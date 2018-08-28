@@ -1,0 +1,6 @@
+[submodule "src/pcg-cpp"]
+	path = src/pcg-cpp
+	url = https://github.com/imneme/pcg-cpp
+[submodule "src/max-sdk"]
+	path = src/max-sdk
+	url = https://github.com/Cycling74/max-sdk
