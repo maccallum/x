@@ -82,9 +82,9 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 48.0, 167.0, 138.0, 20.0 ],
+					"patching_rect" : [ 48.0, 167.0, 151.0, 20.0 ],
 					"style" : "",
-					"text" : "x.global x.generator.pcg"
+					"text" : "x.global x.generator.pcg32"
 				}
 
 			}

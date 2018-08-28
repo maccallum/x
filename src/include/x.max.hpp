@@ -495,7 +495,7 @@ namespace x
 				rng_obj<rng_type> *x = (rng_obj<rng_type> *)(_x->myobj);
 				t_atom a;
 				atom_set(&a, x->min());
-				outlet_anything(x->outlet_main(), _sym_max, 1, &a);
+				outlet_anything(x->outlet_main(), _sym_min, 1, &a);
 				//outlet_int(x->outlet_main(), x->min());
 			}
 
