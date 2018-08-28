@@ -111,6 +111,7 @@ namespace x
 	namespace max
 	{
 		t_symbol *ps_generate = gensym("generate");
+		t_symbol *ps_paramnames = gensym("paramnames");
 		class obj
 		{
 		private:
@@ -790,6 +791,14 @@ namespace x
 				}
 			}
 
+			static void msg_paramnames(t_maxobj *_x)
+			{
+				dist_obj_type *x = ((dist_obj_type *)(_x->myobj));
+				t_atom a;
+				atom_setsym(&a, gensym(arg1_name));
+				outlet_anything(x->outlet_main(), ps_paramnames, 1, &a);
+			}
+
 			int main(void)
 			{
 				dist_obj_type::main();
@@ -797,6 +806,7 @@ namespace x
 				class_addmethod(c, (method)msg_generate, "generate", A_GIMME, 0);
 				class_addmethod(c, (method)msg_min, "min", A_GIMME, 0);
 				class_addmethod(c, (method)msg_max, "max", A_GIMME, 0);
+				class_addmethod(c, (method)msg_paramnames, "paramnames", 0);
 				class_addmethod(c, (method)msg_arg1, arg1_name, A_GIMME, 0);
 				class_addattr(c, attr_offset_new((std::string(arg1_name) + std::string(" ")).c_str(), gensym(arg1_type_str), 0, (method)0L,(method)0L,calcoffset(struct_type, a1)));		
 				CLASS_ATTR_DEFAULT(c, (std::string(arg1_name) + std::string(" ")).c_str(), 0, arg1_default);
@@ -854,6 +864,15 @@ namespace x
 				}
 			}
 
+			static void msg_paramnames(t_maxobj *_x)
+			{
+				dist_obj_type *x = ((dist_obj_type *)(_x->myobj));
+				t_atom a[2];
+				atom_setsym(a, gensym(arg1_name));
+				atom_setsym(a + 1, gensym(arg2_name));
+				outlet_anything(x->outlet_main(), ps_paramnames, 2, a);
+			}
+
 			int main(void)
 			{
 				dist_obj_type::main();
@@ -861,6 +880,7 @@ namespace x
 				class_addmethod(c, (method)msg_generate, "generate", A_GIMME, 0);
 				class_addmethod(c, (method)msg_min, "min", A_GIMME, 0);
 				class_addmethod(c, (method)msg_max, "max", A_GIMME, 0);
+				class_addmethod(c, (method)msg_paramnames, "paramnames", 0);
 				class_addmethod(c, (method)dist_1arg_obj<dist_obj_type, struct_type, arg1_type, arg1_type_str, arg1_name, arg1_default>::msg_arg1, arg1_name, A_GIMME, 0);
 				class_addattr(c, attr_offset_new((std::string(arg1_name) + std::string(" ")).c_str(), gensym(arg1_type_str), 0, (method)0L,(method)0L,calcoffset(struct_type, a1)));		
 				CLASS_ATTR_DEFAULT(c, (std::string(arg1_name) + std::string(" ")).c_str(), 0, arg1_default);
@@ -987,6 +1007,14 @@ namespace x
 				}
 			}
 
+			static void msg_paramnames(t_maxobj *_x)
+			{
+				dist_obj_type *x = ((dist_obj_type *)(_x->myobj));
+				t_atom a;
+				atom_setsym(&a, gensym(vec1_name));
+				outlet_anything(x->outlet_main(), ps_paramnames, 1, &a);
+			}
+
 			int main(void)
 			{
 				dist_obj_type::main();
@@ -994,6 +1022,7 @@ namespace x
 				class_addmethod(c, (method)msg_generate, "generate", A_GIMME, 0);
 				class_addmethod(c, (method)msg_min, "min", A_GIMME, 0);
 				class_addmethod(c, (method)msg_max, "max", A_GIMME, 0);
+				class_addmethod(c, (method)msg_paramnames, "paramnames", 0);
 				class_addmethod(c, (method)msg_vec1, vec1_name, A_GIMME, 0);
 				class_addattr((c), attr_offset_array_new((std::string(vec1_name) + std::string(" ")).c_str(), gensym(vec1_type_str), 4096, 0, (method)0L, (method)0L, calcoffset(struct_type, vec1), calcoffset(struct_type, vec1)));
 				CLASS_ATTR_ACCESSORS(c, (std::string(vec1_name) + std::string(" ")).c_str(), vec1_get, vec1_set);
@@ -1083,6 +1112,15 @@ namespace x
 				}
 			}
 
+			static void msg_paramnames(t_maxobj *_x)
+			{
+				dist_obj_type *x = ((dist_obj_type *)(_x->myobj));
+				t_atom a[2];
+				atom_setsym(a, gensym(vec1_name));
+				atom_setsym(a + 1, gensym(vec2_name));
+				outlet_anything(x->outlet_main(), ps_paramnames, 2, a);
+			}
+
 			int main(void)
 			{
 				dist_obj_type::main();
@@ -1090,6 +1128,7 @@ namespace x
 				class_addmethod(c, (method)msg_generate, "generate", A_GIMME, 0);
 				class_addmethod(c, (method)msg_min, "min", A_GIMME, 0);
 				class_addmethod(c, (method)msg_max, "max", A_GIMME, 0);
+				class_addmethod(c, (method)msg_paramnames, "paramnames", 0);
 				class_addmethod(c, (method)dist_1vec_obj<dist_obj_type, struct_type, vec1_type, vec1_type_str, vec1_name, vec1_argc, vec1_default>::msg_vec1, vec1_name, A_GIMME, 0);
 				class_addattr((c), attr_offset_array_new((std::string(vec1_name) + std::string(" ")).c_str(), gensym(vec1_type_str), 4096, 0, (method)0L, (method)0L, calcoffset(struct_type, vec1), calcoffset(struct_type, vec1)));
 
