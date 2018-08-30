@@ -240,41 +240,16 @@ namespace x
 			return (T)atom_getfloat(a);
 		}
 
-		// template <typename T, typename std::enable_if<std::is_integral<T>::value, T>::type = 0>
-		// void atom_set(t_atom *a, T v)
-		// {
-		// 	atom_setlong(a, (long)v);
-		// }
-
-		// template <typename T, typename std::enable_if<std::is_floating_point<T>::value, T>::type = 0>
-		// void atom_set(t_atom *a, T v)
-		// {
-		// 	atom_setfloat(a, (double)v);
-		// }
-
-		void atom_set(t_atom *a, int v)
+		template <typename T, typename std::enable_if<std::is_integral<T>::value, T>::type* = nullptr>
+		void atom_set(t_atom *a, T v)
 		{
-			atom_setlong(a, v);
-		}
-		
-		void atom_set(t_atom *a, long v)
-		{
-			atom_setlong(a, v);
+			atom_setlong(a, (long)v);
 		}
 
-		void atom_set(t_atom *a, unsigned int v)
+		template <typename T, typename std::enable_if<std::is_floating_point<T>::value, T>::type* = nullptr>
+		void atom_set(t_atom *a, T v)
 		{
-			atom_setlong(a, v);
-		}
-
-		void atom_set(t_atom *a, unsigned long long v)
-		{
-			atom_setlong(a, v);
-		}
-		
-		void atom_set(t_atom *a, double v)
-		{
-			atom_setfloat(a, v);
+			atom_setfloat(a, (double)v);
 		}
 
 		class random_device_obj : public obj
@@ -353,7 +328,7 @@ namespace x
 		using random_device_delegate_base = x::proxy::delegate<uint_least32_t,
 								       t_atom,
 								       atom_get<uint_least32_t>,
-								       atom_set//<uint_least32_t>
+								       atom_set<uint_least32_t>
 								       >;
 		using seed_seq_from_base = x::proxy::random_device_delegate<random_device_delegate_base>;
 		using seed_seq_from_obj_base = x::proxy::seed_seq_from<seed_seq_from_base>;
