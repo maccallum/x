@@ -22,7 +22,7 @@
 		<key>Build all.bak.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>24</integer>
+			<integer>25</integer>
 		</dict>
 		<key>o.io.bluetoothle.xcscheme</key>
 		<dict>
@@ -62,7 +62,7 @@
 		<key>x.dist.beta.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>25</integer>
+			<integer>24</integer>
 		</dict>
 		<key>x.dist.binomial.xcscheme</key>
 		<dict>
@@ -78,6 +78,11 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>16</integer>
+		</dict>
+		<key>x.dist.dirichlet.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>26</integer>
 		</dict>
 		<key>x.dist.discrete.xcscheme</key>
 		<dict>
@@ -533,6 +538,11 @@
 			<true/>
 		</dict>
 		<key>52B20FE7213C43ED002FC3CD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>52B20FF7213C6B68002FC3CD</key>
 		<dict>
 			<key>primary</key>
 			<true/>

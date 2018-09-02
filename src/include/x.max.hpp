@@ -107,6 +107,7 @@ typedef struct _dist_1arg_maxobj<double> t_dist_student_t_maxobj;
 typedef struct _dist_1vec_maxobj<long> t_dist_discrete_maxobj;
 typedef struct _dist_2vec_maxobj<double, double> t_dist_piecewise_constant_maxobj;
 typedef struct _dist_2vec_maxobj<double, double> t_dist_piecewise_linear_maxobj;
+typedef struct _dist_1vec_maxobj<double> t_dist_dirichlet_maxobj;
 
 namespace x
 {
@@ -522,7 +523,7 @@ namespace x
 		
 		using rng_delegate_uint32 = x::proxy::delegate<uint32_t, t_atom, x::max::atom_get<uint32_t>, x::max::atom_set/*<uint32_t>*/>;
 		using rng_delegate_uint64 = x::proxy::delegate<uint64_t, t_atom, x::max::atom_get<uint64_t>, x::max::atom_set/*<uint64_t>*/>;
-		template <typename dist_type, typename result_type>
+		template <typename dist_type, typename result_type, bool multivariate=false>
 		class dist_obj : public obj, public dist_type
 		{
 		public:
@@ -559,13 +560,27 @@ namespace x
 				_x->n = NULL;
 			}
 
-			template <typename rng_type>
-			static void _generate(t_maxobj *_x, dist_type d, rng_type *rng)
+			template <typename rng_type, bool U=multivariate>
+			static typename std::enable_if<!U>::type _generate(t_maxobj *_x, dist_type d, rng_type *rng)
 			{
 				((dist_obj<dist_type, result_type> *)(_x->myobj))->init_delegate(_x, (rng_delegate_uint64 *)rng);
 				t_atom a;
 				atom_set(&a, d(*rng));
 				outlet_atoms(((dist_obj<dist_type, result_type> *)(_x->myobj))->outlet_main(), 1, &a);
+				((dist_obj<dist_type, result_type> *)(_x->myobj))->finalize_delegate(_x, (rng_delegate_uint64 *)rng);
+			}
+
+			template <typename rng_type, bool U=multivariate>
+			static typename std::enable_if<U>::type _generate(t_maxobj *_x, dist_type d, rng_type *rng)
+			{
+				((dist_obj<dist_type, result_type> *)(_x->myobj))->init_delegate(_x, (rng_delegate_uint64 *)rng);
+				std::vector<result_type> vec = d(*rng);
+				size_t n = vec.size();
+				t_atom a[n];
+				for(int i = 0; i < n; i++){
+					atom_set(a + i, vec[i]);
+				}
+				outlet_atoms(((dist_obj<dist_type, result_type> *)(_x->myobj))->outlet_main(), n, a);
 				((dist_obj<dist_type, result_type> *)(_x->myobj))->finalize_delegate(_x, (rng_delegate_uint64 *)rng);
 			}
 			
@@ -1301,6 +1316,14 @@ namespace x
 		t_object *dist_piecewise_linear_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_piecewise_linear_obj.newobj(msg, argc, argv);
+		}
+
+		double dist_dirichlet_arg_default[] = {0.5, 0.5};
+		using dist_dirichlet_obj = dist_1vec_obj<dist_obj<x::dist::dirichlet_distribution<double>, double, true>, t_dist_dirichlet_maxobj, double, double_str, alpha_str, 2, dist_dirichlet_arg_default>;
+		dist_dirichlet_obj _dist_dirichlet_obj;
+		t_object *dist_dirichlet_newobj(t_symbol *msg, short argc, t_atom *argv)
+		{
+			return _dist_dirichlet_obj.newobj(msg, argc, argv);
 		}
 
 		t_class *newclass(const char *name, t_object *(*newobj)(t_symbol*, short, t_atom*), void (*freeobj)(t_maxobj*), size_t struct_size)
