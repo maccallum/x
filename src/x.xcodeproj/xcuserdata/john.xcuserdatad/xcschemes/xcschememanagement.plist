@@ -59,6 +59,11 @@
 			<key>orderHint</key>
 			<integer>5</integer>
 		</dict>
+		<key>x.dist.beta.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>25</integer>
+		</dict>
 		<key>x.dist.binomial.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -523,6 +528,11 @@
 			<true/>
 		</dict>
 		<key>52A8393B16E978D7002E273C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>52B20FE7213C43ED002FC3CD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
