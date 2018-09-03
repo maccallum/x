@@ -96,6 +96,7 @@ typedef struct _dist_2arg_maxobj<double, double> t_dist_gamma_maxobj;
 typedef struct _dist_2arg_maxobj<double, double> t_dist_weibull_maxobj;
 typedef struct _dist_2arg_maxobj<double, double> t_dist_extreme_value_maxobj;
 typedef struct _dist_2arg_maxobj<double, double> t_dist_beta_maxobj;
+typedef struct _dist_2arg_maxobj<double, double> t_dist_kumaraswamy_maxobj;
 // Related to Normal distribution
 typedef struct _dist_2arg_maxobj<double, double> t_dist_normal_maxobj;
 typedef struct _dist_2arg_maxobj<double, double> t_dist_lognormal_maxobj;
@@ -1246,6 +1247,13 @@ namespace x
 		t_object *dist_beta_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_beta_obj.newobj(msg, argc, argv);
+		}
+
+		using dist_kumaraswamy_obj = dist_2arg_obj<dist_obj<x::dist::kumaraswamy_distribution<double>, double>, t_dist_kumaraswamy_maxobj, double, double, double_str, double_str, a_str, b_str, onef_str, onef_str>;
+		dist_kumaraswamy_obj _dist_kumaraswamy_obj;
+		t_object *dist_kumaraswamy_newobj(t_symbol *msg, short argc, t_atom *argv)
+		{
+			return _dist_kumaraswamy_obj.newobj(msg, argc, argv);
 		}
 
 		// Related to Normal distribution

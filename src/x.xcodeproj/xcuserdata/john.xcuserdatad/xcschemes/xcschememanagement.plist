@@ -114,6 +114,11 @@
 			<key>orderHint</key>
 			<integer>7</integer>
 		</dict>
+		<key>x.dist.kumaraswami.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>27</integer>
+		</dict>
 		<key>x.dist.lognormal.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -543,6 +548,11 @@
 			<true/>
 		</dict>
 		<key>52B20FF7213C6B68002FC3CD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>52B21007213D221D002FC3CD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
