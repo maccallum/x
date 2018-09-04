@@ -112,7 +112,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 108.0, 112.0, 76.0, 42.0 ],
 					"style" : "",
-					"text" : "1: click\n2: 1/second\n3: sig"
+					"text" : "1: 1/second\n2: click\n3: sig"
 				}
 
 			}
