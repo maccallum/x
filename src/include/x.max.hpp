@@ -1257,7 +1257,7 @@ namespace x
 		}
 
 		// Related to Normal distribution
-		using dist_normal_obj = dist_2arg_obj<dist_obj<std::normal_distribution<double>, double>, t_dist_normal_maxobj, double, double, double_str, double_str, mean_str, stddev_str, onef_str, onef_str>;
+		using dist_normal_obj = dist_2arg_obj<dist_obj<std::normal_distribution<double>, double>, t_dist_normal_maxobj, double, double, double_str, double_str, mean_str, stddev_str, zerof_str, onef_str>;
 		dist_normal_obj _dist_normal_obj;
 		t_object *dist_normal_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{

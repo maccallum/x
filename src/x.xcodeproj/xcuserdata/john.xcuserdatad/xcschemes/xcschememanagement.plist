@@ -54,6 +54,11 @@
 			<key>orderHint</key>
 			<integer>92</integer>
 		</dict>
+		<key>x.delegate~.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>28</integer>
+		</dict>
 		<key>x.dist.bernoulli.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -553,6 +558,11 @@
 			<true/>
 		</dict>
 		<key>52B21007213D221D002FC3CD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>52B21017213EDC0F002FC3CD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
