@@ -41,14 +41,11 @@
 					"fontface" : 0,
 					"fontsize" : 12.0,
 					"id" : "obj-4",
-					"linecount" : 6,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 294.0, 186.0, 150.0, 102.0 ],
-					"presentation_rect" : [ 294.0, 186.0, 0.0, 0.0 ],
-					"text" : "/pfx/alpha : 3.,\n/pfx/beta : 1.,\n/pfx/min : 0.,\n/pfx/max : inf,\n/pfx/x : 4.97108,\n/alpha : 33."
+					"patching_rect" : [ 294.0, 186.0, 150.0, 34.0 ]
 				}
 
 			}
@@ -63,7 +60,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 292.0, 52.0, 150.0, 38.0 ],
-					"presentation_rect" : [ 292.0, 52.0, 0.0, 0.0 ],
 					"saved_bundle_data" : [ 35, 98, 117, 110, 100, 108, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 47, 97, 108, 112, 104, 97, 0, 0, 44, 100, 0, 0, 64, 64, -128, 0, 0, 0, 0, 0, 0, 0, 0, 24, 47, 112, 102, 120, 47, 97, 108, 112, 104, 97, 0, 0, 44, 100, 0, 0, 64, 8, 0, 0, 0, 0, 0, 0 ],
 					"saved_bundle_length" : 68,
 					"text" : "/alpha : 33.,\n/pfx/alpha : 3."
@@ -77,9 +73,9 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "FullPacket" ],
-					"patching_rect" : [ 328.0, 116.0, 159.0, 20.0 ],
+					"patching_rect" : [ 328.0, 116.0, 183.0, 20.0 ],
 					"style" : "",
-					"text" : "o.x.dist gamma @prefix /pfx"
+					"text" : "o.x.variable gamma @prefix /pfx"
 				}
 
 			}
@@ -88,13 +84,11 @@
 					"fontface" : 0,
 					"fontsize" : 12.0,
 					"id" : "obj-3",
-					"linecount" : 5,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 72.0, 186.0, 150.0, 88.0 ],
-					"text" : "/alpha : 33.,\n/beta : 1.,\n/min : 0.,\n/max : inf,\n/x : 32.6869"
+					"patching_rect" : [ 72.0, 186.0, 150.0, 34.0 ]
 				}
 
 			}
@@ -121,9 +115,9 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "FullPacket" ],
-					"patching_rect" : [ 106.0, 116.0, 92.0, 20.0 ],
+					"patching_rect" : [ 106.0, 116.0, 115.0, 20.0 ],
 					"style" : "",
-					"text" : "o.x.dist gamma"
+					"text" : "o.x.variable gamma"
 				}
 
 			}
@@ -158,7 +152,7 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "o.x.dist.maxpat",
+				"name" : "o.x.variable.maxpat",
 				"bootpath" : "~/Development/maccallum/x/patchers/odot",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",

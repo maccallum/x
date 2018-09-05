@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 192.0, 97.0, 640.0, 480.0 ],
+		"rect" : [ 927.0, 79.0, 640.0, 480.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -44,7 +44,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 454.0, 90.0, 105.0, 20.0 ],
-					"presentation_rect" : [ 455.0, 92.0, 0.0, 0.0 ],
 					"style" : "",
 					"text" : "x.variable gamma"
 				}
@@ -68,13 +67,11 @@
 					"fontface" : 0,
 					"fontsize" : 12.0,
 					"id" : "obj-4",
-					"linecount" : 6,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 294.0, 186.0, 150.0, 102.0 ],
-					"text" : "/pfx/alpha : 3.,\n/pfx/beta : 1.,\n/pfx/min : 0.,\n/pfx/max : inf,\n/pfx/x : 1.94332,\n/alpha : 33."
+					"patching_rect" : [ 294.0, 186.0, 150.0, 34.0 ]
 				}
 
 			}
@@ -102,9 +99,9 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "FullPacket", "" ],
-					"patching_rect" : [ 328.0, 116.0, 145.0, 20.0 ],
+					"patching_rect" : [ 328.0, 116.0, 168.0, 20.0 ],
 					"style" : "",
-					"text" : "o.x.dist.shim @prefix /pfx"
+					"text" : "o.x.variable.shim @prefix /pfx"
 				}
 
 			}
@@ -113,13 +110,11 @@
 					"fontface" : 0,
 					"fontsize" : 12.0,
 					"id" : "obj-3",
-					"linecount" : 5,
 					"maxclass" : "o.display",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 72.0, 186.0, 150.0, 88.0 ],
-					"text" : "/alpha : 33.,\n/beta : 1.,\n/min : 0.,\n/max : inf,\n/x : 41.2936"
+					"patching_rect" : [ 72.0, 186.0, 150.0, 34.0 ]
 				}
 
 			}
@@ -146,9 +141,9 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "FullPacket", "" ],
-					"patching_rect" : [ 106.0, 116.0, 77.0, 20.0 ],
+					"patching_rect" : [ 106.0, 116.0, 101.0, 20.0 ],
 					"style" : "",
-					"text" : "o.x.dist.shim"
+					"text" : "o.x.variable.shim"
 				}
 
 			}
@@ -163,7 +158,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-7", 0 ],
-					"midpoints" : [ 173.5, 151.0, 279.0, 151.0, 279.0, 80.0, 173.5, 80.0 ],
+					"midpoints" : [ 197.5, 151.0, 279.0, 151.0, 279.0, 80.0, 173.5, 80.0 ],
 					"source" : [ "obj-1", 1 ]
 				}
 
@@ -192,7 +187,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-8", 0 ],
-					"midpoints" : [ 463.5, 146.0, 570.0, 146.0, 570.0, 76.0, 463.5, 76.0 ],
+					"midpoints" : [ 486.5, 146.0, 570.0, 146.0, 570.0, 76.0, 463.5, 76.0 ],
 					"source" : [ "obj-6", 1 ]
 				}
 
@@ -213,7 +208,7 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "o.x.dist.shim.maxpat",
+				"name" : "o.x.variable.shim.maxpat",
 				"bootpath" : "~/Development/maccallum/x/patchers/odot",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
