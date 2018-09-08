@@ -656,7 +656,7 @@
 					"outlettype" : [ "", "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 50.0, 265.0, 146.0, 108.0 ],
-					"setminmax" : [ 0.0, 352.0 ],
+					"setminmax" : [ 0.0, 385.0 ],
 					"setstyle" : 1,
 					"settype" : 0,
 					"size" : 2,
@@ -705,7 +705,7 @@
 			}
 , 			{
 				"box" : 				{
-					"attr" : "probabilities ",
+					"attr" : "p ",
 					"id" : "obj-8",
 					"maxclass" : "attrui",
 					"numinlets" : 1,

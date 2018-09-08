@@ -36,7 +36,8 @@ SOFTWARE.
 #define EVAL(x, y) PASTE(x, y)
 #define x_max_obj_newobj EVAL(C_T, _newobj)
 #define x_max_obj_freeobj EVAL(C_T, _obj::freeobj)
-#define x_max_obj_struct EVAL(t_, EVAL(C_T, _maxobj))
+//#define x_max_obj_struct EVAL(t_, EVAL(C_T, _maxobj))
+#define x_max_obj_struct t_maxobj
 #define x_max_obj_call_max_class EVAL(_, EVAL(C_T, _obj.max_class(c)))
 #define x_max_obj_call_main EVAL(_, EVAL(C_T, _obj.main()))
 

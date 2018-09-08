@@ -41,75 +41,6 @@ typedef struct _maxobj
 	int delegation_status;
 } t_maxobj;
 
-template <typename arg1_type>
-struct _dist_1arg_maxobj
-{
-	t_maxobj ob;
-	arg1_type a1;
-};
-
-template <typename arg1_type, typename arg2_type>
-struct _dist_2arg_maxobj
-{
-	t_maxobj ob;
-	arg1_type a1;
-	arg2_type a2;
-};
-
-template <typename vec1_type>
-struct _dist_1vec_maxobj
-{
-	t_maxobj ob;
-	std::vector<vec1_type> vec1;
-};
-
-template <typename vec1_type, typename vec2_type>
-struct _dist_2vec_maxobj
-{
-	t_maxobj ob;
-	std::vector<vec1_type> vec1;
-	std::vector<vec2_type> vec2;
-};
-
-// Random devices
-typedef struct _maxobj t_random_device_maxobj;
-
-// Seed sequences
-typedef struct _maxobj t_seed_seq_from_maxobj;
-
-// Generators
-typedef struct _maxobj t_generator_pcg32_maxobj;
-typedef struct _maxobj t_generator_mt19937_64_maxobj;
-
-// Uniform
-typedef struct _dist_2arg_maxobj<int, int> t_dist_uniform_int_maxobj;
-typedef struct _dist_2arg_maxobj<double, double> t_dist_uniform_real_maxobj;
-// Related to Bernoulli trials
-typedef struct _dist_1arg_maxobj<double> t_dist_bernoulli_maxobj;
-typedef struct _dist_2arg_maxobj<int, double> t_dist_binomial_maxobj;
-typedef struct _dist_1arg_maxobj<double> t_dist_geometric_maxobj;
-typedef struct _dist_2arg_maxobj<int, double> t_dist_negative_binomial_maxobj;
-// Rate-based distributions
-typedef struct _dist_1arg_maxobj<double> t_dist_poisson_maxobj;
-typedef struct _dist_1arg_maxobj<double> t_dist_exponential_maxobj;
-typedef struct _dist_2arg_maxobj<double, double> t_dist_gamma_maxobj;
-typedef struct _dist_2arg_maxobj<double, double> t_dist_weibull_maxobj;
-typedef struct _dist_2arg_maxobj<double, double> t_dist_extreme_value_maxobj;
-typedef struct _dist_2arg_maxobj<double, double> t_dist_beta_maxobj;
-typedef struct _dist_2arg_maxobj<double, double> t_dist_kumaraswamy_maxobj;
-// Related to Normal distribution
-typedef struct _dist_2arg_maxobj<double, double> t_dist_normal_maxobj;
-typedef struct _dist_2arg_maxobj<double, double> t_dist_lognormal_maxobj;
-typedef struct _dist_1arg_maxobj<double> t_dist_chi_squared_maxobj;
-typedef struct _dist_2arg_maxobj<double, double> t_dist_cauchy_maxobj;
-typedef struct _dist_2arg_maxobj<double, double> t_dist_fisher_f_maxobj;
-typedef struct _dist_1arg_maxobj<double> t_dist_student_t_maxobj;
-// Piecewise distributions
-typedef struct _dist_1vec_maxobj<long> t_dist_discrete_maxobj;
-typedef struct _dist_2vec_maxobj<double, double> t_dist_piecewise_constant_maxobj;
-typedef struct _dist_2vec_maxobj<double, double> t_dist_piecewise_linear_maxobj;
-typedef struct _dist_1vec_maxobj<double> t_dist_dirichlet_maxobj;
-
 namespace x
 {
 	namespace max
@@ -254,6 +185,61 @@ namespace x
 		void atom_set(t_atom *a, T v)
 		{
 			atom_setfloat(a, (double)v);
+		}
+
+		template <typename T>
+		void atom_setv(T v, long *argc, t_atom **argv)
+		{
+			if(!(*argv)){
+				*argv = (t_atom *)sysmem_newptr(sizeof(t_atom));
+			}
+			*argc = 1;
+			atom_set(*argv, v);
+		}
+
+		template <typename T>
+		void atom_setv(std::vector<T> v, long *argc, t_atom **argv)
+		{
+			size_t n = v.size();
+			if(!(*argv)){
+				*argv = (t_atom *)sysmem_newptr(sizeof(t_atom) * n);
+			}
+			*argc = n;
+			for(size_t i = 0; i < n; i++){
+				atom_set((*argv) + i, v[i]);
+			}
+		}
+
+		template <typename T, bool multivariate>
+		typename std::enable_if<std::is_integral<T>::value && multivariate, std::vector<T>>::type atom_getv(long argc, t_atom *argv)
+		{
+			std::vector<T> v(argc);
+			for(size_t i = 0; i < argc; i++){
+				v[i] = (T)atom_get<T>(argv + i);
+			}
+			return v;
+		}
+
+		template <typename T, bool multivariate>
+		typename std::enable_if<std::is_floating_point<T>::value && multivariate, std::vector<T>>::type atom_getv(long argc, t_atom *argv)
+		{
+			std::vector<T> v(argc);
+			for(size_t i = 0; i < argc; i++){
+				v[i] = (T)atom_get<T>(argv + i);
+			}
+			return v;
+		}
+
+		template <typename T, bool multivariate>
+		typename std::enable_if<std::is_integral<T>::value && !multivariate, T>::type atom_getv(long argc, t_atom *argv)
+		{
+			return (T)atom_get<T>(argv);
+		}
+
+		template <typename T, bool multivariate>
+		typename std::enable_if<std::is_floating_point<T>::value && !multivariate, T>::type atom_getv(long argc, t_atom *argv)
+		{
+			return (T)atom_get<T>(argv);
 		}
 
 		class random_device_obj : public obj
@@ -522,10 +508,74 @@ namespace x
 			return _generator_mt19937_64_obj.newobj(msg, argc, argv);
 		}
 		
-		using rng_delegate_uint32 = x::proxy::delegate<uint32_t, t_atom, x::max::atom_get<uint32_t>, x::max::atom_set/*<uint32_t>*/>;
-		using rng_delegate_uint64 = x::proxy::delegate<uint64_t, t_atom, x::max::atom_get<uint64_t>, x::max::atom_set/*<uint64_t>*/>;
-		template <typename dist_type, typename result_type, bool multivariate=false>
-		class dist_obj : public obj, public dist_type
+		using rng_delegate_uint32 = x::proxy::delegate<uint32_t, t_atom, x::max::atom_get<uint32_t>, x::max::atom_set>;
+		using rng_delegate_uint64 = x::proxy::delegate<uint64_t, t_atom, x::max::atom_get<uint64_t>, x::max::atom_set>;
+
+		template <typename param_type, typename result_type, const char param1_name[], typename param1_type, bool param1_vec>
+		class param_type_1 : public param_type
+		{
+		public:
+			int nargs = 1;
+			const char *names_str[1] = {param1_name};
+			t_symbol *names_sym[1] = {gensym(param1_name)};
+			static void p1(param_type *p, long *argc, t_atom **argv)
+			{
+				atom_setv(p->param1(), argc, argv);
+			}
+			static void p1(param_type *p, long argc, t_atom *argv)
+			{
+				*p = param_type(atom_getv<param1_type, param1_vec>(argc, argv));
+			}
+			void (*getters[1])(param_type*, long*, t_atom**) = {p1};
+			void (*setters[1])(param_type*, long, t_atom*) = {p1};
+		};
+
+		template <typename param_type, typename result_type, const char param1_name[], typename param1_type, bool param1_vec, const char param2_name[], typename param2_type, bool param2_vec>
+		class param_type_2 : public param_type
+		{
+		public:
+			int nargs = 2;
+			const char *names_str[2] = {param1_name, param2_name};
+			t_symbol *names_sym[2] = {gensym(param1_name), gensym(param2_name)};
+			static void p1(param_type *p, long *argc, t_atom **argv)
+			{
+				atom_setv(p->param1(), argc, argv);
+			}
+			static void p1(param_type *p, long argc, t_atom *argv)
+			{
+				*p = param_type(atom_getv<param1_type, param1_vec>(argc, argv), p->param2());
+			}
+			static void p2(param_type *p, long *argc, t_atom **argv)
+			{
+				atom_setv(p->param2(), argc, argv);
+			}
+			static void p2(param_type *p, long argc, t_atom *argv)
+			{
+				*p = param_type(p->param1(), atom_getv<param2_type, param2_vec>(argc, argv));
+			}
+			void (*getters[2])(param_type*, long*, t_atom**) = {p1, p2};
+			void (*setters[2])(param_type*, long, t_atom*) = {p1, p2};
+		};
+
+		const char alpha_str[] = "alpha";
+		const char beta_str[] = "beta";
+		const char mean_str[] = "mean";
+		const char lambda_str[] = "lambda";
+		const char stddev_str[] = "stddev";
+		const char probabilities_str[] = "probabilities";
+		const char intervals_str[] = "intervals";
+		const char densities_str[] = "densities";
+		const char a_str[] = "a";
+		const char b_str[] = "b";
+		const char k_str[] = "k";
+		const char m_str[] = "m";
+		const char n_str[] = "n";
+		const char p_str[] = "p";
+		const char s_str[] = "s";
+		const char t_str[] = "t";
+		
+		template <typename dist_type, typename result_type, bool multivariate=false, typename param_type=param_type_2<x::dist::uniform_real_distribution_param_type, double, a_str, double, false, b_str, double, false>>
+		class dist_obj : public obj, public dist_type, public param_type
 		{
 		public:
 			t_object *newobj(t_symbol *msg, short argc, t_atom *argv)
@@ -533,7 +583,7 @@ namespace x
 				t_object *x = obj::newobj(msg, argc, argv);
 				if(x){
 					t_maxobj *xx = (t_maxobj *)x;
-					dist_obj<dist_type, result_type> *o = new dist_obj<dist_type, result_type>;
+					dist_obj<dist_type, result_type, multivariate, param_type> *o = new dist_obj<dist_type, result_type, multivariate, param_type>;
 					obj::obj_init(x, (obj *)o);
 					xx->myobj = (void *)o;
 					return x;
@@ -585,11 +635,10 @@ namespace x
 				((dist_obj<dist_type, result_type> *)(_x->myobj))->finalize_delegate(_x, (rng_delegate_uint64 *)rng);
 			}
 			
-			template <typename ...params>
-			static void generate(t_maxobj *_x, params... ps)
+			static void generate(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
 			{
-				dist_obj<dist_type, result_type> *x = (dist_obj<dist_type, result_type> *)(_x->myobj);
-				dist_type d = dist_type(ps...);
+				dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
+				dist_type d = dist_type(*((param_type *)x));
 				size_t n = 1;
 				_x->n = &n;
 				t_atom mina, maxa;
@@ -680,22 +729,40 @@ namespace x
 				}
 			}
 
-			template <typename ...params>
-			static void min(t_maxobj *_x, params... ps)
+			static void min(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
 			{
-				dist_type d(ps...);
+				if(argc){
+					msg_anything(_x, msg, argc, argv);
+					return;
+				}
+				dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
+				dist_type d = dist_type(*((param_type *)x));
 				t_atom a;
 				atom_set(&a, d.min());
 				outlet_anything(((dist_obj<dist_type, result_type> *)(_x->myobj))->outlet_main(), _sym_min, 1, &a);
 			}
 
-			template <typename ...params>
-			static void max(t_maxobj *_x, params... ps)
+			static void max(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
 			{
-				dist_type d(ps...);
+				if(argc){
+					msg_anything(_x, msg, argc, argv);
+					return;
+				}
+				dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
+				dist_type d = dist_type(*((param_type *)x));
 				t_atom a;
 				atom_set(&a, d.max());
 				outlet_anything(((dist_obj<dist_type, result_type> *)(_x->myobj))->outlet_main(), _sym_max, 1, &a);
+			}
+
+			static void paramnames(t_maxobj *_x)
+			{
+				dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
+				t_atom a[x->nargs];
+				for(int i = 0; i < x->nargs; i++){
+					atom_setsym(a + i, x->names_sym[i]);
+				}
+				outlet_anything(x->outlet_main(), ps_paramnames, x->nargs, a);
 			}
 
 			static void freeobj(t_maxobj *x)
@@ -709,468 +776,85 @@ namespace x
 				}
 			}
 
+			static void param(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
+			{
+				dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
+				t_symbol *name = msg;
+				for(int i = 0; i < x->nargs; i++){
+					if(name == x->names_sym[i]){
+						if(argc){
+							x->setters[i](x, argc, argv);
+						}else{
+							long ac = 0;
+							t_atom *av = NULL;
+							x->getters[i](x, &ac, &av);
+							outlet_anything(x->outlet_main(), name, ac, av);
+							if(av){
+								sysmem_freeptr(av);
+							}
+						}
+						break;
+					}
+				}
+			}
+
+			static t_max_err attr_get(t_maxobj *_x, t_object *attr, long *argc, t_atom **argv)
+			{
+				dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
+				t_symbol *name = (t_symbol *)object_method(attr, gensym("getname"));
+				for(int i = 0; i < x->nargs; i++){
+					if(!strncmp(name->s_name, x->names_sym[i]->s_name, strlen(name->s_name) - 1)){
+						x->getters[i](x, argc, argv);
+						break;
+					}
+				}
+				return MAX_ERR_NONE;
+			}
+
+			static t_max_err attr_set(t_maxobj *_x, t_object *attr, long argc, t_atom *argv)
+			{
+				dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
+				t_symbol *name = (t_symbol *)object_method(attr, gensym("getname"));
+				for(int i = 0; i < x->nargs; i++){
+					if(!strncmp(name->s_name, x->names_sym[i]->s_name, strlen(name->s_name) - 1)){
+						x->setters[i](x, argc, argv);
+						break;
+					}
+				}
+				return 0;
+			}
+
 			int main(void)
 			{
 				obj::main();
-				return 0;
-			}
-		};
-
-		template <typename dist_obj_type, typename struct_type, typename arg1_type, const char *arg1_type_str, const char *arg1_name, const char *arg1_default>
-		class dist_1arg_obj : public dist_obj_type
-		{
-		public:
-			void process_attr(t_object *x, t_dictionary *d, const char *attr_name)
-			{
-				t_symbol *attr_name_sym = gensym(attr_name);
-				t_symbol *attr_name_sym_space = gensym((std::string(attr_name) + std::string(" ")).c_str());
-				if(dictionary_hasentry(d, attr_name_sym)){
-					// user instantiated the obj with the attribute name specified as an argument
-				}else if(dictionary_hasentry(d, attr_name_sym_space)){
-					// default value of the attr
-					attr_name_sym = attr_name_sym_space;
-				}
-				long argc = 0;
-				t_atom *argv = NULL;
-				dictionary_getatoms(d, attr_name_sym, &argc, &argv);
-				if(argc && argv){
-					object_attr_setvalueof(x, attr_name_sym_space, argc, argv);
-				}
-			}
-			
-			t_object *newobj(t_symbol *msg, short argc, t_atom *argv)
-			{
-				t_object *_x = dist_obj_type::newobj(msg, argc, argv);
-				if(_x){
-					if(t_dictionary *d = object_dictionaryarg(argc, argv)){
-						process_attr(_x, d, arg1_name);
-					}
-				}
-				return _x;
-			}
-			
-			static void msg_generate(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
-			{
-				dist_obj_type::generate(_x, ((struct_type *)_x)->a1);
-			}
-
-			static void msg_min(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
-			{
-				if(argc){
-					dist_obj_type::msg_anything(_x, msg, argc, argv);
-				}else{
-					dist_obj_type::min(_x, ((struct_type *)_x)->a1);
-				}
-			}
-
-			static void msg_max(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
-			{
-				if(argc){
-					dist_obj_type::msg_anything(_x, msg, argc, argv);
-				}else{
-					dist_obj_type::max(_x, ((struct_type *)_x)->a1);
-				}
-			}
-
-			static void msg_arg1(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
-			{
-				if(argc){
-					object_attr_setvalueof(_x, gensym((std::string(arg1_name) + std::string(" ")).c_str()), argc, argv);
-				}else{
-					dist_obj_type *x = ((dist_obj_type *)(_x->myobj)) ;
-					t_atom a;
-					atom_set(&a, ((struct_type *)_x)->a1);
-					outlet_anything(x->outlet_main(), gensym(arg1_name), 1, &a);
-				}
-			}
-
-			static void msg_paramnames(t_maxobj *_x)
-			{
-				dist_obj_type *x = ((dist_obj_type *)(_x->myobj));
-				t_atom a;
-				atom_setsym(&a, gensym(arg1_name));
-				outlet_anything(x->outlet_main(), ps_paramnames, 1, &a);
-			}
-
-			int main(void)
-			{
-				dist_obj_type::main();
-				t_class *c = dist_obj_type::max_class();
-				class_addmethod(c, (method)msg_generate, "generate", A_GIMME, 0);
-				class_addmethod(c, (method)msg_min, "min", A_GIMME, 0);
-				class_addmethod(c, (method)msg_max, "max", A_GIMME, 0);
-				class_addmethod(c, (method)msg_paramnames, "paramnames", 0);
-				class_addmethod(c, (method)msg_arg1, arg1_name, A_GIMME, 0);
-				class_addattr(c, attr_offset_new((std::string(arg1_name) + std::string(" ")).c_str(), gensym(arg1_type_str), 0, (method)0L,(method)0L,calcoffset(struct_type, a1)));		
-				CLASS_ATTR_DEFAULT(c, (std::string(arg1_name) + std::string(" ")).c_str(), 0, arg1_default);
-				return 0;
-			}
-		};
-
-		template <typename dist_obj_type, typename struct_type, typename arg1_type, typename arg2_type, const char *arg1_type_str, const char *arg2_type_str, const char *arg1_name, const char *arg2_name, const char *arg1_default, const char *arg2_default>
-		class dist_2arg_obj : public dist_1arg_obj<dist_obj_type, struct_type, arg1_type, arg1_type_str, arg1_name, arg1_default>
-		{
-		public:
-			t_object *newobj(t_symbol *msg, short argc, t_atom *argv)
-			{
-				t_object *_x = dist_1arg_obj<dist_obj_type, struct_type, arg1_type, arg1_type_str, arg1_name, arg1_default>::newobj(msg, argc, argv);
-				if(_x){
-					if(t_dictionary *d = object_dictionaryarg(argc, argv)){
-						dist_1arg_obj<dist_obj_type, struct_type, arg1_type, arg1_type_str, arg1_name, arg1_default>::process_attr(_x, d, arg2_name);
-					}
-				}
-				return _x;
-			}
-
-			static void msg_generate(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
-			{
-				dist_obj_type::generate(_x, ((struct_type *)_x)->a1, ((struct_type *)_x)->a2);
-			}
-
-			static void msg_min(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
-			{
-				if(argc){
-					dist_obj_type::msg_anything(_x, msg, argc, argv);
-				}else{
-					dist_obj_type::min(_x, ((struct_type *)_x)->a1, ((struct_type *)_x)->a2);
-				}
-			}
-
-			static void msg_max(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
-			{
-				if(argc){
-					dist_obj_type::msg_anything(_x, msg, argc, argv);
-				}else{
-					dist_obj_type::max(_x, ((struct_type *)_x)->a1, ((struct_type *)_x)->a2);
-				}
-			}
-			
-			static void msg_arg2(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
-			{
-				if(argc){
-					object_attr_setvalueof(_x, gensym((std::string(arg2_name) + std::string(" ")).c_str()), argc, argv);
-				}else{
-					dist_obj_type *x = ((dist_obj_type *)(_x->myobj)) ;
-					t_atom a;
-					atom_set(&a, ((struct_type *)_x)->a2);
-					outlet_anything(x->outlet_main(), gensym(arg2_name), 1, &a);
-				}
-			}
-
-			static void msg_paramnames(t_maxobj *_x)
-			{
-				dist_obj_type *x = ((dist_obj_type *)(_x->myobj));
-				t_atom a[2];
-				atom_setsym(a, gensym(arg1_name));
-				atom_setsym(a + 1, gensym(arg2_name));
-				outlet_anything(x->outlet_main(), ps_paramnames, 2, a);
-			}
-
-			int main(void)
-			{
-				dist_obj_type::main();
-				t_class *c = dist_obj_type::max_class();
-				class_addmethod(c, (method)msg_generate, "generate", A_GIMME, 0);
-				class_addmethod(c, (method)msg_min, "min", A_GIMME, 0);
-				class_addmethod(c, (method)msg_max, "max", A_GIMME, 0);
-				class_addmethod(c, (method)msg_paramnames, "paramnames", 0);
-				class_addmethod(c, (method)dist_1arg_obj<dist_obj_type, struct_type, arg1_type, arg1_type_str, arg1_name, arg1_default>::msg_arg1, arg1_name, A_GIMME, 0);
-				class_addattr(c, attr_offset_new((std::string(arg1_name) + std::string(" ")).c_str(), gensym(arg1_type_str), 0, (method)0L,(method)0L,calcoffset(struct_type, a1)));		
-				CLASS_ATTR_DEFAULT(c, (std::string(arg1_name) + std::string(" ")).c_str(), 0, arg1_default);
 				
-				class_addmethod(c, (method)msg_arg2, arg2_name, A_GIMME, 0);
-				class_addattr(c, attr_offset_new((std::string(arg2_name) + std::string(" ")).c_str(), gensym(arg2_type_str), 0, (method)0L,(method)0L,calcoffset(struct_type, a2)));		
-				CLASS_ATTR_DEFAULT(c, (std::string(arg2_name) + std::string(" ")).c_str(), 0, arg2_default);
+				t_class *c = max_class();
+				class_addmethod(c, (method)generate, "generate", A_GIMME, 0);
+				class_addmethod(c, (method)min, "min", A_GIMME, 0);
+				class_addmethod(c, (method)max, "max", A_GIMME, 0);
+				class_addmethod(c, (method)paramnames, "paramnames", 0);
+				for(int i = 0; i < param_type::nargs; i++){
+					class_addmethod(c, (method)param, param_type::names_str[i], A_GIMME, 0);
+				        const char *name = (std::string(param_type::names_str[i]) + std::string(" ")).c_str();
+					class_addattr(c, attr_offset_new(name, gensym("atom"), 0, (method)0L,(method)0L,calcoffset(t_maxobj, ob)));
+					
+					t_object *theattr = (t_object *)class_attr_get(c, gensym(name));
+					object_method(theattr, gensym("setmethod"), USESYM(get), attr_get);
+					object_method(theattr, gensym("setmethod"), USESYM(set), attr_set);
+				}
 				return 0;
 			}
 		};
-
-		template <typename dist_obj_type, typename struct_type, typename vec1_type, const char *vec1_type_str, const char *vec1_name, long vec1_argc, vec1_type vec1_default[]>
-		class dist_1vec_obj : public dist_obj_type
-		{
-		public:
-			template <typename T>
-			std::vector<T> init_vec(long argc, T *argv)
-			{
-				std::vector<T> vec(argc);
-				for(int i = 0; i < argc; i++){
-					vec[i] = argv[i];
-				}
-				return vec;
-			}
-
-			template <typename T>
-			std::vector<T> process_attr(t_object *x, t_dictionary *d, const char *attr_name, long def_argc, T *def_argv)
-			{
-				t_symbol *attr_name_sym = gensym(attr_name);
-				t_symbol *attr_name_sym_space = gensym((std::string(attr_name) + std::string(" ")).c_str());
-				if(dictionary_hasentry(d, attr_name_sym)){
-					// user instantiated the obj with the attribute name specified as an argument
-				}else if(dictionary_hasentry(d, attr_name_sym_space)){
-					// default value of the attr
-					attr_name_sym = attr_name_sym_space;
-				}else{
-					return init_vec(def_argc, def_argv);
-				}
-				long argc = 0;
-				t_atom *argv = NULL;
-				dictionary_getatoms(d, attr_name_sym, &argc, &argv);
-				if(argc && argv){
-					T buf[argc];
-					for(int i = 0; i < argc; i++){
-						buf[i] = atom_get<T>(argv + i);
-					}
-					return init_vec(argc, buf);
-				}
-				return std::vector<T>(0);
-			}
-			
-			t_object *newobj(t_symbol *msg, short argc, t_atom *argv)
-			{
-				t_object *_x = dist_obj_type::newobj(msg, argc, argv);
-				if(_x){
-					if(t_dictionary *d = object_dictionaryarg(argc, argv)){
-						((struct_type *)_x)->vec1 = process_attr(_x, d, vec1_name, vec1_argc, vec1_default);
-					}
-				}
-				return _x;
-			}
-			
-			static void msg_generate(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
-			{
-				std::vector<vec1_type> vec1 = ((struct_type *)_x)->vec1;
-				dist_obj_type::generate(_x, vec1.begin(), vec1.end());
-			}
-
-			static void msg_min(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
-			{
-				if(argc){
-					dist_obj_type::msg_anything(_x, msg, argc, argv);
-				}else{
-					std::vector<vec1_type> vec1 = ((struct_type *)_x)->vec1;
-					dist_obj_type::min(_x, vec1.begin(), vec1.end());
-				}
-			}
-
-			static void msg_max(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
-			{
-				if(argc){
-					dist_obj_type::msg_anything(_x, msg, argc, argv);
-				}else{
-					std::vector<vec1_type> vec1 = ((struct_type *)_x)->vec1;
-					dist_obj_type::max(_x, vec1.begin(), vec1.end());
-				}
-			}
-
-			static t_max_err vec1_get(t_maxobj *x, t_object *attr, long *argc, t_atom **argv)
-			{
-				std::vector<vec1_type> vec1 = (((struct_type *)x)->vec1);
-				long args = vec1.size();
-				*argv = (t_atom *)sysmem_resizeptr(*argv, args * sizeof(t_atom));
-				*argc = args;
-				for(int i = 0; i < args; i++){
-					atom_set((*argv) + i, vec1[i]);
-				}
-				return 0;
-			}
-			
-			static t_max_err vec1_set(t_maxobj *x, t_object *attr, long argc, t_atom *argv)
-			{
-				std::vector<vec1_type> vec1(argc);
-				for(int i = 0; i < argc; i++){
-					vec1[i] = atom_get<typename std::vector<vec1_type>::value_type>(argv + i);
-				}
-				(((struct_type *)x)->vec1) = vec1;
-				return 0;
-			}
-
-			static void msg_vec1(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
-			{
-				if(argc){
-					object_attr_setvalueof(_x, gensym((std::string(vec1_name) + std::string(" ")).c_str()), argc, argv);
-				}else{
-					dist_obj_type *x = ((dist_obj_type *)(_x->myobj)) ;
-					std::vector<vec1_type> vec1 = (((struct_type *)x)->vec1);
-					long args = vec1.size();
-					t_atom a[args];
-					for(int i = 0; i < args; i++){
-						atom_set(a + i, vec1[i]);
-					}
-					outlet_anything(x->outlet_main(), gensym(vec1_name), args, a);
-				}
-			}
-
-			static void msg_paramnames(t_maxobj *_x)
-			{
-				dist_obj_type *x = ((dist_obj_type *)(_x->myobj));
-				t_atom a;
-				atom_setsym(&a, gensym(vec1_name));
-				outlet_anything(x->outlet_main(), ps_paramnames, 1, &a);
-			}
-
-			int main(void)
-			{
-				dist_obj_type::main();
-				t_class *c = dist_obj_type::max_class();
-				class_addmethod(c, (method)msg_generate, "generate", A_GIMME, 0);
-				class_addmethod(c, (method)msg_min, "min", A_GIMME, 0);
-				class_addmethod(c, (method)msg_max, "max", A_GIMME, 0);
-				class_addmethod(c, (method)msg_paramnames, "paramnames", 0);
-				class_addmethod(c, (method)msg_vec1, vec1_name, A_GIMME, 0);
-				class_addattr((c), attr_offset_array_new((std::string(vec1_name) + std::string(" ")).c_str(), gensym(vec1_type_str), 4096, 0, (method)0L, (method)0L, calcoffset(struct_type, vec1), calcoffset(struct_type, vec1)));
-				CLASS_ATTR_ACCESSORS(c, (std::string(vec1_name) + std::string(" ")).c_str(), vec1_get, vec1_set);
-				return 0;
-			}
-		};
-
-		template <typename dist_obj_type, typename struct_type, typename vec1_type, typename vec2_type, const char *vec1_type_str, const char *vec2_type_str, const char *vec1_name, const char *vec2_name, long vec1_argc, vec1_type vec1_default[], long vec2_argc, vec2_type vec2_default[]>
-		class dist_2vec_obj : public dist_1vec_obj<dist_obj_type, struct_type, vec1_type, vec1_type_str, vec1_name, vec1_argc, vec1_default>
-		{
-		public:
-			t_object *newobj(t_symbol *msg, short argc, t_atom *argv)
-			{
-				t_object *_x = dist_1vec_obj<dist_obj_type, struct_type, vec1_type, vec1_type_str, vec1_name, vec1_argc, vec1_default>::newobj(msg, argc, argv);
-				if(_x){
-					if(t_dictionary *d = object_dictionaryarg(argc, argv)){
-						((struct_type *)_x)->vec2 = dist_1vec_obj<dist_obj_type, struct_type, vec1_type, vec1_type_str, vec1_name, vec1_argc, vec1_default>::process_attr(_x, d, vec2_name, vec2_argc, vec2_default);
-					}
-				}
-				return _x;
-			}
-			
-			static void msg_generate(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
-			{
-				std::vector<vec1_type> vec1 = ((struct_type *)_x)->vec1;
-				std::vector<vec2_type> vec2 = ((struct_type *)_x)->vec2;
-				dist_obj_type::generate(_x, vec1.begin(), vec1.end(), vec2.begin());
-			}
-
-			static void msg_min(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
-			{
-				if(argc){
-					dist_obj_type::msg_anything(_x, msg, argc, argv);
-				}else{
-					std::vector<vec1_type> vec1 = ((struct_type *)_x)->vec1;
-					std::vector<vec2_type> vec2 = ((struct_type *)_x)->vec2;
-					dist_obj_type::min(_x, vec1.begin(), vec1.end(), vec2.begin());
-				}
-			}
-
-			static void msg_max(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
-			{
-				if(argc){
-					dist_obj_type::msg_anything(_x, msg, argc, argv);
-				}else{
-					std::vector<vec1_type> vec1 = ((struct_type *)_x)->vec1;
-					std::vector<vec2_type> vec2 = ((struct_type *)_x)->vec2;
-					dist_obj_type::max(_x, vec1.begin(), vec1.end(), vec2.begin());
-				}
-			}
-
-			static t_max_err vec2_get(t_maxobj *x, t_object *attr, long *argc, t_atom **argv)
-			{
-				std::vector<vec2_type> vec2 = (((struct_type *)x)->vec2);
-				long args = vec2.size();
-				*argv = (t_atom *)sysmem_resizeptr(*argv, args * sizeof(t_atom));
-				*argc = args;
-				for(int i = 0; i < args; i++){
-					atom_set((*argv) + i, vec2[i]);
-				}
-				return 0;
-			}
-			
-			static t_max_err vec2_set(t_maxobj *x, t_object *attr, long argc, t_atom *argv)
-			{
-				std::vector<vec2_type> vec2(argc);
-				for(int i = 0; i < argc; i++){
-					vec2[i] = atom_get<typename std::vector<vec2_type>::value_type>(argv + i);
-				}
-				(((struct_type *)x)->vec2) = vec2;
-				return 0;
-			}
-
-			static void msg_vec2(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
-			{
-				if(argc){
-					object_attr_setvalueof(_x, gensym((std::string(vec2_name) + std::string(" ")).c_str()), argc, argv);
-				}else{
-					dist_obj_type *x = ((dist_obj_type *)(_x->myobj)) ;
-					std::vector<vec2_type> vec2 = (((struct_type *)x)->vec2);
-					long args = vec2.size();
-					t_atom a[args];
-					for(int i = 0; i < args; i++){
-						atom_set(a + i, vec2[i]);
-					}
-					outlet_anything(x->outlet_main(), gensym(vec2_name), args, a);
-				}
-			}
-
-			static void msg_paramnames(t_maxobj *_x)
-			{
-				dist_obj_type *x = ((dist_obj_type *)(_x->myobj));
-				t_atom a[2];
-				atom_setsym(a, gensym(vec1_name));
-				atom_setsym(a + 1, gensym(vec2_name));
-				outlet_anything(x->outlet_main(), ps_paramnames, 2, a);
-			}
-
-			int main(void)
-			{
-				dist_obj_type::main();
-				t_class *c = dist_obj_type::max_class();
-				class_addmethod(c, (method)msg_generate, "generate", A_GIMME, 0);
-				class_addmethod(c, (method)msg_min, "min", A_GIMME, 0);
-				class_addmethod(c, (method)msg_max, "max", A_GIMME, 0);
-				class_addmethod(c, (method)msg_paramnames, "paramnames", 0);
-				class_addmethod(c, (method)dist_1vec_obj<dist_obj_type, struct_type, vec1_type, vec1_type_str, vec1_name, vec1_argc, vec1_default>::msg_vec1, vec1_name, A_GIMME, 0);
-				class_addattr((c), attr_offset_array_new((std::string(vec1_name) + std::string(" ")).c_str(), gensym(vec1_type_str), 4096, 0, (method)0L, (method)0L, calcoffset(struct_type, vec1), calcoffset(struct_type, vec1)));
-
-				t_object *theattr = (t_object *)class_attr_get(c, gensym((std::string(vec1_name) + std::string(" ")).c_str()));
-				t_max_err (*getter)(t_maxobj *x, t_object *attr, long *argc, t_atom **argv) = dist_1vec_obj<dist_obj_type, struct_type, vec1_type, vec1_type_str, vec1_name, vec1_argc, vec1_default>::vec1_get;
-				object_method(theattr, gensym("setmethod"), USESYM(get), getter);
-				t_max_err (*setter)(t_maxobj *x, t_object *attr, long argc, t_atom *argv) = dist_1vec_obj<dist_obj_type, struct_type, vec1_type, vec1_type_str, vec1_name, vec1_argc, vec1_default>::vec1_set;
-				object_method(theattr, gensym("setmethod"), USESYM(set), setter);
-
-				class_addmethod(c, (method)msg_vec2, vec2_name, A_GIMME, 0);
-				class_addattr((c), attr_offset_array_new((std::string(vec2_name) + std::string(" ")).c_str(), gensym(vec2_type_str), 4096, 0, (method)0L, (method)0L, calcoffset(struct_type, vec2), calcoffset(struct_type, vec2)));
-				CLASS_ATTR_ACCESSORS(c, (std::string(vec2_name) + std::string(" ")).c_str(), vec2_get, vec2_set);
-				return 0;
-			}
-		};
-
-		const char double_str[] = "float64";
-		const char int_str[] = "int32";
-		const char alpha_str[] = "alpha";
-		const char beta_str[] = "beta";
-		const char mean_str[] = "mean";
-		const char lambda_str[] = "lambda";
-		const char stddev_str[] = "stddev";
-		const char probabilities_str[] = "probabilities";
-		const char intervals_str[] = "intervals";
-		const char densities_str[] = "densities";
-		const char a_str[] = "a";
-		const char b_str[] = "b";
-		const char k_str[] = "k";
-		const char m_str[] = "m";
-		const char n_str[] = "n";
-		const char p_str[] = "p";
-		const char s_str[] = "s";
-		const char t_str[] = "t";
-		const char one_str[] = "1";
-		const char onef_str[] = "1.0";
-		const char half_str[] = "0.5";
-		const char zero_str[] = "0";
-		const char zerof_str[] = "0.";
 
 		// Uniform
-		using dist_uniform_int_obj = dist_2arg_obj<dist_obj<std::uniform_int_distribution<long>, long>, t_dist_uniform_int_maxobj, long, long, int_str, int_str, a_str, b_str, zero_str, one_str>;
+		using dist_uniform_int_obj = dist_obj<std::uniform_int_distribution<long>, long, false, param_type_2<x::dist::uniform_int_distribution_param_type, long, a_str, long, false, b_str, long, false>>;
 		dist_uniform_int_obj _dist_uniform_int_obj;
 		t_object *dist_uniform_int_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_uniform_int_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_uniform_real_obj = dist_2arg_obj<dist_obj<std::uniform_real_distribution<double>, double>, t_dist_uniform_real_maxobj, double, double, double_str, double_str, a_str, b_str, zerof_str, onef_str>;
+		using dist_uniform_real_obj = dist_obj<std::uniform_real_distribution<double>, double, false, param_type_2<x::dist::uniform_real_distribution_param_type, double, a_str, double, false, b_str, double, false>>;
 		dist_uniform_real_obj _dist_uniform_real_obj;
 		t_object *dist_uniform_real_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
@@ -1178,78 +862,85 @@ namespace x
 		}
 
 		// Related to Bernoulli trials
-		using dist_bernoulli_obj = dist_1arg_obj<dist_obj<std::bernoulli_distribution, long>, t_dist_bernoulli_maxobj, double, double_str, p_str, half_str>;
+		using dist_bernoulli_obj = dist_obj<std::bernoulli_distribution, bool, false, param_type_1<x::dist::bernoulli_distribution_param_type, bool, p_str, double, false>>;
 		dist_bernoulli_obj _dist_bernoulli_obj;
 		t_object *dist_bernoulli_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_bernoulli_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_binomial_obj = dist_2arg_obj<dist_obj<std::binomial_distribution<long>, long>, t_dist_binomial_maxobj, long, double, int_str, double_str, t_str, p_str, one_str, half_str>;
+		using dist_binomial_obj = dist_obj<std::binomial_distribution<long>, long, false, param_type_2<x::dist::binomial_distribution_param_type, long, t_str, long, false, p_str, double, false>>;
 		dist_binomial_obj _dist_binomial_obj;
 		t_object *dist_binomial_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_binomial_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_geometric_obj = dist_1arg_obj<dist_obj<std::geometric_distribution<long>, long>, t_dist_geometric_maxobj, double, double_str, p_str, half_str>;
+		using dist_geometric_obj = dist_obj<std::geometric_distribution<long>, long, false, param_type_1<x::dist::geometric_distribution_param_type, long, p_str, double, false>>;
 		dist_geometric_obj _dist_geometric_obj;
 		t_object *dist_geometric_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_geometric_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_negative_binomial_obj = dist_2arg_obj<dist_obj<std::negative_binomial_distribution<long>, long>, t_dist_negative_binomial_maxobj, long, double, int_str, double_str, k_str, p_str, one_str, half_str>;
+		using dist_negative_binomial_obj = dist_obj<std::negative_binomial_distribution<long>, long, false, param_type_2<x::dist::negative_binomial_distribution_param_type, long, k_str, long, false, p_str, double, false>>;
 		dist_negative_binomial_obj _dist_negative_binomial_obj;
 		t_object *dist_negative_binomial_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_negative_binomial_obj.newobj(msg, argc, argv);
 		}
+
+		// using dist_multinomial_obj = dist_obj<x::dist::multinomial_distribution<long>, long, true, param_type_2<x::dist::multinomial_distribution_param_type, long, n_str, long, false, p_str, double, true>>;
+		// dist_multinomial_obj _dist_multinomial_obj;
+		// t_object *dist_multinomial_newobj(t_symbol *msg, short argc, t_atom *argv)
+		// {
+		// 	return _dist_multinomial_obj.newobj(msg, argc, argv);
+		// }
 		
 		// Rate-based distributions
-		using dist_poisson_obj = dist_1arg_obj<dist_obj<std::poisson_distribution<long>, long>, t_dist_poisson_maxobj, double, double_str, mean_str, onef_str>;
+		using dist_poisson_obj = dist_obj<std::poisson_distribution<long>, long, false, param_type_1<x::dist::poisson_distribution_param_type, long, mean_str, double, false>>;
 		dist_poisson_obj _dist_poisson_obj;
 		t_object *dist_poisson_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_poisson_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_exponential_obj = dist_1arg_obj<dist_obj<std::exponential_distribution<double>, double>, t_dist_exponential_maxobj, double, double_str, lambda_str, onef_str>;
+		using dist_exponential_obj = dist_obj<std::exponential_distribution<double>, double, false, param_type_1<x::dist::exponential_distribution_param_type, double, lambda_str, double, false>>;
 		dist_exponential_obj _dist_exponential_obj;
 		t_object *dist_exponential_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_exponential_obj.newobj(msg, argc, argv);
 		}
 		
-		using dist_gamma_obj = dist_2arg_obj<dist_obj<std::gamma_distribution<double>, double>, t_dist_gamma_maxobj, double, double, double_str, double_str, alpha_str, beta_str, onef_str, onef_str>;
+		using dist_gamma_obj = dist_obj<std::gamma_distribution<double>, double, false, param_type_2<x::dist::gamma_distribution_param_type, double, alpha_str, double, false, beta_str, double, false>>;
 		dist_gamma_obj _dist_gamma_obj;
 		t_object *dist_gamma_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_gamma_obj.newobj(msg, argc, argv);
 		}
 		
-		using dist_weibull_obj = dist_2arg_obj<dist_obj<std::weibull_distribution<double>, double>, t_dist_weibull_maxobj, double, double, double_str, double_str, a_str, b_str, onef_str, onef_str>;
+		using dist_weibull_obj = dist_obj<std::weibull_distribution<double>, double, false, param_type_2<x::dist::weibull_distribution_param_type, double, a_str, double, false, b_str, double, false>>;
 		dist_weibull_obj _dist_weibull_obj;
 		t_object *dist_weibull_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_weibull_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_extreme_value_obj = dist_2arg_obj<dist_obj<std::extreme_value_distribution<double>, double>, t_dist_extreme_value_maxobj, double, double, double_str, double_str, a_str, b_str, onef_str, onef_str>;
+		using dist_extreme_value_obj = dist_obj<std::extreme_value_distribution<double>, double, false, param_type_2<x::dist::extreme_value_distribution_param_type, double, a_str, double, false, b_str, double, false>>;
 		dist_extreme_value_obj _dist_extreme_value_obj;
 		t_object *dist_extreme_value_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_extreme_value_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_beta_obj = dist_2arg_obj<dist_obj<x::dist::beta_distribution<double>, double>, t_dist_beta_maxobj, double, double, double_str, double_str, alpha_str, beta_str, onef_str, onef_str>;
+		using dist_beta_obj = dist_obj<x::dist::beta_distribution<double>, double, false, param_type_2<x::dist::beta_distribution_param_type, double, alpha_str, double, false, beta_str, double, false>>;
 		dist_beta_obj _dist_beta_obj;
 		t_object *dist_beta_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_beta_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_kumaraswamy_obj = dist_2arg_obj<dist_obj<x::dist::kumaraswamy_distribution<double>, double>, t_dist_kumaraswamy_maxobj, double, double, double_str, double_str, a_str, b_str, onef_str, onef_str>;
+		using dist_kumaraswamy_obj = dist_obj<x::dist::kumaraswamy_distribution<double>, double, false, param_type_2<x::dist::kumaraswamy_distribution_param_type, double, alpha_str, double, false, beta_str, double, false>>;
 		dist_kumaraswamy_obj _dist_kumaraswamy_obj;
 		t_object *dist_kumaraswamy_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
@@ -1257,77 +948,70 @@ namespace x
 		}
 
 		// Related to Normal distribution
-		using dist_normal_obj = dist_2arg_obj<dist_obj<std::normal_distribution<double>, double>, t_dist_normal_maxobj, double, double, double_str, double_str, mean_str, stddev_str, zerof_str, onef_str>;
+		using dist_normal_obj = dist_obj<std::normal_distribution<double>, double, false, param_type_2<x::dist::normal_distribution_param_type, double, mean_str, double, false, stddev_str, double, false>>;
 		dist_normal_obj _dist_normal_obj;
 		t_object *dist_normal_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_normal_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_lognormal_obj = dist_2arg_obj<dist_obj<std::lognormal_distribution<double>, double>, t_dist_lognormal_maxobj, double, double, double_str, double_str, m_str, s_str, onef_str, onef_str>;
+		using dist_lognormal_obj = dist_obj<std::lognormal_distribution<double>, double, false, param_type_2<x::dist::lognormal_distribution_param_type, double, m_str, double, false, s_str, double, false>>;
 		dist_lognormal_obj _dist_lognormal_obj;
 		t_object *dist_lognormal_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_lognormal_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_chi_squared_obj = dist_1arg_obj<dist_obj<std::chi_squared_distribution<double>, double>, t_dist_chi_squared_maxobj, double, double_str, n_str, onef_str>;
+		using dist_chi_squared_obj = dist_obj<std::chi_squared_distribution<double>, double, false, param_type_1<x::dist::chi_squared_distribution_param_type, double, n_str, double, false>>;
 		dist_chi_squared_obj _dist_chi_squared_obj;
 		t_object *dist_chi_squared_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_chi_squared_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_cauchy_obj = dist_2arg_obj<dist_obj<std::cauchy_distribution<double>, double>, t_dist_cauchy_maxobj, double, double, double_str, double_str, a_str, b_str, onef_str, onef_str>;
+		using dist_cauchy_obj = dist_obj<std::cauchy_distribution<double>, double, false, param_type_2<x::dist::cauchy_distribution_param_type, double, a_str, double, false, b_str, double, false>>;
 		dist_cauchy_obj _dist_cauchy_obj;
 		t_object *dist_cauchy_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_cauchy_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_fisher_f_obj = dist_2arg_obj<dist_obj<std::fisher_f_distribution<double>, double>, t_dist_fisher_f_maxobj, double, double, double_str, double_str, m_str, n_str, onef_str, onef_str>;
+		using dist_fisher_f_obj = dist_obj<std::fisher_f_distribution<double>, double, false, param_type_2<x::dist::fisher_f_distribution_param_type, double, m_str, double, false, n_str, double, false>>;
 		dist_fisher_f_obj _dist_fisher_f_obj;
 		t_object *dist_fisher_f_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_fisher_f_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_student_t_obj = dist_1arg_obj<dist_obj<std::student_t_distribution<double>, double>, t_dist_student_t_maxobj, double, double_str, n_str, onef_str>;
+		using dist_student_t_obj = dist_obj<std::student_t_distribution<double>, double, false, param_type_1<x::dist::student_t_distribution_param_type, double, n_str, double, false>>;
 		dist_student_t_obj _dist_student_t_obj;
 		t_object *dist_student_t_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_student_t_obj.newobj(msg, argc, argv);
 		}
 
-		// Piecewise distributions
-		long dist_discrete_arg_default[] = {1};
-		using dist_discrete_obj = dist_1vec_obj<dist_obj<std::discrete_distribution<long>, long>, t_dist_discrete_maxobj, long, int_str, probabilities_str, 1, dist_discrete_arg_default>;
+		using dist_discrete_obj = dist_obj<std::discrete_distribution<long>, long, false, param_type_1<x::dist::discrete_distribution_param_type, long, probabilities_str, double, true>>;
 		dist_discrete_obj _dist_discrete_obj;
 		t_object *dist_discrete_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_discrete_obj.newobj(msg, argc, argv);
 		}
 
-		double dist_piecewise_constant_vec1_default[] = {0., 1.};
-		double dist_piecewise_constant_vec2_default[] = {1.};
-		using dist_piecewise_constant_obj = dist_2vec_obj<dist_obj<std::piecewise_constant_distribution<double>, double>, t_dist_piecewise_constant_maxobj, double, double, double_str, double_str, intervals_str, densities_str, 2, dist_piecewise_constant_vec1_default, 1, dist_piecewise_constant_vec2_default>;
+		using dist_piecewise_constant_obj = dist_obj<std::piecewise_constant_distribution<double>, double, false, param_type_2<x::dist::piecewise_constant_distribution_param_type, double, intervals_str, double, true, densities_str, double, true>>;
 		dist_piecewise_constant_obj _dist_piecewise_constant_obj;
 		t_object *dist_piecewise_constant_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_piecewise_constant_obj.newobj(msg, argc, argv);
 		}
 
-		double dist_piecewise_linear_vec1_default[] = {0., 1.};
-		double dist_piecewise_linear_vec2_default[] = {1.};
-		using dist_piecewise_linear_obj = dist_2vec_obj<dist_obj<std::piecewise_linear_distribution<double>, double>, t_dist_piecewise_linear_maxobj, double, double, double_str, double_str, intervals_str, densities_str, 2, dist_piecewise_linear_vec1_default, 1, dist_piecewise_linear_vec2_default>;
+		using dist_piecewise_linear_obj = dist_obj<std::piecewise_linear_distribution<double>, double, false, param_type_2<x::dist::piecewise_linear_distribution_param_type, double, intervals_str, double, true, densities_str, double, true>>;
 		dist_piecewise_linear_obj _dist_piecewise_linear_obj;
 		t_object *dist_piecewise_linear_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_piecewise_linear_obj.newobj(msg, argc, argv);
 		}
 
-		double dist_dirichlet_arg_default[] = {0.5, 0.5};
-		using dist_dirichlet_obj = dist_1vec_obj<dist_obj<x::dist::dirichlet_distribution<double>, double, true>, t_dist_dirichlet_maxobj, double, double_str, alpha_str, 2, dist_dirichlet_arg_default>;
+		using dist_dirichlet_obj = dist_obj<x::dist::dirichlet_distribution<double>, double, true, param_type_1<x::dist::dirichlet_distribution_param_type, double, alpha_str, double, true>>;
 		dist_dirichlet_obj _dist_dirichlet_obj;
 		t_object *dist_dirichlet_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{

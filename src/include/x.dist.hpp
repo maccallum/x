@@ -1,3 +1,25 @@
+/*
+Copyright (c) 2018 John MacCallum
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
 namespace x
 {
 	namespace dist
@@ -145,7 +167,7 @@ namespace x
 
 			// property functions
 			result_type alpha() const {return __p_.alpha();}
-			result_type kumaraswamy() const {return __p_.beta();}
+			result_type beta() const {return __p_.beta();}
 			param_type param() const {return __p_;}
 			void param(const param_type& __p) {__p_ = __p;}
 			result_type min() const {return 0;}
@@ -426,5 +448,222 @@ namespace x
 				swap(__x.__p_.__p_, __p);
 			return __is;
 		}
+
+		// params
+		class uniform_int_distribution_param_type : public std::uniform_int_distribution<long>::param_type
+		{
+		public:
+			uniform_int_distribution_param_type(void) : std::uniform_int_distribution<long>::param_type() {}
+			uniform_int_distribution_param_type(long p1, long p2) : std::uniform_int_distribution<long>::param_type(p1, p2) {}
+			long param1(void){return a();}
+			long param2(void){return b();}
+		};
+		
+		class uniform_real_distribution_param_type : public std::uniform_real_distribution<double>::param_type
+		{
+		public:
+			uniform_real_distribution_param_type(void) : std::uniform_real_distribution<double>::param_type() {}
+			uniform_real_distribution_param_type(double p1, double p2) : std::uniform_real_distribution<double>::param_type(p1, p2) {}
+			double param1(void){return a();}
+			double param2(void){return b();}
+		};
+
+		class bernoulli_distribution_param_type : public std::bernoulli_distribution::param_type
+		{
+		public:
+			bernoulli_distribution_param_type(void) : std::bernoulli_distribution::param_type() {}
+			bernoulli_distribution_param_type(double p1) : std::bernoulli_distribution::param_type(p1) {}
+			double param1(void){return p();}
+		};
+		
+		class binomial_distribution_param_type : public std::binomial_distribution<long>::param_type
+		{
+		public:
+			binomial_distribution_param_type(void) : std::binomial_distribution<long>::param_type() {}
+			binomial_distribution_param_type(long p1, double p2) : std::binomial_distribution<long>::param_type(p1, p2) {}
+			long param1(void){return t();}
+			double param2(void){return p();}
+		};
+
+		class geometric_distribution_param_type : public std::geometric_distribution<long>::param_type
+		{
+		public:
+			geometric_distribution_param_type(void) : std::geometric_distribution<long>::param_type() {}
+			geometric_distribution_param_type(double p1) : std::geometric_distribution<long>::param_type(p1) {}
+			double param1(void){return p();}
+		};
+		
+		class negative_binomial_distribution_param_type : public std::negative_binomial_distribution<long>::param_type
+		{
+		public:
+			negative_binomial_distribution_param_type(void) : std::negative_binomial_distribution<long>::param_type() {}
+			negative_binomial_distribution_param_type(long p1, double p2) : std::negative_binomial_distribution<long>::param_type(p1, p2) {}
+			long param1(void){return k();}
+			double param2(void){return p();}
+		};
+
+		// class multinomial_distribution_param_type : public std::multinomial_distribution<long>::param_type
+		// {
+		// public:
+		// 	multinomial_distribution_param_type(void) : std::multinomial_distribution<long>::param_type() {}
+		// 	multinomial_distribution_param_type(long p1, double p2) : std::multinomial_distribution<long>::param_type(p1, p2) {}
+		// 	long param1(void){return n();}
+		// 	double param2(void){return p();}
+		// };
+		
+		class poisson_distribution_param_type : public std::poisson_distribution<long>::param_type
+		{
+		public:
+			poisson_distribution_param_type(void) : std::poisson_distribution<long>::param_type() {}
+			poisson_distribution_param_type(double p1) : std::poisson_distribution<long>::param_type(p1) {}
+			double param1(void){return mean();}
+		};
+
+		class exponential_distribution_param_type : public std::exponential_distribution<double>::param_type
+		{
+		public:
+			exponential_distribution_param_type(void) : std::exponential_distribution<double>::param_type() {}
+			exponential_distribution_param_type(double p1) : std::exponential_distribution<double>::param_type(p1) {}
+			double param1(void){return lambda();}
+		};
+
+		class gamma_distribution_param_type : public std::gamma_distribution<double>::param_type
+		{
+		public:
+			gamma_distribution_param_type(void) : std::gamma_distribution<double>::param_type() {}
+			gamma_distribution_param_type(double p1, double p2) : std::gamma_distribution<double>::param_type(p1, p2) {}
+			double param1(void){return alpha();}
+			double param2(void){return beta();}
+		};
+
+		class weibull_distribution_param_type : public std::weibull_distribution<double>::param_type
+		{
+		public:
+			weibull_distribution_param_type(void) : std::weibull_distribution<double>::param_type() {}
+			weibull_distribution_param_type(double p1, double p2) : std::weibull_distribution<double>::param_type(p1, p2) {}
+			double param1(void){return a();}
+			double param2(void){return b();}
+		};
+
+		class extreme_value_distribution_param_type : public std::extreme_value_distribution<double>::param_type
+		{
+		public:
+			extreme_value_distribution_param_type(void) : std::extreme_value_distribution<double>::param_type() {}
+			extreme_value_distribution_param_type(double p1, double p2) : std::extreme_value_distribution<double>::param_type(p1, p2) {}
+			double param1(void){return a();}
+			double param2(void){return b();}
+		};
+
+		class beta_distribution_param_type : public x::dist::beta_distribution<double>::param_type
+		{
+		public:
+			beta_distribution_param_type(void) : x::dist::beta_distribution<double>::param_type() {}
+			beta_distribution_param_type(double p1, double p2) : x::dist::beta_distribution<double>::param_type(p1, p2) {}
+			double param1(void){return alpha();}
+			double param2(void){return beta();}
+		};
+
+		class kumaraswamy_distribution_param_type : public x::dist::kumaraswamy_distribution<double>::param_type
+		{
+		public:
+			kumaraswamy_distribution_param_type(void) : x::dist::kumaraswamy_distribution<double>::param_type() {}
+			kumaraswamy_distribution_param_type(double p1, double p2) : x::dist::kumaraswamy_distribution<double>::param_type(p1, p2) {}
+			double param1(void){return alpha();}
+			double param2(void){return beta();}
+		};
+
+		class normal_distribution_param_type : public std::normal_distribution<double>::param_type
+		{
+		public:
+			normal_distribution_param_type(void) : std::normal_distribution<double>::param_type() {}
+			normal_distribution_param_type(double p1, double p2) : std::normal_distribution<double>::param_type(p1, p2) {}
+			double param1(void){return mean();}
+			double param2(void){return stddev();}
+		};
+
+		class lognormal_distribution_param_type : public std::lognormal_distribution<double>::param_type
+		{
+		public:
+			lognormal_distribution_param_type(void) : std::lognormal_distribution<double>::param_type() {}
+			lognormal_distribution_param_type(double p1, double p2) : std::lognormal_distribution<double>::param_type(p1, p2) {}
+			double param1(void){return m();}
+			double param2(void){return s();}
+		};
+
+		class chi_squared_distribution_param_type : public std::chi_squared_distribution<double>::param_type
+		{
+		public:
+			chi_squared_distribution_param_type(void) : std::chi_squared_distribution<double>::param_type() {}
+			chi_squared_distribution_param_type(double p1) : std::chi_squared_distribution<double>::param_type(p1) {}
+			double param1(void){return n();}
+		};
+
+		class cauchy_distribution_param_type : public std::cauchy_distribution<double>::param_type
+		{
+		public:
+			cauchy_distribution_param_type(void) : std::cauchy_distribution<double>::param_type() {}
+			cauchy_distribution_param_type(double p1, double p2) : std::cauchy_distribution<double>::param_type(p1, p2) {}
+			double param1(void){return a();}
+			double param2(void){return b();}
+		};
+
+		class fisher_f_distribution_param_type : public std::fisher_f_distribution<double>::param_type
+		{
+		public:
+			fisher_f_distribution_param_type(void) : std::fisher_f_distribution<double>::param_type() {}
+			fisher_f_distribution_param_type(double p1, double p2) : std::fisher_f_distribution<double>::param_type(p1, p2) {}
+			double param1(void){return m();}
+			double param2(void){return n();}
+		};
+
+		class student_t_distribution_param_type : public std::student_t_distribution<double>::param_type
+		{
+		public:
+			student_t_distribution_param_type(void) : std::student_t_distribution<double>::param_type() {}
+			student_t_distribution_param_type(double p1) : std::student_t_distribution<double>::param_type(p1) {}
+			double param1(void){return n();}
+		};
+		
+		class discrete_distribution_param_type : public std::discrete_distribution<long>::param_type
+		{
+		public:
+			discrete_distribution_param_type(void) : std::discrete_distribution<long>::param_type() {}
+			template <class _InputIterator>
+			discrete_distribution_param_type(_InputIterator __f, _InputIterator __l) : std::discrete_distribution<long>::param_type(__f, __l) {}
+			discrete_distribution_param_type(std::vector<double> v) : discrete_distribution_param_type(v.begin(), v.end()) {}
+			std::vector<double> param1(void){return probabilities();}
+		};
+
+		class piecewise_constant_distribution_param_type : public std::piecewise_constant_distribution<double>::param_type
+		{
+		public:
+			piecewise_constant_distribution_param_type(void) : std::piecewise_constant_distribution<double>::param_type() {}
+			template <class _InputIteratorB, class _InputIteratorW>
+			piecewise_constant_distribution_param_type(_InputIteratorB __fB, _InputIteratorB __lB, _InputIteratorW __fW) : std::piecewise_constant_distribution<double>::param_type(__fB, __lB, __fW) {}
+			piecewise_constant_distribution_param_type(std::vector<double> v1, std::vector<double> v2) : piecewise_constant_distribution_param_type(v1.begin(), v1.end(), v2.begin()) {}
+			std::vector<double> param1(void){return intervals();}
+			std::vector<double> param2(void){return densities();}
+		};
+
+		class piecewise_linear_distribution_param_type : public std::piecewise_linear_distribution<double>::param_type
+		{
+		public:
+			piecewise_linear_distribution_param_type(void) : std::piecewise_linear_distribution<double>::param_type() {}
+			template <class _InputIteratorB, class _InputIteratorW>
+			piecewise_linear_distribution_param_type(_InputIteratorB __fB, _InputIteratorB __lB, _InputIteratorW __fW) : std::piecewise_linear_distribution<double>::param_type(__fB, __lB, __fW) {}
+			piecewise_linear_distribution_param_type(std::vector<double> v1, std::vector<double> v2) : piecewise_linear_distribution_param_type(v1.begin(), v1.end(), v2.begin()) {}
+			std::vector<double> param1(void){return intervals();}
+			std::vector<double> param2(void){return densities();}
+		};
+
+		class dirichlet_distribution_param_type : public x::dist::dirichlet_distribution<double>::param_type
+		{
+		public:
+			dirichlet_distribution_param_type(void) : x::dist::dirichlet_distribution<double>::param_type() {}
+			template <class _InputIterator>
+			dirichlet_distribution_param_type(_InputIterator __f, _InputIterator __l) : x::dist::dirichlet_distribution<double>::param_type(__f, __l) {}
+			dirichlet_distribution_param_type(std::vector<double> v) : dirichlet_distribution_param_type(v.begin(), v.end()) {}
+			std::vector<double> param1(void){return alpha();}
+		};
 	}
 }

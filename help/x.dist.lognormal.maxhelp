@@ -80,7 +80,6 @@
 						"tags" : "",
 						"style" : "",
 						"subpatcher_template" : "",
-						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-22",
@@ -443,7 +442,7 @@
 					"outlettype" : [ "", "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 227.0, 321.0, 146.0, 108.0 ],
-					"setminmax" : [ 0.0, 8.963369 ],
+					"setminmax" : [ 0.0, 3.297441 ],
 					"setstyle" : 4,
 					"style" : ""
 				}
@@ -537,7 +536,7 @@
 					"outlettype" : [ "", "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 65.0, 321.0, 146.0, 108.0 ],
-					"setminmax" : [ 0.0, 17.926739 ],
+					"setminmax" : [ 0.0, 6.594883 ],
 					"setstyle" : 4,
 					"style" : ""
 				}

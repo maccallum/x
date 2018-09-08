@@ -84,9 +84,9 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 257.0, 114.0, 34.0, 20.0 ],
+					"patching_rect" : [ 257.0, 114.0, 51.0, 20.0 ],
 					"style" : "",
-					"text" : "b $1"
+					"text" : "beta $1"
 				}
 
 			}
@@ -97,9 +97,9 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 194.0, 114.0, 34.0, 20.0 ],
+					"patching_rect" : [ 194.0, 114.0, 57.0, 20.0 ],
 					"style" : "",
-					"text" : "a $1"
+					"text" : "alpha $1"
 				}
 
 			}
@@ -269,7 +269,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 2,
-					"outlettype" : [ "float", "" ],
+					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 65.0, 159.0, 119.0, 20.0 ],
 					"style" : "",
 					"text" : "x.dist.kumaraswamy"
@@ -410,20 +410,6 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "x.dist.kumaraswamy.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "x.dist.beta.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "x.generator.default.global.maxpat",
 				"bootpath" : "~/Development/maccallum/x/patchers",
 				"patcherrelativepath" : "../patchers",
@@ -452,7 +438,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "x.dist.gamma.mxo",
+				"name" : "x.dist.kumaraswamy.mxo",
 				"type" : "iLaX"
 			}
 , 			{
