@@ -890,12 +890,12 @@ namespace x
 			return _dist_negative_binomial_obj.newobj(msg, argc, argv);
 		}
 
-		// using dist_multinomial_obj = dist_obj<x::dist::multinomial_distribution<long>, long, true, param_type_2<x::dist::multinomial_distribution_param_type, long, n_str, long, false, p_str, double, true>>;
-		// dist_multinomial_obj _dist_multinomial_obj;
-		// t_object *dist_multinomial_newobj(t_symbol *msg, short argc, t_atom *argv)
-		// {
-		// 	return _dist_multinomial_obj.newobj(msg, argc, argv);
-		// }
+		using dist_multinomial_obj = dist_obj<x::dist::multinomial_distribution<long>, long, true, param_type_2<x::dist::multinomial_distribution_param_type, long, n_str, long, false, p_str, double, true>>;
+		dist_multinomial_obj _dist_multinomial_obj;
+		t_object *dist_multinomial_newobj(t_symbol *msg, short argc, t_atom *argv)
+		{
+			return _dist_multinomial_obj.newobj(msg, argc, argv);
+		}
 		
 		// Rate-based distributions
 		using dist_poisson_obj = dist_obj<std::poisson_distribution<long>, long, false, param_type_1<x::dist::poisson_distribution_param_type, long, mean_str, double, false>>;

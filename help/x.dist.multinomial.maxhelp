@@ -143,7 +143,6 @@
 					"patching_rect" : [ 232.0, 107.0, 157.0, 90.0 ],
 					"setminmax" : [ 0.0, 5.0 ],
 					"setstyle" : 1,
-					"settype" : 0,
 					"size" : 4,
 					"style" : ""
 				}
@@ -350,13 +349,6 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "x.dist.multinomial.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "x.generator.default.global.maxpat",
 				"bootpath" : "~/Development/maccallum/x/patchers",
 				"patcherrelativepath" : "../patchers",
@@ -385,7 +377,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "x.dist.binomial.mxo",
+				"name" : "x.dist.multinomial.mxo",
 				"type" : "iLaX"
 			}
 , 			{

@@ -449,6 +449,246 @@ namespace x
 			return __is;
 		}
 
+		// multinomial_distribution
+
+		template<class _IntType = int>
+		class multinomial_distribution
+		{
+		public:
+			// types
+			typedef _IntType result_type;
+
+			class param_type
+			{
+				result_type __n_ = 1;
+				std::vector<double> __p_;
+			public:
+				typedef multinomial_distribution distribution_type;
+
+				param_type() : __p_({0.5, 0.5}) {}
+				template<class _InputIterator>
+				param_type(result_type __n, _InputIterator __f, _InputIterator __l)
+					: __n_(__n), __p_(__f, __l) {__init();}
+#ifndef _LIBCPP_CXX03_LANG
+				param_type(result_type __n, std::initializer_list<double> __wl)
+					: __n_(__n), __p_(__wl.begin(), __wl.end()) {__init();}
+#endif  // _LIBCPP_CXX03_LANG
+				template<class _UnaryOperation>
+				param_type(result_type __n, size_t __nw, double __xmin, double __xmax,
+					   _UnaryOperation __fw);
+
+				result_type n() const {return __n_;}
+				std::vector<double> p() const;
+
+				friend bool operator==(const param_type& __x, const param_type& __y)
+				{return __x.__p_ == __y.__p_ && __x.__n_ == __y.__n_;}
+				friend bool operator!=(const param_type& __x, const param_type& __y)
+				{return !(__x == __y);}
+
+			private:
+				void __init();
+
+				friend class multinomial_distribution;
+
+				template <class _CharT, class _Traits, class _IT>
+				friend
+				std::basic_ostream<_CharT, _Traits>&
+				operator<<(std::basic_ostream<_CharT, _Traits>& __os,
+					   const multinomial_distribution<_IT>& __x);
+
+				template <class _CharT, class _Traits, class _IT>
+				friend
+				std::basic_istream<_CharT, _Traits>&
+				operator>>(std::basic_istream<_CharT, _Traits>& __is,
+					   multinomial_distribution<_IT>& __x);
+			};
+
+		private:
+			param_type __p_;
+
+		public:
+			// constructor and reset functions
+			multinomial_distribution() {}
+			template<class _InputIterator>
+			multinomial_distribution(result_type __n, _InputIterator __f, _InputIterator __l)
+				: __p_(__n, __f, __l) {}
+#ifndef _LIBCPP_CXX03_LANG
+			multinomial_distribution(result_type __n, std::initializer_list<double> __wl)
+				: __p_(__n, __wl) {}
+#endif  // _LIBCPP_CXX03_LANG
+			template<class _UnaryOperation>
+			multinomial_distribution(result_type __n, size_t __nw, double __xmin, double __xmax,
+					      _UnaryOperation __fw)
+				: __p_(__n, __nw, __xmin, __xmax, __fw) {}
+			explicit multinomial_distribution(const param_type& __p)
+				: __p_(__p) {}
+			void reset() {}
+
+			// generating functions
+			template<class _URNG>
+			std::vector<result_type> operator()(_URNG& __g)
+			{return (*this)(__g, __p_);}
+			template<class _URNG> std::vector<result_type> operator()(_URNG& __g, const param_type& __p);
+
+			// property functions
+			result_type n() const {return __p_.n();}
+			std::vector<double> p() const {return __p_.p();}
+
+			param_type param() const {return __p_;}
+			void param(const param_type& __p) {__p_ = __p;}
+
+			result_type min() const {return 0;}
+			result_type max() const {return __p_.n();}
+
+			friend bool operator==(const multinomial_distribution& __x,
+					       const multinomial_distribution& __y)
+			{return __x.__p_ == __y.__p_;}
+			friend bool operator!=(const multinomial_distribution& __x,
+					       const multinomial_distribution& __y)
+			{return !(__x == __y);}
+
+			template <class _CharT, class _Traits, class _IT>
+			friend
+			std::basic_ostream<_CharT, _Traits>&
+			operator<<(std::basic_ostream<_CharT, _Traits>& __os,
+				   const multinomial_distribution<_IT>& __x);
+
+			template <class _CharT, class _Traits, class _IT>
+			friend
+			std::basic_istream<_CharT, _Traits>&
+			operator>>(std::basic_istream<_CharT, _Traits>& __is,
+				   multinomial_distribution<_IT>& __x);
+		};
+
+		template<class _IntType>
+		template<class _UnaryOperation>
+		multinomial_distribution<_IntType>::param_type::param_type(result_type __n,
+									   size_t __nw,
+									double __xmin,
+									double __xmax,
+									_UnaryOperation __fw)
+		{
+			if (__nw > 1)
+				{
+					__p_.reserve(__nw - 1);
+					double __d = (__xmax - __xmin) / __nw;
+					double __d2 = __d / 2;
+					for (size_t __k = 0; __k < __nw; ++__k)
+						__p_.push_back(__fw(__xmin + __k * __d + __d2));
+					__n_ = __n;
+					__init();
+				}
+		}
+
+		template<class _IntType>
+		void
+		multinomial_distribution<_IntType>::param_type::__init()
+		{
+			// result_type __sum = _VSTD::accumulate(__p_.begin(),
+			// 				      __p_.end(),
+			// 				      result_type());
+			// for(size_t __i = 0; __i < __p_.size(); ++__i){
+			// 	__p_[__i] /= __sum;
+			// }
+			// if (!__p_.empty())
+			// 	{
+			// 		if (__p_.size() > 1)
+			// 			{
+			// 				double __s = _VSTD::accumulate(__p_.begin(), __p_.end(), 0.0);
+			// 				for (_VSTD::vector<double>::iterator __i = __p_.begin(), __e = __p_.end();
+			// 				     __i < __e; ++__i)
+			// 					*__i /= __s;
+			// 				vector<double> __t(__p_.size() - 1);
+			// 				_VSTD::partial_sum(__p_.begin(), __p_.end() - 1, __t.begin());
+			// 				swap(__p_, __t);
+			// 			}
+			// 		else
+			// 			{
+			// 				__p_.clear();
+			// 				__p_.shrink_to_fit();
+			// 			}
+			// 	}
+		}
+
+		template<class _IntType>
+		std::vector<double>
+		multinomial_distribution<_IntType>::param_type::p() const
+		{
+			// size_t __n = __p_.size();
+			// _VSTD::vector<double> __p(__n+1);
+			// _VSTD::adjacent_difference(__p_.begin(), __p_.end(), __p.begin());
+			// if (__n > 0)
+			// 	__p[__n] = 1 - __p_[__n-1];
+			// else
+			// 	__p[0] = 1;
+			// return __p;
+			return __p_;
+		}
+
+		template<class _IntType>
+		template<class _URNG>
+		std::vector<_IntType>
+		multinomial_distribution<_IntType>::operator()(_URNG& __g, const param_type& __p)
+		{
+			std::vector<double> p = __p.p();
+			long pn = p.size();
+			long n = __p.n();
+			std::vector<result_type> r(pn);
+			std::fill(r.begin(), r.end(), 0);
+			double norm = 0;
+			long n_sum = 0;
+			long p_sum = 0;
+			for(long i = 0; i < pn; i++){
+				norm += p[i];
+			}
+			for(long i = 0; i < pn; i++){
+				if(p[i] > 0){
+					std::binomial_distribution d(n - n_sum, p[i] / (norm - p_sum));
+					r[i] = d(__g);
+				}
+				n_sum += r[i];
+				p_sum += p[i];
+				if(n_sum == n){
+					break;
+				}
+			}
+			return r;
+		}
+
+		template <class _CharT, class _Traits, class _IT>
+		std::basic_ostream<_CharT, _Traits>&
+		operator<<(std::basic_ostream<_CharT, _Traits>& __os,
+			   const multinomial_distribution<_IT>& __x)
+		{
+			std::__save_flags<_CharT, _Traits> __lx(__os);
+			__os.flags(std::ios_base::dec | std::ios_base::left | std::ios_base::fixed |
+				   std::ios_base::scientific);
+			_CharT __sp = __os.widen(' ');
+			__os.fill(__sp);
+			size_t __n = __x.__p_.__p_.size();
+			__os << __n;
+			for (size_t __i = 0; __i < __n; ++__i)
+				__os << __sp << __x.__p_.__p_[__i];
+			return __os;
+		}
+
+		template <class _CharT, class _Traits, class _IT>
+		std::basic_istream<_CharT, _Traits>&
+		operator>>(std::basic_istream<_CharT, _Traits>& __is,
+			   multinomial_distribution<_IT>& __x)
+		{
+			std::__save_flags<_CharT, _Traits> __lx(__is);
+			__is.flags(std::ios_base::dec | std::ios_base::skipws);
+			size_t __n;
+			__is >> __n;
+			std::vector<double> __p(__n);
+			for (size_t __i = 0; __i < __n; ++__i)
+				__is >> __p[__i];
+			if (!__is.fail())
+				swap(__x.__p_.__p_, __p);
+			return __is;
+		}
+
 		// params
 		class uniform_int_distribution_param_type : public std::uniform_int_distribution<long>::param_type
 		{
@@ -502,14 +742,14 @@ namespace x
 			double param2(void){return p();}
 		};
 
-		// class multinomial_distribution_param_type : public std::multinomial_distribution<long>::param_type
-		// {
-		// public:
-		// 	multinomial_distribution_param_type(void) : std::multinomial_distribution<long>::param_type() {}
-		// 	multinomial_distribution_param_type(long p1, double p2) : std::multinomial_distribution<long>::param_type(p1, p2) {}
-		// 	long param1(void){return n();}
-		// 	double param2(void){return p();}
-		// };
+		class multinomial_distribution_param_type : public x::dist::multinomial_distribution<long>::param_type
+		{
+		public:
+			multinomial_distribution_param_type(void) : x::dist::multinomial_distribution<long>::param_type() {}
+			multinomial_distribution_param_type(long p1, std::vector<double> p2) : x::dist::multinomial_distribution<long>::param_type(p1, p2.begin(), p2.end()) {}
+			long param1(void){return n();}
+			std::vector<double> param2(void){return p();}
+		};
 		
 		class poisson_distribution_param_type : public std::poisson_distribution<long>::param_type
 		{

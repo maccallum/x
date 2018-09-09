@@ -131,10 +131,8 @@
 		</dict>
 		<key>x.dist.multinomial.xcscheme</key>
 		<dict>
-			<key>isShown</key>
-			<true/>
 			<key>orderHint</key>
-			<integer>29</integer>
+			<integer>30</integer>
 		</dict>
 		<key>x.dist.negative_binomial.xcscheme</key>
 		<dict>
@@ -575,6 +573,11 @@
 			<true/>
 		</dict>
 		<key>52B2102921400842002FC3CD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>52B2103821448A55002FC3CD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
