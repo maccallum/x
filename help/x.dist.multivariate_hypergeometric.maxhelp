@@ -98,7 +98,7 @@
 					"outlettype" : [ "", "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 50.0, 364.0, 157.0, 90.0 ],
-					"setminmax" : [ 0.0, 3.0 ],
+					"setminmax" : [ 0.0, 4.0 ],
 					"setstyle" : 1,
 					"size" : 4,
 					"style" : ""
@@ -125,9 +125,9 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 232.0, 217.0, 64.0, 20.0 ],
+					"patching_rect" : [ 232.0, 217.0, 68.0, 20.0 ],
 					"style" : "",
-					"text" : "prepend k"
+					"text" : "prepend M"
 				}
 
 			}
@@ -350,13 +350,6 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "x.dist.multivariate_hypergeometric.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "x.generator.default.global.maxpat",
 				"bootpath" : "~/Development/maccallum/x/patchers",
 				"patcherrelativepath" : "../patchers",
@@ -385,7 +378,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "x.dist.uniform_real.mxo",
+				"name" : "x.dist.multivariate_hypergeometric.mxo",
 				"type" : "iLaX"
 			}
 , 			{

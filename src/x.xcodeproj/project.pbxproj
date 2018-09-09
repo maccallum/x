@@ -169,6 +169,11 @@
 		52B2104D21454CB9002FC3CD /* commonsyms.c in Sources */ = {isa = PBXBuildFile; fileRef = 523B363920A32703003D1A6B /* commonsyms.c */; };
 		52B2104F21454CB9002FC3CD /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 523B362D20A32080003D1A6B /* MaxAPI.framework */; };
 		52B2105021454CB9002FC3CD /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08EA7FFBFE8413EDC02AAC07 /* Carbon.framework */; };
+		52B210582145796D002FC3CD /* x.max.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 521EE6AE2115F30000F281AE /* x.max.hpp */; };
+		52B2105B2145796D002FC3CD /* x.max.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52582D5521343AD4000C1585 /* x.max.cpp */; };
+		52B2105C2145796D002FC3CD /* commonsyms.c in Sources */ = {isa = PBXBuildFile; fileRef = 523B363920A32703003D1A6B /* commonsyms.c */; };
+		52B2105E2145796D002FC3CD /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 523B362D20A32080003D1A6B /* MaxAPI.framework */; };
+		52B2105F2145796D002FC3CD /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08EA7FFBFE8413EDC02AAC07 /* Carbon.framework */; };
 		52D69DE820AC90CB00D7BDEF /* commonsyms.c in Sources */ = {isa = PBXBuildFile; fileRef = 523B363920A32703003D1A6B /* commonsyms.c */; };
 		52D69DEB20AC90CB00D7BDEF /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 523B362D20A32080003D1A6B /* MaxAPI.framework */; };
 		52D69DEC20AC90CB00D7BDEF /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08EA7FFBFE8413EDC02AAC07 /* Carbon.framework */; };
@@ -222,6 +227,8 @@
 		52B21027213EDCD5002FC3CD /* x.delegate~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "x.delegate~.c"; sourceTree = "<group>"; };
 		52B2104521448A55002FC3CD /* x.dist.multinomial.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = x.dist.multinomial.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 		52B2105421454CB9002FC3CD /* x.dist.hypergeometric.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = x.dist.hypergeometric.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
+		52B210632145796D002FC3CD /* x.dist.multivariate_hypergeometric.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = x.dist.multivariate_hypergeometric.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
+		52B210642145796E002FC3CD /* x.dist.multinomial copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "x.dist.multinomial copy-Info.plist"; path = "/Users/john/Development/maccallum/x/src/x.dist.multinomial copy-Info.plist"; sourceTree = "<absolute>"; };
 		52D69DF020AC90CB00D7BDEF /* x.seed_seq_from.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = x.seed_seq_from.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -488,6 +495,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		52B2105D2145796D002FC3CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52B2105E2145796D002FC3CD /* MaxAPI.framework in Frameworks */,
+				52B2105F2145796D002FC3CD /* Carbon.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		52D69DEA20AC90CB00D7BDEF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -511,6 +527,7 @@
 				52C839E1167A5BB8000AA688 /* Other Sources */,
 				089C1671FE841209C02AAC07 /* External Frameworks and Libraries */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
+				52B210642145796E002FC3CD /* x.dist.multinomial copy-Info.plist */,
 			);
 			name = cv_jit;
 			sourceTree = "<group>";
@@ -558,6 +575,7 @@
 				52B21025213EDC0F002FC3CD /* x.delegate~.mxo */,
 				52B2104521448A55002FC3CD /* x.dist.multinomial.mxo */,
 				52B2105421454CB9002FC3CD /* x.dist.hypergeometric.mxo */,
+				52B210632145796D002FC3CD /* x.dist.multivariate_hypergeometric.mxo */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -801,6 +819,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				52B2104921454CB9002FC3CD /* x.max.hpp in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52B210572145796D002FC3CD /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52B210582145796D002FC3CD /* x.max.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1337,6 +1363,24 @@
 			productReference = 52B2105421454CB9002FC3CD /* x.dist.hypergeometric.mxo */;
 			productType = "com.apple.product-type.bundle";
 		};
+		52B210562145796D002FC3CD /* x.dist.multivariate_hypergeometric */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 52B210602145796D002FC3CD /* Build configuration list for PBXNativeTarget "x.dist.multivariate_hypergeometric" */;
+			buildPhases = (
+				52B210572145796D002FC3CD /* Headers */,
+				52B210592145796D002FC3CD /* Resources */,
+				52B2105A2145796D002FC3CD /* Sources */,
+				52B2105D2145796D002FC3CD /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = x.dist.multivariate_hypergeometric;
+			productName = cv.jit.dilate;
+			productReference = 52B210632145796D002FC3CD /* x.dist.multivariate_hypergeometric.mxo */;
+			productType = "com.apple.product-type.bundle";
+		};
 		52D69DE420AC90CB00D7BDEF /* x.seed_seq_from */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 52D69DED20AC90CB00D7BDEF /* Build configuration list for PBXNativeTarget "x.seed_seq_from" */;
@@ -1410,6 +1454,7 @@
 				52B21017213EDC0F002FC3CD /* x.delegate~ */,
 				52B2103821448A55002FC3CD /* x.dist.multinomial */,
 				52B2104721454CB9002FC3CD /* x.dist.hypergeometric */,
+				52B210562145796D002FC3CD /* x.dist.multivariate_hypergeometric */,
 			);
 		};
 /* End PBXProject section */
@@ -1612,6 +1657,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		52B2104A21454CB9002FC3CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52B210592145796D002FC3CD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1886,6 +1938,15 @@
 			files = (
 				52B2104C21454CB9002FC3CD /* x.max.cpp in Sources */,
 				52B2104D21454CB9002FC3CD /* commonsyms.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52B2105A2145796D002FC3CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52B2105B2145796D002FC3CD /* x.max.cpp in Sources */,
+				52B2105C2145796D002FC3CD /* commonsyms.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5258,6 +5319,115 @@
 			};
 			name = Release;
 		};
+		52B210612145796D002FC3CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(inherited)";
+				COPY_PHASE_STRIP = NO;
+				DEPLOYMENT_LOCATION = YES;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/max-sdk/source/c74support/max-includes",
+					"$(PROJECT_DIR)/max-sdk/source/c74support/jit-includes",
+					"$(PROJECT_DIR)/max-sdk/source/c74support/msp-includes",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
+				GCC_ALTIVEC_EXTENSIONS = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INPUT_FILETYPE = automatic;
+				GCC_MODEL_TUNING = G4;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(inherited)";
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "$(inherited)";
+				INSTALL_PATH = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../libo\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/../../libomax\"";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				OBJROOT = "$(inherited)";
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-Wall",
+					"-DX_MAX_TYPE=multivariate_hypergeometric",
+					"-DX_MAX_CLASS=dist",
+				);
+				OTHER_LDFLAGS = "$(inherited)";
+				PREBINDING = YES;
+				PRELINK_LIBS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = "$(inherited)";
+				SHARED_PRECOMPS_DIR = "$(inherited)";
+				SKIP_INSTALL = NO;
+				SYMROOT = "$(inherited)";
+				VERSION_INFO_BUILDER = "$(TARGET_NAME)";
+				WARNING_CFLAGS = "$(inherited)";
+				WRAPPER_EXTENSION = "$(inherited)";
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		52B210622145796D002FC3CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(inherited)";
+				COPY_PHASE_STRIP = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				DSTROOT = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/max-sdk/source/c74support/max-includes",
+					"$(PROJECT_DIR)/max-sdk/source/c74support/jit-includes",
+					"$(PROJECT_DIR)/max-sdk/source/c74support/msp-includes",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
+				GCC_ALTIVEC_EXTENSIONS = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INPUT_FILETYPE = automatic;
+				GCC_MODEL_TUNING = G4;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(inherited)";
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "$(inherited)";
+				INSTALL_PATH = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../libo\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/../../libomax\"";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				OBJROOT = "$(inherited)";
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-Wall",
+					"-DX_MAX_TYPE=multivariate_hypergeometric",
+					"-DX_MAX_CLASS=dist",
+				);
+				OTHER_LDFLAGS = "$(inherited)";
+				PREBINDING = YES;
+				PRELINK_LIBS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = "$(inherited)";
+				SHARED_PRECOMPS_DIR = "$(inherited)";
+				SKIP_INSTALL = NO;
+				SYMROOT = "$(inherited)";
+				VERSION_INFO_BUILDER = "$(TARGET_NAME)";
+				WARNING_CFLAGS = "$(inherited)";
+				WRAPPER_EXTENSION = "$(inherited)";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		52D69DEE20AC90CB00D7BDEF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -5700,6 +5870,15 @@
 			buildConfigurations = (
 				52B2105221454CB9002FC3CD /* Debug */,
 				52B2105321454CB9002FC3CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		52B210602145796D002FC3CD /* Build configuration list for PBXNativeTarget "x.dist.multivariate_hypergeometric" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52B210612145796D002FC3CD /* Debug */,
+				52B210622145796D002FC3CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

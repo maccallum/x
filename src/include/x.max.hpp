@@ -940,6 +940,13 @@ namespace x
 		{
 			return _dist_hypergeometric_obj.newobj(msg, argc, argv);
 		}
+
+		using dist_multivariate_hypergeometric_obj = dist_obj<x::dist::multivariate_hypergeometric_distribution<long>, long, true, param_type_2<x::dist::multivariate_hypergeometric_distribution_param_type, long, n_str, long, false, M_str, long, true>>;
+		dist_multivariate_hypergeometric_obj _dist_multivariate_hypergeometric_obj;
+		t_object *dist_multivariate_hypergeometric_newobj(t_symbol *msg, short argc, t_atom *argv)
+		{
+			return _dist_multivariate_hypergeometric_obj.newobj(msg, argc, argv);
+		}
 		
 		// Rate-based distributions
 		using dist_poisson_obj = dist_obj<std::poisson_distribution<long>, long, false, param_type_1<x::dist::poisson_distribution_param_type, long, mean_str, double, false>>;

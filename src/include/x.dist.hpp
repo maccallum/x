@@ -837,6 +837,253 @@ namespace x
 			return __is;
 		}
 
+		// multivariate_hypergeometric_distribution
+
+		template<class _IntType = int>
+		class multivariate_hypergeometric_distribution
+		{
+		public:
+			// types
+			typedef _IntType result_type;
+
+			class param_type
+			{
+				result_type __n_ = 1;
+				std::vector<result_type> __M_;
+			public:
+				typedef multivariate_hypergeometric_distribution distribution_type;
+
+				param_type() : __M_({1, 1}) {}
+				template<class _InputIterator>
+				param_type(result_type __n, _InputIterator __f, _InputIterator __l)
+					: __n_(__n), __M_(__f, __l) {__init();}
+#ifndef _LIBCPP_CXX03_LANG
+				param_type(result_type __n, std::initializer_list<double> __wl)
+					: __n_(__n), __M_(__wl.begin(), __wl.end()) {__init();}
+#endif  // _LIBCPP_CXX03_LANG
+				template<class _UnaryOperation>
+				param_type(result_type __n, size_t __nw, double __xmin, double __xmax,
+					   _UnaryOperation __fw);
+
+				result_type n() const {return __n_;}
+				std::vector<result_type> M() const;
+
+				friend bool operator==(const param_type& __x, const param_type& __y)
+				{return __x.__M_ == __y.__M_ && __x.__n_ == __y.__n_;}
+				friend bool operator!=(const param_type& __x, const param_type& __y)
+				{return !(__x == __y);}
+
+			private:
+				void __init();
+
+				friend class multivariate_hypergeometric_distribution;
+
+				template <class _CharT, class _Traits, class _IT>
+				friend
+				std::basic_ostream<_CharT, _Traits>&
+				operator<<(std::basic_ostream<_CharT, _Traits>& __os,
+					   const multivariate_hypergeometric_distribution<_IT>& __x);
+
+				template <class _CharT, class _Traits, class _IT>
+				friend
+				std::basic_istream<_CharT, _Traits>&
+				operator>>(std::basic_istream<_CharT, _Traits>& __is,
+					   multivariate_hypergeometric_distribution<_IT>& __x);
+			};
+
+		private:
+			param_type __p_;
+
+		public:
+			// constructor and reset functions
+			multivariate_hypergeometric_distribution() {}
+			template<class _InputIterator>
+			multivariate_hypergeometric_distribution(result_type __n, _InputIterator __f, _InputIterator __l)
+				: __p_(__n, __f, __l) {}
+#ifndef _LIBCPP_CXX03_LANG
+			multivariate_hypergeometric_distribution(result_type __n, std::initializer_list<double> __wl)
+				: __p_(__n, __wl) {}
+#endif  // _LIBCPP_CXX03_LANG
+			template<class _UnaryOperation>
+			multivariate_hypergeometric_distribution(result_type __n, size_t __nw, double __xmin, double __xmax,
+					      _UnaryOperation __fw)
+				: __p_(__n, __nw, __xmin, __xmax, __fw) {}
+			explicit multivariate_hypergeometric_distribution(const param_type& __p)
+				: __p_(__p) {}
+			void reset() {}
+
+			// generating functions
+			template<class _URNG>
+			std::vector<result_type> operator()(_URNG& __g)
+			{return (*this)(__g, __p_);}
+			template<class _URNG> std::vector<result_type> operator()(_URNG& __g, const param_type& __p);
+
+			// property functions
+			result_type n() const {return __p_.n();}
+			std::vector<double> M() const {return __p_.p();}
+
+			param_type param() const {return __p_;}
+			void param(const param_type& __p) {__p_ = __p;}
+
+			result_type min() const {return 0;}
+			result_type max() const {return __p_.n();}
+
+			friend bool operator==(const multivariate_hypergeometric_distribution& __x,
+					       const multivariate_hypergeometric_distribution& __y)
+			{return __x.__p_ == __y.__p_;}
+			friend bool operator!=(const multivariate_hypergeometric_distribution& __x,
+					       const multivariate_hypergeometric_distribution& __y)
+			{return !(__x == __y);}
+
+			template <class _CharT, class _Traits, class _IT>
+			friend
+			std::basic_ostream<_CharT, _Traits>&
+			operator<<(std::basic_ostream<_CharT, _Traits>& __os,
+				   const multivariate_hypergeometric_distribution<_IT>& __x);
+
+			template <class _CharT, class _Traits, class _IT>
+			friend
+			std::basic_istream<_CharT, _Traits>&
+			operator>>(std::basic_istream<_CharT, _Traits>& __is,
+				   multivariate_hypergeometric_distribution<_IT>& __x);
+		};
+
+		template<class _IntType>
+		template<class _UnaryOperation>
+		multivariate_hypergeometric_distribution<_IntType>::param_type::param_type(result_type __n,
+									   size_t __nw,
+									double __xmin,
+									double __xmax,
+									_UnaryOperation __fw)
+		{
+			if (__nw > 1)
+				{
+					__M_.reserve(__nw - 1);
+					double __d = (__xmax - __xmin) / __nw;
+					double __d2 = __d / 2;
+					for (size_t __k = 0; __k < __nw; ++__k)
+						__M_.push_back(__fw(__xmin + __k * __d + __d2));
+					__n_ = __n;
+					__init();
+				}
+		}
+
+		template<class _IntType>
+		void
+		multivariate_hypergeometric_distribution<_IntType>::param_type::__init()
+		{
+			// result_type __sum = _VSTD::accumulate(__p_.begin(),
+			// 				      __p_.end(),
+			// 				      result_type());
+			// for(size_t __i = 0; __i < __p_.size(); ++__i){
+			// 	__p_[__i] /= __sum;
+			// }
+			// if (!__p_.empty())
+			// 	{
+			// 		if (__p_.size() > 1)
+			// 			{
+			// 				double __s = _VSTD::accumulate(__p_.begin(), __p_.end(), 0.0);
+			// 				for (_VSTD::vector<double>::iterator __i = __p_.begin(), __e = __p_.end();
+			// 				     __i < __e; ++__i)
+			// 					*__i /= __s;
+			// 				vector<double> __t(__p_.size() - 1);
+			// 				_VSTD::partial_sum(__p_.begin(), __p_.end() - 1, __t.begin());
+			// 				swap(__p_, __t);
+			// 			}
+			// 		else
+			// 			{
+			// 				__p_.clear();
+			// 				__p_.shrink_to_fit();
+			// 			}
+			// 	}
+		}
+
+		template<class _IntType>
+		std::vector<_IntType>
+		multivariate_hypergeometric_distribution<_IntType>::param_type::M() const
+		{
+			// size_t __n = __p_.size();
+			// _VSTD::vector<double> __p(__n+1);
+			// _VSTD::adjacent_difference(__p_.begin(), __p_.end(), __p.begin());
+			// if (__n > 0)
+			// 	__p[__n] = 1 - __p_[__n-1];
+			// else
+			// 	__p[0] = 1;
+			// return __p;
+			return __M_;
+		}
+
+		template<class _IntType>
+		template<class _URNG>
+		std::vector<_IntType>
+		multivariate_hypergeometric_distribution<_IntType>::operator()(_URNG& __g, const param_type& __p)
+		{
+			_IntType n = __p.n();
+			std::vector<_IntType> M = __p.M();
+			std::vector<_IntType> M_cumsum(M.size());
+			std::vector<_IntType> m(M.size());
+			std::fill(m.begin(), m.end(), 0);
+			_IntType N = 0;
+			
+			for(int i = 0; i < M.size(); i++){
+				N += M[i];
+				M_cumsum[i] = N;
+			}
+			double b = N;
+			for(int i = 0; i < n; i++){
+				std::uniform_real_distribution d(0., 1.);
+				double u = d(__g);
+				u *= b;
+
+				for(int j = 0; j < M.size(); j++){
+					if(u < M_cumsum[j]){
+						M[j]--;
+						m[j]++;
+						for(int k = j; k < M.size(); k++){
+							M_cumsum[k]--;
+						}
+						break;
+					}
+				}
+				b--;
+			}
+			return m;
+		}
+
+		template <class _CharT, class _Traits, class _IT>
+		std::basic_ostream<_CharT, _Traits>&
+		operator<<(std::basic_ostream<_CharT, _Traits>& __os,
+			   const multivariate_hypergeometric_distribution<_IT>& __x)
+		{
+			std::__save_flags<_CharT, _Traits> __lx(__os);
+			__os.flags(std::ios_base::dec | std::ios_base::left | std::ios_base::fixed |
+				   std::ios_base::scientific);
+			_CharT __sp = __os.widen(' ');
+			__os.fill(__sp);
+			size_t __n = __x.__p_.__p_.size();
+			__os << __n;
+			for (size_t __i = 0; __i < __n; ++__i)
+				__os << __sp << __x.__p_.__p_[__i];
+			return __os;
+		}
+
+		template <class _CharT, class _Traits, class _IT>
+		std::basic_istream<_CharT, _Traits>&
+		operator>>(std::basic_istream<_CharT, _Traits>& __is,
+			   multivariate_hypergeometric_distribution<_IT>& __x)
+		{
+			std::__save_flags<_CharT, _Traits> __lx(__is);
+			__is.flags(std::ios_base::dec | std::ios_base::skipws);
+			size_t __n;
+			__is >> __n;
+			std::vector<double> __p(__n);
+			for (size_t __i = 0; __i < __n; ++__i)
+				__is >> __p[__i];
+			if (!__is.fail())
+				swap(__x.__p_.__p_, __p);
+			return __is;
+		}
+
 		// params
 		class uniform_int_distribution_param_type : public std::uniform_int_distribution<long>::param_type
 		{
@@ -907,6 +1154,15 @@ namespace x
 			long param1(void){return n();}
 			long param2(void){return M();}
 			long param3(void){return N();}
+		};
+
+		class multivariate_hypergeometric_distribution_param_type : public x::dist::multivariate_hypergeometric_distribution<long>::param_type
+		{
+		public:
+			multivariate_hypergeometric_distribution_param_type(void) : x::dist::multivariate_hypergeometric_distribution<long>::param_type() {}
+			multivariate_hypergeometric_distribution_param_type(long p1, std::vector<long> p2) : x::dist::multivariate_hypergeometric_distribution<long>::param_type(p1, p2.begin(), p2.end()) {}
+			long param1(void){return n();}
+			std::vector<long> param2(void){return M();}
 		};
 		
 		class poisson_distribution_param_type : public std::poisson_distribution<long>::param_type
