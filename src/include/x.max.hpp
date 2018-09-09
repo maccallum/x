@@ -557,6 +557,41 @@ namespace x
 			void (*setters[2])(param_type*, long, t_atom*) = {p1, p2};
 		};
 
+		template <typename param_type, typename result_type, const char param1_name[], typename param1_type, bool param1_vec, const char param2_name[], typename param2_type, bool param2_vec, const char param3_name[], typename param3_type, bool param3_vec>
+		class param_type_3 : public param_type
+		{
+		public:
+			int nargs = 3;
+			const char *names_str[3] = {param1_name, param2_name, param3_name};
+			t_symbol *names_sym[3] = {gensym(param1_name), gensym(param2_name), gensym(param3_name)};
+			static void p1(param_type *p, long *argc, t_atom **argv)
+			{
+				atom_setv(p->param1(), argc, argv);
+			}
+			static void p1(param_type *p, long argc, t_atom *argv)
+			{
+				*p = param_type(atom_getv<param1_type, param1_vec>(argc, argv), p->param2(), p->param3());
+			}
+			static void p2(param_type *p, long *argc, t_atom **argv)
+			{
+				atom_setv(p->param2(), argc, argv);
+			}
+			static void p2(param_type *p, long argc, t_atom *argv)
+			{
+				*p = param_type(p->param1(), atom_getv<param2_type, param2_vec>(argc, argv), p->param3());
+			}
+			static void p3(param_type *p, long *argc, t_atom **argv)
+			{
+				atom_setv(p->param3(), argc, argv);
+			}
+			static void p3(param_type *p, long argc, t_atom *argv)
+			{
+				*p = param_type(p->param1(), p->param2(), atom_getv<param3_type, param3_vec>(argc, argv));
+			}
+			void (*getters[3])(param_type*, long*, t_atom**) = {p1, p2, p3};
+			void (*setters[3])(param_type*, long, t_atom*) = {p1, p2, p3};
+		};
+
 		const char alpha_str[] = "alpha";
 		const char beta_str[] = "beta";
 		const char mean_str[] = "mean";
@@ -568,7 +603,9 @@ namespace x
 		const char a_str[] = "a";
 		const char b_str[] = "b";
 		const char k_str[] = "k";
+		const char M_str[] = "M";
 		const char m_str[] = "m";
+		const char N_str[] = "N";
 		const char n_str[] = "n";
 		const char p_str[] = "p";
 		const char s_str[] = "s";
@@ -895,6 +932,13 @@ namespace x
 		t_object *dist_multinomial_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_multinomial_obj.newobj(msg, argc, argv);
+		}
+
+		using dist_hypergeometric_obj = dist_obj<x::dist::hypergeometric_distribution<long>, long, false, param_type_3<x::dist::hypergeometric_distribution_param_type, long, n_str, long, false, M_str, long, false, N_str, long, false>>;
+		dist_hypergeometric_obj _dist_hypergeometric_obj;
+		t_object *dist_hypergeometric_newobj(t_symbol *msg, short argc, t_atom *argv)
+		{
+			return _dist_hypergeometric_obj.newobj(msg, argc, argv);
 		}
 		
 		// Rate-based distributions

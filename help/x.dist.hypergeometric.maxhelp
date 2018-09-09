@@ -100,7 +100,6 @@
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 314.0, 177.0, 50.0, 20.0 ],
-					"presentation_rect" : [ 314.0, 178.0, 0.0, 0.0 ],
 					"style" : ""
 				}
 
@@ -140,7 +139,6 @@
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 232.0, 177.0, 50.0, 20.0 ],
-					"presentation_rect" : [ 233.0, 178.0, 0.0, 0.0 ],
 					"style" : ""
 				}
 
@@ -191,9 +189,9 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 232.0, 217.0, 66.0, 20.0 ],
+					"patching_rect" : [ 232.0, 217.0, 68.0, 20.0 ],
 					"style" : "",
-					"text" : "prepend K"
+					"text" : "prepend M"
 				}
 
 			}
@@ -427,20 +425,6 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "x.dist.hypergeometric.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "x.dist.multivariate_hypergeometric.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "x.generator.default.global.maxpat",
 				"bootpath" : "~/Development/maccallum/x/patchers",
 				"patcherrelativepath" : "../patchers",
@@ -469,7 +453,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "x.dist.uniform_real.mxo",
+				"name" : "x.dist.hypergeometric.mxo",
 				"type" : "iLaX"
 			}
 , 			{

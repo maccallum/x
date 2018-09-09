@@ -689,6 +689,154 @@ namespace x
 			return __is;
 		}
 
+		// hypergeometric_distribution
+
+		template<class _IntType = int>
+		class hypergeometric_distribution
+		{
+		public:
+			// types
+			typedef _IntType result_type;
+
+			class param_type
+			{
+				result_type __n_, __M_, __N_;
+			public:
+				typedef hypergeometric_distribution distribution_type;
+
+				explicit param_type(result_type __n = 1, result_type __M = 1, result_type __N = 2);
+
+				result_type n() const {return __n_;}
+				result_type M() const {return __M_;}
+				result_type N() const {return __N_;}
+
+				friend bool operator==(const param_type& __x, const param_type& __y)
+				{return __x.__n_ == __y.__n_ && __x.__M_ == __y.__M_ && __x.__N_ == __y.__N_;}
+				friend bool operator!=(const param_type& __x, const param_type& __y)
+				{return !(__x == __y);}
+
+				friend class hypergeometric_distribution;
+			};
+
+		private:
+			param_type __p_;
+
+		public:
+			// constructors and reset functions
+			explicit hypergeometric_distribution(result_type __n = 1, result_type __M = 1, result_type __N = 2)
+				: __p_(param_type(__n, __M, __N)) {}
+			explicit hypergeometric_distribution(const param_type& __p) : __p_(__p) {}
+			void reset() {}
+
+			// generating functions
+			template<class _URNG>
+			result_type operator()(_URNG& __g)
+			{return (*this)(__g, __p_);}
+			template<class _URNG> result_type operator()(_URNG& __g, const param_type& __p);
+
+			// property functions
+			result_type n() const {return __p_.n();}
+			result_type M() const {return __p_.M();}
+			result_type N() const {return __p_.N();}
+
+			param_type param() const {return __p_;}
+			void param(const param_type& __p) {__p_ = __p;}
+
+			result_type min() const {return 0;}
+			result_type max() const {return __p_.n();}
+
+			friend bool operator==(const hypergeometric_distribution& __x,
+					       const hypergeometric_distribution& __y)
+			{return __x.__p_ == __y.__p_;}
+			friend bool operator!=(const hypergeometric_distribution& __x,
+					       const hypergeometric_distribution& __y)
+			{return !(__x == __y);}
+		};
+
+		template<class _IntType>
+		hypergeometric_distribution<_IntType>::param_type::param_type(const result_type __n, const result_type __M, const result_type __N)
+			: __n_(__n), __M_(__M), __N_(__N)
+		{
+			// if (0 < __p_ && __p_ < 1)
+			// 	{
+			// 		__r0_ = static_cast<result_type>((__t_ + 1) * __p_);
+			// 		__pr_ = _VSTD::exp(__libcpp_lgamma(__t_ + 1.) -
+			// 				   __libcpp_lgamma(__r0_ + 1.) -
+			// 				   __libcpp_lgamma(__t_ - __r0_ + 1.) + __r0_ * _VSTD::log(__p_) +
+			// 				   (__t_ - __r0_) * _VSTD::log(1 - __p_));
+			// 		__odds_ratio_ = __p_ / (1 - __p_);
+			// 	}
+		}
+
+		template<class _IntType>
+		template<class _URNG>
+		_IntType
+		hypergeometric_distribution<_IntType>::operator()(_URNG& __g, const param_type& __p)
+		{
+			_IntType a = __p.M();
+			_IntType b = __p.N();
+			_IntType k = 0;
+			if(__p.n() > __p.N() / 2){
+				for(long i = 0; i < __p.n(); i++){
+					std::uniform_real_distribution d(0., 1.);
+					double r = d(__g);
+					if(b * r < a){
+						k++;
+						if(k == __p.M()){
+							return k;
+						}
+						a--;
+					}
+					b--;
+				}
+				return k;
+			}else{
+				for(long i = 0; i < __p.N() - __p.n(); i++){
+					std::uniform_real_distribution d(0., 1.);
+					double r = d(__g);
+					if(b * r < a){
+						k++;
+						if(k == __p.M()){
+							return __p.M() - k;
+						}
+						a--;
+					}
+					b--;
+				}
+				return __p.M() - k;
+			}
+		}
+
+		template <class _CharT, class _Traits, class _IntType>
+		std::basic_ostream<_CharT, _Traits>&
+		operator<<(std::basic_ostream<_CharT, _Traits>& __os,
+			   const hypergeometric_distribution<_IntType>& __x)
+		{
+			std::__save_flags<_CharT, _Traits> __lx(__os);
+			__os.flags(std::ios_base::dec | std::ios_base::left | std::ios_base::fixed |
+				   std::ios_base::scientific);
+			_CharT __sp = __os.widen(' ');
+			__os.fill(__sp);
+			return __os << __x.n() << __sp << __x.M() << __sp << __x.N();
+		}
+
+		template <class _CharT, class _Traits, class _IntType>
+		std::basic_istream<_CharT, _Traits>&
+		operator>>(std::basic_istream<_CharT, _Traits>& __is,
+			   hypergeometric_distribution<_IntType>& __x)
+		{
+			typedef hypergeometric_distribution<_IntType> _Eng;
+			typedef typename _Eng::result_type result_type;
+			typedef typename _Eng::param_type param_type;
+			std::__save_flags<_CharT, _Traits> __lx(__is);
+			__is.flags(std::ios_base::dec | std::ios_base::skipws);
+			result_type __n, __M, __N;
+			__is >> __n >> __M >> __N;
+			if (!__is.fail())
+				__x.param(param_type(__n, __M, __N));
+			return __is;
+		}
+
 		// params
 		class uniform_int_distribution_param_type : public std::uniform_int_distribution<long>::param_type
 		{
@@ -749,6 +897,16 @@ namespace x
 			multinomial_distribution_param_type(long p1, std::vector<double> p2) : x::dist::multinomial_distribution<long>::param_type(p1, p2.begin(), p2.end()) {}
 			long param1(void){return n();}
 			std::vector<double> param2(void){return p();}
+		};
+
+		class hypergeometric_distribution_param_type : public x::dist::hypergeometric_distribution<long>::param_type
+		{
+		public:
+			hypergeometric_distribution_param_type(void) : x::dist::hypergeometric_distribution<long>::param_type() {}
+			hypergeometric_distribution_param_type(long p1, long p2, long p3) : x::dist::hypergeometric_distribution<long>::param_type(p1, p2, p3) {}
+			long param1(void){return n();}
+			long param2(void){return M();}
+			long param3(void){return N();}
 		};
 		
 		class poisson_distribution_param_type : public std::poisson_distribution<long>::param_type

@@ -119,6 +119,11 @@
 			<key>orderHint</key>
 			<integer>7</integer>
 		</dict>
+		<key>x.dist.hypergeometric.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>30</integer>
+		</dict>
 		<key>x.dist.kumaraswamy.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -132,7 +137,7 @@
 		<key>x.dist.multinomial.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>30</integer>
+			<integer>29</integer>
 		</dict>
 		<key>x.dist.negative_binomial.xcscheme</key>
 		<dict>
@@ -578,6 +583,11 @@
 			<true/>
 		</dict>
 		<key>52B2103821448A55002FC3CD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>52B2104721454CB9002FC3CD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
