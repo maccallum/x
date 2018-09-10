@@ -77,40 +77,14 @@
 			}
 , 			{
 				"box" : 				{
-					"id" : "obj-4",
+					"id" : "obj-2",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 422.0, 297.0, 137.0, 20.0 ],
+					"patching_rect" : [ 188.0, 230.0, 110.0, 20.0 ],
 					"style" : "",
-					"text" : "x.random_device.global"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-3",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 338.0, 264.0, 103.0, 20.0 ],
-					"style" : "",
-					"text" : "x.seed_seq_from"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-2",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 215.0, 230.0, 142.0, 20.0 ],
-					"style" : "",
-					"text" : "x.generator.pcg32.global"
+					"text" : "x.generator.default"
 				}
 
 			}
@@ -158,39 +132,9 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-3", 0 ],
-					"source" : [ "obj-2", 1 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-6", 0 ],
-					"midpoints" : [ 224.5, 348.0, 574.0, 348.0, 574.0, 175.0, 161.5, 175.0 ],
+					"midpoints" : [ 197.5, 271.0, 327.0, 271.0, 327.0, 175.0, 161.5, 175.0 ],
 					"source" : [ "obj-2", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-2", 0 ],
-					"midpoints" : [ 347.5, 339.0, 567.0, 339.0, 567.0, 227.0, 224.5, 227.0 ],
-					"source" : [ "obj-3", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-4", 0 ],
-					"source" : [ "obj-3", 1 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-3", 0 ],
-					"midpoints" : [ 431.5, 332.0, 562.0, 332.0, 562.0, 258.0, 347.5, 258.0 ],
-					"source" : [ "obj-4", 0 ]
 				}
 
 			}
@@ -224,36 +168,18 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "x.generator.pcg32.global.maxpat",
+				"name" : "x.generator.default.maxpat",
 				"bootpath" : "~/Development/maccallum/x/patchers",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "x.global.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "x.random_device.global.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "x.generator.pcg32.mxo",
+				"name" : "x.global.mxo",
 				"type" : "iLaX"
 			}
 , 			{
 				"name" : "x.seed_seq_from.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "x.random_device.mxo",
 				"type" : "iLaX"
 			}
  ],

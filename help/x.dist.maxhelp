@@ -123,10 +123,9 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 298.0, 184.0, 145.0, 20.0 ],
-					"presentation_rect" : [ 213.0, 284.0, 0.0, 0.0 ],
+					"patching_rect" : [ 298.0, 184.0, 110.0, 20.0 ],
 					"style" : "",
-					"text" : "x.generator.default.global"
+					"text" : "x.generator.default"
 				}
 
 			}
@@ -161,7 +160,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-6", 0 ],
-					"midpoints" : [ 307.5, 216.0, 460.0, 216.0, 460.0, 139.0, 127.5, 139.0 ],
+					"midpoints" : [ 307.5, 216.0, 429.0, 216.0, 429.0, 139.0, 127.5, 139.0 ],
 					"source" : [ "obj-5", 0 ]
 				}
 
@@ -203,28 +202,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "x.generator.default.global.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "x.generator.pcg32.global.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "x.global.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "x.random_device.global.maxpat",
+				"name" : "x.generator.default.maxpat",
 				"bootpath" : "~/Development/maccallum/x/patchers",
 				"patcherrelativepath" : "../patchers",
 				"type" : "JSON",
@@ -235,15 +213,11 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "x.generator.pcg32.mxo",
+				"name" : "x.global.mxo",
 				"type" : "iLaX"
 			}
 , 			{
 				"name" : "x.seed_seq_from.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "x.random_device.mxo",
 				"type" : "iLaX"
 			}
  ],

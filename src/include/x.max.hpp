@@ -23,11 +23,13 @@ SOFTWARE.
 #include "ext.h"
 #include "ext_obex.h"
 #include "ext_obex_util.h"
+#include "jpatcher_utils.h"
 
 #include <random>
 #include "pcg_random.hpp"
 #include "x.proxy.hpp"
 #include "x.dist.hpp"
+#include "x.global.h"
 
 #ifndef __X_MAX_HPP__
 #define __X_MAX_HPP__
@@ -253,6 +255,10 @@ namespace x
 				random_device_obj *o = new random_device_obj;
 				obj::obj_init_without_delegation(xx, (obj *)o);
 				x->myobj = (void *)o;
+				t_dictionary *d = object_dictionaryarg(argc, argv);
+				if(dictionary_hasentry(d, gensym(XGLOBAL_REGISTER))){
+					object_subscribe(gensym("xglobal_conduit"), max_class()->c_sym, gensym("xglobal_conduit"), x);
+				}
 				return xx;
 			}
 
@@ -299,12 +305,24 @@ namespace x
 				}
 			}
 
+			static void notify(t_maxobj *_x, t_symbol *s, t_symbol *msg, t_xglobal_conduit *sender, void *data)
+			{
+				if(msg == gensym("sendmessage")){
+					random_device_obj *x = (random_device_obj *)(_x->myobj);
+					x->outlet_main(sender->outlet_main);
+					//x->outlet_delegation(sender->outlet_delegation);
+					t_atom rv;
+					object_method_typed(_x, sender->msg, sender->argc, sender->argv, &rv);
+				}
+			}
+
 			int main(void)
 			{
 				int ret = obj::main();
 				class_addmethod(max_class(), (method)msg_generate, "generate", A_GIMME, 0);
 				class_addmethod(max_class(), (method)msg_min, "min", 0);
 				class_addmethod(max_class(), (method)msg_max, "max", 0);
+				class_addmethod(max_class(), (method)notify, "notify", A_CANT, 0);
 				return ret;
 			}
 		};
@@ -431,6 +449,11 @@ namespace x
 					rng_obj<rng_type> *o = new rng_obj<rng_type>;
 					obj::obj_init(x, (obj *)o);
 					xx->myobj = (void *)o;
+
+					t_dictionary *d = object_dictionaryarg(argc, argv);
+					if(dictionary_hasentry(d, gensym(XGLOBAL_REGISTER))){
+						object_subscribe(gensym("xglobal_conduit"), max_class()->c_sym, gensym("xglobal_conduit"), x);
+					}
 					return (t_object *)x;
 				}
 				return NULL;
@@ -462,7 +485,6 @@ namespace x
 				t_atom a;
 				atom_set(&a, x->min());
 				outlet_anything(x->outlet_main(), _sym_min, 1, &a);
-				//outlet_int(x->outlet_main(), x->min());
 			}
 
 			static void msg_max(t_maxobj *_x)
@@ -471,7 +493,6 @@ namespace x
 				t_atom a;
 				atom_set(&a, x->max());
 				outlet_anything(x->outlet_main(), _sym_max, 1, &a);
-				//outlet_int(x->outlet_main(), x->max());
 			}
 
 			static void freeobj(t_maxobj *x)
@@ -485,12 +506,24 @@ namespace x
 				}
 			}
 
+			static void notify(t_maxobj *_x, t_symbol *s, t_symbol *msg, t_xglobal_conduit *sender, void *data)
+			{
+				if(msg == gensym("sendmessage")){
+					rng_obj<rng_type> *x = (rng_obj<rng_type> *)(_x->myobj);
+					x->outlet_main(sender->outlet_main);
+					x->outlet_delegation(sender->outlet_delegation);
+					t_atom rv;
+					object_method_typed(_x, sender->msg, sender->argc, sender->argv, &rv);
+				}
+			}
+
 			int main(void)
 			{
 				rng_obj_base::main();
 				class_addmethod(max_class(), (method)msg_generate, "generate", A_GIMME, 0);
 				class_addmethod(max_class(), (method)msg_min, "min", 0);
 				class_addmethod(max_class(), (method)msg_max, "max", 0);
+				class_addmethod(max_class(), (method)notify, "notify", A_CANT, 0);
 				return 0;
 			}
 		};
@@ -612,276 +645,276 @@ namespace x
 		const char t_str[] = "t";
 		
 		template <typename dist_type, typename result_type, bool multivariate=false, typename param_type=param_type_2<x::dist::uniform_real_distribution_param_type, double, a_str, double, false, b_str, double, false>>
-		class dist_obj : public obj, public dist_type, public param_type
-		{
-		public:
-			t_object *newobj(t_symbol *msg, short argc, t_atom *argv)
+			class dist_obj : public obj, public dist_type, public param_type
 			{
-				t_object *x = obj::newobj(msg, argc, argv);
-				if(x){
-					t_maxobj *xx = (t_maxobj *)x;
-					dist_obj<dist_type, result_type, multivariate, param_type> *o = new dist_obj<dist_type, result_type, multivariate, param_type>;
-					obj::obj_init(x, (obj *)o);
-					xx->myobj = (void *)o;
-					return x;
-				}
-				return NULL;
-			}
-
-			template <typename delegate_type>
-			void init_delegate(t_maxobj *_x, delegate_type *d)
-			{
-				d->context(outlet_delegation());
-				_x->n = d->buffer_len_address();
-				_x->buf = d->buffer_address();
-			}
-
-			template <typename delegate_type>
-			void finalize_delegate(t_maxobj *_x, delegate_type *d)
-			{
-				if(_x->buf){
-					if(*(_x->buf)){
-						sysmem_freeptr(*(_x->buf));
+			public:
+				t_object *newobj(t_symbol *msg, short argc, t_atom *argv)
+				{
+					t_object *x = obj::newobj(msg, argc, argv);
+					if(x){
+						t_maxobj *xx = (t_maxobj *)x;
+						dist_obj<dist_type, result_type, multivariate, param_type> *o = new dist_obj<dist_type, result_type, multivariate, param_type>;
+						obj::obj_init(x, (obj *)o);
+						xx->myobj = (void *)o;
+						return x;
 					}
+					return NULL;
 				}
-				_x->buf = NULL;
-				_x->n = NULL;
-			}
 
-			template <typename rng_type, bool U=multivariate>
-			static typename std::enable_if<!U>::type _generate(t_maxobj *_x, dist_type d, rng_type *rng)
-			{
-				((dist_obj<dist_type, result_type> *)(_x->myobj))->init_delegate(_x, (rng_delegate_uint64 *)rng);
-				t_atom a;
-				atom_set(&a, d(*rng));
-				outlet_atoms(((dist_obj<dist_type, result_type> *)(_x->myobj))->outlet_main(), 1, &a);
-				((dist_obj<dist_type, result_type> *)(_x->myobj))->finalize_delegate(_x, (rng_delegate_uint64 *)rng);
-			}
-
-			template <typename rng_type, bool U=multivariate>
-			static typename std::enable_if<U>::type _generate(t_maxobj *_x, dist_type d, rng_type *rng)
-			{
-				((dist_obj<dist_type, result_type> *)(_x->myobj))->init_delegate(_x, (rng_delegate_uint64 *)rng);
-				std::vector<result_type> vec = d(*rng);
-				size_t n = vec.size();
-				t_atom a[n];
-				for(int i = 0; i < n; i++){
-					atom_set(a + i, vec[i]);
+				template <typename delegate_type>
+				void init_delegate(t_maxobj *_x, delegate_type *d)
+				{
+					d->context(outlet_delegation());
+					_x->n = d->buffer_len_address();
+					_x->buf = d->buffer_address();
 				}
-				outlet_atoms(((dist_obj<dist_type, result_type> *)(_x->myobj))->outlet_main(), n, a);
-				((dist_obj<dist_type, result_type> *)(_x->myobj))->finalize_delegate(_x, (rng_delegate_uint64 *)rng);
-			}
+
+				template <typename delegate_type>
+				void finalize_delegate(t_maxobj *_x, delegate_type *d)
+				{
+					if(_x->buf){
+						if(*(_x->buf)){
+							sysmem_freeptr(*(_x->buf));
+						}
+					}
+					_x->buf = NULL;
+					_x->n = NULL;
+				}
+
+				template <typename rng_type, bool U=multivariate>
+				static typename std::enable_if<!U>::type _generate(t_maxobj *_x, dist_type d, rng_type *rng)
+				{
+					((dist_obj<dist_type, result_type> *)(_x->myobj))->init_delegate(_x, (rng_delegate_uint64 *)rng);
+					t_atom a;
+					atom_set(&a, d(*rng));
+					outlet_atoms(((dist_obj<dist_type, result_type> *)(_x->myobj))->outlet_main(), 1, &a);
+					((dist_obj<dist_type, result_type> *)(_x->myobj))->finalize_delegate(_x, (rng_delegate_uint64 *)rng);
+				}
+
+				template <typename rng_type, bool U=multivariate>
+				static typename std::enable_if<U>::type _generate(t_maxobj *_x, dist_type d, rng_type *rng)
+				{
+					((dist_obj<dist_type, result_type> *)(_x->myobj))->init_delegate(_x, (rng_delegate_uint64 *)rng);
+					std::vector<result_type> vec = d(*rng);
+					size_t n = vec.size();
+					t_atom a[n];
+					for(int i = 0; i < n; i++){
+						atom_set(a + i, vec[i]);
+					}
+					outlet_atoms(((dist_obj<dist_type, result_type> *)(_x->myobj))->outlet_main(), n, a);
+					((dist_obj<dist_type, result_type> *)(_x->myobj))->finalize_delegate(_x, (rng_delegate_uint64 *)rng);
+				}
 			
-			static void generate(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
-			{
-				dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
-				dist_type d = dist_type(*((param_type *)x));
-				size_t n = 1;
-				_x->n = &n;
-				t_atom mina, maxa;
-				t_atom *p = &mina;
-				_x->buf = &p;
-				outlet_anything(x->outlet_delegation(), _sym_min, 0, NULL);
-				p = &maxa;
-				_x->buf = &p;
-				outlet_anything(x->outlet_delegation(), _sym_max, 0, NULL);
-				uint64_t min = atom_getlong(&mina);
-				uint64_t max = atom_getlong(&maxa);
-				if(max == 0xFFFFFF){
-					switch(min){
-					case 0:
-						{
-							x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 0, 0xFFFFFF> rng;
-							_generate(_x, d, &rng);
-						}
-						break;
-					case 1:
-						{
-							x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 1, 0xFFFFFF> rng;
-							_generate(_x, d, &rng);
-						}
-						break;
-					}
-				}else if(max == 0x7FFFFFFE){
-					switch(min){
-					case 0:
-						{
-							x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 0, 0x7FFFFFFE> rng;
-							_generate(_x, d, &rng);
-						}
-						break;
-					case 1:
-						{
-							x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 1, 0x7FFFFFFE> rng;
-							_generate(_x, d, &rng);
-						}
-						break;
-					}
-				}else if(max == 0xFFFFFFFF){
-					switch(min){
-					case 0:
-						{
-							x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 0, 0xFFFFFFFF> rng;
-							_generate(_x, d, &rng);
-						}
-						break;
-					case 1:
-						{
-							x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 1, 0xFFFFFFFF> rng;
-							_generate(_x, d, &rng);
-						}
-						break;
-					}
-				}else if(max == 0xFFFFFFFFFFFF){
-					switch(min){
-					case 0:
-						{
-							x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 0, 0xFFFFFFFFFFFF> rng;
-							_generate(_x, d, &rng);
-						}
-						break;
-					case 1:
-						{
-							x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 1, 0xFFFFFFFFFFFF> rng;
-							_generate(_x, d, &rng);
-						}
-						break;
-					}
-				}else if(max == 0xFFFFFFFFFFFFFFFF){
-					switch(min){
-					case 0:
-						{
-							x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 0, 0xFFFFFFFFFFFFFFFF> rng;
-							_generate(_x, d, &rng);
-						}
-						break;
-					case 1:
-						{
-							x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 1, 0xFFFFFFFFFFFFFFFF> rng;
-							_generate(_x, d, &rng);
-						}
-						break;
-					}
-				}else{
-				}
-			}
-
-			static void min(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
-			{
-				if(argc){
-					msg_anything(_x, msg, argc, argv);
-					return;
-				}
-				dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
-				dist_type d = dist_type(*((param_type *)x));
-				t_atom a;
-				atom_set(&a, d.min());
-				outlet_anything(((dist_obj<dist_type, result_type> *)(_x->myobj))->outlet_main(), _sym_min, 1, &a);
-			}
-
-			static void max(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
-			{
-				if(argc){
-					msg_anything(_x, msg, argc, argv);
-					return;
-				}
-				dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
-				dist_type d = dist_type(*((param_type *)x));
-				t_atom a;
-				atom_set(&a, d.max());
-				outlet_anything(((dist_obj<dist_type, result_type> *)(_x->myobj))->outlet_main(), _sym_max, 1, &a);
-			}
-
-			static void paramnames(t_maxobj *_x)
-			{
-				dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
-				t_atom a[x->nargs];
-				for(int i = 0; i < x->nargs; i++){
-					atom_setsym(a + i, x->names_sym[i]);
-				}
-				outlet_anything(x->outlet_main(), ps_paramnames, x->nargs, a);
-			}
-
-			static void freeobj(t_maxobj *x)
-			{
-				if(x->buf){
-					sysmem_freeptr(x->buf);
-				}
-				
-				if(x->myobj){
-					delete ((dist_obj<dist_type, result_type> *)(x->myobj));
-				}
-			}
-
-			static void param(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
-			{
-				dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
-				t_symbol *name = msg;
-				for(int i = 0; i < x->nargs; i++){
-					if(name == x->names_sym[i]){
-						if(argc){
-							x->setters[i](x, argc, argv);
-						}else{
-							long ac = 0;
-							t_atom *av = NULL;
-							x->getters[i](x, &ac, &av);
-							outlet_anything(x->outlet_main(), name, ac, av);
-							if(av){
-								sysmem_freeptr(av);
+				static void generate(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
+				{
+					dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
+					dist_type d = dist_type(*((param_type *)x));
+					size_t n = 1;
+					_x->n = &n;
+					t_atom mina, maxa;
+					t_atom *p = &mina;
+					_x->buf = &p;
+					outlet_anything(x->outlet_delegation(), _sym_min, 0, NULL);
+					p = &maxa;
+					_x->buf = &p;
+					outlet_anything(x->outlet_delegation(), _sym_max, 0, NULL);
+					uint64_t min = atom_getlong(&mina);
+					uint64_t max = atom_getlong(&maxa);
+					if(max == 0xFFFFFF){
+						switch(min){
+						case 0:
+							{
+								x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 0, 0xFFFFFF> rng;
+								_generate(_x, d, &rng);
 							}
+							break;
+						case 1:
+							{
+								x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 1, 0xFFFFFF> rng;
+								_generate(_x, d, &rng);
+							}
+							break;
 						}
-						break;
+					}else if(max == 0x7FFFFFFE){
+						switch(min){
+						case 0:
+							{
+								x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 0, 0x7FFFFFFE> rng;
+								_generate(_x, d, &rng);
+							}
+							break;
+						case 1:
+							{
+								x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 1, 0x7FFFFFFE> rng;
+								_generate(_x, d, &rng);
+							}
+							break;
+						}
+					}else if(max == 0xFFFFFFFF){
+						switch(min){
+						case 0:
+							{
+								x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 0, 0xFFFFFFFF> rng;
+								_generate(_x, d, &rng);
+							}
+							break;
+						case 1:
+							{
+								x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 1, 0xFFFFFFFF> rng;
+								_generate(_x, d, &rng);
+							}
+							break;
+						}
+					}else if(max == 0xFFFFFFFFFFFF){
+						switch(min){
+						case 0:
+							{
+								x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 0, 0xFFFFFFFFFFFF> rng;
+								_generate(_x, d, &rng);
+							}
+							break;
+						case 1:
+							{
+								x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 1, 0xFFFFFFFFFFFF> rng;
+								_generate(_x, d, &rng);
+							}
+							break;
+						}
+					}else if(max == 0xFFFFFFFFFFFFFFFF){
+						switch(min){
+						case 0:
+							{
+								x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 0, 0xFFFFFFFFFFFFFFFF> rng;
+								_generate(_x, d, &rng);
+							}
+							break;
+						case 1:
+							{
+								x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 1, 0xFFFFFFFFFFFFFFFF> rng;
+								_generate(_x, d, &rng);
+							}
+							break;
+						}
+					}else{
 					}
 				}
-			}
 
-			static t_max_err attr_get(t_maxobj *_x, t_object *attr, long *argc, t_atom **argv)
-			{
-				dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
-				t_symbol *name = (t_symbol *)object_method(attr, gensym("getname"));
-				for(int i = 0; i < x->nargs; i++){
-					if(!strncmp(name->s_name, x->names_sym[i]->s_name, strlen(name->s_name) - 1)){
-						x->getters[i](x, argc, argv);
-						break;
+				static void min(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
+				{
+					if(argc){
+						msg_anything(_x, msg, argc, argv);
+						return;
 					}
+					dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
+					dist_type d = dist_type(*((param_type *)x));
+					t_atom a;
+					atom_set(&a, d.min());
+					outlet_anything(((dist_obj<dist_type, result_type> *)(_x->myobj))->outlet_main(), _sym_min, 1, &a);
 				}
-				return MAX_ERR_NONE;
-			}
 
-			static t_max_err attr_set(t_maxobj *_x, t_object *attr, long argc, t_atom *argv)
-			{
-				dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
-				t_symbol *name = (t_symbol *)object_method(attr, gensym("getname"));
-				for(int i = 0; i < x->nargs; i++){
-					if(!strncmp(name->s_name, x->names_sym[i]->s_name, strlen(name->s_name) - 1)){
-						x->setters[i](x, argc, argv);
-						break;
+				static void max(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
+				{
+					if(argc){
+						msg_anything(_x, msg, argc, argv);
+						return;
 					}
+					dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
+					dist_type d = dist_type(*((param_type *)x));
+					t_atom a;
+					atom_set(&a, d.max());
+					outlet_anything(((dist_obj<dist_type, result_type> *)(_x->myobj))->outlet_main(), _sym_max, 1, &a);
 				}
-				return 0;
-			}
 
-			int main(void)
-			{
-				obj::main();
+				static void paramnames(t_maxobj *_x)
+				{
+					dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
+					t_atom a[x->nargs];
+					for(int i = 0; i < x->nargs; i++){
+						atom_setsym(a + i, x->names_sym[i]);
+					}
+					outlet_anything(x->outlet_main(), ps_paramnames, x->nargs, a);
+				}
+
+				static void freeobj(t_maxobj *x)
+				{
+					if(x->buf){
+						sysmem_freeptr(x->buf);
+					}
 				
-				t_class *c = max_class();
-				class_addmethod(c, (method)generate, "generate", A_GIMME, 0);
-				class_addmethod(c, (method)min, "min", A_GIMME, 0);
-				class_addmethod(c, (method)max, "max", A_GIMME, 0);
-				class_addmethod(c, (method)paramnames, "paramnames", 0);
-				for(int i = 0; i < param_type::nargs; i++){
-					class_addmethod(c, (method)param, param_type::names_str[i], A_GIMME, 0);
-				        const char *name = (std::string(param_type::names_str[i]) + std::string(" ")).c_str();
-					class_addattr(c, attr_offset_new(name, gensym("atom"), 0, (method)0L,(method)0L,calcoffset(t_maxobj, ob)));
-					
-					t_object *theattr = (t_object *)class_attr_get(c, gensym(name));
-					object_method(theattr, gensym("setmethod"), USESYM(get), attr_get);
-					object_method(theattr, gensym("setmethod"), USESYM(set), attr_set);
+					if(x->myobj){
+						delete ((dist_obj<dist_type, result_type> *)(x->myobj));
+					}
 				}
-				return 0;
-			}
-		};
+
+				static void param(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
+				{
+					dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
+					t_symbol *name = msg;
+					for(int i = 0; i < x->nargs; i++){
+						if(name == x->names_sym[i]){
+							if(argc){
+								x->setters[i](x, argc, argv);
+							}else{
+								long ac = 0;
+								t_atom *av = NULL;
+								x->getters[i](x, &ac, &av);
+								outlet_anything(x->outlet_main(), name, ac, av);
+								if(av){
+									sysmem_freeptr(av);
+								}
+							}
+							break;
+						}
+					}
+				}
+
+				static t_max_err attr_get(t_maxobj *_x, t_object *attr, long *argc, t_atom **argv)
+				{
+					dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
+					t_symbol *name = (t_symbol *)object_method(attr, gensym("getname"));
+					for(int i = 0; i < x->nargs; i++){
+						if(!strncmp(name->s_name, x->names_sym[i]->s_name, strlen(name->s_name) - 1)){
+							x->getters[i](x, argc, argv);
+							break;
+						}
+					}
+					return MAX_ERR_NONE;
+				}
+
+				static t_max_err attr_set(t_maxobj *_x, t_object *attr, long argc, t_atom *argv)
+				{
+					dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
+					t_symbol *name = (t_symbol *)object_method(attr, gensym("getname"));
+					for(int i = 0; i < x->nargs; i++){
+						if(!strncmp(name->s_name, x->names_sym[i]->s_name, strlen(name->s_name) - 1)){
+							x->setters[i](x, argc, argv);
+							break;
+						}
+					}
+					return 0;
+				}
+
+				int main(void)
+				{
+					obj::main();
+				
+					t_class *c = max_class();
+					class_addmethod(c, (method)generate, "generate", A_GIMME, 0);
+					class_addmethod(c, (method)min, "min", A_GIMME, 0);
+					class_addmethod(c, (method)max, "max", A_GIMME, 0);
+					class_addmethod(c, (method)paramnames, "paramnames", 0);
+					for(int i = 0; i < param_type::nargs; i++){
+						class_addmethod(c, (method)param, param_type::names_str[i], A_GIMME, 0);
+						const char *name = (std::string(param_type::names_str[i]) + std::string(" ")).c_str();
+						class_addattr(c, attr_offset_new(name, gensym("atom"), 0, (method)0L,(method)0L,calcoffset(t_maxobj, ob)));
+					
+						t_object *theattr = (t_object *)class_attr_get(c, gensym(name));
+						object_method(theattr, gensym("setmethod"), USESYM(get), attr_get);
+						object_method(theattr, gensym("setmethod"), USESYM(set), attr_set);
+					}
+					return 0;
+				}
+			};
 
 		// Uniform
 		using dist_uniform_int_obj = dist_obj<std::uniform_int_distribution<long>, long, false, param_type_2<x::dist::uniform_int_distribution_param_type, long, a_str, long, false, b_str, long, false>>;

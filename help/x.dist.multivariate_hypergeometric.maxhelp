@@ -98,7 +98,7 @@
 					"outlettype" : [ "", "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 50.0, 364.0, 157.0, 90.0 ],
-					"setminmax" : [ 0.0, 4.0 ],
+					"setminmax" : [ 0.0, 1.0 ],
 					"setstyle" : 1,
 					"size" : 4,
 					"style" : ""
@@ -220,9 +220,9 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 115.0, 295.0, 145.0, 20.0 ],
+					"patching_rect" : [ 224.0, 294.0, 110.0, 20.0 ],
 					"style" : "",
-					"text" : "x.generator.default.global"
+					"text" : "x.generator.default"
 				}
 
 			}
@@ -280,7 +280,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-1", 0 ],
-					"midpoints" : [ 124.5, 326.0, 274.0, 326.0, 274.0, 249.0, 59.5, 249.0 ],
+					"midpoints" : [ 233.5, 326.0, 347.0, 326.0, 347.0, 249.0, 59.5, 249.0 ],
 					"source" : [ "obj-2", 0 ]
 				}
 
@@ -350,28 +350,7 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "x.generator.default.global.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "x.generator.pcg32.global.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "x.global.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "x.random_device.global.maxpat",
+				"name" : "x.generator.default.maxpat",
 				"bootpath" : "~/Development/maccallum/x/patchers",
 				"patcherrelativepath" : "../patchers",
 				"type" : "JSON",
@@ -382,15 +361,11 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "x.generator.pcg32.mxo",
+				"name" : "x.global.mxo",
 				"type" : "iLaX"
 			}
 , 			{
 				"name" : "x.seed_seq_from.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "x.random_device.mxo",
 				"type" : "iLaX"
 			}
  ],

@@ -257,9 +257,9 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 169.0, 192.0, 145.0, 20.0 ],
+					"patching_rect" : [ 120.0, 192.0, 110.0, 20.0 ],
 					"style" : "",
-					"text" : "x.generator.default.global"
+					"text" : "x.generator.default"
 				}
 
 			}
@@ -269,7 +269,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 2,
-					"outlettype" : [ "float", "" ],
+					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 65.0, 159.0, 65.0, 20.0 ],
 					"style" : "",
 					"text" : "x.dist.beta"
@@ -315,7 +315,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-1", 0 ],
-					"midpoints" : [ 178.5, 217.0, 320.0, 217.0, 320.0, 146.0, 74.5, 146.0 ],
+					"midpoints" : [ 129.5, 217.0, 237.0, 217.0, 237.0, 146.0, 74.5, 146.0 ],
 					"source" : [ "obj-2", 0 ]
 				}
 
@@ -410,54 +410,22 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "x.dist.beta.maxpat",
+				"name" : "x.generator.default.maxpat",
 				"bootpath" : "~/Development/maccallum/x/patchers",
 				"patcherrelativepath" : "../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "x.generator.default.global.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "x.generator.pcg32.global.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "x.global.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "x.random_device.global.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "x.dist.gamma.mxo",
+				"name" : "x.dist.beta.mxo",
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "x.generator.pcg32.mxo",
+				"name" : "x.global.mxo",
 				"type" : "iLaX"
 			}
 , 			{
 				"name" : "x.seed_seq_from.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "x.random_device.mxo",
 				"type" : "iLaX"
 			}
  ],
