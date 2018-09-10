@@ -170,7 +170,7 @@ void xglobal_conduit_free(t_xglobal_conduit *x)
 void *xglobal_conduit_new(t_symbol *name)
 {
 	t_xglobal_conduit *x = NULL;
-
+	
 	if(name && name != ps_nothing){
 		x = (t_xglobal_conduit *)object_alloc(xglobal_conduit_class);
 		if(x){
