@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 65.0, 79.0, 413.0, 409.0 ],
+		"rect" : [ 65.0, 79.0, 334.0, 453.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -1120,9 +1120,9 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 164.0, 241.0, 64.0, 20.0 ],
+													"patching_rect" : [ 164.0, 241.0, 68.0, 20.0 ],
 													"style" : "",
-													"text" : "prepend k"
+													"text" : "prepend M"
 												}
 
 											}
@@ -1211,9 +1211,9 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 88.0, 294.0, 126.0, 20.0 ],
+													"patching_rect" : [ 88.0, 294.0, 216.0, 20.0 ],
 													"style" : "",
-													"text" : "x.variable multinomial"
+													"text" : "x.variable multivariate_hypergeometric"
 												}
 
 											}
@@ -1295,7 +1295,7 @@
 											}
 , 											{
 												"patchline" : 												{
-													"destination" : [ "obj-12", 0 ],
+													"destination" : [ "obj-12", 1 ],
 													"source" : [ "obj-2", 0 ]
 												}
 
@@ -2017,7 +2017,7 @@
 													"numinlets" : 2,
 													"numoutlets" : 2,
 													"outlettype" : [ "", "" ],
-													"patching_rect" : [ 99.0, 206.0, 57.0, 20.0 ],
+													"patching_rect" : [ 99.0, 203.0, 57.0, 20.0 ],
 													"style" : "",
 													"text" : "zl.slice 1"
 												}
@@ -2166,7 +2166,7 @@
 											}
 , 											{
 												"patchline" : 												{
-													"destination" : [ "obj-12", 0 ],
+													"destination" : [ "obj-12", 1 ],
 													"source" : [ "obj-2", 0 ]
 												}
 
@@ -6787,7 +6787,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 2,
-									"outlettype" : [ "float", "" ],
+									"outlettype" : [ "", "" ],
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
@@ -6922,7 +6922,7 @@
 													"maxclass" : "newobj",
 													"numinlets" : 1,
 													"numoutlets" : 1,
-													"outlettype" : [ "float" ],
+													"outlettype" : [ "" ],
 													"patching_rect" : [ 88.0, 297.0, 89.0, 20.0 ],
 													"style" : "",
 													"text" : "x.variable beta"
@@ -10452,42 +10452,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "x.generator.pcg32.global.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "x.global.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "x.random_device.global.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "x.dist.beta.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "x.dist.dirichlet.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "x.dist.multinomial.maxpat",
+				"name" : "x.generator.default.maxpat",
 				"bootpath" : "~/Development/maccallum/x/patchers",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
@@ -10498,15 +10463,11 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "x.generator.pcg32.mxo",
+				"name" : "x.global.mxo",
 				"type" : "iLaX"
 			}
 , 			{
 				"name" : "x.seed_seq_from.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "x.random_device.mxo",
 				"type" : "iLaX"
 			}
 , 			{
@@ -10542,7 +10503,15 @@
 				"type" : "iLaX"
 			}
 , 			{
+				"name" : "x.dist.beta.mxo",
+				"type" : "iLaX"
+			}
+, 			{
 				"name" : "x.dist.weibull.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.dirichlet.mxo",
 				"type" : "iLaX"
 			}
 , 			{
@@ -10558,11 +10527,19 @@
 				"type" : "iLaX"
 			}
 , 			{
+				"name" : "x.dist.multinomial.mxo",
+				"type" : "iLaX"
+			}
+, 			{
 				"name" : "x.dist.negative_binomial.mxo",
 				"type" : "iLaX"
 			}
 , 			{
 				"name" : "x.dist.geometric.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.multivariate_hypergeometric.mxo",
 				"type" : "iLaX"
 			}
  ],
