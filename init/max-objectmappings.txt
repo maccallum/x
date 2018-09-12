@@ -1,0 +1,2 @@
+max objectfile x.dist.delegate~ x.delegate~;
+max objectfile x.process.delegate~ x.delegate~;

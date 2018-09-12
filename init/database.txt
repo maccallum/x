@@ -1,0 +1,2 @@
+max db.addvirtual alias x.dist.delegate~ x.delegate~;
+max db.addvirtual alias x.process.delegate~ x.delegate~;

@@ -31,24 +31,59 @@ typedef struct _xdelegate{
 	t_pxobject ob;
 	void *outlet_delegation;
 	double value;
+	long nsamples_to_wait;
+	long nsamples_waited;
+	t_symbol *mode;
 } t_xdelegate;
 
 void *xdelegate_class;
 
-void xdelegate_perform64(t_xdelegate *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vectorsize, long flags, void *userparam)
+double xdelegate_getvalue(t_xdelegate *x)
+{
+	outlet_anything(x->outlet_delegation, gensym("generate"), 0, NULL);
+	double v = x->value;
+	x->value = 0;
+	return v;
+}
+
+void xdelegate_dist_perform64(t_xdelegate *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vectorsize, long flags, void *userparam)
 {
 	for(int i = 0; i < vectorsize; i++){
 		if(ins[0][i] != 0){
-			outlet_anything(x->outlet_delegation, gensym("generate"), 0, NULL);
-			outs[0][i] = x->value;
-			x->value = 0;
+			outs[0][i] = xdelegate_getvalue(x);
+		}
+	}
+}
+
+void xdelegate_process_perform64(t_xdelegate *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vectorsize, long flags, void *userparam)
+{
+	long rem = x->nsamples_to_wait - (x->nsamples_waited + vectorsize);
+	if(rem <= 0){	
+		for(long i = 0; i < vectorsize; i++){
+			if(x->nsamples_to_wait - x->nsamples_waited <= 0){
+				while((x->nsamples_to_wait = xdelegate_getvalue(x)) == 0.){}
+				outs[0][i] = 0;
+				x->nsamples_waited = 1;
+			}else{
+				outs[0][i] = (double)x->nsamples_waited / (double)x->nsamples_to_wait;
+				x->nsamples_waited++;
+			}
+		}
+	}else{
+		for(long i = 0; i < vectorsize; i++){
+			outs[0][i] = (double)x->nsamples_waited / (double)x->nsamples_to_wait;
+			x->nsamples_waited++;
 		}
 	}
 }
 
 void xdelegate_dsp64(t_xdelegate *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	object_method(dsp64, gensym("dsp_add64"), x, xdelegate_perform64, 0, NULL);
+	if(x->mode == gensym("dist")){
+		object_method(dsp64, gensym("dsp_add64"), x, xdelegate_dist_perform64, 0, NULL);
+	}else if(x->mode == gensym("process")){
+		object_method(dsp64, gensym("dsp_add64"), x, xdelegate_process_perform64, 0, NULL);
+	}
 }
 
 void xdelegate_float(t_xdelegate *x, double f)
@@ -76,8 +111,21 @@ void *xdelegate_new(t_symbol *msg, short argc, t_atom *argv)
 	if((x = (t_xdelegate *)object_alloc(xdelegate_class))){
   		dsp_setup((t_pxobject *)x, 1);
 		x->outlet_delegation = outlet_new((t_object *)x, "generate");
+		x->mode = gensym("dist");
+		if(msg == gensym("x.delegate~")){
+			if(argc && atom_gettype(argv) == A_SYM){
+				x->mode = atom_getsym(argv);
+			}
+		}else if(msg == gensym("x.dist.delegate~")){
+		}else if(msg == gensym("x.process.delegate~")){
+			x->mode = gensym("process");
+		}
 		outlet_new((t_object *)x, "signal");
+		if(x->mode == gensym("process")){
+			//outlet_new((t_object *)x, "signal");
+		}
 		x->value = 0;
+		x->nsamples_to_wait = x->nsamples_waited = 0;
 	}
 	return x;
 }
