@@ -28,7 +28,7 @@ SOFTWARE.
 #include <random>
 #include "pcg_random.hpp"
 #include "x.proxy.hpp"
-#include "x.dist.hpp"
+#include "x.random.hpp"
 #include "x.global.h"
 
 #ifndef __X_MAX_HPP__
