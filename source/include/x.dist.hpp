@@ -637,7 +637,7 @@ namespace x
 			std::fill(r.begin(), r.end(), 0);
 			double norm = 0;
 			long n_sum = 0;
-			long p_sum = 0;
+			double p_sum = 0;
 			for(long i = 0; i < pn; i++){
 				norm += p[i];
 			}
