@@ -45,7 +45,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 251.0, 24.0, 295.0, 30.0 ],
 					"style" : "",
-					"text" : "x.dist is a utility patch that simply instantiates an object of the given distribution. It's used by x.variable"
+					"text" : "x.dist is a utility  that simply instantiates an object of the given distribution. It's used by x.variable"
 				}
 
 			}
@@ -195,13 +195,6 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "x.dist.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "x.generator.default.maxpat",
 				"bootpath" : "~/Development/maccallum/x/patchers",
 				"patcherrelativepath" : "../patchers",

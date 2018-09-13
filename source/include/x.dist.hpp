@@ -398,11 +398,9 @@ namespace x
 			std::vector<_RealType> vec(n);
 			_RealType sum = 0;
 			for(size_t i = 0; i < n; i++){
-				std::cout << "alpha[" << i << " = " << alpha[i] << "\n";
 				std::gamma_distribution d(alpha[i], 1.0);
 				
 				vec[i] = d(__g);
-				std::cout << "gamma(" << alpha[i] << ", " << 1.0 << ") = " << vec[i] << "\n";
 				sum += vec[i];
 			}
 			for(size_t i = 0; i < n; i++){
