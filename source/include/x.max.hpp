@@ -656,6 +656,16 @@ namespace x
 						dist_obj<dist_type, result_type, multivariate, param_type> *o = new dist_obj<dist_type, result_type, multivariate, param_type>;
 						obj::obj_init(x, (obj *)o);
 						xx->myobj = (void *)o;
+						t_dictionary *d = object_dictionaryarg(argc, argv);
+						for(int i = 0; i < o->nargs; i++){
+							t_symbol *s = gensym(o->names_str[i]);
+							if(dictionary_hasentry(d, s)){
+								long ac = 0;
+								t_atom *av = NULL;
+								dictionary_getatoms(d, s, &ac, &av);
+								o->setters[i](o, ac, av);
+							}
+						}
 						return x;
 					}
 					return NULL;
