@@ -71,7 +71,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "float" ],
-					"patching_rect" : [ 107.0, 101.0, 98.0, 20.0 ],
+					"patching_rect" : [ 107.0, 101.0, 99.0, 20.0 ],
 					"sig" : 0.0,
 					"style" : ""
 				}
@@ -109,9 +109,9 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 71.0, 70.0, 101.0, 20.0 ],
+					"patching_rect" : [ 71.0, 70.0, 108.0, 20.0 ],
 					"style" : "",
-					"text" : "x.process.wiener"
+					"text" : "x.process.wiener~"
 				}
 
 			}
@@ -141,7 +141,7 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "x.process.wiener.maxpat",
+				"name" : "x.process.wiener~.maxpat",
 				"bootpath" : "~/Development/maccallum/x/patchers",
 				"patcherrelativepath" : "../patchers",
 				"type" : "JSON",
