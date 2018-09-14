@@ -633,6 +633,8 @@ namespace x
 		const char probabilities_str[] = "probabilities";
 		const char intervals_str[] = "intervals";
 		const char densities_str[] = "densities";
+		const char mu_str[] = "mu";
+		const char sigma_str[] = "sigma";
 		const char a_str[] = "a";
 		const char b_str[] = "b";
 		const char k_str[] = "k";
@@ -1039,6 +1041,13 @@ namespace x
 		t_object *dist_kumaraswamy_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_kumaraswamy_obj.newobj(msg, argc, argv);
+		}
+
+		using dist_laplace_obj = dist_obj<x::dist::laplace_distribution<double>, double, false, param_type_2<x::dist::laplace_distribution_param_type, double, mu_str, double, false, sigma_str, double, false>>;
+		dist_laplace_obj _dist_laplace_obj;
+		t_object *dist_laplace_newobj(t_symbol *msg, short argc, t_atom *argv)
+		{
+			return _dist_laplace_obj.newobj(msg, argc, argv);
 		}
 
 		// Related to Normal distribution

@@ -1082,6 +1082,110 @@ namespace x
 			return __is;
 		}
 
+		// laplace distribution
+		template<class _RealType = double>
+		class laplace_distribution
+		{
+		public:
+			// types
+			typedef _RealType result_type;
+
+			class param_type
+			{
+				result_type __mu_;
+				result_type __sigma_;
+			public:
+				typedef laplace_distribution distribution_type;
+				explicit param_type(result_type __mu = 0, result_type __sigma = 1)
+					: __mu_(__mu), __sigma_(__sigma) {}
+				result_type mu() const {return __mu_;}
+				result_type sigma() const {return __sigma_;}
+				friend bool operator==(const param_type& __x, const param_type& __y)
+				{return __x.__mu_ == __y.__mu_ && __x.__sigma_ == __y.__sigma_;}
+				friend bool operator!=(const param_type& __x, const param_type& __y)
+				{return !(__x == __y);}
+			};
+
+		private:
+			param_type __p_;
+
+		public:
+			// constructors and reset functions
+			explicit laplace_distribution(result_type __mu = 1, result_type __sigma = 1)
+				: __p_(param_type(__mu, __sigma)) {}
+			explicit laplace_distribution(const param_type& __p)
+				: __p_(__p) {}
+			void reset() {}
+
+			// generating functions
+			template<class _URNG>
+			result_type operator()(_URNG& __g)
+			{return (*this)(__g, __p_);}
+			template<class _URNG> result_type operator()(_URNG& __g, const param_type& __p);
+
+			// property functions
+			result_type mu() const {return __p_.mu();}
+			result_type laplace() const {return __p_.sigma();}
+			param_type param() const {return __p_;}
+			void param(const param_type& __p) {__p_ = __p;}
+			result_type min() const {return 0;}
+			result_type max() const {return 1.;}
+
+			friend bool operator==(const laplace_distribution& __x,
+					       const laplace_distribution& __y)
+			{return __x.__p_ == __y.__p_;}
+			friend bool operator!=(const laplace_distribution& __x,
+					       const laplace_distribution& __y)
+			{return !(__x == __y);}
+		};
+
+		template <class _RealType>
+		template<class _URNG>
+		_RealType
+		laplace_distribution<_RealType>::operator()(_URNG& __g, const param_type& __p)
+		{
+			std::exponential_distribution<result_type> ed(1.);
+			std::uniform_real_distribution<result_type> ud(0, 1);
+			result_type u = ud(__g);
+			result_type x = ed(__g);
+			if(u < 0.5){
+				x = -x;
+			}
+			return __p.mu() + __p.sigma() * x;
+		}
+
+		template <class _CharT, class _Traits, class _RT>
+		std::basic_ostream<_CharT, _Traits>&
+		operator<<(std::basic_ostream<_CharT, _Traits>& __os,
+			   const laplace_distribution<_RT>& __x)
+		{
+			std::__save_flags<_CharT, _Traits> __lx(__os);
+			__os.flags(std::ios_base::dec | std::ios_base::left | std::ios_base::fixed |
+				   std::ios_base::scientific);
+			_CharT __sp = __os.widen(' ');
+			__os.fill(__sp);
+			__os << __x.mu() << __sp << __x.sigma();
+			return __os;
+		}
+
+		template <class _CharT, class _Traits, class _RT>
+		std::basic_istream<_CharT, _Traits>&
+		operator>>(std::basic_istream<_CharT, _Traits>& __is,
+			   laplace_distribution<_RT>& __x)
+		{
+			typedef laplace_distribution<_RT> _Eng;
+			typedef typename _Eng::result_type result_type;
+			typedef typename _Eng::param_type param_type;
+			std::__save_flags<_CharT, _Traits> __lx(__is);
+			__is.flags(std::ios_base::dec | std::ios_base::skipws);
+			result_type __mu;
+			result_type __sigma;
+			__is >> __mu >> __sigma;
+			if (!__is.fail())
+				__x.param(param_type(__mu, __sigma));
+			return __is;
+		}
+
 		// params
 		class uniform_int_distribution_param_type : public std::uniform_int_distribution<long>::param_type
 		{
@@ -1222,6 +1326,15 @@ namespace x
 			kumaraswamy_distribution_param_type(double p1, double p2) : x::dist::kumaraswamy_distribution<double>::param_type(p1, p2) {}
 			double param1(void){return alpha();}
 			double param2(void){return beta();}
+		};
+
+		class laplace_distribution_param_type : public x::dist::laplace_distribution<double>::param_type
+		{
+		public:
+			laplace_distribution_param_type(void) : x::dist::laplace_distribution<double>::param_type() {}
+			laplace_distribution_param_type(double p1, double p2) : x::dist::laplace_distribution<double>::param_type(p1, p2) {}
+			double param1(void){return mu();}
+			double param2(void){return sigma();}
 		};
 
 		class normal_distribution_param_type : public std::normal_distribution<double>::param_type

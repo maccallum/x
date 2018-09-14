@@ -129,6 +129,11 @@
 			<key>orderHint</key>
 			<integer>26</integer>
 		</dict>
+		<key>x.dist.laplace.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>34</integer>
+		</dict>
 		<key>x.dist.lognormal.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -618,6 +623,11 @@
 			<true/>
 		</dict>
 		<key>52B21076214ABC25002FC3CD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>52B21089214BB588002FC3CD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
