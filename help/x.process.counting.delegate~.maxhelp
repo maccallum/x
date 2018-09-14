@@ -43,7 +43,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 74.0, 75.0, 567.0, 18.0 ],
-					"presentation_rect" : [ 84.5, 75.0, 0.0, 0.0 ],
 					"style" : "",
 					"text" : "This example, which uses the exponential distribution to generate wait times is a Poisson process"
 				}
@@ -69,7 +68,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 363.0, 291.0, 119.0, 18.0 ],
-					"presentation_rect" : [ 555.0, 225.0, 0.0, 0.0 ],
 					"style" : "",
 					"text" : "wait time in seconds"
 				}
@@ -293,9 +291,9 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "generate" ],
-					"patching_rect" : [ 74.0, 159.0, 207.0, 20.0 ],
+					"patching_rect" : [ 74.0, 159.0, 167.0, 20.0 ],
 					"style" : "",
-					"text" : "x.process.delegate~"
+					"text" : "x.process.counting.delegate~"
 				}
 
 			}
@@ -442,13 +440,6 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "x.variable.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "x.dist.maxpat",
 				"bootpath" : "~/Development/maccallum/x/patchers",
 				"patcherrelativepath" : "../patchers",
 				"type" : "JSON",

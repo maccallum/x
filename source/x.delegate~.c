@@ -96,7 +96,7 @@ void xdelegate_dsp64(t_xdelegate *x, t_object *dsp64, short *count, double sampl
 	x->nsamples_waited = 0;
 	if(x->mode == gensym("dist")){
 		object_method(dsp64, gensym("dsp_add64"), x, xdelegate_dist_perform64, 0, NULL);
-	}else if(x->mode == gensym("process")){
+	}else if(x->mode == gensym("process.counting")){
 		object_method(dsp64, gensym("dsp_add64"), x, xdelegate_process_perform64, 0, NULL);
 	}
 }
@@ -143,8 +143,8 @@ void *xdelegate_new(t_symbol *msg, short argc, t_atom *argv)
 		//x->mode = gensym("dist");
 		t_dictionary *d = object_dictionaryarg(argc, argv);
 		attr_dictionary_process(x, d);
-		if(x->mode == gensym("process") && x->nvars > 1){
-			object_error((t_object *)x, "process mode can only be univariate. setting nvars to 1");
+		if(x->mode == gensym("process.counting") && x->nvars > 1){
+			object_error((t_object *)x, "process.counting mode can only be univariate. setting nvars to 1");
 			x->nvars = 1;
 		}
 		if(msg == gensym("x.delegate~")){
@@ -152,8 +152,8 @@ void *xdelegate_new(t_symbol *msg, short argc, t_atom *argv)
 				x->mode = atom_getsym(argv);
 			}
 		}else if(msg == gensym("x.dist.delegate~")){
-		}else if(msg == gensym("x.process.delegate~")){
-			x->mode = gensym("process");
+		}else if(msg == gensym("x.process.counting.delegate~")){
+			x->mode = gensym("process.counting");
 		}
 		for(int i = 0; i < x->nvars; i++){
 			outlet_new((t_object *)x, "signal");
