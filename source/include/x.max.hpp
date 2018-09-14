@@ -1050,6 +1050,13 @@ namespace x
 			return _dist_laplace_obj.newobj(msg, argc, argv);
 		}
 
+		using dist_erlang_obj = dist_obj<x::random::erlang_distribution<double>, double, false, param_type_2<x::random::erlang_distribution_param_type, double, k_str, long, false, lambda_str, double, false>>;
+		dist_erlang_obj _dist_erlang_obj;
+		t_object *dist_erlang_newobj(t_symbol *msg, short argc, t_atom *argv)
+		{
+			return _dist_erlang_obj.newobj(msg, argc, argv);
+		}
+
 		// Related to Normal distribution
 		using dist_normal_obj = dist_obj<std::normal_distribution<double>, double, false, param_type_2<x::random::normal_distribution_param_type, double, mean_str, double, false, stddev_str, double, false>>;
 		dist_normal_obj _dist_normal_obj;

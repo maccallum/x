@@ -1125,7 +1125,7 @@ namespace x
 
 			// property functions
 			result_type mu() const {return __p_.mu();}
-			result_type laplace() const {return __p_.sigma();}
+			result_type sigma() const {return __p_.sigma();}
 			param_type param() const {return __p_;}
 			void param(const param_type& __p) {__p_ = __p;}
 			result_type min() const {return -std::numeric_limits<result_type>::infinity();}
@@ -1282,6 +1282,112 @@ namespace x
 			return __is;
 		}
 
+		// erlang distribution
+		template<class _RealType = double>
+		class erlang_distribution
+		{
+		public:
+			// types
+			typedef _RealType result_type;
+
+			class param_type
+			{
+				long __k_;
+				result_type __lambda_;
+			public:
+				typedef erlang_distribution distribution_type;
+				explicit param_type(long __k = 1, result_type __lambda = 1)
+					: __k_(__k), __lambda_(__lambda) {}
+				long k() const {return __k_;}
+				result_type lambda() const {return __lambda_;}
+				friend bool operator==(const param_type& __x, const param_type& __y)
+				{return __x.__k_ == __y.__k_ && __x.__lambda_ == __y.__lambda_;}
+				friend bool operator!=(const param_type& __x, const param_type& __y)
+				{return !(__x == __y);}
+			};
+
+		private:
+			param_type __p_;
+
+		public:
+			// constructors and reset functions
+			explicit erlang_distribution(long __k = 1, result_type __lambda = 1)
+				: __p_(param_type(__k, __lambda)) {}
+			explicit erlang_distribution(const param_type& __p)
+				: __p_(__p) {}
+			void reset() {}
+
+			// generating functions
+			template<class _URNG>
+			result_type operator()(_URNG& __g)
+			{return (*this)(__g, __p_);}
+			template<class _URNG> result_type operator()(_URNG& __g, const param_type& __p);
+
+			// property functions
+			long k() const {return __p_.k();}
+			result_type lambda() const {return __p_.lambda();}
+			param_type param() const {return __p_;}
+			void param(const param_type& __p) {__p_ = __p;}
+			result_type min() const {return 0;}
+			result_type max() const {return std::numeric_limits<result_type>::infinity();}
+
+			friend bool operator==(const erlang_distribution& __x,
+					       const erlang_distribution& __y)
+			{return __x.__p_ == __y.__p_;}
+			friend bool operator!=(const erlang_distribution& __x,
+					       const erlang_distribution& __y)
+			{return !(__x == __y);}
+		};
+
+		template <class _RealType>
+		template<class _URNG>
+		_RealType
+		erlang_distribution<_RealType>::operator()(_URNG& __g, const param_type& __p)
+		{
+			std::uniform_real_distribution<result_type> d(0, 1);
+			std::cout << "k = " << __p.k() << "\n";
+			long k = __p.k();
+			result_type product = 1.;
+			for(long i = 0; i < k; i++){
+				result_type u = 0.;
+				while((u = d(__g)) == 0.){}
+				product *= u;
+			}
+			return (-1. / __p.lambda()) * log(product);
+		}
+
+		template <class _CharT, class _Traits, class _RT>
+		std::basic_ostream<_CharT, _Traits>&
+		operator<<(std::basic_ostream<_CharT, _Traits>& __os,
+			   const erlang_distribution<_RT>& __x)
+		{
+			std::__save_flags<_CharT, _Traits> __lx(__os);
+			__os.flags(std::ios_base::dec | std::ios_base::left | std::ios_base::fixed |
+				   std::ios_base::scientific);
+			_CharT __sp = __os.widen(' ');
+			__os.fill(__sp);
+			__os << __x.k() << __sp << __x.lambda();
+			return __os;
+		}
+
+		template <class _CharT, class _Traits, class _RT>
+		std::basic_istream<_CharT, _Traits>&
+		operator>>(std::basic_istream<_CharT, _Traits>& __is,
+			   erlang_distribution<_RT>& __x)
+		{
+			typedef erlang_distribution<_RT> _Eng;
+			typedef typename _Eng::result_type result_type;
+			typedef typename _Eng::param_type param_type;
+			std::__save_flags<_CharT, _Traits> __lx(__is);
+			__is.flags(std::ios_base::dec | std::ios_base::skipws);
+			long __k;
+			result_type __lambda;
+			__is >> __k >> __lambda;
+			if (!__is.fail())
+				__x.param(param_type(__k, __lambda));
+			return __is;
+		}
+
 		// params
 		class uniform_int_distribution_param_type : public std::uniform_int_distribution<long>::param_type
 		{
@@ -1431,6 +1537,15 @@ namespace x
 			laplace_distribution_param_type(double p1, double p2) : x::random::laplace_distribution<double>::param_type(p1, p2) {}
 			double param1(void){return mu();}
 			double param2(void){return sigma();}
+		};
+
+		class erlang_distribution_param_type : public x::random::erlang_distribution<double>::param_type
+		{
+		public:
+			erlang_distribution_param_type(void) : x::random::erlang_distribution<double>::param_type() {}
+			erlang_distribution_param_type(double p1, double p2) : x::random::erlang_distribution<double>::param_type(p1, p2) {}
+			long param1(void){return k();}
+			double param2(void){return lambda();}
 		};
 
 		class normal_distribution_param_type : public std::normal_distribution<double>::param_type

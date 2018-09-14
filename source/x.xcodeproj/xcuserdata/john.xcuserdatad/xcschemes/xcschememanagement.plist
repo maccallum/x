@@ -94,6 +94,11 @@
 			<key>orderHint</key>
 			<integer>21</integer>
 		</dict>
+		<key>x.dist.erlang.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>36</integer>
+		</dict>
 		<key>x.dist.exponential.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -638,6 +643,11 @@
 			<true/>
 		</dict>
 		<key>52B21098214BBB0D002FC3CD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>52B210A7214BEBB3002FC3CD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
