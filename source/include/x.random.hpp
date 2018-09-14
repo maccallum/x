@@ -1128,8 +1128,8 @@ namespace x
 			result_type laplace() const {return __p_.sigma();}
 			param_type param() const {return __p_;}
 			void param(const param_type& __p) {__p_ = __p;}
-			result_type min() const {return 0;}
-			result_type max() const {return 1.;}
+			result_type min() const {return -std::numeric_limits<result_type>::infinity();}
+			result_type max() const {return std::numeric_limits<result_type>::infinity();}
 
 			friend bool operator==(const laplace_distribution& __x,
 					       const laplace_distribution& __y)
@@ -1183,6 +1183,102 @@ namespace x
 			__is >> __mu >> __sigma;
 			if (!__is.fail())
 				__x.param(param_type(__mu, __sigma));
+			return __is;
+		}
+
+		// rayleigh_distribution
+
+		template<class _RealType = double>
+		class rayleigh_distribution
+		{
+		public:
+			// types
+			typedef _RealType result_type;
+
+			class param_type
+			{
+				result_type __sigma_;
+			public:
+				typedef rayleigh_distribution distribution_type;
+
+				explicit param_type(result_type __sigma = 1) : __sigma_(__sigma) {}
+
+				result_type sigma() const {return __sigma_;}
+
+				friend bool operator==(const param_type& __x, const param_type& __y)
+				{return __x.__sigma_ == __y.__sigma_;}
+				friend bool operator!=(const param_type& __x, const param_type& __y)
+				{return !(__x == __y);}
+			};
+
+		private:
+			param_type __p_;
+
+		public:
+			// constructors and reset functions
+			explicit rayleigh_distribution(result_type __sigma = 1)
+				: __p_(param_type(__sigma)) {}
+			explicit rayleigh_distribution(const param_type& __p) : __p_(__p) {}
+			void reset() {}
+
+			// generating functions
+			template<class _URNG>
+			result_type operator()(_URNG& __g)
+			{return (*this)(__g, __p_);}
+			template<class _URNG> result_type operator()(_URNG& __g, const param_type& __p);
+
+			// property functions
+			result_type sigma() const {return __p_.sigma();}
+
+			param_type param() const {return __p_;}
+			void param(const param_type& __p) {__p_ = __p;}
+
+			result_type min() const {return 0;}
+			result_type max() const {return std::numeric_limits<result_type>::infinity();}
+
+			friend bool operator==(const rayleigh_distribution& __x,
+					       const rayleigh_distribution& __y)
+			{return __x.__p_ == __y.__p_;}
+			friend bool operator!=(const rayleigh_distribution& __x,
+					       const rayleigh_distribution& __y)
+			{return !(__x == __y);}
+		};
+
+		template <class _RealType>
+		template<class _URNG>
+		_RealType
+		rayleigh_distribution<_RealType>::operator()(_URNG& __g, const param_type& __p)
+		{
+			std::uniform_real_distribution d(0., 1.);
+			result_type u = d(__g);
+			return __p.sigma() * sqrt(-2. * log(u));
+		}
+
+		template <class _CharT, class _Traits, class _RealType>
+		std::basic_ostream<_CharT, _Traits>&
+		operator<<(std::basic_ostream<_CharT, _Traits>& __os,
+			   const rayleigh_distribution<_RealType>& __x)
+		{
+			std::__save_flags<_CharT, _Traits> __lx(__os);
+			__os.flags(std::ios_base::dec | std::ios_base::left | std::ios_base::fixed |
+				   std::ios_base::scientific);
+			return __os << __x.sigma();
+		}
+
+		template <class _CharT, class _Traits, class _RealType>
+		std::basic_istream<_CharT, _Traits>&
+		operator>>(std::basic_istream<_CharT, _Traits>& __is,
+			   rayleigh_distribution<_RealType>& __x)
+		{
+			typedef rayleigh_distribution<_RealType> _Eng;
+			typedef typename _Eng::result_type result_type;
+			typedef typename _Eng::param_type param_type;
+			std::__save_flags<_CharT, _Traits> __lx(__is);
+			__is.flags(std::ios_base::dec | std::ios_base::skipws);
+			result_type __sigma;
+			__is >> __sigma;
+			if (!__is.fail())
+				__x.param(param_type(__sigma));
 			return __is;
 		}
 
@@ -1387,6 +1483,14 @@ namespace x
 			student_t_distribution_param_type(void) : std::student_t_distribution<double>::param_type() {}
 			student_t_distribution_param_type(double p1) : std::student_t_distribution<double>::param_type(p1) {}
 			double param1(void){return n();}
+		};
+
+		class rayleigh_distribution_param_type : public rayleigh_distribution<double>::param_type
+		{
+		public:
+			rayleigh_distribution_param_type(void) : rayleigh_distribution<double>::param_type() {}
+			rayleigh_distribution_param_type(double p1) : rayleigh_distribution<double>::param_type(p1) {}
+			double param1(void){return sigma();}
 		};
 		
 		class discrete_distribution_param_type : public std::discrete_distribution<long>::param_type

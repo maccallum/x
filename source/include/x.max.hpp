@@ -1093,6 +1093,13 @@ namespace x
 			return _dist_student_t_obj.newobj(msg, argc, argv);
 		}
 
+		using dist_rayleigh_obj = dist_obj<x::dist::rayleigh_distribution<double>, double, false, param_type_1<x::dist::rayleigh_distribution_param_type, double, sigma_str, double, false>>;
+		dist_rayleigh_obj _dist_rayleigh_obj;
+		t_object *dist_rayleigh_newobj(t_symbol *msg, short argc, t_atom *argv)
+		{
+			return _dist_rayleigh_obj.newobj(msg, argc, argv);
+		}
+
 		using dist_discrete_obj = dist_obj<std::discrete_distribution<long>, long, false, param_type_1<x::dist::discrete_distribution_param_type, long, probabilities_str, double, true>>;
 		dist_discrete_obj _dist_discrete_obj;
 		t_object *dist_discrete_newobj(t_symbol *msg, short argc, t_atom *argv)
