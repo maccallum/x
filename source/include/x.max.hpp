@@ -646,7 +646,7 @@ namespace x
 		const char s_str[] = "s";
 		const char t_str[] = "t";
 		
-		template <typename dist_type, typename result_type, bool multivariate=false, typename param_type=param_type_2<x::dist::uniform_real_distribution_param_type, double, a_str, double, false, b_str, double, false>>
+		template <typename dist_type, typename result_type, bool multivariate=false, typename param_type=param_type_2<x::random::uniform_real_distribution_param_type, double, a_str, double, false, b_str, double, false>>
 			class dist_obj : public obj, public dist_type, public param_type
 			{
 			public:
@@ -929,14 +929,14 @@ namespace x
 			};
 
 		// Uniform
-		using dist_uniform_int_obj = dist_obj<std::uniform_int_distribution<long>, long, false, param_type_2<x::dist::uniform_int_distribution_param_type, long, a_str, long, false, b_str, long, false>>;
+		using dist_uniform_int_obj = dist_obj<std::uniform_int_distribution<long>, long, false, param_type_2<x::random::uniform_int_distribution_param_type, long, a_str, long, false, b_str, long, false>>;
 		dist_uniform_int_obj _dist_uniform_int_obj;
 		t_object *dist_uniform_int_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_uniform_int_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_uniform_real_obj = dist_obj<std::uniform_real_distribution<double>, double, false, param_type_2<x::dist::uniform_real_distribution_param_type, double, a_str, double, false, b_str, double, false>>;
+		using dist_uniform_real_obj = dist_obj<std::uniform_real_distribution<double>, double, false, param_type_2<x::random::uniform_real_distribution_param_type, double, a_str, double, false, b_str, double, false>>;
 		dist_uniform_real_obj _dist_uniform_real_obj;
 		t_object *dist_uniform_real_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
@@ -944,49 +944,49 @@ namespace x
 		}
 
 		// Related to Bernoulli trials
-		using dist_bernoulli_obj = dist_obj<std::bernoulli_distribution, bool, false, param_type_1<x::dist::bernoulli_distribution_param_type, bool, p_str, double, false>>;
+		using dist_bernoulli_obj = dist_obj<std::bernoulli_distribution, bool, false, param_type_1<x::random::bernoulli_distribution_param_type, bool, p_str, double, false>>;
 		dist_bernoulli_obj _dist_bernoulli_obj;
 		t_object *dist_bernoulli_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_bernoulli_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_binomial_obj = dist_obj<std::binomial_distribution<long>, long, false, param_type_2<x::dist::binomial_distribution_param_type, long, t_str, long, false, p_str, double, false>>;
+		using dist_binomial_obj = dist_obj<std::binomial_distribution<long>, long, false, param_type_2<x::random::binomial_distribution_param_type, long, t_str, long, false, p_str, double, false>>;
 		dist_binomial_obj _dist_binomial_obj;
 		t_object *dist_binomial_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_binomial_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_geometric_obj = dist_obj<std::geometric_distribution<long>, long, false, param_type_1<x::dist::geometric_distribution_param_type, long, p_str, double, false>>;
+		using dist_geometric_obj = dist_obj<std::geometric_distribution<long>, long, false, param_type_1<x::random::geometric_distribution_param_type, long, p_str, double, false>>;
 		dist_geometric_obj _dist_geometric_obj;
 		t_object *dist_geometric_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_geometric_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_negative_binomial_obj = dist_obj<std::negative_binomial_distribution<long>, long, false, param_type_2<x::dist::negative_binomial_distribution_param_type, long, k_str, long, false, p_str, double, false>>;
+		using dist_negative_binomial_obj = dist_obj<std::negative_binomial_distribution<long>, long, false, param_type_2<x::random::negative_binomial_distribution_param_type, long, k_str, long, false, p_str, double, false>>;
 		dist_negative_binomial_obj _dist_negative_binomial_obj;
 		t_object *dist_negative_binomial_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_negative_binomial_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_multinomial_obj = dist_obj<x::dist::multinomial_distribution<long>, long, true, param_type_2<x::dist::multinomial_distribution_param_type, long, n_str, long, false, p_str, double, true>>;
+		using dist_multinomial_obj = dist_obj<x::random::multinomial_distribution<long>, long, true, param_type_2<x::random::multinomial_distribution_param_type, long, n_str, long, false, p_str, double, true>>;
 		dist_multinomial_obj _dist_multinomial_obj;
 		t_object *dist_multinomial_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_multinomial_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_hypergeometric_obj = dist_obj<x::dist::hypergeometric_distribution<long>, long, false, param_type_3<x::dist::hypergeometric_distribution_param_type, long, n_str, long, false, M_str, long, false, N_str, long, false>>;
+		using dist_hypergeometric_obj = dist_obj<x::random::hypergeometric_distribution<long>, long, false, param_type_3<x::random::hypergeometric_distribution_param_type, long, n_str, long, false, M_str, long, false, N_str, long, false>>;
 		dist_hypergeometric_obj _dist_hypergeometric_obj;
 		t_object *dist_hypergeometric_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_hypergeometric_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_multivariate_hypergeometric_obj = dist_obj<x::dist::multivariate_hypergeometric_distribution<long>, long, true, param_type_2<x::dist::multivariate_hypergeometric_distribution_param_type, long, n_str, long, false, M_str, long, true>>;
+		using dist_multivariate_hypergeometric_obj = dist_obj<x::random::multivariate_hypergeometric_distribution<long>, long, true, param_type_2<x::random::multivariate_hypergeometric_distribution_param_type, long, n_str, long, false, M_str, long, true>>;
 		dist_multivariate_hypergeometric_obj _dist_multivariate_hypergeometric_obj;
 		t_object *dist_multivariate_hypergeometric_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
@@ -994,56 +994,56 @@ namespace x
 		}
 		
 		// Rate-based distributions
-		using dist_poisson_obj = dist_obj<std::poisson_distribution<long>, long, false, param_type_1<x::dist::poisson_distribution_param_type, long, mean_str, double, false>>;
+		using dist_poisson_obj = dist_obj<std::poisson_distribution<long>, long, false, param_type_1<x::random::poisson_distribution_param_type, long, mean_str, double, false>>;
 		dist_poisson_obj _dist_poisson_obj;
 		t_object *dist_poisson_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_poisson_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_exponential_obj = dist_obj<std::exponential_distribution<double>, double, false, param_type_1<x::dist::exponential_distribution_param_type, double, lambda_str, double, false>>;
+		using dist_exponential_obj = dist_obj<std::exponential_distribution<double>, double, false, param_type_1<x::random::exponential_distribution_param_type, double, lambda_str, double, false>>;
 		dist_exponential_obj _dist_exponential_obj;
 		t_object *dist_exponential_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_exponential_obj.newobj(msg, argc, argv);
 		}
 		
-		using dist_gamma_obj = dist_obj<std::gamma_distribution<double>, double, false, param_type_2<x::dist::gamma_distribution_param_type, double, alpha_str, double, false, beta_str, double, false>>;
+		using dist_gamma_obj = dist_obj<std::gamma_distribution<double>, double, false, param_type_2<x::random::gamma_distribution_param_type, double, alpha_str, double, false, beta_str, double, false>>;
 		dist_gamma_obj _dist_gamma_obj;
 		t_object *dist_gamma_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_gamma_obj.newobj(msg, argc, argv);
 		}
 		
-		using dist_weibull_obj = dist_obj<std::weibull_distribution<double>, double, false, param_type_2<x::dist::weibull_distribution_param_type, double, a_str, double, false, b_str, double, false>>;
+		using dist_weibull_obj = dist_obj<std::weibull_distribution<double>, double, false, param_type_2<x::random::weibull_distribution_param_type, double, a_str, double, false, b_str, double, false>>;
 		dist_weibull_obj _dist_weibull_obj;
 		t_object *dist_weibull_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_weibull_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_extreme_value_obj = dist_obj<std::extreme_value_distribution<double>, double, false, param_type_2<x::dist::extreme_value_distribution_param_type, double, a_str, double, false, b_str, double, false>>;
+		using dist_extreme_value_obj = dist_obj<std::extreme_value_distribution<double>, double, false, param_type_2<x::random::extreme_value_distribution_param_type, double, a_str, double, false, b_str, double, false>>;
 		dist_extreme_value_obj _dist_extreme_value_obj;
 		t_object *dist_extreme_value_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_extreme_value_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_beta_obj = dist_obj<x::dist::beta_distribution<double>, double, false, param_type_2<x::dist::beta_distribution_param_type, double, alpha_str, double, false, beta_str, double, false>>;
+		using dist_beta_obj = dist_obj<x::random::beta_distribution<double>, double, false, param_type_2<x::random::beta_distribution_param_type, double, alpha_str, double, false, beta_str, double, false>>;
 		dist_beta_obj _dist_beta_obj;
 		t_object *dist_beta_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_beta_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_kumaraswamy_obj = dist_obj<x::dist::kumaraswamy_distribution<double>, double, false, param_type_2<x::dist::kumaraswamy_distribution_param_type, double, alpha_str, double, false, beta_str, double, false>>;
+		using dist_kumaraswamy_obj = dist_obj<x::random::kumaraswamy_distribution<double>, double, false, param_type_2<x::random::kumaraswamy_distribution_param_type, double, alpha_str, double, false, beta_str, double, false>>;
 		dist_kumaraswamy_obj _dist_kumaraswamy_obj;
 		t_object *dist_kumaraswamy_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_kumaraswamy_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_laplace_obj = dist_obj<x::dist::laplace_distribution<double>, double, false, param_type_2<x::dist::laplace_distribution_param_type, double, mu_str, double, false, sigma_str, double, false>>;
+		using dist_laplace_obj = dist_obj<x::random::laplace_distribution<double>, double, false, param_type_2<x::random::laplace_distribution_param_type, double, mu_str, double, false, sigma_str, double, false>>;
 		dist_laplace_obj _dist_laplace_obj;
 		t_object *dist_laplace_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
@@ -1051,77 +1051,77 @@ namespace x
 		}
 
 		// Related to Normal distribution
-		using dist_normal_obj = dist_obj<std::normal_distribution<double>, double, false, param_type_2<x::dist::normal_distribution_param_type, double, mean_str, double, false, stddev_str, double, false>>;
+		using dist_normal_obj = dist_obj<std::normal_distribution<double>, double, false, param_type_2<x::random::normal_distribution_param_type, double, mean_str, double, false, stddev_str, double, false>>;
 		dist_normal_obj _dist_normal_obj;
 		t_object *dist_normal_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_normal_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_lognormal_obj = dist_obj<std::lognormal_distribution<double>, double, false, param_type_2<x::dist::lognormal_distribution_param_type, double, m_str, double, false, s_str, double, false>>;
+		using dist_lognormal_obj = dist_obj<std::lognormal_distribution<double>, double, false, param_type_2<x::random::lognormal_distribution_param_type, double, m_str, double, false, s_str, double, false>>;
 		dist_lognormal_obj _dist_lognormal_obj;
 		t_object *dist_lognormal_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_lognormal_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_chi_squared_obj = dist_obj<std::chi_squared_distribution<double>, double, false, param_type_1<x::dist::chi_squared_distribution_param_type, double, n_str, double, false>>;
+		using dist_chi_squared_obj = dist_obj<std::chi_squared_distribution<double>, double, false, param_type_1<x::random::chi_squared_distribution_param_type, double, n_str, double, false>>;
 		dist_chi_squared_obj _dist_chi_squared_obj;
 		t_object *dist_chi_squared_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_chi_squared_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_cauchy_obj = dist_obj<std::cauchy_distribution<double>, double, false, param_type_2<x::dist::cauchy_distribution_param_type, double, a_str, double, false, b_str, double, false>>;
+		using dist_cauchy_obj = dist_obj<std::cauchy_distribution<double>, double, false, param_type_2<x::random::cauchy_distribution_param_type, double, a_str, double, false, b_str, double, false>>;
 		dist_cauchy_obj _dist_cauchy_obj;
 		t_object *dist_cauchy_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_cauchy_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_fisher_f_obj = dist_obj<std::fisher_f_distribution<double>, double, false, param_type_2<x::dist::fisher_f_distribution_param_type, double, m_str, double, false, n_str, double, false>>;
+		using dist_fisher_f_obj = dist_obj<std::fisher_f_distribution<double>, double, false, param_type_2<x::random::fisher_f_distribution_param_type, double, m_str, double, false, n_str, double, false>>;
 		dist_fisher_f_obj _dist_fisher_f_obj;
 		t_object *dist_fisher_f_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_fisher_f_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_student_t_obj = dist_obj<std::student_t_distribution<double>, double, false, param_type_1<x::dist::student_t_distribution_param_type, double, n_str, double, false>>;
+		using dist_student_t_obj = dist_obj<std::student_t_distribution<double>, double, false, param_type_1<x::random::student_t_distribution_param_type, double, n_str, double, false>>;
 		dist_student_t_obj _dist_student_t_obj;
 		t_object *dist_student_t_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_student_t_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_rayleigh_obj = dist_obj<x::dist::rayleigh_distribution<double>, double, false, param_type_1<x::dist::rayleigh_distribution_param_type, double, sigma_str, double, false>>;
+		using dist_rayleigh_obj = dist_obj<x::random::rayleigh_distribution<double>, double, false, param_type_1<x::random::rayleigh_distribution_param_type, double, sigma_str, double, false>>;
 		dist_rayleigh_obj _dist_rayleigh_obj;
 		t_object *dist_rayleigh_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_rayleigh_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_discrete_obj = dist_obj<std::discrete_distribution<long>, long, false, param_type_1<x::dist::discrete_distribution_param_type, long, probabilities_str, double, true>>;
+		using dist_discrete_obj = dist_obj<std::discrete_distribution<long>, long, false, param_type_1<x::random::discrete_distribution_param_type, long, probabilities_str, double, true>>;
 		dist_discrete_obj _dist_discrete_obj;
 		t_object *dist_discrete_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_discrete_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_piecewise_constant_obj = dist_obj<std::piecewise_constant_distribution<double>, double, false, param_type_2<x::dist::piecewise_constant_distribution_param_type, double, intervals_str, double, true, densities_str, double, true>>;
+		using dist_piecewise_constant_obj = dist_obj<std::piecewise_constant_distribution<double>, double, false, param_type_2<x::random::piecewise_constant_distribution_param_type, double, intervals_str, double, true, densities_str, double, true>>;
 		dist_piecewise_constant_obj _dist_piecewise_constant_obj;
 		t_object *dist_piecewise_constant_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_piecewise_constant_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_piecewise_linear_obj = dist_obj<std::piecewise_linear_distribution<double>, double, false, param_type_2<x::dist::piecewise_linear_distribution_param_type, double, intervals_str, double, true, densities_str, double, true>>;
+		using dist_piecewise_linear_obj = dist_obj<std::piecewise_linear_distribution<double>, double, false, param_type_2<x::random::piecewise_linear_distribution_param_type, double, intervals_str, double, true, densities_str, double, true>>;
 		dist_piecewise_linear_obj _dist_piecewise_linear_obj;
 		t_object *dist_piecewise_linear_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_piecewise_linear_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_dirichlet_obj = dist_obj<x::dist::dirichlet_distribution<double>, double, true, param_type_1<x::dist::dirichlet_distribution_param_type, double, alpha_str, double, true>>;
+		using dist_dirichlet_obj = dist_obj<x::random::dirichlet_distribution<double>, double, true, param_type_1<x::random::dirichlet_distribution_param_type, double, alpha_str, double, true>>;
 		dist_dirichlet_obj _dist_dirichlet_obj;
 		t_object *dist_dirichlet_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{

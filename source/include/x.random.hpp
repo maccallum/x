@@ -22,7 +22,7 @@ SOFTWARE.
 
 namespace x
 {
-	namespace dist
+	namespace random
 	{
 		// beta distribution
 		template<class _RealType = double>
@@ -1335,30 +1335,30 @@ namespace x
 			double param2(void){return p();}
 		};
 
-		class multinomial_distribution_param_type : public x::dist::multinomial_distribution<long>::param_type
+		class multinomial_distribution_param_type : public x::random::multinomial_distribution<long>::param_type
 		{
 		public:
-			multinomial_distribution_param_type(void) : x::dist::multinomial_distribution<long>::param_type() {}
-			multinomial_distribution_param_type(long p1, std::vector<double> p2) : x::dist::multinomial_distribution<long>::param_type(p1, p2.begin(), p2.end()) {}
+			multinomial_distribution_param_type(void) : x::random::multinomial_distribution<long>::param_type() {}
+			multinomial_distribution_param_type(long p1, std::vector<double> p2) : x::random::multinomial_distribution<long>::param_type(p1, p2.begin(), p2.end()) {}
 			long param1(void){return n();}
 			std::vector<double> param2(void){return p();}
 		};
 
-		class hypergeometric_distribution_param_type : public x::dist::hypergeometric_distribution<long>::param_type
+		class hypergeometric_distribution_param_type : public x::random::hypergeometric_distribution<long>::param_type
 		{
 		public:
-			hypergeometric_distribution_param_type(void) : x::dist::hypergeometric_distribution<long>::param_type() {}
-			hypergeometric_distribution_param_type(long p1, long p2, long p3) : x::dist::hypergeometric_distribution<long>::param_type(p1, p2, p3) {}
+			hypergeometric_distribution_param_type(void) : x::random::hypergeometric_distribution<long>::param_type() {}
+			hypergeometric_distribution_param_type(long p1, long p2, long p3) : x::random::hypergeometric_distribution<long>::param_type(p1, p2, p3) {}
 			long param1(void){return n();}
 			long param2(void){return M();}
 			long param3(void){return N();}
 		};
 
-		class multivariate_hypergeometric_distribution_param_type : public x::dist::multivariate_hypergeometric_distribution<long>::param_type
+		class multivariate_hypergeometric_distribution_param_type : public x::random::multivariate_hypergeometric_distribution<long>::param_type
 		{
 		public:
-			multivariate_hypergeometric_distribution_param_type(void) : x::dist::multivariate_hypergeometric_distribution<long>::param_type() {}
-			multivariate_hypergeometric_distribution_param_type(long p1, std::vector<long> p2) : x::dist::multivariate_hypergeometric_distribution<long>::param_type(p1, p2.begin(), p2.end()) {}
+			multivariate_hypergeometric_distribution_param_type(void) : x::random::multivariate_hypergeometric_distribution<long>::param_type() {}
+			multivariate_hypergeometric_distribution_param_type(long p1, std::vector<long> p2) : x::random::multivariate_hypergeometric_distribution<long>::param_type(p1, p2.begin(), p2.end()) {}
 			long param1(void){return n();}
 			std::vector<long> param2(void){return M();}
 		};
@@ -1406,29 +1406,29 @@ namespace x
 			double param2(void){return b();}
 		};
 
-		class beta_distribution_param_type : public x::dist::beta_distribution<double>::param_type
+		class beta_distribution_param_type : public x::random::beta_distribution<double>::param_type
 		{
 		public:
-			beta_distribution_param_type(void) : x::dist::beta_distribution<double>::param_type() {}
-			beta_distribution_param_type(double p1, double p2) : x::dist::beta_distribution<double>::param_type(p1, p2) {}
+			beta_distribution_param_type(void) : x::random::beta_distribution<double>::param_type() {}
+			beta_distribution_param_type(double p1, double p2) : x::random::beta_distribution<double>::param_type(p1, p2) {}
 			double param1(void){return alpha();}
 			double param2(void){return beta();}
 		};
 
-		class kumaraswamy_distribution_param_type : public x::dist::kumaraswamy_distribution<double>::param_type
+		class kumaraswamy_distribution_param_type : public x::random::kumaraswamy_distribution<double>::param_type
 		{
 		public:
-			kumaraswamy_distribution_param_type(void) : x::dist::kumaraswamy_distribution<double>::param_type() {}
-			kumaraswamy_distribution_param_type(double p1, double p2) : x::dist::kumaraswamy_distribution<double>::param_type(p1, p2) {}
+			kumaraswamy_distribution_param_type(void) : x::random::kumaraswamy_distribution<double>::param_type() {}
+			kumaraswamy_distribution_param_type(double p1, double p2) : x::random::kumaraswamy_distribution<double>::param_type(p1, p2) {}
 			double param1(void){return alpha();}
 			double param2(void){return beta();}
 		};
 
-		class laplace_distribution_param_type : public x::dist::laplace_distribution<double>::param_type
+		class laplace_distribution_param_type : public x::random::laplace_distribution<double>::param_type
 		{
 		public:
-			laplace_distribution_param_type(void) : x::dist::laplace_distribution<double>::param_type() {}
-			laplace_distribution_param_type(double p1, double p2) : x::dist::laplace_distribution<double>::param_type(p1, p2) {}
+			laplace_distribution_param_type(void) : x::random::laplace_distribution<double>::param_type() {}
+			laplace_distribution_param_type(double p1, double p2) : x::random::laplace_distribution<double>::param_type(p1, p2) {}
 			double param1(void){return mu();}
 			double param2(void){return sigma();}
 		};
@@ -1525,12 +1525,12 @@ namespace x
 			std::vector<double> param2(void){return densities();}
 		};
 
-		class dirichlet_distribution_param_type : public x::dist::dirichlet_distribution<double>::param_type
+		class dirichlet_distribution_param_type : public x::random::dirichlet_distribution<double>::param_type
 		{
 		public:
-			dirichlet_distribution_param_type(void) : x::dist::dirichlet_distribution<double>::param_type() {}
+			dirichlet_distribution_param_type(void) : x::random::dirichlet_distribution<double>::param_type() {}
 			template <class _InputIterator>
-			dirichlet_distribution_param_type(_InputIterator __f, _InputIterator __l) : x::dist::dirichlet_distribution<double>::param_type(__f, __l) {}
+			dirichlet_distribution_param_type(_InputIterator __f, _InputIterator __l) : x::random::dirichlet_distribution<double>::param_type(__f, __l) {}
 			dirichlet_distribution_param_type(std::vector<double> v) : dirichlet_distribution_param_type(v.begin(), v.end()) {}
 			std::vector<double> param1(void){return alpha();}
 		};
