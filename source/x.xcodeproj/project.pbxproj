@@ -260,7 +260,6 @@
 		52B21096214BB588002FC3CD /* x.dist.laplace.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = x.dist.laplace.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 		52B210A5214BBB0D002FC3CD /* x.dist.rayleigh.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = x.dist.rayleigh.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 		52B210B4214BEBB3002FC3CD /* x.dist.erlang.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = x.dist.erlang.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
-		52B210B5214BEBB4002FC3CD /* x.dist.rayleigh copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "x.dist.rayleigh copy-Info.plist"; path = "/Users/john/Development/maccallum/x/source/x.dist.rayleigh copy-Info.plist"; sourceTree = "<absolute>"; };
 		52D69DF020AC90CB00D7BDEF /* x.seed_seq_from.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = x.seed_seq_from.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -606,7 +605,6 @@
 				52C839E1167A5BB8000AA688 /* Other Sources */,
 				089C1671FE841209C02AAC07 /* External Frameworks and Libraries */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
-				52B210B5214BEBB4002FC3CD /* x.dist.rayleigh copy-Info.plist */,
 			);
 			name = cv_jit;
 			sourceTree = "<group>";
@@ -1639,41 +1637,41 @@
 			targets = (
 				B4E73DAC0E1888E9001E52BE /* Build all.bak */,
 				52A8393B16E978D7002E273C /* x.random_device */,
+				52D69DE420AC90CB00D7BDEF /* x.seed_seq_from */,
 				523B363B20A3396A003D1A6B /* x.generator.pcg32 */,
 				528D3197211C765C00DD478F /* x.generator.mt19937_64 */,
-				52D69DE420AC90CB00D7BDEF /* x.seed_seq_from */,
 				5266D4DB20C963FF007D4589 /* x.dist.uniform_int */,
 				5266D4EA20C96405007D4589 /* x.dist.uniform_real */,
 				5266D4FD20C969EB007D4589 /* x.dist.bernoulli */,
 				5266D50C20C969EF007D4589 /* x.dist.binomial */,
 				5266D51B20C969F1007D4589 /* x.dist.geometric */,
 				5266D52A20C969F3007D4589 /* x.dist.negative_binomial */,
+				52B2103821448A55002FC3CD /* x.dist.multinomial */,
+				52B2104721454CB9002FC3CD /* x.dist.hypergeometric */,
+				52B210562145796D002FC3CD /* x.dist.multivariate_hypergeometric */,
 				5266D4A720C95B70007D4589 /* x.dist.poisson */,
 				5266D49620C95934007D4589 /* x.dist.exponential */,
 				529EACB520B0121C006D56A4 /* x.dist.gamma */,
 				5266D4B920C95CC9007D4589 /* x.dist.weibull */,
 				5266D4CA20C96115007D4589 /* x.dist.extreme_value */,
+				52B20FF7213C6B68002FC3CD /* x.dist.dirichlet */,
+				52B20FE7213C43ED002FC3CD /* x.dist.beta */,
+				52B21007213D221D002FC3CD /* x.dist.kumaraswamy */,
+				52B21089214BB588002FC3CD /* x.dist.laplace */,
+				52B210A7214BEBB3002FC3CD /* x.dist.erlang */,
 				5266D54120C974E4007D4589 /* x.dist.normal */,
 				5266D55020C974E6007D4589 /* x.dist.lognormal */,
 				5266D55F20C974E8007D4589 /* x.dist.chi_squared */,
 				5266D56E20C974EA007D4589 /* x.dist.cauchy */,
 				5266D57D20C974EC007D4589 /* x.dist.fisher_f */,
 				5266D58C20C974ED007D4589 /* x.dist.student_t */,
+				52B21098214BBB0D002FC3CD /* x.dist.rayleigh */,
 				521EE6C42118992700F281AE /* x.dist.discrete */,
 				521EE6D52118E74700F281AE /* x.dist.piecewise_constant */,
 				521EE6E72118EE7600F281AE /* x.dist.piecewise_linear */,
-				52B20FE7213C43ED002FC3CD /* x.dist.beta */,
-				52B20FF7213C6B68002FC3CD /* x.dist.dirichlet */,
-				52B21007213D221D002FC3CD /* x.dist.kumaraswamy */,
-				52B21017213EDC0F002FC3CD /* x.delegate~ */,
-				52B2103821448A55002FC3CD /* x.dist.multinomial */,
-				52B2104721454CB9002FC3CD /* x.dist.hypergeometric */,
-				52B210562145796D002FC3CD /* x.dist.multivariate_hypergeometric */,
-				52B210652145B083002FC3CD /* x.global */,
 				52B21076214ABC25002FC3CD /* x.dist */,
-				52B21089214BB588002FC3CD /* x.dist.laplace */,
-				52B21098214BBB0D002FC3CD /* x.dist.rayleigh */,
-				52B210A7214BEBB3002FC3CD /* x.dist.erlang */,
+				52B210652145B083002FC3CD /* x.global */,
+				52B21017213EDC0F002FC3CD /* x.delegate~ */,
 			);
 		};
 /* End PBXProject section */

@@ -1029,6 +1029,13 @@ namespace x
 			return _dist_extreme_value_obj.newobj(msg, argc, argv);
 		}
 
+		using dist_dirichlet_obj = dist_obj<x::random::dirichlet_distribution<double>, double, true, param_type_1<x::random::dirichlet_distribution_param_type, double, alpha_str, double, true>>;
+		dist_dirichlet_obj _dist_dirichlet_obj;
+		t_object *dist_dirichlet_newobj(t_symbol *msg, short argc, t_atom *argv)
+		{
+			return _dist_dirichlet_obj.newobj(msg, argc, argv);
+		}
+
 		using dist_beta_obj = dist_obj<x::random::beta_distribution<double>, double, false, param_type_2<x::random::beta_distribution_param_type, double, alpha_str, double, false, beta_str, double, false>>;
 		dist_beta_obj _dist_beta_obj;
 		t_object *dist_beta_newobj(t_symbol *msg, short argc, t_atom *argv)
@@ -1126,13 +1133,6 @@ namespace x
 		t_object *dist_piecewise_linear_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_piecewise_linear_obj.newobj(msg, argc, argv);
-		}
-
-		using dist_dirichlet_obj = dist_obj<x::random::dirichlet_distribution<double>, double, true, param_type_1<x::random::dirichlet_distribution_param_type, double, alpha_str, double, true>>;
-		dist_dirichlet_obj _dist_dirichlet_obj;
-		t_object *dist_dirichlet_newobj(t_symbol *msg, short argc, t_atom *argv)
-		{
-			return _dist_dirichlet_obj.newobj(msg, argc, argv);
 		}
 
 		t_class *newclass(const char *name, t_object *(*newobj)(t_symbol*, short, t_atom*), void (*freeobj)(t_maxobj*), size_t struct_size)

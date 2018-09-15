@@ -1512,6 +1512,16 @@ namespace x
 			double param2(void){return b();}
 		};
 
+		class dirichlet_distribution_param_type : public x::random::dirichlet_distribution<double>::param_type
+		{
+		public:
+			dirichlet_distribution_param_type(void) : x::random::dirichlet_distribution<double>::param_type() {}
+			template <class _InputIterator>
+			dirichlet_distribution_param_type(_InputIterator __f, _InputIterator __l) : x::random::dirichlet_distribution<double>::param_type(__f, __l) {}
+			dirichlet_distribution_param_type(std::vector<double> v) : dirichlet_distribution_param_type(v.begin(), v.end()) {}
+			std::vector<double> param1(void){return alpha();}
+		};
+
 		class beta_distribution_param_type : public x::random::beta_distribution<double>::param_type
 		{
 		public:
@@ -1638,16 +1648,6 @@ namespace x
 			piecewise_linear_distribution_param_type(std::vector<double> v1, std::vector<double> v2) : piecewise_linear_distribution_param_type(v1.begin(), v1.end(), v2.begin()) {}
 			std::vector<double> param1(void){return intervals();}
 			std::vector<double> param2(void){return densities();}
-		};
-
-		class dirichlet_distribution_param_type : public x::random::dirichlet_distribution<double>::param_type
-		{
-		public:
-			dirichlet_distribution_param_type(void) : x::random::dirichlet_distribution<double>::param_type() {}
-			template <class _InputIterator>
-			dirichlet_distribution_param_type(_InputIterator __f, _InputIterator __l) : x::random::dirichlet_distribution<double>::param_type(__f, __l) {}
-			dirichlet_distribution_param_type(std::vector<double> v) : dirichlet_distribution_param_type(v.begin(), v.end()) {}
-			std::vector<double> param1(void){return alpha();}
 		};
 	}
 }
