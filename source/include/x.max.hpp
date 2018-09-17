@@ -23,6 +23,7 @@ SOFTWARE.
 #include "ext.h"
 #include "ext_obex.h"
 #include "ext_obex_util.h"
+#include "ext_critical.h"
 #include "jpatcher_utils.h"
 
 #include <random>
@@ -41,6 +42,7 @@ typedef struct _maxobj
 	t_atom **buf;
 	size_t *n;
 	int delegation_status;
+	t_critical lock;
 } t_maxobj;
 
 namespace x
@@ -73,6 +75,7 @@ namespace x
 				x->buf = NULL;
 				x->n = NULL;
 				x->delegation_status = 0;
+				critical_new(&(x->lock));
 				return (t_object *)x;
 			}
 
@@ -82,6 +85,7 @@ namespace x
 					object_error((t_object *)_x, "doesn't understand message %s", msg->s_name);
 					return;
 				}
+				critical_enter(_x->lock);
 				if(_x->buf){
 					if(*(_x->buf)){
 						if(*(_x->n) != argc){
@@ -99,6 +103,7 @@ namespace x
 				}
 				memcpy(*(_x->buf), argv, argc * sizeof(t_atom));
 				_x->delegation_status = 1;
+				critical_exit(_x->lock);
 			}
 
 			static void msg_list(t_maxobj *x, t_symbol *msg, short argc, t_atom *argv)
@@ -365,9 +370,10 @@ namespace x
 					n = atom_getlong(argv);
 				}
 				x::proxy::seed_seq_from<x::proxy::random_device_delegate<x::proxy::delegate<uint_least32_t, t_atom, atom_get<uint_least32_t>, atom_set/*<uint_least32_t>*/>>> seed_source;
-				seed_source.context(x->outlet_delegation());
+				critical_enter(_x->lock);
 				_x->n = seed_source.buffer_len_address();
 				_x->buf = seed_source.buffer_address();
+				seed_source.context(x->outlet_delegation());
 				typename seed_seq_from_obj_base::result_type buf[n];
 				seed_source.generate(buf, buf + n);
 				t_atom out[n];
@@ -381,6 +387,7 @@ namespace x
 					_x->buf = NULL;
 					_x->n = 0;
 				}
+				critical_exit(_x->lock);
 			}
 
 			static void freeobj(t_maxobj *x)
@@ -388,7 +395,7 @@ namespace x
 				if(x->buf){
 					sysmem_freeptr(x->buf);
 				}
-				
+				critical_free(x->lock);
 				if(x->myobj){
 					delete ((seed_seq_from_obj *)(x->myobj));
 				}
@@ -422,6 +429,7 @@ namespace x
 			{
 				x::proxy::seed_seq_from_delegate<seed_seq_from_delegate_base, std::random_device> seed_source;
 				seed_source.context(outlet_delegation());
+			        critical_enter(x->lock);
 				x->buf = seed_source.buffer_address();
 				x->n = seed_source.buffer_len_address();
 				x->delegation_status = 0;
@@ -438,6 +446,7 @@ namespace x
 					x->buf = NULL;
 					x->n = 0;
 				}
+				critical_exit(x->lock);
 				return _rng_is_valid;
 			}
 			
@@ -446,6 +455,7 @@ namespace x
 				t_object *x = obj::newobj(msg, argc, argv);
 				if(x){
 					t_maxobj *xx = (t_maxobj *)x;
+					critical_new(&(xx->lock));
 					rng_obj<rng_type> *o = new rng_obj<rng_type>;
 					obj::obj_init(x, (obj *)o);
 					xx->myobj = (void *)o;
@@ -500,7 +510,7 @@ namespace x
 				if(x->buf){
 					sysmem_freeptr(x->buf);
 				}
-				
+				critical_free(x->lock);				
 				if(x->myobj){
 					delete ((rng_obj<rng_type> *)(x->myobj));
 				}
@@ -658,6 +668,7 @@ namespace x
 						dist_obj<dist_type, result_type, multivariate, param_type> *o = new dist_obj<dist_type, result_type, multivariate, param_type>;
 						obj::obj_init(x, (obj *)o);
 						xx->myobj = (void *)o;
+						critical_new(&(xx->lock));
 						t_dictionary *d = object_dictionaryarg(argc, argv);
 						for(int i = 0; i < o->nargs; i++){
 							t_symbol *s = gensym(o->names_str[i]);
@@ -696,11 +707,13 @@ namespace x
 				template <typename rng_type, bool U=multivariate>
 				static typename std::enable_if<!U>::type _generate(t_maxobj *_x, dist_type d, rng_type *rng)
 				{
+					critical_enter(_x->lock);
 					((dist_obj<dist_type, result_type> *)(_x->myobj))->init_delegate(_x, (rng_delegate_uint64 *)rng);
 					t_atom a;
 					atom_set(&a, d(*rng));
 					outlet_atoms(((dist_obj<dist_type, result_type> *)(_x->myobj))->outlet_main(), 1, &a);
 					((dist_obj<dist_type, result_type> *)(_x->myobj))->finalize_delegate(_x, (rng_delegate_uint64 *)rng);
+					critical_exit(_x->lock);
 				}
 
 				template <typename rng_type, bool U=multivariate>
@@ -722,6 +735,7 @@ namespace x
 					dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
 					dist_type d = dist_type(*((param_type *)x));
 					size_t n = 1;
+					critical_enter(_x->lock);
 					_x->n = &n;
 					t_atom mina, maxa;
 					t_atom *p = &mina;
@@ -809,6 +823,7 @@ namespace x
 						}
 					}else{
 					}
+					critical_exit(_x->lock);
 				}
 
 				static void min(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
@@ -852,7 +867,7 @@ namespace x
 					if(x->buf){
 						sysmem_freeptr(x->buf);
 					}
-				
+					critical_free(x->lock);				
 					if(x->myobj){
 						delete ((dist_obj<dist_type, result_type> *)(x->myobj));
 					}

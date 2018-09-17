@@ -38,6 +38,7 @@ namespace x
 			void *_context = NULL;
 			size_t _buffer_len = 0;
 			boxed_type *_buffer = NULL;
+			bool _busy = false;
 		public:
 			delegate(void) {}
 			delegate(void *context) :
