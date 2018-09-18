@@ -38,6 +38,19 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-8",
+					"linecount" : 3,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 201.0, 48.0, 421.0, 42.0 ],
+					"style" : "",
+					"text" : "Note: this generator produces unsigned 64-bit values, and Max only has signed 64-bit values, so although the displays below are signed, the values are actually unsigned"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-3",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -109,7 +122,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 201.0, 26.0, 421.0, 18.0 ],
 					"style" : "",
-					"text" : "Produce a pseudo-random value using the PCG 32-bit generator"
+					"text" : "Produce a pseudo-random value using the PCG 64-bit generator"
 				}
 
 			}
@@ -122,7 +135,7 @@
 					"outlettype" : [ "", "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 227.0, 334.0, 146.0, 108.0 ],
-					"setminmax" : [ 0.0, 4294967296.0 ],
+					"setminmax" : [ -1.0, -1.0 ],
 					"setstyle" : 4,
 					"style" : ""
 				}
@@ -202,7 +215,7 @@
 					"outlettype" : [ "", "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 65.0, 334.0, 146.0, 108.0 ],
-					"setminmax" : [ 0.0, 4294967296.0 ],
+					"setminmax" : [ -1.0, -1.0 ],
 					"setstyle" : 4,
 					"settype" : 0,
 					"style" : ""
@@ -231,7 +244,7 @@
 					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 65.0, 140.0, 107.0, 20.0 ],
 					"style" : "",
-					"text" : "x.generator.pcg32"
+					"text" : "x.generator.pcg64"
 				}
 
 			}
@@ -363,7 +376,7 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "x.generator.pcg32.mxo",
+				"name" : "x.generator.pcg64.mxo",
 				"type" : "iLaX"
 			}
 , 			{

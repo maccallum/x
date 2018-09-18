@@ -544,6 +544,13 @@ namespace x
 			return _generator_pcg32_obj.newobj(msg, argc, argv);
 		}
 
+		using generator_pcg64_obj = rng_obj<pcg64>;
+		generator_pcg64_obj _generator_pcg64_obj;
+		t_object *generator_pcg64_newobj(t_symbol *msg, short argc, t_atom *argv)
+		{
+			return _generator_pcg64_obj.newobj(msg, argc, argv);
+		}
+
 		using generator_minstd_rand0_obj = rng_obj<std::minstd_rand0>;
 		generator_minstd_rand0_obj _generator_minstd_rand0_obj;
 		t_object *generator_minstd_rand0_newobj(t_symbol *msg, short argc, t_atom *argv)
