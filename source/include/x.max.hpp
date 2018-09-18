@@ -544,11 +544,53 @@ namespace x
 			return _generator_pcg32_obj.newobj(msg, argc, argv);
 		}
 
+		using generator_minstd_rand0_obj = rng_obj<std::minstd_rand0>;
+		generator_minstd_rand0_obj _generator_minstd_rand0_obj;
+		t_object *generator_minstd_rand0_newobj(t_symbol *msg, short argc, t_atom *argv)
+		{
+			return _generator_minstd_rand0_obj.newobj(msg, argc, argv);
+		}
+
+		using generator_minstd_rand_obj = rng_obj<std::minstd_rand>;
+		generator_minstd_rand_obj _generator_minstd_rand_obj;
+		t_object *generator_minstd_rand_newobj(t_symbol *msg, short argc, t_atom *argv)
+		{
+			return _generator_minstd_rand_obj.newobj(msg, argc, argv);
+		}
+
+		using generator_mt19937_obj = rng_obj<std::mt19937>;
+		generator_mt19937_obj _generator_mt19937_obj;
+		t_object *generator_mt19937_newobj(t_symbol *msg, short argc, t_atom *argv)
+		{
+			return _generator_mt19937_obj.newobj(msg, argc, argv);
+		}
+
 		using generator_mt19937_64_obj = rng_obj<std::mt19937_64>;
 		generator_mt19937_64_obj _generator_mt19937_64_obj;
 		t_object *generator_mt19937_64_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _generator_mt19937_64_obj.newobj(msg, argc, argv);
+		}
+
+		using generator_ranlux24_obj = rng_obj<std::ranlux24>;
+		generator_ranlux24_obj _generator_ranlux24_obj;
+		t_object *generator_ranlux24_newobj(t_symbol *msg, short argc, t_atom *argv)
+		{
+			return _generator_ranlux24_obj.newobj(msg, argc, argv);
+		}
+
+		using generator_ranlux48_obj = rng_obj<std::ranlux48>;
+		generator_ranlux48_obj _generator_ranlux48_obj;
+		t_object *generator_ranlux48_newobj(t_symbol *msg, short argc, t_atom *argv)
+		{
+			return _generator_ranlux48_obj.newobj(msg, argc, argv);
+		}
+
+		using generator_knuth_b_obj = rng_obj<std::knuth_b>;
+		generator_knuth_b_obj _generator_knuth_b_obj;
+		t_object *generator_knuth_b_newobj(t_symbol *msg, short argc, t_atom *argv)
+		{
+			return _generator_knuth_b_obj.newobj(msg, argc, argv);
 		}
 		
 		using rng_delegate_uint32 = x::proxy::delegate<uint32_t, t_atom, x::max::atom_get<uint32_t>, x::max::atom_set>;
