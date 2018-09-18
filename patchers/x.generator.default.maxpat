@@ -84,7 +84,7 @@
 					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 103.0, 136.0, 151.0, 20.0 ],
 					"style" : "",
-					"text" : "x.global x.generator.pcg32"
+					"text" : "x.global x.generator.pcg64"
 				}
 
 			}
