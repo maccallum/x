@@ -27,73 +27,62 @@ SOFTWARE.
 extern "C" {
 #endif
 
+struct xobj_uint32;
+
+typedef void (*xobj_uint32_callback)(struct xobj_uint32*, size_t n);
+
+typedef struct xobj_uint32
+{
+	void *myobj;
+	xobj_uint32_callback callback;
+	size_t *n;
+	uint32_t **buf;
+} xobj_uint32;
+
 //////////////////////////////////////////////////
 // random_device
 //////////////////////////////////////////////////
-
 typedef struct random_device random_device;
-random_device *random_device_new(void);
-void random_device_delete(random_device *rd);
-unsigned int random_device_generate(random_device *rd);
-unsigned int random_device_min(random_device *rd);
-unsigned int random_device_max(random_device *rd);
+xobj_uint32 *random_device_new(xobj_uint32_callback callback);
+void random_device_delete(xobj_uint32 *rd);
+unsigned int random_device_generate(xobj_uint32 *rd);
+unsigned int random_device_min(xobj_uint32 *rd);
+unsigned int random_device_max(xobj_uint32 *rd);
 
 //////////////////////////////////////////////////
 // seed_seq_from
 //////////////////////////////////////////////////
-
 typedef struct seed_seq_from seed_seq_from;
-seed_seq_from *seed_seq_from_new(void);
-void seed_seq_from_delete(seed_seq_from *ssf);
-void seed_seq_from_setcontext(seed_seq_from *ssf, void *context);
-void seed_seq_from_generate(seed_seq_from *_ssf, uint32_t *start, uint32_t *end);
+xobj_uint32 *seed_seq_from_new(xobj_uint32_callback callback);
+void seed_seq_from_delete(xobj_uint32 *ssf);
+void seed_seq_from_setcontext(xobj_uint32 *ssf, void *context);
+void seed_seq_from_generate(xobj_uint32 *_ssf, uint32_t *start, uint32_t *end);
 
 //////////////////////////////////////////////////
 // seed_seq_from_delegate
 //////////////////////////////////////////////////
-
 typedef struct seed_seq_from_delegate seed_seq_from_delegate;
-seed_seq_from_delegate *seed_seq_from_delegate_new(void);
-void seed_seq_from_delegate_delete(seed_seq_from_delegate *ssfd);
-void seed_seq_from_delegate_setcontext(seed_seq_from_delegate *ssfd, void *context);
+xobj_uint32 *seed_seq_from_delegate_new(void);
+void seed_seq_from_delegate_delete(xobj_uint32 *ssfd);
+void seed_seq_from_delegate_setcontext(xobj_uint32 *ssfd, void *context);
 
 //////////////////////////////////////////////////
 // rngs
 //////////////////////////////////////////////////
-
 typedef struct rng_pcg32 rng_pcg32;
-rng_pcg32 *rng_pcg32_new_seed_seq_from_delegate(seed_seq_from_delegate *ssfd);
-void rng_pcg32_delete(rng_pcg32 *r);
+xobj_uint32 *rng_pcg32_new_seed_seq_from_delegate(xobj_uint32 *ssfd);
+void rng_pcg32_delete(xobj_uint32 *r);
 uint32_t rng_pcg32_min(void);
 uint32_t rng_pcg32_max(void);
-uint32_t rng_pcg32_generate(rng_pcg32 *r);
-
-//////////////////////////////////////////////////
-// rng_delegate
-//////////////////////////////////////////////////
-
-// typedef struct rng_delegate_0_FFFFFF rng_delegate_0_FFFFFF;
-// typedef struct rng_delegate_1_FFFFFF rng_delegate_1_FFFFFF;
-// typedef struct rng_delegate_0_7FFFFFFE rng_delegate_0_7FFFFFFE;
-// typedef struct rng_delegate_0_7FFFFFFE rng_delegate_1_7FFFFFFE;
-// typedef struct rng_delegate_0_FFFFFFFF rng_delegate_0_FFFFFFFF;
-// typedef struct rng_delegate_0_FFFFFFFF rng_delegate_1_FFFFFFFF;
-// typedef struct rng_delegate_0_FFFFFFFFFFFF rng_delegate_0_FFFFFFFFFFFF;
-// typedef struct rng_delegate_1_FFFFFFFFFFFF rng_delegate_1_FFFFFFFFFFFF;
-// typedef struct rng_delegate_0_FFFFFFFFFFFFFFFF rng_delegate_0_FFFFFFFFFFFFFFFF;
-// typedef struct rng_delegate_0_FFFFFFFFFFFFFFFF rng_delegate_1_FFFFFFFFFFFFFFFF;
-
-// rng_delegate_0_FFFFFFFF *rng_delegate_0_FFFFFFFF_new(void);
-// void rng_delegate_0_FFFFFFFF_delete(rng_delegate_0_FFFFFFFF *rd);
+uint32_t rng_pcg32_generate(xobj_uint32 *r);
 
 //////////////////////////////////////////////////
 // distributions
 //////////////////////////////////////////////////
-
-typedef struct dist_gamma dist_gamma;
-dist_gamma *dist_gamma_new(void);
-void dist_gamma_delete(dist_gamma *d);
-double dist_gamma_generate(void *context, double alpha, double beta, uint64_t rng_min, uint64_t rng_max);
+//typedef struct dist_gamma dist_gamma;
+//dist_gamma *dist_gamma_new(void);
+//void dist_gamma_delete(dist_gamma *d);
+double dist_gamma_generate(void *context, xobj_uint32_callback callback, double alpha, double beta, uint64_t rng_min, uint64_t rng_max);
 
 #ifdef __cplusplus
 }

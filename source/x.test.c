@@ -25,46 +25,61 @@ SOFTWARE.
 #include <inttypes.h>
 #include "x.capi.h"
 
-void random_device_delegate_callback(void *context, size_t buflen, uint32_t *buf)
+void random_device_delegate_callback(xobj_uint32 *x, size_t n)
 {
-	for(size_t i = 0; i < buflen; i++){
-		buf[i] = random_device_generate((random_device *)context);
-	}
-}
-
-void seed_seq_from_delegate_callback(void *context, size_t n, size_t *buflen, uint32_t **buf)
-{
-	if(*buflen != n || !(*buf)){
-		*buf = (uint32_t *)realloc(*buf, n * sizeof(uint32_t));
-		*buflen = n;
-	}
-	seed_seq_from_generate((seed_seq_from *)context, *buf, (*buf) + n);
-}
-
-void rng_delegate_uint32_callback(void *context, size_t n, size_t *buflen, uint32_t **buf)
-{
-	if(*buflen != n || !(*buf)){
-		*buf = (uint32_t *)realloc(*buf, n * sizeof(uint32_t));
-		*buflen = n;
+	if(*(x->n) != n || !(*(x->buf))){
+		*(x->buf) = (uint32_t *)realloc(*(x->buf), n * sizeof(uint32_t));
+		*(x->n) = n;
 	}
 	for(size_t i = 0; i < n; i++){
-		(*buf)[i] = rng_pcg32_generate((rng_pcg32 *)context);
+		(*(x->buf))[i] = random_device_generate(x);
 	}
+}
+
+void seed_seq_from_delegate_callback(xobj_uint32 *x, size_t n)
+{
+	printf("%s:%d\n", __func__, __LINE__);
+	if(!(x->n) || !(x->buf) || *(x->n) != n){
+		printf("%s:%d\n", __func__, __LINE__);
+		*(x->buf) = (uint32_t *)realloc(*(x->buf), n * sizeof(uint32_t));
+		*(x->n) = n;
+		printf("%s:%d\n", __func__, __LINE__);
+	}
+	printf("%s:%d\n", __func__, __LINE__);
+	seed_seq_from_generate(x, *(x->buf), (*(x->buf)) + n);
+	printf("%s:%d\n", __func__, __LINE__);
+}
+
+void rng_delegate_uint32_callback(xobj_uint32 *x, size_t n){
+	printf("%s:%d: x = %p, x->myobj = %p\n", __func__, __LINE__, x, x->myobj);
+	printf("%s:%d: *(x->n) = %zu\n", __func__, __LINE__, *(x->n));
+	if(!(x->n) || !(x->buf) || *(x->n) != n){
+		*(x->buf) = (uint32_t *)realloc(*(x->buf), n * sizeof(uint32_t));
+		*(x->n) = n;
+	}
+	printf("%s:%d\n", __func__, __LINE__);
+	for(size_t i = 0; i < n; i++){
+		(*(x->buf))[i] = rng_pcg32_generate(x);
+	}
+	printf("%s:%d\n", __func__, __LINE__);
 }
 
 int main(int argc, char **argv)
 {
-	random_device *rd = random_device_new();
-	seed_seq_from *ssf = seed_seq_from_new();
-	seed_seq_from_setcontext(ssf, rd);
+	xobj_uint32 *rd = random_device_new(random_device_delegate_callback);
+	xobj_uint32 *ssf = seed_seq_from_new(seed_seq_from_delegate_callback);
+	printf("%s:%d: callback = %p\n", __func__, __LINE__, ssf->callback);
+	seed_seq_from_setcontext(ssf, (void *)rd);
 	size_t buflen = 10;
 	uint32_t buf[buflen];
-	seed_seq_from_delegate *ssfd = seed_seq_from_delegate_new();
+	xobj_uint32 *ssfd = seed_seq_from_delegate_new();
 	seed_seq_from_delegate_setcontext(ssfd, ssf);
-	rng_pcg32 *r = rng_pcg32_new_seed_seq_from_delegate(ssfd);
-
+	printf("here\n");
+	xobj_uint32 *r = rng_pcg32_new_seed_seq_from_delegate(ssfd);
+	printf("there\n");
+	printf("%s:%d: r = %p, r->myobj = %p\n", __func__, __LINE__, r, r->myobj);
 	for(int i = 0; i < 10; i++){
-		double f = dist_gamma_generate((void *)r, 2., 2., rng_pcg32_min(), rng_pcg32_max());
+		double f = dist_gamma_generate((void *)r, rng_delegate_uint32_callback, 2., 2., rng_pcg32_min(), rng_pcg32_max());
 		printf("f = %f\n", f);
 	}
 	
