@@ -36,11 +36,10 @@ void set_u64(uint64_t *i, uint64_t ii){*i = ii;}
 // random_device
 //////////////////////////////////////////////////
 
-xobj_uint32 *random_device_new(xobj_uint32_callback callback)
+xobj_uint32 *random_device_new(void)
 {
 	xobj_uint32 *x = (xobj_uint32 *)calloc(1, sizeof(xobj_uint32));
 	x->myobj = (void *)(new std::random_device());
-	x->callback = callback;
 	return x;
 }
 
@@ -70,7 +69,8 @@ unsigned int random_device_max(xobj_uint32 *x)
 // seed_seq_from
 //////////////////////////////////////////////////
 
-extern void random_device_delegate_callback(void *context, size_t n);//, size_t buflen, uint32_t *buf);
+extern void random_device_delegate_callback(void *context, size_t n);
+
 template<> void x::proxy::random_device_delegate<x::proxy::delegate<uint32_t, uint32_t, &(get_u32), &(set_u32)> >::callback(x::proxy::delegate<uint32_t, uint32_t, &(get_u32), &(set_u32)>* x, unsigned long i)
 {
 	xobj_uint32 *o = (xobj_uint32 *)x->context();
@@ -80,14 +80,15 @@ template<> void x::proxy::random_device_delegate<x::proxy::delegate<uint32_t, ui
 	o->callback(o, i);
 }
 
-xobj_uint32 *seed_seq_from_new(xobj_uint32_callback callback)
+xobj_uint32 *seed_seq_from_new(xobj_uint32 *random_device, xobj_uint32_callback random_device_delegate_callback)
 {
 	xobj_uint32 *x = (xobj_uint32 *)calloc(1, sizeof(xobj_uint32));
-	x->myobj = new x::proxy::seed_seq_from<x::proxy::random_device_delegate<x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>>>();
-	x->callback = callback;
-	printf("%s:%d: %p %p, callback = %p\n", __func__, __LINE__, x, x->myobj, callback);
+	x::proxy::seed_seq_from<x::proxy::random_device_delegate<x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>>> *o = new x::proxy::seed_seq_from<x::proxy::random_device_delegate<x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>>>();
+	
+	random_device->callback = random_device_delegate_callback;
+	o->context(random_device);
+	x->myobj = o;
 	return x;
-	//return reinterpret_cast<seed_seq_from*>(new x::proxy::seed_seq_from<x::proxy::random_device_delegate<x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>>>());
 }
 
 void seed_seq_from_delete(xobj_uint32 *ssf)
@@ -107,7 +108,6 @@ void seed_seq_from_generate(xobj_uint32 *_ssf, uint32_t *start, uint32_t *end)
 	x::proxy::seed_seq_from<x::proxy::random_device_delegate<x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>>> *ssf = reinterpret_cast<x::proxy::seed_seq_from<x::proxy::random_device_delegate<x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>>>*>(_ssf->myobj);
 	ssf->buffer(start);
 	ssf->buffer_len(end - start);
-	//reinterpret_cast<x::proxy::seed_seq_from<x::proxy::random_device_delegate<x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>>>*>(ssf)->generate(start, end);
 	ssf->generate(start, end);
 }
 
@@ -117,26 +117,24 @@ void seed_seq_from_generate(xobj_uint32 *_ssf, uint32_t *start, uint32_t *end)
 
 using seed_seq_from_delegate_base = x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>;
 
-extern void seed_seq_from_delegate_callback(void *context, size_t n);//, size_t *buflen, uint32_t **buf);
+extern void seed_seq_from_delegate_callback(void *context, size_t n);
+
 template <> void x::proxy::seed_seq_from_delegate<seed_seq_from_delegate_base, std::random_device>::callback(seed_seq_from_delegate_base *x, size_t n)
 {
-	printf("%s:%d: x = %p, x->context() = %p\n", __func__, __LINE__, x, x->context());
 	xobj_uint32 *o = (xobj_uint32 *)x->context();
 	o->n = x->buffer_len_address();
 	o->buf = x->buffer_address();
-	//seed_seq_from_delegate_callback(ssfd->context(), n, ssfd->buffer_len_address(), (uint32_t **)ssfd->buffer_address());
-	//seed_seq_from_delegate_callback(o, n);
-	printf("%s:%d: %p %p\n", __func__, __LINE__, o, o->callback);
 	o->callback(o, n);
 }
 
-xobj_uint32 *seed_seq_from_delegate_new(void)
+xobj_uint32 *seed_seq_from_delegate_new(xobj_uint32 *seed_seq_from, xobj_uint32_callback seed_seq_from_delegate_callback)
 {
 	xobj_uint32 *x = (xobj_uint32 *)calloc(1, sizeof(xobj_uint32));
-	x->myobj = new x::proxy::seed_seq_from_delegate<x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>, std::random_device>();
-	printf("%s:%d: %p %p\n", __func__, __LINE__, x, x->myobj);
+	x::proxy::seed_seq_from_delegate<x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>, std::random_device> *o = new x::proxy::seed_seq_from_delegate<x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>, std::random_device>();
+	seed_seq_from->callback = seed_seq_from_delegate_callback;
+	o->context(seed_seq_from);
+	x->myobj = o;
 	return x;
-	//return reinterpret_cast<seed_seq_from_delegate*>(new x::proxy::seed_seq_from_delegate<x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>, std::random_device>());
 }
 
 void seed_seq_from_delegate_delete(xobj_uint32 *ssfd)
@@ -148,8 +146,6 @@ void seed_seq_from_delegate_delete(xobj_uint32 *ssfd)
 
 void seed_seq_from_delegate_setcontext(xobj_uint32 *ssfd, void *context)
 {
-	printf("%s:%d: setting context of %p->%p to %p\n", __func__, __LINE__, ssfd, ssfd->myobj, context);
-	//printf("%s:%d: callback = %p\n", __func__, __LINE__, ((xobj_uint32 *)(context))->callback);
 	reinterpret_cast<x::proxy::seed_seq_from_delegate<x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>, std::random_device>*>(ssfd->myobj)->context(context);
 }
 
@@ -157,12 +153,11 @@ void seed_seq_from_delegate_setcontext(xobj_uint32 *ssfd, void *context)
 // rngs
 //////////////////////////////////////////////////
 
-xobj_uint32 *rng_pcg32_new_seed_seq_from_delegate(xobj_uint32 *ssfd)
+xobj_uint32 *rng_pcg32_new(xobj_uint32 *ssfd)
 {
 	xobj_uint32 *x = (xobj_uint32 *)calloc(1, sizeof(xobj_uint32));
 	x->myobj = new pcg32(*reinterpret_cast<x::proxy::seed_seq_from_delegate<seed_seq_from_delegate_base, std::random_device>*>(ssfd->myobj));
 	return x;
-	//return reinterpret_cast<rng_pcg32*>(new pcg32(*reinterpret_cast<x::proxy::seed_seq_from_delegate<seed_seq_from_delegate_base, std::random_device>*>(ssfd)));
 }
 
 void rng_pcg32_delete(xobj_uint32 *r)
@@ -194,7 +189,7 @@ uint32_t rng_pcg32_generate(xobj_uint32 *r)
 using rng_delegate_uint32 = x::proxy::delegate<uint32_t, uint32_t, get_u32, set_u32>;
 using rng_delegate_uint64 = x::proxy::delegate<uint64_t, uint64_t, get_u64, set_u64>;
 
-extern void rng_delegate_uint32_callback(void *context, size_t n);//, size_t *buflen, uint32_t **buf);
+extern void rng_delegate_uint32_callback(void *context, size_t n);
 
 template<> void x::proxy::rng_delegate<rng_delegate_uint32, uint32_t, 0, 0xFFFFFF>::callback(rng_delegate_uint32 *o, size_t n)
 {
@@ -222,7 +217,6 @@ template<> void x::proxy::rng_delegate<rng_delegate_uint32, uint32_t, 1, 0x7FFFF
 
 template<> void x::proxy::rng_delegate<rng_delegate_uint32, uint32_t, 0, 0xFFFFFFFF>::callback(rng_delegate_uint32 *o, size_t n)
 {
-	printf("%s:%d: o = %p, o->context() = %p, %zu\n", __func__, __LINE__, o, o->context(), n);
 	xobj_uint32 *x = (xobj_uint32 *)(o->context());
 	x->callback(x, n);
 }
@@ -314,7 +308,6 @@ double dist_gamma_generate(void *context, xobj_uint32_callback callback, double 
 				x->buf = rng.buffer_address();
 				x->n = rng.buffer_len_address();
 				x->callback = callback;
-			        printf("%s:%d: rng.context() = %p\n", __func__, __LINE__, rng.context());
 				return d(rng);
 			}
 			break;
