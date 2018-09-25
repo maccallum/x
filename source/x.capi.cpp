@@ -46,7 +46,11 @@ xobj_uint32 *random_device_new(void)
 void random_device_delete(xobj_uint32 *x)
 {
 	delete reinterpret_cast<std::random_device*>(x->myobj);
-	// buffer
+	if(x->buf && *(x->buf)){
+		free(*(x->buf));
+		*(x->buf) = NULL;
+		x->buf = NULL;
+	}
 	free(x);
 }
 
@@ -78,6 +82,8 @@ template<> void x::proxy::random_device_delegate<x::proxy::delegate<uint32_t, ui
 	o->buf = x->buffer_address();
 	//random_device_delegate_callback(x->context(), x->buffer_len(), x->buffer());
 	o->callback(o, i);
+	o->n = 0;
+	o->buf = NULL;
 }
 
 xobj_uint32 *seed_seq_from_new(xobj_uint32 *random_device, xobj_uint32_callback random_device_delegate_callback)
@@ -91,11 +97,16 @@ xobj_uint32 *seed_seq_from_new(xobj_uint32 *random_device, xobj_uint32_callback 
 	return x;
 }
 
-void seed_seq_from_delete(xobj_uint32 *ssf)
+void seed_seq_from_delete(xobj_uint32 *x)
 {
-	delete reinterpret_cast<x::proxy::seed_seq_from<x::proxy::random_device_delegate<x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>>>*>(ssf->myobj);
-	// buffer
-	free(ssf);
+	delete reinterpret_cast<x::proxy::seed_seq_from<x::proxy::random_device_delegate<x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>>>*>(x->myobj);
+	if(x->buf && *(x->buf)){
+		free(*(x->buf));
+		*(x->buf) = NULL;
+
+		x->buf = NULL;
+	}
+	free(x);
 }
 
 void seed_seq_from_setcontext(xobj_uint32 *ssf, void *context)
@@ -137,11 +148,15 @@ xobj_uint32 *seed_seq_from_delegate_new(xobj_uint32 *seed_seq_from, xobj_uint32_
 	return x;
 }
 
-void seed_seq_from_delegate_delete(xobj_uint32 *ssfd)
+void seed_seq_from_delegate_delete(xobj_uint32 *x)
 {
-	delete reinterpret_cast<x::proxy::seed_seq_from_delegate<x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>, std::random_device>*>(ssfd->myobj);
-	// buffer
-	free(ssfd);
+	delete reinterpret_cast<x::proxy::seed_seq_from_delegate<x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>, std::random_device>*>(x->myobj);
+	if(x->buf && *(x->buf)){
+		free(*(x->buf));
+		*(x->buf) = NULL;
+		x->buf = NULL;
+	}
+	free(x);
 }
 
 void seed_seq_from_delegate_setcontext(xobj_uint32 *ssfd, void *context)
@@ -160,11 +175,15 @@ xobj_uint32 *rng_pcg32_new(xobj_uint32 *ssfd)
 	return x;
 }
 
-void rng_pcg32_delete(xobj_uint32 *r)
+void rng_pcg32_delete(xobj_uint32 *x)
 {
-	delete reinterpret_cast<pcg32*>(r->myobj);
-	// buffer
-	free(r);
+	delete reinterpret_cast<pcg32*>(x->myobj);
+	if(x->buf && *(x->buf)){
+		free(*(x->buf));
+		*(x->buf) = NULL;
+		x->buf = NULL;
+	}
+	free(x);
 }
 
 uint32_t rng_pcg32_min(void)
@@ -305,10 +324,18 @@ double dist_gamma_generate(void *context, xobj_uint32_callback callback, double 
 				x::proxy::rng_delegate<rng_delegate_uint32, uint32_t, 0, 0xFFFFFFFF> rng;
 				xobj_uint32 *x = (xobj_uint32 *)context;
 				rng.context(context);
+				uint32_t buf = 0;
+				rng.buffer(&buf);
+				rng.buffer_len(1);
 				x->buf = rng.buffer_address();
 				x->n = rng.buffer_len_address();
 				x->callback = callback;
-				return d(rng);
+				double f = d(rng);
+				rng.buffer(NULL);
+				rng.buffer_len(0);
+				x->buf = NULL;
+				x->n = 0;
+				return f;
 			}
 			break;
 		case 1:

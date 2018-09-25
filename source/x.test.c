@@ -27,7 +27,7 @@ SOFTWARE.
 
 void random_device_delegate_callback(xobj_uint32 *x, size_t n)
 {
-	if(*(x->n) != n || !(*(x->buf))){
+	if(*(x->n) < n || !(*(x->buf))){
 		*(x->buf) = (uint32_t *)realloc(*(x->buf), n * sizeof(uint32_t));
 		*(x->n) = n;
 	}
@@ -38,15 +38,16 @@ void random_device_delegate_callback(xobj_uint32 *x, size_t n)
 
 void seed_seq_from_delegate_callback(xobj_uint32 *x, size_t n)
 {
-	if(!(x->n) || !(x->buf) || *(x->n) != n){
+	if(!(x->n) || !(x->buf) || *(x->n) < n){
 		*(x->buf) = (uint32_t *)realloc(*(x->buf), n * sizeof(uint32_t));
 		*(x->n) = n;
 	}
 	seed_seq_from_generate(x, *(x->buf), (*(x->buf)) + n);
 }
 
-void rng_delegate_uint32_callback(xobj_uint32 *x, size_t n){
-	if(!(x->n) || !(x->buf) || *(x->n) != n){
+void rng_delegate_uint32_callback(xobj_uint32 *x, size_t n)
+{
+	if(!(x->n) || !(x->buf) || *(x->n) < n){
 		*(x->buf) = (uint32_t *)realloc(*(x->buf), n * sizeof(uint32_t));
 		*(x->n) = n;	
 	}
@@ -55,47 +56,11 @@ void rng_delegate_uint32_callback(xobj_uint32 *x, size_t n){
 	}
 }
 
-// int main(int argc, char **argv)
-// {
-// 	xobj_uint32 *rd = random_device_new(random_device_delegate_callback);
-// 	xobj_uint32 *ssf = seed_seq_from_new(seed_seq_from_delegate_callback);
-// 	seed_seq_from_setcontext(ssf, (void *)rd);
-// 	size_t buflen = 10;
-// 	uint32_t buf[buflen];
-// 	xobj_uint32 *ssfd = seed_seq_from_delegate_new();
-// 	seed_seq_from_delegate_setcontext(ssfd, ssf);
-// 	xobj_uint32 *r = rng_pcg32_new_seed_seq_from_delegate(ssfd);
-// 	for(int i = 0; i < 10; i++){
-// 		double f = dist_gamma_generate((void *)r, rng_delegate_uint32_callback, 2., 2., rng_pcg32_min(), rng_pcg32_max());
-// 		printf("f = %f\n", f);
-// 	}
-	
-// 	random_device_delete(rd);
-// 	seed_seq_from_delete(ssf);
-// 	seed_seq_from_delegate_delete(ssfd);
-// 	rng_pcg32_delete(r);
-
-// 	return 0;
-// }
-
 int main(int argc, char **argv)
 {
 	xobj_uint32 *rd = random_device_new();
-	// ^^^
-	// return new random_device;
-	
 	xobj_uint32 *ssf = seed_seq_from_new(rd, random_device_delegate_callback);
-	// ^^^
-	// ssf = new seed_ceq_from<random_device_delegate>
-	// ssf->context(rd);
-	// rd->callback = random_device_delegate_callback
-	
 	xobj_uint32 *ssfd = seed_seq_from_delegate_new(ssf, seed_seq_from_delegate_callback);
-	// ^^^
-	// ssfd = new seed_seq_from_delegate<std::random_device>
-	// ssfd->context(ssf)
-	// ssf->callback = seed_seq_from_delegate_callback
-	
 	xobj_uint32 *r = rng_pcg32_new(ssfd);
 
 	for(int i = 0; i < 10; i++){
@@ -107,4 +72,5 @@ int main(int argc, char **argv)
 	seed_seq_from_delete(ssf);
 	seed_seq_from_delegate_delete(ssfd);
 	rng_pcg32_delete(r);
+	//while(1){sleep(1);}
 }
