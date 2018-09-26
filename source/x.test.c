@@ -25,7 +25,7 @@ SOFTWARE.
 #include <inttypes.h>
 #include "x.capi.h"
 
-void random_device_delegate_callback(xobj_uint32 *x, size_t n)
+void random_device_delegate_callback(x_random_device *x, size_t n)
 {
 	if(*(x->n) < n || !(*(x->buf))){
 		*(x->buf) = (uint32_t *)realloc(*(x->buf), n * sizeof(uint32_t));
@@ -36,7 +36,7 @@ void random_device_delegate_callback(xobj_uint32 *x, size_t n)
 	}
 }
 
-void seed_seq_from_delegate_callback(xobj_uint32 *x, size_t n)
+void seed_seq_from_delegate_callback(x_seed_seq_from *x, size_t n)
 {
 	if(!(x->n) || !(x->buf) || *(x->n) < n){
 		*(x->buf) = (uint32_t *)realloc(*(x->buf), n * sizeof(uint32_t));
@@ -45,7 +45,7 @@ void seed_seq_from_delegate_callback(xobj_uint32 *x, size_t n)
 	seed_seq_from_generate(x, *(x->buf), (*(x->buf)) + n);
 }
 
-void rng_delegate_uint32_callback(xobj_uint32 *x, size_t n)
+void rng_delegate_uint32_callback(x_rng *x, size_t n)
 {
 	if(!(x->n) || !(x->buf) || *(x->n) < n){
 		*(x->buf) = (uint32_t *)realloc(*(x->buf), n * sizeof(uint32_t));
@@ -58,10 +58,10 @@ void rng_delegate_uint32_callback(xobj_uint32 *x, size_t n)
 
 int main(int argc, char **argv)
 {
-	xobj_uint32 *rd = random_device_new();
-	xobj_uint32 *ssf = seed_seq_from_new(rd, random_device_delegate_callback);
-	xobj_uint32 *ssfd = seed_seq_from_delegate_new(ssf, seed_seq_from_delegate_callback);
-	xobj_uint32 *r = rng_pcg32_new(ssfd);
+	x_random_device *rd = random_device_new();
+	x_seed_seq_from *ssf = seed_seq_from_new(rd, random_device_delegate_callback);
+	x_seed_seq_from_delegate *ssfd = seed_seq_from_delegate_new(ssf, seed_seq_from_delegate_callback);
+	x_rng *r = rng_pcg32_new(ssfd);
 
 	for(int i = 0; i < 10; i++){
 		//double f = dist_gamma_generate((void *)r, rng_delegate_uint32_callback, 2., 2., rng_pcg32_min(), rng_pcg32_max());
