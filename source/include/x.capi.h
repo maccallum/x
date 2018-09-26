@@ -82,7 +82,13 @@ uint32_t rng_pcg32_generate(xobj_uint32 *r);
 //typedef struct dist_gamma dist_gamma;
 //dist_gamma *dist_gamma_new(void);
 //void dist_gamma_delete(dist_gamma *d);
-double dist_gamma_generate(void *context, xobj_uint32_callback callback, double alpha, double beta, uint64_t rng_min, uint64_t rng_max);
+//double dist_gamma_generate(void *context, xobj_uint32_callback callback, double alpha, double beta, uint64_t rng_min, uint64_t rng_max);
+double dist_gamma_generate(xobj_uint32 *rng,
+			   xobj_uint32_callback rng_delegate_callback,
+			   uint64_t rng_min,
+			   uint64_t rng_max,
+			   double alpha,
+			   double beta);
 
 #ifdef __cplusplus
 }

@@ -280,86 +280,66 @@ template<> void x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 1, 0xFFFFF
 // 	delete reinterpret_cast<std::gamma_distribution<double>*>(d);
 // }
 
-double dist_gamma_generate(void *context, xobj_uint32_callback callback, double alpha, double beta, uint64_t rng_min, uint64_t rng_max)
+#define DIST_CALL(dist_ret_type, rng_type, min, max) \
+	{\
+		x::proxy::rng_delegate<rng_delegate_##rng_type, rng_type##_t, min, max> rngd;\
+		rngd.context(rng);\
+		rng_type##_t buf = 0;\
+		rngd.buffer(&buf);\
+		rngd.buffer_len(1);\
+		rng->buf = rngd.buffer_address();\
+		rng->n = rngd.buffer_len_address();\
+		rng->callback = rng_delegate_callback;\
+		dist_ret_type f = d(rngd);\
+		rngd.buffer(NULL);\
+		rngd.buffer_len(0);\
+		rng->buf = NULL;\
+		rng->n = 0;\
+		return f;\
+	}
+
+double dist_gamma_generate(xobj_uint32 *rng,
+			   xobj_uint32_callback rng_delegate_callback,
+			   uint64_t rng_min,
+			   uint64_t rng_max,
+			   double alpha,
+			   double beta)
+//double dist_gamma_generate(void *context, xobj_uint32_callback callback, double alpha, double beta, uint64_t rng_min, uint64_t rng_max)
 {
+	uint64_t buf = 0;
+
 	std::gamma_distribution d(alpha, beta);
 	if(rng_max == 0xFFFFFF){
 		switch(rng_min){
 		case 0:
-			{
-				x::proxy::rng_delegate<rng_delegate_uint32, uint32_t, 0, 0xFFFFFF> rng;
-				rng.context(context);
-				return d(rng);
-			}
-			break;
+			DIST_CALL(double, uint32, 0, 0xFFFFFF);
 		case 1:
-			{
-				x::proxy::rng_delegate<rng_delegate_uint32, uint32_t, 1, 0xFFFFFF> rng;
-				rng.context(context);
-				return d(rng);
-			}
-			break;
+			DIST_CALL(double, uint32, 1, 0xFFFFFF);
 		}
 	}else if(rng_max == 0x7FFFFFFE){
 		switch(rng_min){
 		case 0:
-			{
-				x::proxy::rng_delegate<rng_delegate_uint32, uint32_t, 0, 0x7FFFFFFE> rng;
-				rng.context(context);
-				return d(rng);
-			}
-			break;
+			DIST_CALL(double, uint32, 0, 0x7FFFFFFE);
 		case 1:
-			{
-				x::proxy::rng_delegate<rng_delegate_uint32, uint32_t, 1, 0x7FFFFFFE> rng;
-				rng.context(context);
-				return d(rng);
-			}
-			break;
+			DIST_CALL(double, uint32, 1, 0x7FFFFFFE);
 		}
 	}else if(rng_max == 0xFFFFFFFF){
 		switch(rng_min){
 		case 0:
-			{
-				x::proxy::rng_delegate<rng_delegate_uint32, uint32_t, 0, 0xFFFFFFFF> rng;
-				xobj_uint32 *x = (xobj_uint32 *)context;
-				rng.context(context);
-				uint32_t buf = 0;
-				rng.buffer(&buf);
-				rng.buffer_len(1);
-				x->buf = rng.buffer_address();
-				x->n = rng.buffer_len_address();
-				x->callback = callback;
-				double f = d(rng);
-				rng.buffer(NULL);
-				rng.buffer_len(0);
-				x->buf = NULL;
-				x->n = 0;
-				return f;
-			}
-			break;
+			DIST_CALL(double, uint32, 0, 0xFFFFFFFF);
 		case 1:
-			{
-				x::proxy::rng_delegate<rng_delegate_uint32, uint32_t, 1, 0xFFFFFFFF> rng;
-				rng.context(context);
-				return d(rng);
-			}
-			break;
+			DIST_CALL(double, uint32, 1, 0xFFFFFFFF);
 		}
 	}else if(rng_max == 0xFFFFFFFFFFFF){
 		switch(rng_min){
 		case 0:
 			{
-				x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 0, 0xFFFFFFFFFFFF> rng;
-				rng.context(context);
-				return d(rng);
+				return 0;
 			}
 			break;
 		case 1:
 			{
-				x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 1, 0xFFFFFFFFFFFF> rng;
-				rng.context(context);
-				return d(rng);
+				return 0;
 			}
 			break;
 		}
@@ -367,16 +347,12 @@ double dist_gamma_generate(void *context, xobj_uint32_callback callback, double 
 		switch(rng_min){
 		case 0:
 			{
-				x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 0, 0xFFFFFFFFFFFFFFFF> rng;
-				rng.context(context);
-				return d(rng);
+				return 0;
 			}
 			break;
 		case 1:
 			{
-				x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 1, 0xFFFFFFFFFFFFFFFF> rng;
-				rng.context(context);
-				return d(rng);
+				return 0;
 			}
 			break;
 		}

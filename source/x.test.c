@@ -64,7 +64,8 @@ int main(int argc, char **argv)
 	xobj_uint32 *r = rng_pcg32_new(ssfd);
 
 	for(int i = 0; i < 10; i++){
-		double f = dist_gamma_generate((void *)r, rng_delegate_uint32_callback, 2., 2., rng_pcg32_min(), rng_pcg32_max());
+		//double f = dist_gamma_generate((void *)r, rng_delegate_uint32_callback, 2., 2., rng_pcg32_min(), rng_pcg32_max());
+		double f = dist_gamma_generate(r, rng_delegate_uint32_callback, rng_pcg32_min(), rng_pcg32_max(), 2., 2.);
 		printf("f = %f\n", f);
 	}
 
