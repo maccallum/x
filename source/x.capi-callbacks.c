@@ -20,27 +20,35 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <inttypes.h>
 #include "x.capi.h"
-#include "x.capi-callbacks.h"
 
-int main(int argc, char **argv)
+void def_random_device_delegate_callback(x_random_device *x, size_t n)
 {
-	x_random_device *rd = random_device_new();
-	x_seed_seq_from *ssf = seed_seq_from_new(rd);
-	x_seed_seq_from_delegate *ssfd = seed_seq_from_delegate_new(ssf);
-	x_rng *r = rng_pcg32_new(ssfd);
-
-	for(int i = 0; i < 10; i++){
-		double f = dist_gamma_generate(r, rng_pcg32_min(), rng_pcg32_max(), 2., 2.);
-		printf("f = %f\n", f);
+	if(*(x->n) < n || !(*(x->buf))){
+		*(x->buf) = (uint32_t *)realloc(*(x->buf), n * sizeof(uint32_t));
+		*(x->n) = n;
 	}
+	for(size_t i = 0; i < n; i++){
+		(*(x->buf))[i] = random_device_generate(x);
+	}
+}
 
-	random_device_delete(rd);
-	seed_seq_from_delete(ssf);
-	seed_seq_from_delegate_delete(ssfd);
-	rng_pcg32_delete(r);
-	//while(1){sleep(1);}
+void def_seed_seq_from_delegate_callback(x_seed_seq_from *x, size_t n)
+{
+	if(!(x->n) || !(x->buf) || *(x->n) < n){
+		*(x->buf) = (uint32_t *)realloc(*(x->buf), n * sizeof(uint32_t));
+		*(x->n) = n;
+	}
+	seed_seq_from_generate(x, *(x->buf), (*(x->buf)) + n);
+}
+
+void def_rng_delegate_uint32_callback(x_rng *x, size_t n)
+{
+	if(!(x->n) || !(x->buf) || *(x->n) < n){
+		*(x->buf) = (uint32_t *)realloc(*(x->buf), n * sizeof(uint32_t));
+		*(x->n) = n;	
+	}
+	for(size_t i = 0; i < n; i++){
+		(*(x->buf))[i] = rng_pcg32_generate(x);
+	}
 }

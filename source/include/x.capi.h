@@ -27,6 +27,9 @@ SOFTWARE.
 extern "C" {
 #endif
 
+#include <stdlib.h>
+#include <inttypes.h>
+
 struct xobj_uint32;
 
 typedef void (*xobj_uint32_callback)(struct xobj_uint32*, size_t n);
@@ -58,7 +61,8 @@ unsigned int random_device_max(x_random_device *rd);
 // seed_seq_from
 //////////////////////////////////////////////////
 typedef struct seed_seq_from seed_seq_from;
-x_seed_seq_from *seed_seq_from_new(x_seed_seq_from *random_device, xobj_uint32_callback random_device_delegate_callback);
+x_seed_seq_from *seed_seq_from_new_with_callback(x_random_device *random_device, xobj_uint32_callback random_device_delegate_callback);
+x_seed_seq_from *seed_seq_from_new(x_random_device *random_device);
 void seed_seq_from_delete(x_seed_seq_from *ssf);
 void seed_seq_from_setcontext(x_seed_seq_from *ssf, void *context);
 void seed_seq_from_generate(x_seed_seq_from *_ssf, uint32_t *start, uint32_t *end);
@@ -67,7 +71,8 @@ void seed_seq_from_generate(x_seed_seq_from *_ssf, uint32_t *start, uint32_t *en
 // seed_seq_from_delegate
 //////////////////////////////////////////////////
 typedef struct seed_seq_from_delegate seed_seq_from_delegate;
-x_seed_seq_from_delegate *seed_seq_from_delegate_new(x_seed_seq_from *seed_seq_from, xobj_uint32_callback seed_seq_from_delegate_callback);
+x_seed_seq_from_delegate *seed_seq_from_delegate_new_with_callback(x_seed_seq_from *seed_seq_from, xobj_uint32_callback seed_seq_from_delegate_callback);
+x_seed_seq_from_delegate *seed_seq_from_delegate_new(x_seed_seq_from *seed_seq_from);
 void seed_seq_from_delegate_delete(x_seed_seq_from_delegate *ssfd);
 void seed_seq_from_delegate_setcontext(x_seed_seq_from_delegate *ssfd, void *context);
 
@@ -88,12 +93,17 @@ uint32_t rng_pcg32_generate(x_rng *r);
 //dist_gamma *dist_gamma_new(void);
 //void dist_gamma_delete(dist_gamma *d);
 //double dist_gamma_generate(void *context, xobj_uint32_callback callback, double alpha, double beta, uint64_t rng_min, uint64_t rng_max);
+double dist_gamma_generate_with_callback(x_rng *rng,
+					 xobj_uint32_callback rng_delegate_callback,
+					 uint64_t rng_min,
+					 uint64_t rng_max,
+					 double alpha,
+					 double beta);
 double dist_gamma_generate(x_rng *rng,
-			   xobj_uint32_callback rng_delegate_callback,
 			   uint64_t rng_min,
 			   uint64_t rng_max,
 			   double alpha,
-			   double beta);
+			   double beta); 
 
 #ifdef __cplusplus
 }

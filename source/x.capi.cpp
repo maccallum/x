@@ -25,6 +25,7 @@ SOFTWARE.
 #include "x.random.hpp"
 #include "x.proxy.hpp"
 #include "x.capi.h"
+#include "x.capi-callbacks.h"
 
 extern "C" {
 
@@ -87,7 +88,7 @@ template<> void x::proxy::random_device_delegate<x::proxy::delegate<uint32_t, ui
 	o->buf = NULL;
 }
 
-x_seed_seq_from *seed_seq_from_new(x_random_device *random_device, xobj_uint32_callback random_device_delegate_callback)
+x_seed_seq_from *seed_seq_from_new_with_callback(x_random_device *random_device, xobj_uint32_callback random_device_delegate_callback)
 {
 	x_seed_seq_from *x = (x_seed_seq_from *)calloc(1, sizeof(x_seed_seq_from));
 	x::proxy::seed_seq_from<x::proxy::random_device_delegate<x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>>> *o = new x::proxy::seed_seq_from<x::proxy::random_device_delegate<x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>>>();
@@ -96,6 +97,11 @@ x_seed_seq_from *seed_seq_from_new(x_random_device *random_device, xobj_uint32_c
 	o->context(random_device);
 	x->myobj = o;
 	return x;
+}
+
+x_seed_seq_from *seed_seq_from_new(x_random_device *random_device)
+{
+	return seed_seq_from_new_with_callback(random_device, def_random_device_delegate_callback);
 }
 
 void seed_seq_from_delete(x_seed_seq_from *x)
@@ -139,7 +145,7 @@ template <> void x::proxy::seed_seq_from_delegate<seed_seq_from_delegate_base, s
 	o->callback(o, n);
 }
 
-x_seed_seq_from_delegate *seed_seq_from_delegate_new(x_seed_seq_from *seed_seq_from, xobj_uint32_callback seed_seq_from_delegate_callback)
+x_seed_seq_from_delegate *seed_seq_from_delegate_new_with_callback(x_seed_seq_from *seed_seq_from, xobj_uint32_callback seed_seq_from_delegate_callback)
 {
 	x_seed_seq_from_delegate *x = (x_seed_seq_from_delegate *)calloc(1, sizeof(x_seed_seq_from_delegate));
 	x::proxy::seed_seq_from_delegate<x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>, std::random_device> *o = new x::proxy::seed_seq_from_delegate<x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>, std::random_device>();
@@ -147,6 +153,11 @@ x_seed_seq_from_delegate *seed_seq_from_delegate_new(x_seed_seq_from *seed_seq_f
 	o->context(seed_seq_from);
 	x->myobj = o;
 	return x;
+}
+
+x_seed_seq_from_delegate *seed_seq_from_delegate_new(x_seed_seq_from *seed_seq_from)
+{
+	return seed_seq_from_delegate_new_with_callback(seed_seq_from, def_seed_seq_from_delegate_callback);
 }
 
 void seed_seq_from_delegate_delete(x_seed_seq_from_delegate *x)
@@ -354,16 +365,25 @@ template<> void x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 1, 0xFFFFF
 		return 0;						\
 	}
 
+double dist_gamma_generate_with_callback(x_rng *rng,
+					 xobj_uint32_callback rng_delegate_callback,
+					 uint64_t rng_min,
+					 uint64_t rng_max,
+					 double alpha,
+					 double beta)
+{
+	uint64_t buf = 0;
+	x::random::gamma_distribution<double> d(alpha, beta);
+	DIST_CALL_SWITCH(double);
+}
+
 double dist_gamma_generate(x_rng *rng,
-			   xobj_uint32_callback rng_delegate_callback,
 			   uint64_t rng_min,
 			   uint64_t rng_max,
 			   double alpha,
 			   double beta)
 {
-	uint64_t buf = 0;
-	x::random::gamma_distribution<double> d(alpha, beta);
-	DIST_CALL_SWITCH(double);
+	return dist_gamma_generate_with_callback(rng, def_rng_delegate_uint32_callback, rng_min, rng_max, alpha, beta);
 }
 
 } // extern "C"

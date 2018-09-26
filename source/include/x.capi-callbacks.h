@@ -20,27 +20,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <inttypes.h>
-#include "x.capi.h"
-#include "x.capi-callbacks.h"
+#ifndef __X_CAPI_CALLBACKS_H__
+#define __X_CAPI_CALLBACKS_H__
 
-int main(int argc, char **argv)
-{
-	x_random_device *rd = random_device_new();
-	x_seed_seq_from *ssf = seed_seq_from_new(rd);
-	x_seed_seq_from_delegate *ssfd = seed_seq_from_delegate_new(ssf);
-	x_rng *r = rng_pcg32_new(ssfd);
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-	for(int i = 0; i < 10; i++){
-		double f = dist_gamma_generate(r, rng_pcg32_min(), rng_pcg32_max(), 2., 2.);
-		printf("f = %f\n", f);
-	}
+void def_random_device_delegate_callback(x_random_device *x, size_t n);
+void def_seed_seq_from_delegate_callback(x_seed_seq_from *x, size_t n);
+void def_rng_delegate_uint32_callback(x_rng *x, size_t n);
 
-	random_device_delete(rd);
-	seed_seq_from_delete(ssf);
-	seed_seq_from_delegate_delete(ssfd);
-	rng_pcg32_delete(r);
-	//while(1){sleep(1);}
+#ifdef __cplusplus
 }
+#endif
+
+#endif
