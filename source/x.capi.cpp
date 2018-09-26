@@ -22,6 +22,7 @@ SOFTWARE.
 
 #include <random>
 #include "pcg_random.hpp"
+#include "x.random.hpp"
 #include "x.proxy.hpp"
 #include "x.capi.h"
 
@@ -282,6 +283,7 @@ template<> void x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 1, 0xFFFFF
 
 #define DIST_CALL(dist_ret_type, rng_type, min, max) \
 	{\
+		int i = 0;\
 		x::proxy::rng_delegate<rng_delegate_##rng_type, rng_type##_t, min, max> rngd;\
 		rngd.context(rng);\
 		rng_type##_t buf = 0;\
@@ -298,67 +300,70 @@ template<> void x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 1, 0xFFFFF
 		return f;\
 	}
 
+#define DIST_CALL_SWITCH(dist_ret_type)					\
+	{								\
+		if(rng_max == 0xFFFFFF){				\
+			switch(rng_min){				\
+			case 0:						\
+				DIST_CALL(dist_ret_type, uint32, 0, 0xFFFFFF);	\
+			case 1:						\
+				DIST_CALL(dist_ret_type, uint32, 1, 0xFFFFFF);	\
+			}						\
+		}else if(rng_max == 0x7FFFFFFE){			\
+			switch(rng_min){				\
+			case 0:						\
+				DIST_CALL(dist_ret_type, uint32, 0, 0x7FFFFFFE); \
+			case 1:						\
+				DIST_CALL(dist_ret_type, uint32, 1, 0x7FFFFFFE); \
+			}						\
+		}else if(rng_max == 0xFFFFFFFF){			\
+			switch(rng_min){				\
+			case 0:						\
+				DIST_CALL(dist_ret_type, uint32, 0, 0xFFFFFFFF); \
+			case 1:						\
+				DIST_CALL(dist_ret_type, uint32, 1, 0xFFFFFFFF); \
+			}						\
+		}else if(rng_max == 0xFFFFFFFFFFFF){			\
+			switch(rng_min){				\
+			case 0:						\
+				{					\
+					return 0;			\
+				}					\
+				break;					\
+			case 1:						\
+				{					\
+					return 0;			\
+				}					\
+				break;					\
+			}						\
+		}else if(rng_max == 0xFFFFFFFFFFFFFFFF){		\
+			switch(rng_min){				\
+			case 0:						\
+				{					\
+					return 0;			\
+				}					\
+				break;					\
+			case 1:						\
+				{					\
+					return 0;			\
+				}					\
+				break;					\
+			}						\
+		}else{							\
+		}							\
+		return 0;						\
+	}
+
 double dist_gamma_generate(xobj_uint32 *rng,
 			   xobj_uint32_callback rng_delegate_callback,
 			   uint64_t rng_min,
 			   uint64_t rng_max,
 			   double alpha,
 			   double beta)
-//double dist_gamma_generate(void *context, xobj_uint32_callback callback, double alpha, double beta, uint64_t rng_min, uint64_t rng_max)
 {
 	uint64_t buf = 0;
-
-	std::gamma_distribution d(alpha, beta);
-	if(rng_max == 0xFFFFFF){
-		switch(rng_min){
-		case 0:
-			DIST_CALL(double, uint32, 0, 0xFFFFFF);
-		case 1:
-			DIST_CALL(double, uint32, 1, 0xFFFFFF);
-		}
-	}else if(rng_max == 0x7FFFFFFE){
-		switch(rng_min){
-		case 0:
-			DIST_CALL(double, uint32, 0, 0x7FFFFFFE);
-		case 1:
-			DIST_CALL(double, uint32, 1, 0x7FFFFFFE);
-		}
-	}else if(rng_max == 0xFFFFFFFF){
-		switch(rng_min){
-		case 0:
-			DIST_CALL(double, uint32, 0, 0xFFFFFFFF);
-		case 1:
-			DIST_CALL(double, uint32, 1, 0xFFFFFFFF);
-		}
-	}else if(rng_max == 0xFFFFFFFFFFFF){
-		switch(rng_min){
-		case 0:
-			{
-				return 0;
-			}
-			break;
-		case 1:
-			{
-				return 0;
-			}
-			break;
-		}
-	}else if(rng_max == 0xFFFFFFFFFFFFFFFF){
-		switch(rng_min){
-		case 0:
-			{
-				return 0;
-			}
-			break;
-		case 1:
-			{
-				return 0;
-			}
-			break;
-		}
-	}else{
-	}
-	return 0;
+	x::random::gamma_distribution<double> d(alpha, beta);
+	DIST_CALL_SWITCH(double);
 }
 
-}
+} // extern "C"
