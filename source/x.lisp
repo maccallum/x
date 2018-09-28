@@ -13,7 +13,7 @@
 	   (* (struct xobj_uint32)))
 #+sbcl (define-alien-routine random-device-delete
 	   void
-	 (* (struct xobj_uint32)))
+	 (obj (* (struct xobj_uint32))))
 #+sbcl (define-alien-routine random-device-generate
 	   unsigned-long
 	 (obj (* (struct xobj_uint32))))
@@ -64,7 +64,7 @@
 	 (seed-seq-from-delegate (* (struct xobj_uint32))))
 #+sbcl (define-alien-routine rng-pcg32-delete
 	   void
-	 (* (struct xobj_uint32)))
+	 (obj (* (struct xobj_uint32))))
 #+sbcl (define-alien-routine rng-pcg32-generate
 	   unsigned-long
 	 (obj (* (struct xobj_uint32))))
@@ -76,8 +76,28 @@
 ;;
 ;; distributions
 ;;
-(declaim (inline dist-gamma-generate))
+(declaim (inline dist-uniform-int-generate))
+#+sbcl (define-alien-routine dist-uniform-int-generate
+	   long
+	 (rng (* (struct xobj_uint32)))
+	 (rng-min unsigned-long)
+	 (rng-max unsigned-long)
+	 (a long)
+	 (b long))
 
+(declaim (inline dist-uniform-real-generate))
+#+sbcl (define-alien-routine ("dist_uniform_real_generate" alien-dist-uniform-real-generate)
+	   double
+	 (rng (* (struct xobj_uint32)))
+	 (rng-min unsigned-long)
+	 (rng-max unsigned-long)
+	 (a double)
+	 (b double))
+(defun dist-uniform-real-generate (rng rng-min rng-max a b)
+  (alien-dist-uniform-real-generate rng rng-min rng-max (coerce a 'double-float) (coerce b 'double-float)))
+
+
+(declaim (inline dist-gamma-generate))
 #+sbcl (define-alien-routine ("dist_gamma_generate" alien-dist-gamma-generate)
 	   double
 	 (rng (* (struct xobj_uint32)))
@@ -85,16 +105,23 @@
 	 (rng-max unsigned-long)
 	 (alpha double)
 	 (beta double))
-
 (defun dist-gamma-generate (rng rng-min rng-max alpha beta)
   (alien-dist-gamma-generate rng rng-min rng-max (coerce alpha 'double-float) (coerce beta 'double-float)))
 
+(defvar *defrng* 
+  (with-alien ((rd (* (struct xobj_uint32)) (random-device-new)))
+    (with-alien ((ssf (* (struct xobj_uint32)) (seed-seq-from-new rd)))
+      (with-alien ((ssfd (* (struct xobj_uint32)) (seed-seq-from-delegate-new ssf)))
+	(with-alien ((rng (* (struct xobj_uint32)) (rng-pcg32-new ssfd)))
+	  (seed-seq-from-delegate-delete ssfd)
+	  (seed-seq-from-delete ssf)
+	  (random-device-delete rd)
+	  rng)))))
+
 (defun test ()
-  (let ((rng (rng-pcg32-new (seed-seq-from-delegate-new (seed-seq-from-new (random-device-new))))))
-    (print (rng-pcg32-generate rng))
-    (dist-gamma-generate rng
+    (dist-uniform-int-generate *defrng*
 				(rng-pcg32-min)
 				(rng-pcg32-max)
-				2.0
-				2.0)))
+				0
+				100))
     

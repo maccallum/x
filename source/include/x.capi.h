@@ -93,17 +93,134 @@ uint32_t rng_pcg32_generate(x_rng *r);
 //dist_gamma *dist_gamma_new(void);
 //void dist_gamma_delete(dist_gamma *d);
 //double dist_gamma_generate(void *context, xobj_uint32_callback callback, double alpha, double beta, uint64_t rng_min, uint64_t rng_max);
-double dist_gamma_generate_with_callback(x_rng *rng,
-					 xobj_uint32_callback rng_delegate_callback,
-					 uint64_t rng_min,
-					 uint64_t rng_max,
-					 double alpha,
-					 double beta);
-double dist_gamma_generate(x_rng *rng,
-			   uint64_t rng_min,
-			   uint64_t rng_max,
-			   double alpha,
-			   double beta); 
+
+//////////////////////////////////////////////////
+// these macros produce declarations of the form
+// <dist_ret_type> dist_<dist>_generate_with_callback(x_rng *rng,
+//                                                    xobj_uint32_callback rng_delegate_callback,
+//                                                    uint64_t rng_min,
+//                                                    uint64_t rng_max,
+//						      <arg1_type> <arg1_name>,
+//						      ...);
+//
+// and
+//
+// <dist_ret_type> dist_<dist>_generate(x_rng *rng,
+//                                      uint64_t rng_min,
+//                                      uint64_t rng_max,
+//					<arg1_type> <arg1_name>,
+//					...);
+//
+// for example
+//
+// DIST_GENERATE_WITH_CALLBACK_DECL(gamma, double, double alpha, double beta);
+// DIST_GENERATE_DECL(gamma, double, double alpha, double beta);
+//
+// produce
+//
+// double dist_gamma_generate_with_callback(x_rng *rng,
+//					    xobj_uint32_callback rng_delegate_callback,
+//					    uint64_t rng_min,
+//					    uint64_t rng_max,
+//					    double alpha,
+//					    double beta);
+//
+// double dist_gamma_generate(x_rng *rng,
+//			      uint64_t rng_min,
+//			      uint64_t rng_max,
+//			      double alpha,
+//			      double beta);
+
+#define DIST_GENERATE_WITH_CALLBACK_DECL(dist, dist_ret_type, ...) \
+	dist_ret_type dist_##dist##_generate_with_callback(x_rng *rng,	\
+							   xobj_uint32_callback rng_delegate_callback, \
+							   uint64_t rng_min, \
+							   uint64_t rng_max, \
+							   __VA_ARGS__)
+
+#define DIST_GENERATE_DECL(dist, dist_ret_type, ...)\
+	dist_ret_type dist_##dist##_generate(x_rng *rng,		\
+					     uint64_t rng_min,		\
+					     uint64_t rng_max,		\
+					     __VA_ARGS__)
+
+DIST_GENERATE_WITH_CALLBACK_DECL(uniform_int, long, long a, long b);
+DIST_GENERATE_DECL(uniform_int, long, long a, long b);
+
+DIST_GENERATE_WITH_CALLBACK_DECL(uniform_real, double, double a, double b);
+DIST_GENERATE_DECL(uniform_real, double, double a, double b);
+
+
+DIST_GENERATE_WITH_CALLBACK_DECL(bernoulli, long, double p);
+DIST_GENERATE_DECL(bernoulli, long, double p);
+
+DIST_GENERATE_WITH_CALLBACK_DECL(binomial, long, long t, double p);
+DIST_GENERATE_DECL(binomial, long, long t, double p);
+
+DIST_GENERATE_WITH_CALLBACK_DECL(geometric, long, double p);
+DIST_GENERATE_DECL(geometric, long, double p);
+
+DIST_GENERATE_WITH_CALLBACK_DECL(negative_binomial, long, long t, double p);
+DIST_GENERATE_DECL(negative_binomial, long, long t, double p);
+
+// multinomial
+
+DIST_GENERATE_WITH_CALLBACK_DECL(hypergeometric, long, long n, long M, long N);
+DIST_GENERATE_DECL(hypergeometric, long, long n, long M, long N);
+
+// multivariate hypergeometric
+
+
+DIST_GENERATE_WITH_CALLBACK_DECL(poisson, long, double mean);
+DIST_GENERATE_DECL(poisson, long, double mean);
+
+DIST_GENERATE_WITH_CALLBACK_DECL(exponential, double, double lambda);
+DIST_GENERATE_DECL(exponential, double, double lambda);
+
+DIST_GENERATE_WITH_CALLBACK_DECL(gamma, double, double alpha, double beta);
+DIST_GENERATE_DECL(gamma, double, double alpha, double beta);
+
+DIST_GENERATE_WITH_CALLBACK_DECL(weibull, double, double a, double b);
+DIST_GENERATE_DECL(weibull, double, double a, double b);
+
+DIST_GENERATE_WITH_CALLBACK_DECL(extreme_value, double, double a, double b);
+DIST_GENERATE_DECL(extreme_value, double, double a, double b);
+
+// dirichlet
+
+DIST_GENERATE_WITH_CALLBACK_DECL(beta, double, double alpha, double beta);
+DIST_GENERATE_DECL(beta, double, double alpha, double beta);
+
+DIST_GENERATE_WITH_CALLBACK_DECL(kumaraswamy, double, double alpha, double beta);
+DIST_GENERATE_DECL(kumaraswamy, double, double alpha, double beta);
+
+DIST_GENERATE_WITH_CALLBACK_DECL(laplace, double, double mu, double sigma);
+DIST_GENERATE_DECL(laplace, double, double mu, double sigma);
+
+DIST_GENERATE_WITH_CALLBACK_DECL(erlang, double, long k, double lambda);
+DIST_GENERATE_DECL(erlang, double, double k, double lambda);
+
+
+DIST_GENERATE_WITH_CALLBACK_DECL(normal, double, double mean, double stddev);
+DIST_GENERATE_DECL(normal, double, double mean, double stddev);
+
+DIST_GENERATE_WITH_CALLBACK_DECL(lognormal, double, double m, double s);
+DIST_GENERATE_DECL(lognormal, double, double m, double s);
+
+DIST_GENERATE_WITH_CALLBACK_DECL(chi_squared, double, double n);
+DIST_GENERATE_DECL(chi_squared, double, double n);
+
+DIST_GENERATE_WITH_CALLBACK_DECL(cauchy, double, double a, double b);
+DIST_GENERATE_DECL(cauchy, double, double a, double b);
+
+DIST_GENERATE_WITH_CALLBACK_DECL(fisher_f, double, double m, double n);
+DIST_GENERATE_DECL(fisher_f, double, double m, double n);
+
+DIST_GENERATE_WITH_CALLBACK_DECL(student_t, double, double n);
+DIST_GENERATE_DECL(student_t, double, double n);
+
+DIST_GENERATE_WITH_CALLBACK_DECL(rayleigh, double, double sigma);
+DIST_GENERATE_DECL(rayleigh, double, double sigma);
 
 #ifdef __cplusplus
 }

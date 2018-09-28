@@ -29,6 +29,7 @@ namespace x
 		template <typename RealType = double>
 		using uniform_real_distribution = std::uniform_real_distribution<RealType>;
 
+		template <typename IntType = int>
 		using bernoulli_distribution = std::bernoulli_distribution;
 		template <typename IntType = int>
 		using binomial_distribution = std::binomial_distribution<IntType>;
@@ -1451,11 +1452,11 @@ namespace x
 			double param2(void){return b();}
 		};
 
-		class bernoulli_distribution_param_type : public bernoulli_distribution::param_type
+		class bernoulli_distribution_param_type : public bernoulli_distribution<int>::param_type
 		{
 		public:
-			bernoulli_distribution_param_type(void) : bernoulli_distribution::param_type() {}
-			bernoulli_distribution_param_type(double p1) : bernoulli_distribution::param_type(p1) {}
+			bernoulli_distribution_param_type(void) : bernoulli_distribution<int>::param_type() {}
+			bernoulli_distribution_param_type(double p1) : bernoulli_distribution<int>::param_type(p1) {}
 			double param1(void){return p();}
 		};
 		

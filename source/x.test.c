@@ -38,9 +38,10 @@ int main(int argc, char **argv)
 		printf("f = %f\n", f);
 	}
 
-	random_device_delete(rd);
+	seed_seq_from_delegate_delete(ssfd);        
 	seed_seq_from_delete(ssf);
-	seed_seq_from_delegate_delete(ssfd);
+
+	random_device_delete(rd);
 	rng_pcg32_delete(r);
-	//while(1){sleep(1);}
+	while(1){sleep(1);}
 }

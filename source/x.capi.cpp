@@ -48,11 +48,6 @@ x_random_device *random_device_new(void)
 void random_device_delete(x_random_device *x)
 {
 	delete reinterpret_cast<std::random_device*>(x->myobj);
-	if(x->buf && *(x->buf)){
-		free(*(x->buf));
-		*(x->buf) = NULL;
-		x->buf = NULL;
-	}
 	free(x);
 }
 
@@ -82,7 +77,6 @@ template<> void x::proxy::random_device_delegate<x::proxy::delegate<uint32_t, ui
 	x_random_device *o = (x_random_device *)x->context();
 	o->n = x->buffer_len_address();
 	o->buf = x->buffer_address();
-	//random_device_delegate_callback(x->context(), x->buffer_len(), x->buffer());
 	o->callback(o, i);
 	o->n = 0;
 	o->buf = NULL;
@@ -92,7 +86,6 @@ x_seed_seq_from *seed_seq_from_new_with_callback(x_random_device *random_device,
 {
 	x_seed_seq_from *x = (x_seed_seq_from *)calloc(1, sizeof(x_seed_seq_from));
 	x::proxy::seed_seq_from<x::proxy::random_device_delegate<x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>>> *o = new x::proxy::seed_seq_from<x::proxy::random_device_delegate<x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>>>();
-	
 	random_device->callback = random_device_delegate_callback;
 	o->context(random_device);
 	x->myobj = o;
@@ -106,13 +99,7 @@ x_seed_seq_from *seed_seq_from_new(x_random_device *random_device)
 
 void seed_seq_from_delete(x_seed_seq_from *x)
 {
-	delete reinterpret_cast<x::proxy::seed_seq_from<x::proxy::random_device_delegate<x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>>>*>(x->myobj);
-	if(x->buf && *(x->buf)){
-		free(*(x->buf));
-		*(x->buf) = NULL;
-
-		x->buf = NULL;
-	}
+	delete ((x::proxy::seed_seq_from<x::proxy::random_device_delegate<x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>>>*)(x->myobj));
 	free(x);
 }
 
@@ -143,6 +130,8 @@ template <> void x::proxy::seed_seq_from_delegate<seed_seq_from_delegate_base, s
 	o->n = x->buffer_len_address();
 	o->buf = x->buffer_address();
 	o->callback(o, n);
+	o->n = 0;
+	o->buf = NULL;
 }
 
 x_seed_seq_from_delegate *seed_seq_from_delegate_new_with_callback(x_seed_seq_from *seed_seq_from, xobj_uint32_callback seed_seq_from_delegate_callback)
@@ -162,11 +151,12 @@ x_seed_seq_from_delegate *seed_seq_from_delegate_new(x_seed_seq_from *seed_seq_f
 
 void seed_seq_from_delegate_delete(x_seed_seq_from_delegate *x)
 {
-	delete reinterpret_cast<x::proxy::seed_seq_from_delegate<x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>, std::random_device>*>(x->myobj);
-	if(x->buf && *(x->buf)){
-		free(*(x->buf));
-		*(x->buf) = NULL;
-		x->buf = NULL;
+	
+	if(x->myobj){
+		if(((x::proxy::seed_seq_from_delegate<x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>, std::random_device> *)(x->myobj))->buffer()){
+			free(((x::proxy::seed_seq_from_delegate<x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>, std::random_device> *)(x->myobj))->buffer());
+		}
+		delete reinterpret_cast<x::proxy::seed_seq_from_delegate<x::proxy::delegate<uint_least32_t, uint32_t, get_u32, set_u32>, std::random_device>*>(x->myobj);
 	}
 	free(x);
 }
@@ -190,11 +180,6 @@ x_rng *rng_pcg32_new(x_rng *ssfd)
 void rng_pcg32_delete(x_rng *x)
 {
 	delete reinterpret_cast<pcg32*>(x->myobj);
-	if(x->buf && *(x->buf)){
-		free(*(x->buf));
-		*(x->buf) = NULL;
-		x->buf = NULL;
-	}
 	free(x);
 }
 
@@ -281,17 +266,6 @@ template<> void x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 1, 0xFFFFF
 //////////////////////////////////////////////////
 // distributions
 //////////////////////////////////////////////////
-
-// dist_gamma *dist_gamma_new(void)
-// {
-// 	return reinterpret_cast<dist_gamma*>(new std::gamma_distribution<double>());
-// }
-
-// void dist_gamma_delete(dist_gamma *d)
-// {
-// 	delete reinterpret_cast<std::gamma_distribution<double>*>(d);
-// }
-
 #define DIST_CALL(dist_ret_type, rng_type, min, max) \
 	{\
 		int i = 0;\
@@ -365,25 +339,145 @@ template<> void x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 1, 0xFFFFF
 		return 0;						\
 	}
 
-double dist_gamma_generate_with_callback(x_rng *rng,
-					 xobj_uint32_callback rng_delegate_callback,
-					 uint64_t rng_min,
-					 uint64_t rng_max,
-					 double alpha,
-					 double beta)
-{
-	uint64_t buf = 0;
-	x::random::gamma_distribution<double> d(alpha, beta);
-	DIST_CALL_SWITCH(double);
-}
+#define DIST_GENERATE_WITH_CALLBACK_DEFN(dist, dist_ret_type, ...)\
+	{								\
+		using namespace x::random;				\
+		uint64_t buf = 0;					\
+		dist##_distribution<dist_ret_type> d(__VA_ARGS__);	\
+		DIST_CALL_SWITCH(dist_ret_type);			\
+	}
 
-double dist_gamma_generate(x_rng *rng,
-			   uint64_t rng_min,
-			   uint64_t rng_max,
-			   double alpha,
-			   double beta)
-{
-	return dist_gamma_generate_with_callback(rng, def_rng_delegate_uint32_callback, rng_min, rng_max, alpha, beta);
-}
+#define DIST_GENERATE_DEFN(dist, dist_ret_type, ...)\
+	{								\
+		return dist_##dist##_generate_with_callback(rng, def_rng_delegate_uint32_callback, rng_min, rng_max, __VA_ARGS__); \
+	}
+
+DIST_GENERATE_WITH_CALLBACK_DECL(uniform_int, long, long a, long b)
+DIST_GENERATE_WITH_CALLBACK_DEFN(uniform_int, long, a, b)
+DIST_GENERATE_DECL(uniform_int, long, long a, long b)
+DIST_GENERATE_DEFN(uniform_int, long, a, b)
+
+DIST_GENERATE_WITH_CALLBACK_DECL(uniform_real, double, double a, double b)
+DIST_GENERATE_WITH_CALLBACK_DEFN(uniform_real, double, a, b)
+DIST_GENERATE_DECL(uniform_real, double, double a, double b)
+DIST_GENERATE_DEFN(uniform_real, double, a, b)
+
+
+DIST_GENERATE_WITH_CALLBACK_DECL(bernoulli, long, double p)
+DIST_GENERATE_WITH_CALLBACK_DEFN(bernoulli, long, p)
+DIST_GENERATE_DECL(bernoulli, long, double p)
+DIST_GENERATE_DEFN(bernoulli, long, p)
+
+DIST_GENERATE_WITH_CALLBACK_DECL(binomial, long, long t, double p)
+DIST_GENERATE_WITH_CALLBACK_DEFN(binomial, long, t, p)
+DIST_GENERATE_DECL(binomial, long, long t, double p)
+DIST_GENERATE_DEFN(binomial, long, t, p)
+
+DIST_GENERATE_WITH_CALLBACK_DECL(geometric, long, double p)
+DIST_GENERATE_WITH_CALLBACK_DEFN(geometric, long, p)
+DIST_GENERATE_DECL(geometric, long, double p)
+DIST_GENERATE_DEFN(geometric, long, p)
+
+DIST_GENERATE_WITH_CALLBACK_DECL(negative_binomial, long, long t, double p)
+DIST_GENERATE_WITH_CALLBACK_DEFN(negative_binomial, long, t, p)
+DIST_GENERATE_DECL(negative_binomial, long, long t, double p)
+DIST_GENERATE_DEFN(negative_binomial, long, t, p)
+
+// multinomial
+
+DIST_GENERATE_WITH_CALLBACK_DECL(hypergeometric, long, long n, long M, long N)
+DIST_GENERATE_WITH_CALLBACK_DEFN(hypergeometric, long, n, M, N)
+DIST_GENERATE_DECL(hypergeometric, long, long n, long M, long N)
+DIST_GENERATE_DEFN(hypergeometric, long, n, M, N)
+
+// multivariate hypergeometric
+
+
+DIST_GENERATE_WITH_CALLBACK_DECL(poisson, long, double mean)
+DIST_GENERATE_WITH_CALLBACK_DEFN(poisson, long, mean)
+DIST_GENERATE_DECL(poisson, long, double mean)
+DIST_GENERATE_DEFN(poisson, long, mean)
+
+DIST_GENERATE_WITH_CALLBACK_DECL(exponential, double, double lambda)
+DIST_GENERATE_WITH_CALLBACK_DEFN(exponential, double, lambda)
+DIST_GENERATE_DECL(exponential, double, double lambda)
+DIST_GENERATE_DEFN(exponential, double, lambda)
+
+DIST_GENERATE_WITH_CALLBACK_DECL(gamma, double, double alpha, double beta)
+DIST_GENERATE_WITH_CALLBACK_DEFN(gamma, double, alpha, beta)
+DIST_GENERATE_DECL(gamma, double, double alpha, double beta)
+DIST_GENERATE_DEFN(gamma, double, alpha, beta)
+
+DIST_GENERATE_WITH_CALLBACK_DECL(weibull, double, double a, double b)
+DIST_GENERATE_WITH_CALLBACK_DEFN(weibull, double, a, b)
+DIST_GENERATE_DECL(weibull, double, double a, double b)
+DIST_GENERATE_DEFN(weibull, double, a, b)
+
+DIST_GENERATE_WITH_CALLBACK_DECL(extreme_value, double, double a, double b)
+DIST_GENERATE_WITH_CALLBACK_DEFN(extreme_value, double, a, b)
+DIST_GENERATE_DECL(extreme_value, double, double a, double b)
+DIST_GENERATE_DEFN(extreme_value, double, a, b)
+
+// dirichlet
+
+DIST_GENERATE_WITH_CALLBACK_DECL(beta, double, double alpha, double beta)
+DIST_GENERATE_WITH_CALLBACK_DEFN(beta, double, alpha, beta)
+DIST_GENERATE_DECL(beta, double, double alpha, double beta)
+DIST_GENERATE_DEFN(beta, double, alpha, beta)
+
+DIST_GENERATE_WITH_CALLBACK_DECL(kumaraswamy, double, double alpha, double beta)
+DIST_GENERATE_WITH_CALLBACK_DEFN(kumaraswamy, double, alpha, beta)
+DIST_GENERATE_DECL(kumaraswamy, double, double alpha, double beta)
+DIST_GENERATE_DEFN(kumaraswamy, double, alpha, beta)
+
+DIST_GENERATE_WITH_CALLBACK_DECL(laplace, double, double mu, double sigma)
+DIST_GENERATE_WITH_CALLBACK_DEFN(laplace, double, mu, sigma)
+DIST_GENERATE_DECL(laplace, double, double mu, double sigma)
+DIST_GENERATE_DEFN(laplace, double, mu, sigma)
+
+DIST_GENERATE_WITH_CALLBACK_DECL(erlang, double, long k, double lambda)
+DIST_GENERATE_WITH_CALLBACK_DEFN(erlang, double, k, lambda)
+DIST_GENERATE_DECL(erlang, double, double k, double lambda)
+DIST_GENERATE_DEFN(erlang, double, k, lambda)
+
+
+DIST_GENERATE_WITH_CALLBACK_DECL(normal, double, double mean, double stddev)
+DIST_GENERATE_WITH_CALLBACK_DEFN(normal, double, mean, stddev)
+DIST_GENERATE_DECL(normal, double, double mean, double stddev)
+DIST_GENERATE_DEFN(normal, double, mean, stddev)
+
+DIST_GENERATE_WITH_CALLBACK_DECL(lognormal, double, double m, double s)
+DIST_GENERATE_WITH_CALLBACK_DEFN(lognormal, double, m, s)
+DIST_GENERATE_DECL(lognormal, double, double m, double s)
+DIST_GENERATE_DEFN(lognormal, double, m, s)
+
+DIST_GENERATE_WITH_CALLBACK_DECL(chi_squared, double, double n)
+DIST_GENERATE_WITH_CALLBACK_DEFN(chi_squared, double, n)
+DIST_GENERATE_DECL(chi_squared, double, double n)
+DIST_GENERATE_DEFN(chi_squared, double, n)
+
+DIST_GENERATE_WITH_CALLBACK_DECL(cauchy, double, double a, double b)
+DIST_GENERATE_WITH_CALLBACK_DEFN(cauchy, double, a, b)
+DIST_GENERATE_DECL(cauchy, double, double a, double b)
+DIST_GENERATE_DEFN(cauchy, double, a, b)
+
+DIST_GENERATE_WITH_CALLBACK_DECL(fisher_f, double, double m, double n)
+DIST_GENERATE_WITH_CALLBACK_DEFN(fisher_f, double, m, n)
+DIST_GENERATE_DECL(fisher_f, double, double m, double n)
+DIST_GENERATE_DEFN(fisher_f, double, m, n)
+
+DIST_GENERATE_WITH_CALLBACK_DECL(student_t, double, double n)
+DIST_GENERATE_WITH_CALLBACK_DEFN(student_t, double, n)
+DIST_GENERATE_DECL(student_t, double, double n)
+DIST_GENERATE_DEFN(student_t, double, n)
+
+DIST_GENERATE_WITH_CALLBACK_DECL(rayleigh, double, double sigma)
+DIST_GENERATE_WITH_CALLBACK_DEFN(rayleigh, double, sigma)
+DIST_GENERATE_DECL(rayleigh, double, double sigma)
+DIST_GENERATE_DEFN(rayleigh, double, sigma)
+
+// discrete
+// piecewise constant
+// piecewise linear
 
 } // extern "C"
