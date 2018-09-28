@@ -72,6 +72,10 @@
 	   unsigned-long)
 #+sbcl (define-alien-routine rng-pcg32-max
 	   unsigned-long)
+#+sbcl (define-alien-routine rng-min
+	   unsigned-long-long)
+#+sbcl (define-alien-routine rng-max
+	   unsigned-long-long)
 
 ;;
 ;; distributions
@@ -80,8 +84,6 @@
 #+sbcl (define-alien-routine dist-uniform-int-generate
 	   long
 	 (rng (* (struct xobj_uint32)))
-	 (rng-min unsigned-long)
-	 (rng-max unsigned-long)
 	 (a long)
 	 (b long))
 
@@ -89,24 +91,39 @@
 #+sbcl (define-alien-routine ("dist_uniform_real_generate" alien-dist-uniform-real-generate)
 	   double
 	 (rng (* (struct xobj_uint32)))
-	 (rng-min unsigned-long)
-	 (rng-max unsigned-long)
 	 (a double)
 	 (b double))
-(defun dist-uniform-real-generate (rng rng-min rng-max a b)
-  (alien-dist-uniform-real-generate rng rng-min rng-max (coerce a 'double-float) (coerce b 'double-float)))
+(defun dist-uniform-real-generate (rng a b)
+  (alien-dist-uniform-real-generate rng (coerce a 'double-float) (coerce b 'double-float)))
+
+
+
+(declaim (inline dist-bernoulli-generate))
+#+sbcl (define-alien-routine ("dist_bernoulli_generate" alien-dist-bernoulli-generate)
+	   long
+	 (rng (* (struct xobj_uint32)))
+	 (p double))
+(defun dist-bernoulli-generate (rng p)
+  (alien-dist-bernoulli-generate rng (coerce p 'double-float)))
+
+(declaim (inline dist-binomial-generate))
+#+sbcl (define-alien-routine ("dist_binomial_generate" alien-dist-binomial-generate)
+	   long
+	 (rng (* (struct xobj_uint32)))
+	 (n long)
+	 (p double))
+(defun dist-binomial-generate (rng n p)
+  (alien-dist-binomial-generate rng n (coerce p 'double-float)))
 
 
 (declaim (inline dist-gamma-generate))
 #+sbcl (define-alien-routine ("dist_gamma_generate" alien-dist-gamma-generate)
 	   double
 	 (rng (* (struct xobj_uint32)))
-	 (rng-min unsigned-long)
-	 (rng-max unsigned-long)
 	 (alpha double)
 	 (beta double))
-(defun dist-gamma-generate (rng rng-min rng-max alpha beta)
-  (alien-dist-gamma-generate rng rng-min rng-max (coerce alpha 'double-float) (coerce beta 'double-float)))
+(defun dist-gamma-generate (rng alpha beta)
+  (alien-dist-gamma-generate rng (coerce alpha 'double-float) (coerce beta 'double-float)))
 
 (defvar *defrng* 
   (with-alien ((rd (* (struct xobj_uint32)) (random-device-new)))
@@ -120,8 +137,6 @@
 
 (defun test ()
     (dist-uniform-int-generate *defrng*
-				(rng-pcg32-min)
-				(rng-pcg32-max)
 				0
 				100))
     

@@ -42,13 +42,13 @@ void def_seed_seq_from_delegate_callback(x_seed_seq_from *x, size_t n)
 	seed_seq_from_generate(x, *(x->buf), (*(x->buf)) + n);
 }
 
-void def_rng_delegate_uint32_callback(x_rng *x, size_t n)
+void def_rng_delegate_uint32_callback(xobj_uint32 *x, size_t n)
 {
 	if(!(x->n) || !(x->buf) || *(x->n) < n){
 		*(x->buf) = (uint32_t *)realloc(*(x->buf), n * sizeof(uint32_t));
 		*(x->n) = n;	
 	}
 	for(size_t i = 0; i < n; i++){
-		(*(x->buf))[i] = rng_pcg32_generate(x);
+		(*(x->buf))[i] = rng_pcg32_generate((x_rng *)x);
 	}
 }

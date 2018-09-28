@@ -45,7 +45,12 @@ typedef struct xobj_uint32
 typedef xobj_uint32 x_random_device;
 typedef xobj_uint32 x_seed_seq_from;
 typedef xobj_uint32 x_seed_seq_from_delegate;
-typedef xobj_uint32 x_rng;
+typedef struct x_rng
+{
+	xobj_uint32 obj;
+	uint64_t min;
+	uint64_t max;
+} x_rng;
 
 //////////////////////////////////////////////////
 // random_device
@@ -80,11 +85,13 @@ void seed_seq_from_delegate_setcontext(x_seed_seq_from_delegate *ssfd, void *con
 // rngs
 //////////////////////////////////////////////////
 typedef struct rng_pcg32 rng_pcg32;
-x_rng *rng_pcg32_new(x_rng *ssfd);
+x_rng *rng_pcg32_new(x_seed_seq_from_delegate *ssfd);
 void rng_pcg32_delete(x_rng *r);
 uint32_t rng_pcg32_min(void);
 uint32_t rng_pcg32_max(void);
 uint32_t rng_pcg32_generate(x_rng *r);
+uint64_t rng_min(x_rng *r);
+uint64_t rng_max(x_rng *r);
 
 //////////////////////////////////////////////////
 // distributions
@@ -134,14 +141,10 @@ uint32_t rng_pcg32_generate(x_rng *r);
 #define DIST_GENERATE_WITH_CALLBACK_DECL(dist, dist_ret_type, ...) \
 	dist_ret_type dist_##dist##_generate_with_callback(x_rng *rng,	\
 							   xobj_uint32_callback rng_delegate_callback, \
-							   uint64_t rng_min, \
-							   uint64_t rng_max, \
 							   __VA_ARGS__)
 
 #define DIST_GENERATE_DECL(dist, dist_ret_type, ...)\
 	dist_ret_type dist_##dist##_generate(x_rng *rng,		\
-					     uint64_t rng_min,		\
-					     uint64_t rng_max,		\
 					     __VA_ARGS__)
 
 DIST_GENERATE_WITH_CALLBACK_DECL(uniform_int, long, long a, long b);

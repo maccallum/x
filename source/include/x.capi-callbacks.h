@@ -29,7 +29,7 @@ extern "C" {
 
 void def_random_device_delegate_callback(x_random_device *x, size_t n);
 void def_seed_seq_from_delegate_callback(x_seed_seq_from *x, size_t n);
-void def_rng_delegate_uint32_callback(x_rng *x, size_t n);
+void def_rng_delegate_uint32_callback(xobj_uint32 *x, size_t n);
 
 #ifdef __cplusplus
 }

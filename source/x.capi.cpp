@@ -170,16 +170,18 @@ void seed_seq_from_delegate_setcontext(x_seed_seq_from_delegate *ssfd, void *con
 // rngs
 //////////////////////////////////////////////////
 
-x_rng *rng_pcg32_new(x_rng *ssfd)
+x_rng *rng_pcg32_new(x_seed_seq_from_delegate *ssfd)
 {
 	x_rng *x = (x_rng *)calloc(1, sizeof(x_rng));
-	x->myobj = new pcg32(*reinterpret_cast<x::proxy::seed_seq_from_delegate<seed_seq_from_delegate_base, std::random_device>*>(ssfd->myobj));
+	x->obj.myobj = new pcg32(*reinterpret_cast<x::proxy::seed_seq_from_delegate<seed_seq_from_delegate_base, std::random_device>*>(ssfd->myobj));
+	x->min = pcg32::min();
+	x->max = pcg32::max();
 	return x;
 }
 
 void rng_pcg32_delete(x_rng *x)
 {
-	delete reinterpret_cast<pcg32*>(x->myobj);
+	delete reinterpret_cast<pcg32*>(x->obj.myobj);
 	free(x);
 }
 
@@ -195,7 +197,23 @@ uint32_t rng_pcg32_max(void)
 
 uint32_t rng_pcg32_generate(x_rng *r)
 {
-	return reinterpret_cast<pcg32*>(r->myobj)->operator()();
+	return reinterpret_cast<pcg32*>(r->obj.myobj)->operator()();
+}
+
+uint64_t rng_min(x_rng *r)
+{
+	if(r){
+		return r->min;
+	}
+	return 0;
+}
+
+uint64_t rng_max(x_rng *r)
+{
+	if(r){
+		return r->max;
+	}
+	return 0;
 }
 
 //////////////////////////////////////////////////
@@ -209,37 +227,37 @@ extern void rng_delegate_uint32_callback(void *context, size_t n);
 
 template<> void x::proxy::rng_delegate<rng_delegate_uint32, uint32_t, 0, 0xFFFFFF>::callback(rng_delegate_uint32 *o, size_t n)
 {
-	x_rng *x = (x_rng *)(o->context());
+	xobj_uint32 *x = (xobj_uint32 *)(o->context());
 	x->callback(x, n);
 }
 
 template<> void x::proxy::rng_delegate<rng_delegate_uint32, uint32_t, 1, 0xFFFFFF>::callback(rng_delegate_uint32 *o, size_t n)
 {
-	x_rng *x = (x_rng *)(o->context());
+	xobj_uint32 *x = (xobj_uint32 *)(o->context());
 	x->callback(x, n);
 }
 
 template<> void x::proxy::rng_delegate<rng_delegate_uint32, uint32_t, 0, 0x7FFFFFFE>::callback(rng_delegate_uint32 *o, size_t n)
 {
-	x_rng *x = (x_rng *)(o->context());
+	xobj_uint32 *x = (xobj_uint32 *)(o->context());
 	x->callback(x, n);
 }
 
 template<> void x::proxy::rng_delegate<rng_delegate_uint32, uint32_t, 1, 0x7FFFFFFE>::callback(rng_delegate_uint32 *o, size_t n)
 {
-	x_rng *x = (x_rng *)(o->context());
+	xobj_uint32 *x = (xobj_uint32 *)(o->context());
 	x->callback(x, n);
 }
 
 template<> void x::proxy::rng_delegate<rng_delegate_uint32, uint32_t, 0, 0xFFFFFFFF>::callback(rng_delegate_uint32 *o, size_t n)
 {
-	x_rng *x = (x_rng *)(o->context());
+	xobj_uint32 *x = (xobj_uint32 *)(o->context());
 	x->callback(x, n);
 }
 
 template<> void x::proxy::rng_delegate<rng_delegate_uint32, uint32_t, 1, 0xFFFFFFFF>::callback(rng_delegate_uint32 *o, size_t n)
 {
-	x_rng *x = (x_rng *)(o->context());
+	xobj_uint32 *x = (xobj_uint32 *)(o->context());
 	x->callback(x, n);
 }
 
@@ -274,14 +292,14 @@ template<> void x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 1, 0xFFFFF
 		rng_type##_t buf = 0;\
 		rngd.buffer(&buf);\
 		rngd.buffer_len(1);\
-		rng->buf = rngd.buffer_address();\
-		rng->n = rngd.buffer_len_address();\
-		rng->callback = rng_delegate_callback;\
+		rng->obj.buf = rngd.buffer_address();\
+		rng->obj.n = rngd.buffer_len_address();\
+		rng->obj.callback = rng_delegate_callback;\
 		dist_ret_type f = d(rngd);\
 		rngd.buffer(NULL);\
 		rngd.buffer_len(0);\
-		rng->buf = NULL;\
-		rng->n = 0;\
+		rng->obj.buf = NULL;\
+		rng->obj.n = 0;\
 		return f;\
 	}
 
@@ -342,6 +360,8 @@ template<> void x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 1, 0xFFFFF
 #define DIST_GENERATE_WITH_CALLBACK_DEFN(dist, dist_ret_type, ...)\
 	{								\
 		using namespace x::random;				\
+		uint64_t rng_min = rng->min;				\
+		uint64_t rng_max = rng->max;				\
 		uint64_t buf = 0;					\
 		dist##_distribution<dist_ret_type> d(__VA_ARGS__);	\
 		DIST_CALL_SWITCH(dist_ret_type);			\
@@ -349,7 +369,7 @@ template<> void x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 1, 0xFFFFF
 
 #define DIST_GENERATE_DEFN(dist, dist_ret_type, ...)\
 	{								\
-		return dist_##dist##_generate_with_callback(rng, def_rng_delegate_uint32_callback, rng_min, rng_max, __VA_ARGS__); \
+		return dist_##dist##_generate_with_callback(rng, def_rng_delegate_uint32_callback, /*rng_min, rng_max, */__VA_ARGS__); \
 	}
 
 DIST_GENERATE_WITH_CALLBACK_DECL(uniform_int, long, long a, long b)

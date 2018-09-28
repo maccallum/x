@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 	x_rng *r = rng_pcg32_new(ssfd);
 
 	for(int i = 0; i < 10; i++){
-		double f = dist_gamma_generate(r, rng_pcg32_min(), rng_pcg32_max(), 2., 2.);
+		double f = dist_gamma_generate(r, 2., 2.);
 		printf("f = %f\n", f);
 	}
 
