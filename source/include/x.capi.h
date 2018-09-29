@@ -233,11 +233,11 @@ DIST_GENERATE_DECL(rayleigh, double, double sigma);
 long dist_discrete_generate_with_callback(x_rng *rng, xobj_uint32_callback rng_delegate_callback, long buflen, double *probabilities);
 long dist_discrete_generate(x_rng *rng, long buflen, double *probabilities);
 
-long dist_piecewise_constant_generate_with_callback(x_rng *rng, xobj_uint32_callback rng_delegate_callback, long intervals_len, double *intervals, double *densities);
-long dist_piecewise_constant_generate(x_rng *rng, long intervals_len, double *intervals, double *densities);
+double dist_piecewise_constant_generate_with_callback(x_rng *rng, xobj_uint32_callback rng_delegate_callback, long intervals_len, double *intervals, double *densities);
+double dist_piecewise_constant_generate(x_rng *rng, long intervals_len, double *intervals, double *densities);
 
-long dist_piecewise_linear_generate_with_callback(x_rng *rng, xobj_uint32_callback rng_delegate_callback, long intervals_len, double *intervals, double *densities);
-long dist_piecewise_linear_generate(x_rng *rng, long intervals_len, double *intervals, double *densities);
+double dist_piecewise_linear_generate_with_callback(x_rng *rng, xobj_uint32_callback rng_delegate_callback, long intervals_len, double *intervals, double *densities);
+double dist_piecewise_linear_generate(x_rng *rng, long intervals_len, double *intervals, double *densities);
 
 #ifdef __cplusplus
 }

@@ -576,34 +576,34 @@ long dist_discrete_generate(x_rng *rng, long buflen, double *probabilities)
 }
 
 // piecewise constant
-long dist_piecewise_constant_generate_with_callback(x_rng *rng, xobj_uint32_callback rng_delegate_callback, long intervals_len, double *intervals, double *densities)
+double dist_piecewise_constant_generate_with_callback(x_rng *rng, xobj_uint32_callback rng_delegate_callback, long intervals_len, double *intervals, double *densities)
 {
 	uint64_t rng_min = rng->min;
 	uint64_t rng_max = rng->max;
 	uint64_t buf = 0;
-	x::random::piecewise_constant_distribution<long> d(intervals, intervals + intervals_len, densities);
-	long ret;
+	x::random::piecewise_constant_distribution<double> d(intervals, intervals + intervals_len, densities);
+	double ret;
 	DIST_CALL_SWITCH(ret);
 	return ret;
 }
 
-long dist_piecewise_constant_generate(x_rng *rng, long intervals_len, double *intervals, double *densities)
+double dist_piecewise_constant_generate(x_rng *rng, long intervals_len, double *intervals, double *densities)
 {
 	return dist_piecewise_constant_generate_with_callback(rng, def_rng_delegate_uint32_callback, intervals_len, intervals, densities);
 }
 
-long dist_piecewise_linear_generate_with_callback(x_rng *rng, xobj_uint32_callback rng_delegate_callback, long intervals_len, double *intervals, double *densities)
+double dist_piecewise_linear_generate_with_callback(x_rng *rng, xobj_uint32_callback rng_delegate_callback, long intervals_len, double *intervals, double *densities)
 {
 	uint64_t rng_min = rng->min;
 	uint64_t rng_max = rng->max;
 	uint64_t buf = 0;
-	x::random::piecewise_linear_distribution<long> d(intervals, intervals + intervals_len, densities);
-	long ret;
+	x::random::piecewise_linear_distribution<double> d(intervals, intervals + intervals_len, densities);
+	double ret;
 	DIST_CALL_SWITCH(ret);
 	return ret;
 }
 
-long dist_piecewise_linear_generate(x_rng *rng, long intervals_len, double *intervals, double *densities)
+double dist_piecewise_linear_generate(x_rng *rng, long intervals_len, double *intervals, double *densities)
 {
 	return dist_piecewise_linear_generate_with_callback(rng, def_rng_delegate_uint32_callback, intervals_len, intervals, densities);
 }

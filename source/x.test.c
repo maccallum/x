@@ -38,18 +38,23 @@ int main(int argc, char **argv)
 		printf("f = %f\n", f);
 	}
 
+	int N = 10;
 	for(int i = 0; i < 10; i++){
-		double p[10] = {1., 1., 1., 1., 1., 1., 1., 1., 1., 1.};
-		long buf[10];
-		dist_multinomial_generate(r, 5, 10, dist_dirichlet_generate(r, 10, p, p), buf);
-		for(int j = 0; j < 10; j++){
-			printf("%f ", p[j]);
+		double p[] = {1., 1., 1.};
+		double dbuf[sizeof(p) / sizeof(double)];
+		long mbuf[sizeof(p) / sizeof(double)];
+		dist_multinomial_generate(r, N, sizeof(p) / sizeof(double), dist_dirichlet_generate(r, sizeof(p) / sizeof(double), p, dbuf), mbuf);
+		long sum = 0;
+		for(int j = 0; j < sizeof(p) / sizeof(double); j++){
+			printf("%f ", dbuf[j]);
 		}
 		printf("\n");
-		for(int j = 0; j < 10; j++){
-			printf("%-8ld ", buf[j]);
+		for(int j = 0; j < sizeof(p) / sizeof(double); j++){
+			sum += mbuf[j];
+			printf("%-8ld ", mbuf[j]);
 		}
 		printf("\n");
+		printf("total = %ld\n", sum);
 	}
 
 	seed_seq_from_delegate_delete(ssfd);        
@@ -57,5 +62,5 @@ int main(int argc, char **argv)
 
 	random_device_delete(rd);
 	rng_pcg32_delete(r);
-	while(1){sleep(1);}
+	//while(1){sleep(1);}
 }
