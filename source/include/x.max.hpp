@@ -1008,7 +1008,7 @@ namespace x
 		}
 
 		// Related to Bernoulli trials
-		using dist_bernoulli_obj = dist_obj<x::random::bernoulli_distribution, bool, false, param_type_1<x::random::bernoulli_distribution_param_type, bool, p_str, double, false>>;
+		using dist_bernoulli_obj = dist_obj<x::random::bernoulli_distribution<long>, long, false, param_type_1<x::random::bernoulli_distribution_param_type, long, p_str, double, false>>;
 		dist_bernoulli_obj _dist_bernoulli_obj;
 		t_object *dist_bernoulli_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
