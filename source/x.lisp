@@ -1,7 +1,7 @@
 ;;(cl:defpackage "TEST-C-CALL" (:use "CL" "SB-ALIEN" "SB-C-CALL"))
 ;;(cl:in-package "TEST-C-CALL")
 
-(load-shared-object "libx.dylib")
+(load-shared-object "lib/libx.dylib")
 
 (declaim (inline random-device-new))
 (declaim (inline random-device-delete))
