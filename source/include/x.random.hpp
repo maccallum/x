@@ -686,7 +686,11 @@ namespace x
 			}
 			for(long i = 0; i < pn; i++){
 				if(p[i] > 0){
-					binomial_distribution<_IntType> d(n - n_sum, p[i] / (norm - p_sum));
+					double pp = 1.0;
+					if(i < pn - 1){
+						pp = p[i] / (norm - p_sum);
+					}
+					binomial_distribution<_IntType> d(n - n_sum, pp);
 					r[i] = d(__g);
 				}
 				n_sum += r[i];

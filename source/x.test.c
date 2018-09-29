@@ -54,7 +54,7 @@ int main(int argc, char **argv)
 			printf("%-8ld ", mbuf[j]);
 		}
 		printf("\n");
-		printf("total = %ld\n", sum);
+		printf("------------------------------total = %ld\n", sum);
 	}
 
 	seed_seq_from_delegate_delete(ssfd);        
