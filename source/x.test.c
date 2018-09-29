@@ -38,6 +38,20 @@ int main(int argc, char **argv)
 		printf("f = %f\n", f);
 	}
 
+	for(int i = 0; i < 10; i++){
+		double p[10] = {1., 1., 1., 1., 1., 1., 1., 1., 1., 1.};
+		long buf[10];
+		dist_multinomial_generate(r, 5, 10, dist_dirichlet_generate(r, 10, p, p), buf);
+		for(int j = 0; j < 10; j++){
+			printf("%f ", p[j]);
+		}
+		printf("\n");
+		for(int j = 0; j < 10; j++){
+			printf("%-8ld ", buf[j]);
+		}
+		printf("\n");
+	}
+
 	seed_seq_from_delegate_delete(ssfd);        
 	seed_seq_from_delete(ssf);
 

@@ -284,7 +284,7 @@ template<> void x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 1, 0xFFFFF
 //////////////////////////////////////////////////
 // distributions
 //////////////////////////////////////////////////
-#define DIST_CALL(dist_ret_type, rng_type, min, max) \
+#define DIST_CALL(dist_ret_name, rng_type, min, max)	\
 	{\
 		int i = 0;\
 		x::proxy::rng_delegate<rng_delegate_##rng_type, rng_type##_t, min, max> rngd;\
@@ -295,47 +295,48 @@ template<> void x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 1, 0xFFFFF
 		rng->obj.buf = rngd.buffer_address();\
 		rng->obj.n = rngd.buffer_len_address();\
 		rng->obj.callback = rng_delegate_callback;\
-		dist_ret_type f = d(rngd);\
+		dist_ret_name = d(rngd);\
 		rngd.buffer(NULL);\
 		rngd.buffer_len(0);\
 		rng->obj.buf = NULL;\
 		rng->obj.n = 0;\
-		return f;\
 	}
 
-#define DIST_CALL_SWITCH(dist_ret_type)					\
+#define DIST_CALL_SWITCH(dist_ret_name)					\
 	{								\
 		if(rng_max == 0xFFFFFF){				\
 			switch(rng_min){				\
 			case 0:						\
-				DIST_CALL(dist_ret_type, uint32, 0, 0xFFFFFF);	\
+				DIST_CALL(dist_ret_name, uint32, 0, 0xFFFFFF); \
 			case 1:						\
-				DIST_CALL(dist_ret_type, uint32, 1, 0xFFFFFF);	\
+				DIST_CALL(dist_ret_name, uint32, 1, 0xFFFFFF); \
 			}						\
 		}else if(rng_max == 0x7FFFFFFE){			\
 			switch(rng_min){				\
 			case 0:						\
-				DIST_CALL(dist_ret_type, uint32, 0, 0x7FFFFFFE); \
+				DIST_CALL(dist_ret_name, uint32, 0, 0x7FFFFFFE); \
+				break;					\
 			case 1:						\
-				DIST_CALL(dist_ret_type, uint32, 1, 0x7FFFFFFE); \
+				DIST_CALL(dist_ret_name, uint32, 1, 0x7FFFFFFE); \
+				break;					\
 			}						\
 		}else if(rng_max == 0xFFFFFFFF){			\
 			switch(rng_min){				\
 			case 0:						\
-				DIST_CALL(dist_ret_type, uint32, 0, 0xFFFFFFFF); \
+				DIST_CALL(dist_ret_name, uint32, 0, 0xFFFFFFFF); \
+				break;					\
 			case 1:						\
-				DIST_CALL(dist_ret_type, uint32, 1, 0xFFFFFFFF); \
+				DIST_CALL(dist_ret_name, uint32, 1, 0xFFFFFFFF); \
+				break;					\
 			}						\
 		}else if(rng_max == 0xFFFFFFFFFFFF){			\
 			switch(rng_min){				\
 			case 0:						\
 				{					\
-					return 0;			\
 				}					\
 				break;					\
 			case 1:						\
 				{					\
-					return 0;			\
 				}					\
 				break;					\
 			}						\
@@ -343,18 +344,15 @@ template<> void x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 1, 0xFFFFF
 			switch(rng_min){				\
 			case 0:						\
 				{					\
-					return 0;			\
 				}					\
 				break;					\
 			case 1:						\
 				{					\
-					return 0;			\
 				}					\
 				break;					\
 			}						\
 		}else{							\
 		}							\
-		return 0;						\
 	}
 
 #define DIST_GENERATE_WITH_CALLBACK_DEFN(dist, dist_ret_type, ...)\
@@ -364,7 +362,9 @@ template<> void x::proxy::rng_delegate<rng_delegate_uint64, uint64_t, 1, 0xFFFFF
 		uint64_t rng_max = rng->max;				\
 		uint64_t buf = 0;					\
 		dist##_distribution<dist_ret_type> d(__VA_ARGS__);	\
-		DIST_CALL_SWITCH(dist_ret_type);			\
+		dist_ret_type ret;					\
+		DIST_CALL_SWITCH(ret);			\
+		return ret;						\
 	}
 
 #define DIST_GENERATE_DEFN(dist, dist_ret_type, ...)\
@@ -403,15 +403,56 @@ DIST_GENERATE_WITH_CALLBACK_DEFN(negative_binomial, long, t, p)
 DIST_GENERATE_DECL(negative_binomial, long, long t, double p)
 DIST_GENERATE_DEFN(negative_binomial, long, t, p)
 
-// multinomial
+long *dist_multinomial_generate_with_callback(x_rng *rng, xobj_uint32_callback rng_delegate_callback, long n, long buflen, double *p, long *res)
+{
+	uint64_t rng_min = rng->min;
+	uint64_t rng_max = rng->max;
+	uint64_t buf = 0;
+	x::random::multinomial_distribution<long> d(n, p, p + buflen);
+	std::vector<long> ret;
+	DIST_CALL_SWITCH(ret);
+	long _n = buflen;
+	if(ret.size() < _n){
+		_n = ret.size();
+	}
+	for(long i = 0; i < _n; i++){
+		res[i] = ret[i];
+	}
+	return res;
+}
+
+long *dist_multinomial_generate(x_rng *rng, long n, long buflen, double *p, long *res)
+{
+	return dist_multinomial_generate_with_callback(rng, def_rng_delegate_uint32_callback, n, buflen, p, res);
+}
 
 DIST_GENERATE_WITH_CALLBACK_DECL(hypergeometric, long, long n, long M, long N)
 DIST_GENERATE_WITH_CALLBACK_DEFN(hypergeometric, long, n, M, N)
 DIST_GENERATE_DECL(hypergeometric, long, long n, long M, long N)
 DIST_GENERATE_DEFN(hypergeometric, long, n, M, N)
 
-// multivariate hypergeometric
+long *dist_multivariate_hypergeometric_generate_with_callback(x_rng *rng, xobj_uint32_callback rng_delegate_callback, long n, long buflen, long *M, long *res)
+{
+	uint64_t rng_min = rng->min;
+	uint64_t rng_max = rng->max;
+	uint64_t buf = 0;
+	x::random::multivariate_hypergeometric_distribution<long> d(n, M, M + buflen);
+	std::vector<long> ret;
+	DIST_CALL_SWITCH(ret);
+	long _n = buflen;
+	if(ret.size() < _n){
+		_n = ret.size();
+	}
+	for(long i = 0; i < _n; i++){
+		res[i] = ret[i];
+	}
+	return res;
+}
 
+long *dist_multivariate_hypergeometric_generate(x_rng *rng, long n, long buflen, long *M, long *res)
+{
+	return dist_multivariate_hypergeometric_generate_with_callback(rng, def_rng_delegate_uint32_callback, n, buflen, M, res);
+}
 
 DIST_GENERATE_WITH_CALLBACK_DECL(poisson, long, double mean)
 DIST_GENERATE_WITH_CALLBACK_DEFN(poisson, long, mean)
@@ -438,7 +479,28 @@ DIST_GENERATE_WITH_CALLBACK_DEFN(extreme_value, double, a, b)
 DIST_GENERATE_DECL(extreme_value, double, double a, double b)
 DIST_GENERATE_DEFN(extreme_value, double, a, b)
 
-// dirichlet
+double *dist_dirichlet_generate_with_callback(x_rng *rng, xobj_uint32_callback rng_delegate_callback, long buflen, double *alpha, double *res)
+{
+	uint64_t rng_min = rng->min;
+	uint64_t rng_max = rng->max;
+	uint64_t buf = 0;
+	x::random::dirichlet_distribution<double> d(alpha, alpha + buflen);
+	std::vector<double> ret;
+	DIST_CALL_SWITCH(ret);
+	long _n = buflen;
+	if(ret.size() < _n){
+		_n = ret.size();
+	}
+	for(long i = 0; i < _n; i++){
+		res[i] = ret[i];
+	}
+	return res;
+}
+
+double *dist_dirichlet_generate(x_rng *rng, long buflen, double *alpha, double *res)
+{
+	return dist_dirichlet_generate_with_callback(rng, def_rng_delegate_uint32_callback, buflen, alpha, res);
+}
 
 DIST_GENERATE_WITH_CALLBACK_DECL(beta, double, double alpha, double beta)
 DIST_GENERATE_WITH_CALLBACK_DEFN(beta, double, alpha, beta)
@@ -496,8 +558,56 @@ DIST_GENERATE_WITH_CALLBACK_DEFN(rayleigh, double, sigma)
 DIST_GENERATE_DECL(rayleigh, double, double sigma)
 DIST_GENERATE_DEFN(rayleigh, double, sigma)
 
-// discrete
+
+long dist_discrete_generate_with_callback(x_rng *rng, xobj_uint32_callback rng_delegate_callback, long buflen, double *probabilities)
+{
+	uint64_t rng_min = rng->min;
+	uint64_t rng_max = rng->max;
+	uint64_t buf = 0;
+	x::random::discrete_distribution<long> d(probabilities, probabilities + buflen);
+	long ret;
+	DIST_CALL_SWITCH(ret);
+	return ret;
+}
+
+long dist_discrete_generate(x_rng *rng, long buflen, double *probabilities)
+{
+	return dist_discrete_generate_with_callback(rng, def_rng_delegate_uint32_callback, buflen, probabilities);
+}
+
 // piecewise constant
+long dist_piecewise_constant_generate_with_callback(x_rng *rng, xobj_uint32_callback rng_delegate_callback, long intervals_len, double *intervals, double *densities)
+{
+	uint64_t rng_min = rng->min;
+	uint64_t rng_max = rng->max;
+	uint64_t buf = 0;
+	x::random::piecewise_constant_distribution<long> d(intervals, intervals + intervals_len, densities);
+	long ret;
+	DIST_CALL_SWITCH(ret);
+	return ret;
+}
+
+long dist_piecewise_constant_generate(x_rng *rng, long intervals_len, double *intervals, double *densities)
+{
+	return dist_piecewise_constant_generate_with_callback(rng, def_rng_delegate_uint32_callback, intervals_len, intervals, densities);
+}
+
+long dist_piecewise_linear_generate_with_callback(x_rng *rng, xobj_uint32_callback rng_delegate_callback, long intervals_len, double *intervals, double *densities)
+{
+	uint64_t rng_min = rng->min;
+	uint64_t rng_max = rng->max;
+	uint64_t buf = 0;
+	x::random::piecewise_linear_distribution<long> d(intervals, intervals + intervals_len, densities);
+	long ret;
+	DIST_CALL_SWITCH(ret);
+	return ret;
+}
+
+long dist_piecewise_linear_generate(x_rng *rng, long intervals_len, double *intervals, double *densities)
+{
+	return dist_piecewise_linear_generate_with_callback(rng, def_rng_delegate_uint32_callback, intervals_len, intervals, densities);
+}
+
 // piecewise linear
 
 } // extern "C"

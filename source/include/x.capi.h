@@ -167,12 +167,15 @@ DIST_GENERATE_WITH_CALLBACK_DECL(negative_binomial, long, long t, double p);
 DIST_GENERATE_DECL(negative_binomial, long, long t, double p);
 
 // multinomial
+long *dist_multinomial_generate_with_callback(x_rng *rng, xobj_uint32_callback rng_delegate_callback, long n, long buflen, double *p, long *res);
+long *dist_multinomial_generate(x_rng *rng, long n, long buflen, double *p, long *res);
 
 DIST_GENERATE_WITH_CALLBACK_DECL(hypergeometric, long, long n, long M, long N);
 DIST_GENERATE_DECL(hypergeometric, long, long n, long M, long N);
 
 // multivariate hypergeometric
-
+long *dist_multivariate_hypergeometric_generate_with_callback(x_rng *rng, xobj_uint32_callback rng_delegate_callback, long n, long buflen, long *M, long *res);
+long *dist_multivariate_hypergeometric_generate(x_rng *rng, long n, long buflen, long *M, long *res);
 
 DIST_GENERATE_WITH_CALLBACK_DECL(poisson, long, double mean);
 DIST_GENERATE_DECL(poisson, long, double mean);
@@ -190,6 +193,8 @@ DIST_GENERATE_WITH_CALLBACK_DECL(extreme_value, double, double a, double b);
 DIST_GENERATE_DECL(extreme_value, double, double a, double b);
 
 // dirichlet
+double *dist_dirichlet_generate_with_callback(x_rng *rng, xobj_uint32_callback rng_delegate_callback, long buflen, double *alpha, double *res);
+double *dist_dirichlet_generate(x_rng *rng, long buflen, double *alpha, double *res);
 
 DIST_GENERATE_WITH_CALLBACK_DECL(beta, double, double alpha, double beta);
 DIST_GENERATE_DECL(beta, double, double alpha, double beta);
@@ -224,6 +229,15 @@ DIST_GENERATE_DECL(student_t, double, double n);
 
 DIST_GENERATE_WITH_CALLBACK_DECL(rayleigh, double, double sigma);
 DIST_GENERATE_DECL(rayleigh, double, double sigma);
+
+long dist_discrete_generate_with_callback(x_rng *rng, xobj_uint32_callback rng_delegate_callback, long buflen, double *probabilities);
+long dist_discrete_generate(x_rng *rng, long buflen, double *probabilities);
+
+long dist_piecewise_constant_generate_with_callback(x_rng *rng, xobj_uint32_callback rng_delegate_callback, long intervals_len, double *intervals, double *densities);
+long dist_piecewise_constant_generate(x_rng *rng, long intervals_len, double *intervals, double *densities);
+
+long dist_piecewise_linear_generate_with_callback(x_rng *rng, xobj_uint32_callback rng_delegate_callback, long intervals_len, double *intervals, double *densities);
+long dist_piecewise_linear_generate(x_rng *rng, long intervals_len, double *intervals, double *densities);
 
 #ifdef __cplusplus
 }
