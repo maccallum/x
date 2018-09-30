@@ -31,6 +31,7 @@ typedef struct _xdelegate{
 	t_pxobject ob;
 	void *outlet_delegation;
 	double *value;
+	int delegate_did_return;
 	long nvars;
 	long nsamples_to_wait;
 	long nsamples_waited;
@@ -73,7 +74,11 @@ void xdelegate_process_perform64(t_xdelegate *x, t_object *dsp64, double **ins, 
 	if(rem <= 0){	
 		for(long i = 0; i < vectorsize; i++){
 			if(x->nsamples_to_wait - x->nsamples_waited <= 0){
-				while((x->nsamples_to_wait = xdelegate_getvalue(x)) == 0.){}
+				while((x->nsamples_to_wait = xdelegate_getvalue(x)) == 0.){
+					if(!(x->delegate_did_return)){
+						break;
+					}
+				}
 				outs[0][i] = 0;
 				x->nsamples_waited = 1;
 			}else{
@@ -94,6 +99,7 @@ void xdelegate_dsp64(t_xdelegate *x, t_object *dsp64, short *count, double sampl
 	memset(x->value, 0, x->nvars * sizeof(double));
 	x->nsamples_to_wait = 0;
 	x->nsamples_waited = 0;
+	x->delegate_did_return = 0;
 	if(x->mode == gensym("dist")){
 		object_method(dsp64, gensym("dsp_add64"), x, xdelegate_dist_perform64, 0, NULL);
 	}else if(x->mode == gensym("process.counting")){
@@ -103,6 +109,7 @@ void xdelegate_dsp64(t_xdelegate *x, t_object *dsp64, short *count, double sampl
 
 void xdelegate_list(t_xdelegate *x, t_symbol *msg, short argc, t_atom *argv)
 {
+	x->delegate_did_return = 1;
 	long n = x->nvars;
 	if(argc < n){
 		n = argc;
@@ -114,6 +121,7 @@ void xdelegate_list(t_xdelegate *x, t_symbol *msg, short argc, t_atom *argv)
 
 void xdelegate_float(t_xdelegate *x, double f)
 {
+	x->delegate_did_return = 1;
 	x->value[0] = f;
 }
 
