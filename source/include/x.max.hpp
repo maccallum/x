@@ -129,6 +129,29 @@ namespace x
 			{
 			}
 
+			static void msg_assist(t_maxobj *x, void *b, long io, long index, char *s)
+			{
+				switch (io) {
+				case 1:
+					switch (index) {
+					case 0:
+						strncpy_zero(s, "generate", 512);
+						break;
+					}
+					break;
+				case 2:
+					switch(index){
+					case 0:
+						strncpy_zero(s, "Main outlet", 512);
+						break;
+					case 1:
+						strncpy_zero(s, "Delegation outlet", 512);
+						break;
+					}
+					break;
+				}
+			}
+
 			int main(void)
 			{
 				class_addmethod(_c, (method)msg_anything, "anything", A_GIMME, 0);
@@ -136,6 +159,7 @@ namespace x
 				class_addmethod(_c, (method)msg_int, "int", A_LONG, 0);
 				class_addmethod(_c, (method)msg_float, "float", A_FLOAT, 0);
 				class_addmethod(_c, (method)msg_bang, "bang", 0);
+				class_addmethod(_c, (method)msg_assist, "assist", A_CANT, 0);
 				return 0;
 			}
 
