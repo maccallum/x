@@ -2,13 +2,14 @@
 	"patcher" : 	{
 		"fileversion" : 1,
 		"appversion" : 		{
-			"major" : 7,
-			"minor" : 3,
-			"revision" : 5,
+			"major" : 8,
+			"minor" : 0,
+			"revision" : 1,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
+		"classnamespace" : "box",
 		"rect" : [ 396.0, 79.0, 992.0, 1056.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -47,14 +48,15 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 7,
-							"minor" : 3,
-							"revision" : 5,
+							"major" : 8,
+							"minor" : 0,
+							"revision" : 1,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
-						"rect" : [ 396.0, 105.0, 992.0, 1030.0 ],
+						"classnamespace" : "box",
+						"rect" : [ 0.0, 26.0, 992.0, 1030.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -93,7 +95,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 131.0, 608.0, 150.0, 88.0 ],
-									"presentation_rect" : [ 130.0, 608.0, 0.0, 0.0 ],
 									"text" : "/alpha : 1.,\n/beta : 1.,\n/min : 0.,\n/max : 1.,\n/x : 0.195728"
 								}
 
@@ -105,8 +106,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "bang" ],
-									"patching_rect" : [ 131.0, 471.0, 24.0, 24.0 ],
-									"style" : ""
+									"parameter_enable" : 0,
+									"patching_rect" : [ 131.0, 471.0, 24.0, 24.0 ]
 								}
 
 							}
@@ -118,7 +119,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 213.0, 545.0, 89.0, 20.0 ],
-									"style" : "",
 									"text" : "x.variable beta"
 								}
 
@@ -131,7 +131,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "FullPacket", "" ],
 									"patching_rect" : [ 131.0, 509.0, 101.0, 20.0 ],
-									"style" : "",
 									"text" : "o.x.variable.shim"
 								}
 
@@ -164,7 +163,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 355.0, 235.0, 150.0, 88.0 ],
-									"presentation_rect" : [ 355.0, 234.0, 0.0, 0.0 ],
 									"text" : "/foo/alpha : 2.,\n/foo/beta : 3.,\n/foo/min : 0.,\n/foo/max : inf,\n/foo/x : 2.17911"
 								}
 
@@ -176,9 +174,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "bang" ],
-									"patching_rect" : [ 355.0, 143.0, 24.0, 24.0 ],
-									"presentation_rect" : [ 355.0, 142.0, 0.0, 0.0 ],
-									"style" : ""
+									"parameter_enable" : 0,
+									"patching_rect" : [ 355.0, 143.0, 24.0, 24.0 ]
 								}
 
 							}
@@ -190,7 +187,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "FullPacket" ],
 									"patching_rect" : [ 355.0, 198.0, 184.0, 20.0 ],
-									"style" : "",
 									"text" : "o.x.variable gamma @prefix /foo"
 								}
 
@@ -217,8 +213,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "bang" ],
-									"patching_rect" : [ 131.0, 143.0, 24.0, 24.0 ],
-									"style" : ""
+									"parameter_enable" : 0,
+									"patching_rect" : [ 131.0, 143.0, 24.0, 24.0 ]
 								}
 
 							}
@@ -230,7 +226,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "FullPacket" ],
 									"patching_rect" : [ 131.0, 198.0, 115.0, 20.0 ],
-									"style" : "",
 									"text" : "o.x.variable gamma"
 								}
 
@@ -308,11 +303,9 @@
 						"description" : "",
 						"digest" : "",
 						"globalpatchername" : "",
-						"style" : "",
 						"tags" : ""
 					}
 ,
-					"style" : "",
 					"text" : "p odot"
 				}
 
@@ -326,13 +319,14 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 7,
-							"minor" : 3,
-							"revision" : 5,
+							"major" : 8,
+							"minor" : 0,
+							"revision" : 1,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
+						"classnamespace" : "box",
 						"rect" : [ 0.0, 26.0, 992.0, 1030.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -370,8 +364,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 255.5, 102.0, 50.0, 20.0 ],
-									"style" : ""
+									"patching_rect" : [ 255.5, 102.0, 50.0, 20.0 ]
 								}
 
 							}
@@ -383,7 +376,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 255.5, 130.0, 51.0, 20.0 ],
-									"style" : "",
 									"text" : "beta $1"
 								}
 
@@ -397,8 +389,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 191.5, 102.0, 50.0, 20.0 ],
-									"style" : ""
+									"patching_rect" : [ 191.5, 102.0, 50.0, 20.0 ]
 								}
 
 							}
@@ -410,7 +401,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 191.5, 130.0, 57.0, 20.0 ],
-									"style" : "",
 									"text" : "alpha $1"
 								}
 
@@ -424,8 +414,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 116.0, 212.0, 50.0, 20.0 ],
-									"style" : ""
+									"patching_rect" : [ 116.0, 212.0, 50.0, 20.0 ]
 								}
 
 							}
@@ -437,7 +426,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 116.0, 102.0, 58.0, 20.0 ],
-									"style" : "",
 									"text" : "generate"
 								}
 
@@ -450,7 +438,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 116.0, 161.0, 209.0, 20.0 ],
-									"style" : "",
 									"text" : "x.variable gamma @alpha 3 @beta 4"
 								}
 
@@ -462,7 +449,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 116.0, 63.0, 592.0, 18.0 ],
-									"style" : "",
 									"text" : "x.variable brings together a distribution, the default rng, and everything needed to seed it."
 								}
 
@@ -518,11 +504,9 @@
 						"description" : "",
 						"digest" : "",
 						"globalpatchername" : "",
-						"style" : "",
 						"tags" : ""
 					}
 ,
-					"style" : "",
 					"text" : "p Variables"
 				}
 
@@ -536,13 +520,14 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 7,
-							"minor" : 3,
-							"revision" : 5,
+							"major" : 8,
+							"minor" : 0,
+							"revision" : 1,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
+						"classnamespace" : "box",
 						"rect" : [ 0.0, 26.0, 992.0, 1030.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -578,7 +563,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 322.0, 665.0, 150.0, 18.0 ],
-									"style" : "",
 									"text" : "3"
 								}
 
@@ -590,7 +574,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 322.0, 454.0, 150.0, 18.0 ],
-									"style" : "",
 									"text" : "2"
 								}
 
@@ -602,7 +585,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 320.0, 244.0, 150.0, 18.0 ],
-									"style" : "",
 									"text" : "1"
 								}
 
@@ -614,7 +596,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 407.0, 743.0, 93.0, 20.0 ],
-									"style" : "",
 									"text" : "print @popup 1"
 								}
 
@@ -627,7 +608,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 249.0, 780.0, 121.0, 20.0 ],
-									"style" : "",
 									"text" : "4285521571"
 								}
 
@@ -640,7 +620,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 249.0, 665.0, 58.0, 20.0 ],
-									"style" : "",
 									"text" : "generate"
 								}
 
@@ -653,7 +632,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 465.0, 811.0, 102.0, 20.0 ],
-									"style" : "",
 									"text" : "x.random_device"
 								}
 
@@ -666,7 +644,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 381.0, 780.0, 103.0, 20.0 ],
-									"style" : "",
 									"text" : "x.seed_seq_from"
 								}
 
@@ -679,7 +656,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 249.0, 714.0, 107.0, 20.0 ],
-									"style" : "",
 									"text" : "x.generator.pcg32"
 								}
 
@@ -691,7 +667,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 407.0, 532.0, 93.0, 20.0 ],
-									"style" : "",
 									"text" : "print @popup 1"
 								}
 
@@ -704,7 +679,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 249.0, 569.0, 121.0, 20.0 ],
-									"style" : "",
 									"text" : "2653865424"
 								}
 
@@ -717,7 +691,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 249.0, 454.0, 58.0, 20.0 ],
-									"style" : "",
 									"text" : "generate"
 								}
 
@@ -730,7 +703,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 465.0, 600.0, 102.0, 20.0 ],
-									"style" : "",
 									"text" : "x.random_device"
 								}
 
@@ -743,7 +715,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 381.0, 569.0, 103.0, 20.0 ],
-									"style" : "",
 									"text" : "x.seed_seq_from"
 								}
 
@@ -756,7 +727,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 249.0, 503.0, 151.0, 20.0 ],
-									"style" : "",
 									"text" : "x.global x.generator.pcg32"
 								}
 
@@ -769,7 +739,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 143.0, 134.0, 497.0, 66.0 ],
-									"style" : "",
 									"text" : "To see this in action, quit Max and reopen this patch before anything else. Click the first generate message and note that x.global sends a generate message out of its right outlet. Now click the other generate message---x.global simply produces a random value since the global x.generator.pcg32 has already been seeded. Now click the third generate message. Since that x.generator.pcg32 is not global, it will produce a generate message to get a seed."
 								}
 
@@ -781,7 +750,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 407.0, 322.0, 93.0, 20.0 ],
-									"style" : "",
 									"text" : "print @popup 1"
 								}
 
@@ -794,7 +762,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 249.0, 359.0, 121.0, 20.0 ],
-									"style" : "",
 									"text" : "1596218008"
 								}
 
@@ -807,7 +774,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 249.0, 244.0, 58.0, 20.0 ],
-									"style" : "",
 									"text" : "generate"
 								}
 
@@ -820,7 +786,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 465.0, 390.0, 102.0, 20.0 ],
-									"style" : "",
 									"text" : "x.random_device"
 								}
 
@@ -833,7 +798,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 381.0, 359.0, 103.0, 20.0 ],
-									"style" : "",
 									"text" : "x.seed_seq_from"
 								}
 
@@ -846,7 +810,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 249.0, 293.0, 151.0, 20.0 ],
-									"style" : "",
 									"text" : "x.global x.generator.pcg32"
 								}
 
@@ -859,7 +822,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 116.0, 63.0, 592.0, 54.0 ],
-									"style" : "",
 									"text" : "In many cases, it's important to have all distributions sample from the same random number generator. This can be done using the x.global object with the name of a random number generator as its argument. It will ensure that only one copy of that object is loaded, and all x.global objects with the same object as their argument will communicate with that common object."
 								}
 
@@ -1032,11 +994,9 @@
 						"description" : "",
 						"digest" : "",
 						"globalpatchername" : "",
-						"style" : "",
 						"tags" : ""
 					}
 ,
-					"style" : "",
 					"text" : "p Globals"
 				}
 
@@ -1050,13 +1010,14 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 7,
-							"minor" : 3,
-							"revision" : 5,
+							"major" : 8,
+							"minor" : 0,
+							"revision" : 1,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
+						"classnamespace" : "box",
 						"rect" : [ 0.0, 26.0, 992.0, 1030.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1093,7 +1054,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 347.0, 213.0, 81.0, 20.0 ],
-									"style" : "",
 									"text" : "paramnames"
 								}
 
@@ -1106,7 +1066,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 94.0, 518.0, 107.0, 20.0 ],
-									"style" : "",
 									"text" : "max 4294967295"
 								}
 
@@ -1119,7 +1078,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 136.0, 432.0, 33.0, 20.0 ],
-									"style" : "",
 									"text" : "max"
 								}
 
@@ -1132,7 +1090,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 94.0, 432.0, 30.0, 20.0 ],
-									"style" : "",
 									"text" : "min"
 								}
 
@@ -1145,7 +1102,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 94.0, 472.0, 107.0, 20.0 ],
-									"style" : "",
 									"text" : "x.generator.pcg32"
 								}
 
@@ -1158,7 +1114,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 370.0, 340.0, 439.0, 54.0 ],
-									"style" : "",
 									"text" : "Note that in response to the message \"generate\", the object outputs a simple value (or a list in the case of multivariate distributions), however, the values produced by the other messages are prepended by the name of the message that was sent so that they can be easily routed to the the right place in a patch."
 								}
 
@@ -1171,7 +1126,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 203.0, 374.0, 110.0, 20.0 ],
-									"style" : "",
 									"text" : "x.generator.default"
 								}
 
@@ -1184,7 +1138,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 94.0, 374.0, 87.0, 20.0 ],
-									"style" : "",
 									"text" : "p 0.8"
 								}
 
@@ -1197,8 +1150,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 255.0, 292.0, 150.0, 20.0 ],
-									"style" : ""
+									"patching_rect" : [ 255.0, 292.0, 150.0, 20.0 ]
 								}
 
 							}
@@ -1210,7 +1162,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 298.0, 251.0, 31.0, 20.0 ],
-									"style" : "",
 									"text" : "t 30"
 								}
 
@@ -1223,7 +1174,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 255.0, 251.0, 37.0, 20.0 ],
-									"style" : "",
 									"text" : "p 0.8"
 								}
 
@@ -1236,7 +1186,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 298.0, 213.0, 29.5, 20.0 ],
-									"style" : "",
 									"text" : "t"
 								}
 
@@ -1249,7 +1198,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 255.0, 213.0, 29.5, 20.0 ],
-									"style" : "",
 									"text" : "p"
 								}
 
@@ -1262,7 +1210,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 182.0, 213.0, 58.0, 20.0 ],
-									"style" : "",
 									"text" : "generate"
 								}
 
@@ -1275,7 +1222,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 136.0, 213.0, 33.0, 20.0 ],
-									"style" : "",
 									"text" : "max"
 								}
 
@@ -1288,7 +1234,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 94.0, 213.0, 30.0, 20.0 ],
-									"style" : "",
 									"text" : "min"
 								}
 
@@ -1301,7 +1246,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 94.0, 343.0, 87.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.binomial"
 								}
 
@@ -1314,7 +1258,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 94.0, 117.0, 808.0, 42.0 ],
-									"style" : "",
 									"text" : "Additionally, x.dist objects also respond to the names of their parameters, for example, x.dist.gamma responds to \"alpha\" and \"beta\". When these messages are sent with arguments, those values will replace the currently stored values in the object, and when they are sent without values, the objects will output the current value that corresponds to that name."
 								}
 
@@ -1327,7 +1270,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 94.0, 64.0, 808.0, 30.0 ],
-									"style" : "",
 									"text" : "Most objects respond to three messages: \"min\", \"max\", and \"generate\". \"min\" and \"max\" cause an object to output the minimum and maximum values that it can produces respectively. \"generate\" causes an object to output whatever it is that it produces, similar to the \"bang\" message in Max. "
 								}
 
@@ -1447,11 +1389,9 @@
 						"description" : "",
 						"digest" : "",
 						"globalpatchername" : "",
-						"style" : "",
 						"tags" : ""
 					}
 ,
-					"style" : "",
 					"text" : "p Messages"
 				}
 
@@ -1465,14 +1405,15 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 7,
-							"minor" : 3,
-							"revision" : 5,
+							"major" : 8,
+							"minor" : 0,
+							"revision" : 1,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
-						"rect" : [ 0.0, 26.0, 992.0, 1030.0 ],
+						"classnamespace" : "box",
+						"rect" : [ 396.0, 105.0, 992.0, 1030.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -1507,8 +1448,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 405.0, 507.0, 473.0, 78.0 ],
-									"style" : "",
+									"patching_rect" : [ 274.0, 435.0, 473.0, 78.0 ],
 									"text" : "This is a complete setup: x.dist.geometric receives the \"generate\" message and asks  x.generator.pcg32 for its min, max and a random value. x.generator.pcg32 responds with its min and max, and then request two batches of 5 seeds from x.seed_seq_from, which in turn sends the generate message to x.random_device to get those seeds. Once x.generator.pcg32 has been seeded, it sends a random value to x.dist.geometric which can transform it according to the geometric distribution"
 								}
 
@@ -1520,7 +1460,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 193.0, 567.0, 174.0, 20.0 ],
-									"style" : "",
 									"text" : "print dist-delegation @popup 1"
 								}
 
@@ -1532,7 +1471,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 627.0, 809.0, 208.0, 20.0 ],
-									"style" : "",
 									"text" : "print random_device-main @popup 1"
 								}
 
@@ -1544,7 +1482,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 627.0, 737.0, 238.0, 20.0 ],
-									"style" : "",
 									"text" : "print seed_seq_from-delegation @popup 1"
 								}
 
@@ -1556,7 +1493,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 400.0, 737.0, 209.0, 20.0 ],
-									"style" : "",
 									"text" : "print seed_seq_from-main @popup 1"
 								}
 
@@ -1568,7 +1504,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 393.0, 650.0, 207.0, 20.0 ],
-									"style" : "",
 									"text" : "print generator-delegation @popup 1"
 								}
 
@@ -1580,7 +1515,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 193.0, 650.0, 178.0, 20.0 ],
-									"style" : "",
 									"text" : "print generator-main @popup 1"
 								}
 
@@ -1594,8 +1528,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 94.0, 567.0, 50.0, 20.0 ],
-									"style" : ""
+									"patching_rect" : [ 94.0, 567.0, 50.0, 20.0 ]
 								}
 
 							}
@@ -1607,7 +1540,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 607.0, 774.0, 102.0, 20.0 ],
-									"style" : "",
 									"text" : "x.random_device"
 								}
 
@@ -1620,7 +1552,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 373.0, 699.0, 253.0, 20.0 ],
-									"style" : "",
 									"text" : "x.seed_seq_from"
 								}
 
@@ -1633,7 +1564,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 170.0, 614.0, 222.0, 20.0 ],
-									"style" : "",
 									"text" : "x.generator.pcg32"
 								}
 
@@ -1646,7 +1576,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 94.0, 493.0, 58.0, 20.0 ],
-									"style" : "",
 									"text" : "generate"
 								}
 
@@ -1659,7 +1588,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 94.0, 536.0, 95.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.geometric"
 								}
 
@@ -1672,7 +1600,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 274.0, 320.0, 468.0, 42.0 ],
-									"style" : "",
 									"text" : "The same is true for the x.generator objects: they need to be seeded before they can begin producing random numbers and will complain if they don't receive the seeds they request from their delegation outlet"
 								}
 
@@ -1685,7 +1612,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 274.0, 165.0, 462.0, 54.0 ],
-									"style" : "",
 									"text" : "x.dist objects need one or more random numbers from an x.generator object, as well as to know the minimum and maximum values those random numbers can take on. When the \"generate\" message is sent, the x.dist object sends a sequence of messages out its delegation outlet and expects to receive responses in return."
 								}
 
@@ -1697,7 +1623,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 182.0, 370.0, 93.0, 20.0 ],
-									"style" : "",
 									"text" : "print @popup 1"
 								}
 
@@ -1710,7 +1635,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 94.0, 288.0, 58.0, 20.0 ],
-									"style" : "",
 									"text" : "generate"
 								}
 
@@ -1722,7 +1646,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 170.0, 215.0, 93.0, 20.0 ],
-									"style" : "",
 									"text" : "print @popup 1"
 								}
 
@@ -1735,7 +1658,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 94.0, 133.0, 58.0, 20.0 ],
-									"style" : "",
 									"text" : "generate"
 								}
 
@@ -1748,7 +1670,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 94.0, 331.0, 107.0, 20.0 ],
-									"style" : "",
 									"text" : "x.generator.pcg32"
 								}
 
@@ -1761,7 +1682,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 94.0, 176.0, 95.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.geometric"
 								}
 
@@ -1773,7 +1693,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 94.0, 64.0, 774.0, 18.0 ],
-									"style" : "",
 									"text" : "Most objects have two outlets: a main outlet (left), and a delegation outlet (right) that it uses to communicate with other objects in the x package."
 								}
 
@@ -1818,6 +1737,15 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-19", 0 ],
+									"midpoints" : [ 179.5, 877.0, 927.0, 877.0, 927.0, 523.0, 103.5, 523.0 ],
+									"order" : 1,
+									"source" : [ "obj-20", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-21", 0 ],
 									"order" : 1,
 									"source" : [ "obj-20", 1 ]
@@ -1827,6 +1755,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-25", 0 ],
+									"order" : 0,
 									"source" : [ "obj-20", 0 ]
 								}
 
@@ -1918,11 +1847,9 @@
 						"description" : "",
 						"digest" : "",
 						"globalpatchername" : "",
-						"style" : "",
 						"tags" : ""
 					}
 ,
-					"style" : "",
 					"text" : "p Delegation"
 				}
 
@@ -1936,13 +1863,14 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 7,
-							"minor" : 3,
-							"revision" : 5,
+							"major" : 8,
+							"minor" : 0,
+							"revision" : 1,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
+						"classnamespace" : "box",
 						"rect" : [ 0.0, 26.0, 992.0, 1030.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1979,7 +1907,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 563.0, 186.0, 308.0, 66.0 ],
-									"style" : "",
 									"text" : "x.process.counting.delegate~ outputs a ramp that goes from 0 to 1 over some number of samples. When it gets to 1, it outputs a generate message out the right outlet and expects to receive a number of samples over which to produce the next ramp from 0 to 1"
 								}
 
@@ -1992,7 +1919,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 95.0, 186.0, 356.0, 54.0 ],
-									"style" : "",
 									"text" : "x.dist.delegate~ sends a generate message out its delegate outlet for each sample in the input audio stream that is non-zero. The value that is returned is placed in the output audio stream at the sample that corresponds to the non-zero input sample."
 								}
 
@@ -2004,8 +1930,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 0,
 									"patching_rect" : [ 563.0, 596.0, 130.0, 130.0 ],
-									"range" : [ 0.0, 1.0 ],
-									"style" : ""
+									"range" : [ 0.0, 1.0 ]
 								}
 
 							}
@@ -2017,7 +1942,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
 									"patching_rect" : [ 478.5, 460.0, 29.5, 20.0 ],
-									"style" : "",
 									"text" : "<~"
 								}
 
@@ -2030,7 +1954,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
 									"patching_rect" : [ 489.0, 428.0, 66.0, 20.0 ],
-									"style" : "",
 									"text" : "delay~ 1 1"
 								}
 
@@ -2043,7 +1966,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"patching_rect" : [ 771.0, 459.0, 147.0, 20.0 ],
-									"style" : "",
 									"text" : "x.round.alternate-tiebreak"
 								}
 
@@ -2056,7 +1978,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
 									"patching_rect" : [ 711.0, 428.0, 79.0, 20.0 ],
-									"style" : "",
 									"text" : "mstosamps~"
 								}
 
@@ -2069,7 +1990,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
 									"patching_rect" : [ 711.0, 397.0, 49.0, 20.0 ],
-									"style" : "",
 									"text" : "* 1000."
 								}
 
@@ -2086,8 +2006,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
 									"patching_rect" : [ 591.0, 428.0, 102.0, 20.0 ],
-									"sig" : 0.0,
-									"style" : ""
+									"sig" : 0.0
 								}
 
 							}
@@ -2098,8 +2017,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 0,
 									"patching_rect" : [ 563.0, 455.0, 130.0, 130.0 ],
-									"range" : [ 0.0, 1.0 ],
-									"style" : ""
+									"range" : [ 0.0, 1.0 ]
 								}
 
 							}
@@ -2111,7 +2029,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 711.0, 366.0, 195.0, 20.0 ],
-									"style" : "",
 									"text" : "x.variable exponential @lambda 1."
 								}
 
@@ -2124,7 +2041,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "generate" ],
 									"patching_rect" : [ 563.0, 331.0, 167.0, 20.0 ],
-									"style" : "",
 									"text" : "x.process.counting.delegate~"
 								}
 
@@ -2141,8 +2057,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
 									"patching_rect" : [ 123.0, 428.0, 102.0, 20.0 ],
-									"sig" : 0.0,
-									"style" : ""
+									"sig" : 0.0
 								}
 
 							}
@@ -2153,8 +2068,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 0,
 									"patching_rect" : [ 95.0, 455.0, 130.0, 130.0 ],
-									"range" : [ 0.0, 1.0 ],
-									"style" : ""
+									"range" : [ 0.0, 1.0 ]
 								}
 
 							}
@@ -2166,7 +2080,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
 									"patching_rect" : [ 95.0, 366.0, 37.0, 20.0 ],
-									"style" : "",
 									"text" : "sah~"
 								}
 
@@ -2179,7 +2092,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 171.0, 366.0, 192.0, 20.0 ],
-									"style" : "",
 									"text" : "x.variable beta @alpha 2 @beta 2"
 								}
 
@@ -2191,8 +2103,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "bang" ],
-									"patching_rect" : [ 95.0, 254.0, 24.0, 24.0 ],
-									"style" : ""
+									"parameter_enable" : 0,
+									"patching_rect" : [ 95.0, 254.0, 24.0, 24.0 ]
 								}
 
 							}
@@ -2204,7 +2116,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
 									"patching_rect" : [ 95.0, 292.0, 41.0, 20.0 ],
-									"style" : "",
 									"text" : "click~"
 								}
 
@@ -2217,7 +2128,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 299.0, 57.0, 438.0, 78.0 ],
-									"style" : "",
 									"text" : "x.dist.delegate~ and x.process.counting.delegate~ both output a generate message out their right (delegation) outlet to produce a random value at a particular sample in the audio stream.\n\nThese objects are inherently DANGEROUS and computationally expensive as they call normal Max outlets from within the MSP perform routine. "
 								}
 
@@ -2228,8 +2138,7 @@
 									"maxclass" : "ezdac~",
 									"numinlets" : 2,
 									"numoutlets" : 0,
-									"patching_rect" : [ 95.0, 681.0, 45.0, 45.0 ],
-									"style" : ""
+									"patching_rect" : [ 95.0, 681.0, 45.0, 45.0 ]
 								}
 
 							}
@@ -2241,7 +2150,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "generate" ],
 									"patching_rect" : [ 95.0, 331.0, 95.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.delegate~"
 								}
 
@@ -2398,11 +2306,9 @@
 						"description" : "",
 						"digest" : "",
 						"globalpatchername" : "",
-						"style" : "",
 						"tags" : ""
 					}
 ,
-					"style" : "",
 					"text" : "p MSP"
 				}
 
@@ -2416,13 +2322,14 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 7,
-							"minor" : 3,
-							"revision" : 5,
+							"major" : 8,
+							"minor" : 0,
+							"revision" : 1,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
+						"classnamespace" : "box",
 						"rect" : [ 0.0, 26.0, 992.0, 1030.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -2459,7 +2366,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 236.0, 87.0, 107.0, 20.0 ],
-									"style" : "",
 									"text" : "x.generator.pcg64"
 								}
 
@@ -2472,7 +2378,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 236.0, 354.0, 117.0, 20.0 ],
-									"style" : "",
 									"text" : "x.generator.knuth_b"
 								}
 
@@ -2485,7 +2390,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 236.0, 313.0, 120.0, 20.0 ],
-									"style" : "",
 									"text" : "x.generator.ranlux48"
 								}
 
@@ -2498,7 +2402,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 236.0, 283.0, 120.0, 20.0 ],
-									"style" : "",
 									"text" : "x.generator.ranlux24"
 								}
 
@@ -2511,7 +2414,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 236.0, 158.0, 140.0, 20.0 ],
-									"style" : "",
 									"text" : "x.generator.minstd_rand"
 								}
 
@@ -2524,7 +2426,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 236.0, 115.0, 147.0, 20.0 ],
-									"style" : "",
 									"text" : "x.generator.minstd_rand0"
 								}
 
@@ -2537,7 +2438,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 236.0, 192.0, 121.0, 20.0 ],
-									"style" : "",
 									"text" : "x.generator.mt19937"
 								}
 
@@ -2550,7 +2450,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 236.0, 61.0, 107.0, 20.0 ],
-									"style" : "",
 									"text" : "x.generator.pcg32"
 								}
 
@@ -2563,7 +2462,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 236.0, 236.0, 141.0, 20.0 ],
-									"style" : "",
 									"text" : "x.generator.mt19937_64"
 								}
 
@@ -2577,11 +2475,9 @@
 						"description" : "",
 						"digest" : "",
 						"globalpatchername" : "",
-						"style" : "",
 						"tags" : ""
 					}
 ,
-					"style" : "",
 					"text" : "p RNGs"
 				}
 
@@ -2595,13 +2491,14 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 7,
-							"minor" : 3,
-							"revision" : 5,
+							"major" : 8,
+							"minor" : 0,
+							"revision" : 1,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
+						"classnamespace" : "box",
 						"rect" : [ 0.0, 26.0, 992.0, 1030.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -2638,7 +2535,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 859.0, 84.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.rayleigh"
 								}
 
@@ -2651,7 +2547,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 635.0, 75.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.erlang"
 								}
 
@@ -2664,7 +2559,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 606.0, 80.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.laplace"
 								}
 
@@ -2677,7 +2571,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 261.0, 125.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.hypergeometric"
 								}
 
@@ -2690,7 +2583,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 1009.0, 83.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.benford"
 								}
 
@@ -2703,7 +2595,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 574.0, 119.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.kumaraswamy"
 								}
 
@@ -2716,7 +2607,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 290.0, 193.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.multivariate_hypergeometric"
 								}
 
@@ -2729,7 +2619,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 227.0, 103.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.multinomial"
 								}
 
@@ -2742,7 +2631,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 503.0, 83.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.dirichlet"
 								}
 
@@ -2755,7 +2643,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 538.0, 65.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.beta"
 								}
 
@@ -2768,7 +2655,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 973.0, 131.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.piecewise_linear"
 								}
 
@@ -2781,7 +2667,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 936.0, 147.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.piecewise_constant"
 								}
 
@@ -2794,7 +2679,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 897.0, 84.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.discrete"
 								}
 
@@ -2807,7 +2691,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 830.0, 91.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.student_t"
 								}
 
@@ -2820,7 +2703,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 804.0, 81.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.fisher_f"
 								}
 
@@ -2833,7 +2715,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 775.0, 80.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.cauchy"
 								}
 
@@ -2846,7 +2727,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 753.0, 107.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.chi_squared"
 								}
 
@@ -2859,7 +2739,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 715.0, 95.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.lognormal"
 								}
 
@@ -2872,7 +2751,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 684.0, 79.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.normal"
 								}
 
@@ -2885,7 +2763,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 475.0, 121.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.extreme_value"
 								}
 
@@ -2898,7 +2775,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 438.0, 79.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.weibull"
 								}
 
@@ -2911,7 +2787,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 409.0, 82.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.gamma"
 								}
 
@@ -2924,7 +2799,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 381.0, 103.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.exponential"
 								}
 
@@ -2937,7 +2811,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 353.0, 83.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.poisson"
 								}
 
@@ -2950,7 +2823,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 194.0, 139.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.negative_binomial"
 								}
 
@@ -2963,7 +2835,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 164.0, 95.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.geometric"
 								}
 
@@ -2976,7 +2847,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 133.0, 87.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.binomial"
 								}
 
@@ -2989,7 +2859,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 101.0, 87.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.bernoulli"
 								}
 
@@ -3002,7 +2871,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 70.0, 109.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.uniform_real"
 								}
 
@@ -3015,7 +2883,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 80.0, 38.0, 101.0, 20.0 ],
-									"style" : "",
 									"text" : "x.dist.uniform_int"
 								}
 
@@ -3029,11 +2896,9 @@
 						"description" : "",
 						"digest" : "",
 						"globalpatchername" : "",
-						"style" : "",
 						"tags" : ""
 					}
 ,
-					"style" : "",
 					"text" : "p Distributions"
 				}
 
