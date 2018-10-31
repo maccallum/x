@@ -37,9 +37,229 @@
 		"tags" : "",
 		"style" : "",
 		"subpatcher_template" : "",
-		"showrootpatcherontab" : 0,
-		"showontab" : 0,
+		"showontab" : 1,
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-9",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 0,
+					"patcher" : 					{
+						"fileversion" : 1,
+						"appversion" : 						{
+							"major" : 8,
+							"minor" : 0,
+							"revision" : 1,
+							"architecture" : "x64",
+							"modernui" : 1
+						}
+,
+						"classnamespace" : "box",
+						"rect" : [ 0.0, 26.0, 992.0, 1030.0 ],
+						"bglocked" : 0,
+						"openinpresentation" : 0,
+						"default_fontsize" : 12.0,
+						"default_fontface" : 0,
+						"default_fontname" : "Arial",
+						"gridonopen" : 1,
+						"gridsize" : [ 15.0, 15.0 ],
+						"gridsnaponopen" : 1,
+						"objectsnaponopen" : 1,
+						"statusbarvisible" : 2,
+						"toolbarvisible" : 1,
+						"lefttoolbarpinned" : 0,
+						"toptoolbarpinned" : 0,
+						"righttoolbarpinned" : 0,
+						"bottomtoolbarpinned" : 0,
+						"toolbars_unpinned_last_save" : 0,
+						"tallnewobj" : 0,
+						"boxanimatetime" : 200,
+						"enablehscroll" : 1,
+						"enablevscroll" : 1,
+						"devicewidth" : 0.0,
+						"description" : "",
+						"digest" : "",
+						"tags" : "",
+						"style" : "",
+						"subpatcher_template" : "",
+						"showontab" : 1,
+						"boxes" : [ 							{
+								"box" : 								{
+									"id" : "obj-9",
+									"maxclass" : "multislider",
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"orientation" : 0,
+									"outlettype" : [ "", "" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 396.0, 278.0, 175.0, 91.0 ],
+									"setminmax" : [ -100.0, 100.0 ],
+									"setstyle" : 2
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"format" : 6,
+									"id" : "obj-10",
+									"maxclass" : "flonum",
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "bang" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 396.0, 246.0, 77.0, 20.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-1",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 396.0, 212.0, 199.0, 20.0 ],
+									"text" : "x.variable exponential @lambda 0.1"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-14",
+									"maxclass" : "multislider",
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"orientation" : 0,
+									"outlettype" : [ "", "" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 98.0, 278.0, 175.0, 91.0 ],
+									"setminmax" : [ -100.0, 100.0 ],
+									"setstyle" : 2
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"format" : 6,
+									"id" : "obj-12",
+									"maxclass" : "flonum",
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "bang" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 98.0, 246.0, 77.0, 20.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-11",
+									"maxclass" : "newobj",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "bang" ],
+									"patching_rect" : [ 98.0, 178.0, 113.0, 20.0 ],
+									"text" : "metro 50 @active 1"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-5",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 98.0, 212.0, 171.0, 20.0 ],
+									"text" : "x.variable normal @stddev 10."
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-3",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 98.0, 128.0, 733.0, 30.0 ],
+									"text" : "x.variable is a good entrypoint into the library. It takes the name of a distribution, e.g. gamma, beta, binomial, etc., as an argument, and attributes can be used to specify values for the parameters of the distribution."
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-2",
+									"linecount" : 3,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 98.0, 54.0, 733.0, 42.0 ],
+									"text" : "X is a library of objects for random number generation, distribution, and processes. The library can be thought of in terms of a number of low level building blocks, and higher level constructions. These higher level constructions will meet the needs of most applications, however, in the cases where they don't, they can be easily extended by interacting with the lower level objects they are built from."
+								}
+
+							}
+ ],
+						"lines" : [ 							{
+								"patchline" : 								{
+									"destination" : [ "obj-10", 0 ],
+									"source" : [ "obj-1", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-9", 0 ],
+									"source" : [ "obj-10", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-1", 0 ],
+									"order" : 0,
+									"source" : [ "obj-11", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-5", 0 ],
+									"order" : 1,
+									"source" : [ "obj-11", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-14", 0 ],
+									"source" : [ "obj-12", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-12", 0 ],
+									"source" : [ "obj-5", 0 ]
+								}
+
+							}
+ ]
+					}
+,
+					"patching_rect" : [ 74.0, 162.0, 81.0, 20.0 ],
+					"saved_object_attributes" : 					{
+						"description" : "",
+						"digest" : "",
+						"globalpatchername" : "",
+						"tags" : ""
+					}
+,
+					"text" : "p Introduction"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-8",
 					"maxclass" : "newobj",
@@ -89,13 +309,11 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-16",
-									"linecount" : 5,
 									"maxclass" : "o.display",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 131.0, 608.0, 150.0, 88.0 ],
-									"text" : "/alpha : 1.,\n/beta : 1.,\n/min : 0.,\n/max : 1.,\n/x : 0.195728"
+									"patching_rect" : [ 131.0, 608.0, 150.0, 34.0 ]
 								}
 
 							}
@@ -157,13 +375,11 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-5",
-									"linecount" : 5,
 									"maxclass" : "o.display",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 355.0, 235.0, 150.0, 88.0 ],
-									"text" : "/foo/alpha : 2.,\n/foo/beta : 3.,\n/foo/min : 0.,\n/foo/max : inf,\n/foo/x : 2.17911"
+									"patching_rect" : [ 355.0, 235.0, 150.0, 34.0 ]
 								}
 
 							}
@@ -196,13 +412,11 @@
 									"fontface" : 0,
 									"fontsize" : 12.0,
 									"id" : "obj-4",
-									"linecount" : 5,
 									"maxclass" : "o.display",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 131.0, 235.0, 150.0, 88.0 ],
-									"text" : "/alpha : 1.,\n/beta : 1.,\n/min : 0.,\n/max : inf,\n/x : 2.06026"
+									"patching_rect" : [ 131.0, 235.0, 150.0, 34.0 ]
 								}
 
 							}
@@ -298,7 +512,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 728.0, 159.0, 44.0, 20.0 ],
+					"patching_rect" : [ 730.0, 160.0, 44.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -307,207 +521,6 @@
 					}
 ,
 					"text" : "p odot"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-7",
-					"maxclass" : "newobj",
-					"numinlets" : 0,
-					"numoutlets" : 0,
-					"patcher" : 					{
-						"fileversion" : 1,
-						"appversion" : 						{
-							"major" : 8,
-							"minor" : 0,
-							"revision" : 1,
-							"architecture" : "x64",
-							"modernui" : 1
-						}
-,
-						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 992.0, 1030.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 1,
-						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 1,
-						"objectsnaponopen" : 1,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"lefttoolbarpinned" : 0,
-						"toptoolbarpinned" : 0,
-						"righttoolbarpinned" : 0,
-						"bottomtoolbarpinned" : 0,
-						"toolbars_unpinned_last_save" : 0,
-						"tallnewobj" : 0,
-						"boxanimatetime" : 200,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"style" : "",
-						"subpatcher_template" : "",
-						"showontab" : 1,
-						"boxes" : [ 							{
-								"box" : 								{
-									"format" : 6,
-									"id" : "obj-10",
-									"maxclass" : "flonum",
-									"numinlets" : 1,
-									"numoutlets" : 2,
-									"outlettype" : [ "", "bang" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 255.5, 102.0, 50.0, 20.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-11",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 255.5, 130.0, 51.0, 20.0 ],
-									"text" : "beta $1"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"format" : 6,
-									"id" : "obj-9",
-									"maxclass" : "flonum",
-									"numinlets" : 1,
-									"numoutlets" : 2,
-									"outlettype" : [ "", "bang" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 191.5, 102.0, 50.0, 20.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-7",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 191.5, 130.0, 57.0, 20.0 ],
-									"text" : "alpha $1"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"format" : 6,
-									"id" : "obj-6",
-									"maxclass" : "flonum",
-									"numinlets" : 1,
-									"numoutlets" : 2,
-									"outlettype" : [ "", "bang" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 116.0, 212.0, 50.0, 20.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-4",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 116.0, 102.0, 58.0, 20.0 ],
-									"text" : "generate"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-1",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 116.0, 161.0, 209.0, 20.0 ],
-									"text" : "x.variable gamma @alpha 3 @beta 4"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-2",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 116.0, 63.0, 592.0, 18.0 ],
-									"text" : "x.variable brings together a distribution, the default rng, and everything needed to seed it."
-								}
-
-							}
- ],
-						"lines" : [ 							{
-								"patchline" : 								{
-									"destination" : [ "obj-6", 0 ],
-									"source" : [ "obj-1", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-11", 0 ],
-									"source" : [ "obj-10", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-1", 0 ],
-									"source" : [ "obj-11", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-1", 0 ],
-									"source" : [ "obj-4", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-1", 0 ],
-									"source" : [ "obj-7", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-7", 0 ],
-									"source" : [ "obj-9", 0 ]
-								}
-
-							}
- ]
-					}
-,
-					"patching_rect" : [ 355.0, 161.0, 70.0, 20.0 ],
-					"saved_object_attributes" : 					{
-						"description" : "",
-						"digest" : "",
-						"globalpatchername" : "",
-						"tags" : ""
-					}
-,
-					"text" : "p Variables"
 				}
 
 			}
@@ -989,7 +1002,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 270.0, 161.0, 61.0, 20.0 ],
+					"patching_rect" : [ 406.0, 162.0, 61.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -1384,7 +1397,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 155.0, 161.0, 75.0, 20.0 ],
+					"patching_rect" : [ 291.0, 162.0, 75.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -1413,7 +1426,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 396.0, 105.0, 992.0, 1030.0 ],
+						"rect" : [ 0.0, 26.0, 992.0, 1030.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -1448,7 +1461,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 274.0, 435.0, 473.0, 78.0 ],
+									"patching_rect" : [ 274.0, 501.0, 473.0, 78.0 ],
 									"text" : "This is a complete setup: x.dist.geometric receives the \"generate\" message and asks  x.generator.pcg32 for its min, max and a random value. x.generator.pcg32 responds with its min and max, and then request two batches of 5 seeds from x.seed_seq_from, which in turn sends the generate message to x.random_device to get those seeds. Once x.generator.pcg32 has been seeded, it sends a random value to x.dist.geometric which can transform it according to the geometric distribution"
 								}
 
@@ -1459,7 +1472,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 193.0, 567.0, 174.0, 20.0 ],
+									"patching_rect" : [ 193.0, 633.0, 174.0, 20.0 ],
 									"text" : "print dist-delegation @popup 1"
 								}
 
@@ -1470,7 +1483,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 627.0, 809.0, 208.0, 20.0 ],
+									"patching_rect" : [ 627.0, 875.0, 208.0, 20.0 ],
 									"text" : "print random_device-main @popup 1"
 								}
 
@@ -1481,7 +1494,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 627.0, 737.0, 238.0, 20.0 ],
+									"patching_rect" : [ 627.0, 803.0, 238.0, 20.0 ],
 									"text" : "print seed_seq_from-delegation @popup 1"
 								}
 
@@ -1492,7 +1505,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 400.0, 737.0, 209.0, 20.0 ],
+									"patching_rect" : [ 400.0, 803.0, 209.0, 20.0 ],
 									"text" : "print seed_seq_from-main @popup 1"
 								}
 
@@ -1503,7 +1516,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 393.0, 650.0, 207.0, 20.0 ],
+									"patching_rect" : [ 393.0, 716.0, 207.0, 20.0 ],
 									"text" : "print generator-delegation @popup 1"
 								}
 
@@ -1514,7 +1527,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 193.0, 650.0, 178.0, 20.0 ],
+									"patching_rect" : [ 193.0, 716.0, 178.0, 20.0 ],
 									"text" : "print generator-main @popup 1"
 								}
 
@@ -1528,7 +1541,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 94.0, 567.0, 50.0, 20.0 ]
+									"patching_rect" : [ 94.0, 633.0, 50.0, 20.0 ]
 								}
 
 							}
@@ -1539,7 +1552,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 607.0, 774.0, 102.0, 20.0 ],
+									"patching_rect" : [ 607.0, 840.0, 102.0, 20.0 ],
 									"text" : "x.random_device"
 								}
 
@@ -1551,7 +1564,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 373.0, 699.0, 253.0, 20.0 ],
+									"patching_rect" : [ 373.0, 765.0, 253.0, 20.0 ],
 									"text" : "x.seed_seq_from"
 								}
 
@@ -1563,7 +1576,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 170.0, 614.0, 222.0, 20.0 ],
+									"patching_rect" : [ 170.0, 680.0, 222.0, 20.0 ],
 									"text" : "x.generator.pcg32"
 								}
 
@@ -1575,7 +1588,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 94.0, 493.0, 58.0, 20.0 ],
+									"patching_rect" : [ 94.0, 559.0, 58.0, 20.0 ],
 									"text" : "generate"
 								}
 
@@ -1587,7 +1600,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 94.0, 536.0, 95.0, 20.0 ],
+									"patching_rect" : [ 94.0, 602.0, 95.0, 20.0 ],
 									"text" : "x.dist.geometric"
 								}
 
@@ -1738,7 +1751,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-19", 0 ],
-									"midpoints" : [ 179.5, 877.0, 927.0, 877.0, 927.0, 523.0, 103.5, 523.0 ],
+									"midpoints" : [ 179.5, 943.0, 927.0, 943.0, 927.0, 589.0, 103.5, 589.0 ],
 									"order" : 1,
 									"source" : [ "obj-20", 0 ]
 								}
@@ -1771,7 +1784,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-20", 0 ],
-									"midpoints" : [ 382.5, 858.0, 911.0, 858.0, 911.0, 599.0, 179.5, 599.0 ],
+									"midpoints" : [ 382.5, 924.0, 911.0, 924.0, 911.0, 665.0, 179.5, 665.0 ],
 									"order" : 1,
 									"source" : [ "obj-21", 0 ]
 								}
@@ -1804,7 +1817,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-21", 0 ],
-									"midpoints" : [ 616.5, 846.0, 895.0, 846.0, 895.0, 680.0, 382.5, 680.0 ],
+									"midpoints" : [ 616.5, 912.0, 895.0, 912.0, 895.0, 746.0, 382.5, 746.0 ],
 									"order" : 1,
 									"source" : [ "obj-22", 0 ]
 								}
@@ -1842,7 +1855,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 55.0, 161.0, 78.0, 20.0 ],
+					"patching_rect" : [ 191.0, 162.0, 78.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -2301,7 +2314,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 659.0, 160.0, 47.0, 20.0 ],
+					"patching_rect" : [ 661.0, 161.0, 47.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -2470,7 +2483,7 @@
 						"lines" : [  ]
 					}
 ,
-					"patching_rect" : [ 597.0, 160.0, 53.0, 20.0 ],
+					"patching_rect" : [ 599.0, 161.0, 53.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -2891,7 +2904,7 @@
 						"lines" : [  ]
 					}
 ,
-					"patching_rect" : [ 504.0, 161.0, 87.0, 20.0 ],
+					"patching_rect" : [ 506.0, 162.0, 87.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
