@@ -2,14 +2,15 @@
 	"patcher" : 	{
 		"fileversion" : 1,
 		"appversion" : 		{
-			"major" : 7,
-			"minor" : 3,
-			"revision" : 5,
+			"major" : 8,
+			"minor" : 0,
+			"revision" : 1,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 572.0, 79.0, 640.0, 480.0 ],
+		"classnamespace" : "box",
+		"rect" : [ 100.0, 79.0, 640.0, 480.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -44,7 +45,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 115.0, 332.0, 97.0, 20.0 ],
-					"style" : "",
 					"text" : "prepend setmax"
 				}
 
@@ -57,7 +57,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 148.0, 142.0, 72.0, 20.0 ],
-					"style" : "",
 					"text" : "loadmess 1"
 				}
 
@@ -70,8 +69,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 148.0, 177.0, 50.0, 20.0 ],
-					"style" : ""
+					"patching_rect" : [ 148.0, 177.0, 50.0, 20.0 ]
 				}
 
 			}
@@ -83,7 +81,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 148.0, 217.0, 65.0, 20.0 ],
-					"style" : "",
 					"text" : "prepend n"
 				}
 
@@ -100,8 +97,7 @@
 					"patching_rect" : [ 50.0, 364.0, 157.0, 90.0 ],
 					"setminmax" : [ 0.0, 1.0 ],
 					"setstyle" : 1,
-					"size" : 4,
-					"style" : ""
+					"size" : 4
 				}
 
 			}
@@ -113,7 +109,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 232.0, 69.0, 102.0, 20.0 ],
-					"style" : "",
 					"text" : "loadmess 1 2 3 4"
 				}
 
@@ -126,7 +121,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 232.0, 217.0, 68.0, 20.0 ],
-					"style" : "",
 					"text" : "prepend M"
 				}
 
@@ -144,8 +138,7 @@
 					"setminmax" : [ 0.0, 5.0 ],
 					"setstyle" : 1,
 					"settype" : 0,
-					"size" : 4,
-					"style" : ""
+					"size" : 4
 				}
 
 			}
@@ -155,9 +148,8 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 184.0, 46.0, 375.0, 18.0 ],
-					"style" : "",
-					"text" : "Produce a list of multinomial values (sampling with replacement)"
+					"patching_rect" : [ 159.0, 22.0, 464.0, 18.0 ],
+					"text" : "Produce a list of multivariate hypergeometric values (sampling without replacement)"
 				}
 
 			}
@@ -169,7 +161,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 83.0, 46.0, 72.0, 20.0 ],
-					"style" : "",
 					"text" : "loadmess 1"
 				}
 
@@ -182,8 +173,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 50.0, 44.0, 24.0, 24.0 ],
-					"style" : ""
+					"patching_rect" : [ 50.0, 44.0, 24.0, 24.0 ]
 				}
 
 			}
@@ -195,7 +185,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
 					"patching_rect" : [ 50.0, 75.0, 58.0, 20.0 ],
-					"style" : "",
 					"text" : "metro 20"
 				}
 
@@ -208,7 +197,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 50.0, 217.0, 58.0, 20.0 ],
-					"style" : "",
 					"text" : "generate"
 				}
 
@@ -221,7 +209,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 224.0, 294.0, 110.0, 20.0 ],
-					"style" : "",
 					"text" : "x.generator.default"
 				}
 
@@ -234,7 +221,6 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 50.0, 262.0, 193.0, 20.0 ],
-					"style" : "",
 					"text" : "x.dist.multivariate_hypergeometric"
 				}
 

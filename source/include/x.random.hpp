@@ -20,60 +20,368 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+namespace pcg
+{
+#ifdef PCG_RAND_HPP_INCLUDED
+#undef PCG_RAND_HPP_INCLUDED
+#endif
+#include "pcg_random.hpp"
+}
+
 namespace x
 {
 	namespace random
 	{
-		template <typename IntType = int>
-		using uniform_int_distribution = std::uniform_int_distribution<IntType>;
-		template <typename RealType = double>
-		using uniform_real_distribution = std::uniform_real_distribution<RealType>;
+		class random_device : public std::random_device
+		{
+		public:
+			using std::random_device::random_device;
+			//static constexpr const char * const desc_long = "some very long foo";
+			static constexpr const char * const desc_short = "Non-deterministic random number generator using hardware entropy source.";
+		};
+		
+		class pcg32 : public pcg::pcg32
+		{
+		public:
+			using pcg::pcg32::pcg32;
+			//static constexpr const char * const desc_long = "some very long foo";
+			static constexpr const char * const desc_short = "Melissa O'Neill's 32-bit Permuted Congruential Generator";
+		};
 
-		template <typename IntType = int>
-		using bernoulli_distribution = std::bernoulli_distribution;
-		template <typename IntType = int>
-		using binomial_distribution = std::binomial_distribution<IntType>;
-		template <typename IntType = int>
-		using geometric_distribution = std::geometric_distribution<IntType>;
-		template <typename IntType = int>
-		using negative_binomial_distribution = std::negative_binomial_distribution<IntType>;
+		class pcg64 : public pcg::pcg64
+		{
+		public:
+			using pcg::pcg64::pcg64;
+			//static constexpr const char * const desc_long = "some very long foo";
+			static constexpr const char * const desc_short = "Melissa O'Neill's 64-bit Permuted Congruential Generator";
+		};
+
+		class minstd_rand0 : public std::minstd_rand0
+		{
+		public:
+			using std::minstd_rand0::minstd_rand0;
+			//static constexpr const char * const desc_long = "some very long foo";
+			static constexpr const char * const desc_short = "Discovered in 1969 by Lewis, Goodman and Miller, adopted as \"Minimal standard\" in 1988 by Park and Miller";
+		};
+
+		class minstd_rand : public std::minstd_rand
+		{
+		public:
+			using std::minstd_rand::minstd_rand;
+			//static constexpr const char * const desc_long = "some very long foo";
+			static constexpr const char * const desc_short = "Newer \"Minimum standard\", recommended by Park, Miller, and Stockmeyer in 1993";
+		};
+
+		class mt19937 : public std::mt19937
+		{
+		public:
+			using std::mt19937::mt19937;
+			//static constexpr const char * const desc_long = "some very long foo";
+			static constexpr const char * const desc_short = "32-bit Mersenne Twister by Matsumoto and Nishimura, 1998";
+		};
+
+		class mt19937_64 : public std::mt19937_64
+		{
+		public:
+			using std::mt19937_64::mt19937_64;
+			//static constexpr const char * const desc_long = "some very long foo";
+			static constexpr const char * const desc_short = "64-bit Mersenne Twister by Matsumoto and Nishimura, 2000";
+		};
+
+		class ranlux24 : public std::ranlux24
+		{
+		public:
+			using std::ranlux24::ranlux24;
+			//static constexpr const char * const desc_long = "some very long foo";
+			static constexpr const char * const desc_short = "24-bit RANLUX generator by Martin Lüscher and Fred James, 1994";
+		};
+
+		class ranlux48 : public std::ranlux48
+		{
+		public:
+			using std::ranlux48::ranlux48;
+			//static constexpr const char * const desc_long = "some very long foo";
+			static constexpr const char * const desc_short = "48-bit RANLUX generator by Martin Lüscher and Fred James, 1994";
+		};
+
+		class knuth_b : public std::knuth_b
+		{
+		public:
+			using std::knuth_b::knuth_b;
+			//static constexpr const char * const desc_long = "some very long foo";
+			static constexpr const char * const desc_short = "Knuth's generator shuffles sequences generated with minstd_rand0";
+		};
 		
 		template <typename IntType = int>
-		using poisson_distribution = std::poisson_distribution<IntType>;
+		//using uniform_int_distribution = std::uniform_int_distribution<IntType>;
+		class uniform_int_distribution : public std::uniform_int_distribution<IntType>
+		{
+		public:
+			using std::uniform_int_distribution<IntType>::uniform_int_distribution;
+			//static constexpr const char * const desc_long = "some very long foo";
+			static constexpr const char * const desc_short = "Produces random integers with equal probability in the range [a,b] (inclusive).";
+			static const int nparams = 2;
+			static constexpr const char * const param_a_desc = "Lower bound (inclusive)";
+			static constexpr const char * const param_b_desc = "Upper bound (inclusive)";
+			static constexpr const char * const param_desc_list[nparams] = {param_a_desc, param_b_desc};
+		};
 		template <typename RealType = double>
-		using exponential_distribution = std::exponential_distribution<RealType>;
+		//using uniform_real_distribution = std::uniform_real_distribution<RealType>;
+		class uniform_real_distribution : public std::uniform_real_distribution<RealType>
+		{
+		public:
+			using std::uniform_real_distribution<RealType>::uniform_real_distribution;
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "Produces random numbers in the range [a,b) where all intervals of the same length are equally probable.";
+			static const int nparams = 2;
+			static constexpr const char * const param_a_desc = "Lower bound (inclusive)";
+			static constexpr const char * const param_b_desc = "Upper bound (inclusive)";
+			static constexpr const char * const param_desc_list[nparams] = {param_a_desc, param_b_desc};
+		};
+
+		
+		template <typename IntType = int>
+		//using bernoulli_distribution = std::bernoulli_distribution;
+		class bernoulli_distribution : public std::bernoulli_distribution
+		{
+		public:
+			using std::bernoulli_distribution::bernoulli_distribution;
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "Produces a 1 with probability p, and 0 with probability 1-p. Simulates a coin toss.";
+			static const int nparams = 1;
+			static constexpr const char * const param_p_desc = "Probability of success";
+			static constexpr const char * const param_desc_list[nparams] = {param_p_desc};
+		};
+		template <typename IntType = int>
+		//using binomial_distribution = std::binomial_distribution<IntType>;
+		class binomial_distribution : public std::binomial_distribution<IntType>
+		{
+		public:
+			using std::binomial_distribution<IntType>::binomial_distribution;
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "Produces random integers in the range [0,t], which represent the number of successes in t trials each with probability p.";
+			static const int nparams = 2;
+			static constexpr const char * const param_t_desc = "Number of trials";
+			static constexpr const char * const param_p_desc = "Probability of success";
+			static constexpr const char * const param_desc_list[nparams] = {param_t_desc, param_p_desc};
+		};
+		template <typename IntType = int>
+		//using geometric_distribution = std::geometric_distribution<IntType>;
+		class geometric_distribution : public std::geometric_distribution<IntType>
+		{
+		public:
+			using std::geometric_distribution<IntType>::geometric_distribution;
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "Produces random integers which represent the number of unsuccessful trials, each with probability p, before a first success.";
+			static const int nparams = 1;
+			static constexpr const char * const param_p_desc = "Probability of success";
+			static constexpr const char * const param_desc_list[nparams] = {param_p_desc};
+		};
+		template <typename IntType = int>
+		//using negative_binomial_distribution = std::negative_binomial_distribution<IntType>;
+		class negative_binomial_distribution : public std::negative_binomial_distribution<IntType>
+		{
+		public:
+			using std::negative_binomial_distribution<IntType>::negative_binomial_distribution;
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "Produces random integers which represent the number of successful trials, each with probability k, before k unsuccessful trials.";
+			static const int nparams = 2;
+			static constexpr const char * const param_k_desc = "Number of failures";
+			static constexpr const char * const param_p_desc = "Probability of success";
+			static constexpr const char * const param_desc_list[nparams] = {param_k_desc, param_p_desc};
+		};
+		
+		template <typename IntType = int>
+		//using poisson_distribution = std::poisson_distribution<IntType>;
+		class poisson_distribution : public std::poisson_distribution<IntType>
+		{
+		public:
+			using std::poisson_distribution<IntType>::poisson_distribution;
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "Produces random integers which represent the number of events that occurred during a fixed interval with mean rate of events.";
+			static const int nparams = 1;
+			static constexpr const char * const param_mean_desc = "Mean number of events";
+			static constexpr const char * const param_desc_list[nparams] = {param_mean_desc};
+		};
 		template <typename RealType = double>
-		using gamma_distribution = std::gamma_distribution<RealType>;
+		//using exponential_distribution = std::exponential_distribution<RealType>;
+		class exponential_distribution : public std::exponential_distribution<RealType>
+		{
+		public:
+			using std::exponential_distribution<RealType>::exponential_distribution;
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "Produces random numbers which represent the interval between two independant events defined by a constant average rate of occurrence (lambda).";
+			static const int nparams = 1;
+			static constexpr const char * const param_lambda_desc = "Rate of events";
+			static constexpr const char * const param_desc_list[nparams] = {param_lambda_desc};
+		};
 		template <typename RealType = double>
-		using weibull_distribution = std::weibull_distribution<RealType>;
+		//using gamma_distribution = std::gamma_distribution<RealType>;
+		class gamma_distribution : public std::gamma_distribution<RealType>
+		{
+		public:
+			using std::gamma_distribution<RealType>::gamma_distribution;
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "Produces random numbers which are the aggregation of alpha exponential distributions, each with beta as its parameter.";
+			static const int nparams = 2;
+			static constexpr const char * const param_alpha_desc = "Shape";
+			static constexpr const char * const param_beta_desc = "Scale";
+			static constexpr const char * const param_desc_list[nparams] = {param_alpha_desc, param_beta_desc};
+		};
 		template <typename RealType = double>
-		using extreme_value_distribution = std::extreme_value_distribution<RealType>;
+		//using weibull_distribution = std::weibull_distribution<RealType>;
+		class weibull_distribution : public std::weibull_distribution<RealType>
+		{
+		public:
+			using std::weibull_distribution<RealType>::weibull_distribution;
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "Produces random numbers which represent the lifetime for which the death probability is proportional to the a-th power of time. b is a scale parameter.";
+			static const int nparams = 2;
+			static constexpr const char * const param_a_desc = "Shape";
+			static constexpr const char * const param_b_desc = "Scale";
+			static constexpr const char * const param_desc_list[nparams] = {param_a_desc, param_b_desc};
+		};
+		template <typename RealType = double>
+		//using extreme_value_distribution = std::extreme_value_distribution<RealType>;
+		class extreme_value_distribution : public std::extreme_value_distribution<RealType>
+		{
+		public:
+			using std::extreme_value_distribution<RealType>::extreme_value_distribution;
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "Produces random numbers which are the extreme of a number of samples of a random variable.";
+			static const int nparams = 2;
+			static constexpr const char * const param_a_desc = "Location";
+			static constexpr const char * const param_b_desc = "Scale";
+			static constexpr const char * const param_desc_list[nparams] = {param_a_desc, param_b_desc};
+		};
 
 		template <typename RealType = double>
-		using normal_distribution = std::normal_distribution<RealType>;
+		//using normal_distribution = std::normal_distribution<RealType>;
+		class normal_distribution : public std::normal_distribution<RealType>
+		{
+		public:
+			using std::normal_distribution<RealType>::normal_distribution;
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "";
+			static const int nparams = 2;
+			static constexpr const char * const param_mean_desc = "Mean";
+			static constexpr const char * const param_stddev_desc = "Standard deviation";
+			static constexpr const char * const param_desc_list[nparams] = {param_mean_desc, param_stddev_desc};
+		};
 		template <typename RealType = double>
-		using lognormal_distribution = std::lognormal_distribution<RealType>;
+		//using lognormal_distribution = std::lognormal_distribution<RealType>;
+		class lognormal_distribution : public std::lognormal_distribution<RealType>
+		{
+		public:
+			using std::lognormal_distribution<RealType>::lognormal_distribution;
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "";
+			static const int nparams = 2;
+			static constexpr const char * const param_m_desc = "Mean";
+			static constexpr const char * const param_s_desc = "Standard deviation";
+			static constexpr const char * const param_desc_list[nparams] = {param_m_desc, param_s_desc};
+		};
 		template <typename RealType = double>
-		using chi_squared_distribution = std::chi_squared_distribution<RealType>;
+		//using chi_squared_distribution = std::chi_squared_distribution<RealType>;
+		class chi_squared_distribution : public std::chi_squared_distribution<RealType>
+		{
+		public:
+			using std::chi_squared_distribution<RealType>::chi_squared_distribution;
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "";
+			static const int nparams = 1;
+			static constexpr const char * const param_n_desc = "Degrees of freedom";
+			static constexpr const char * const param_desc_list[nparams] = {param_n_desc};
+		};
 		template <typename RealType = double>
-		using cauchy_distribution = std::cauchy_distribution<RealType>;
+		//using cauchy_distribution = std::cauchy_distribution<RealType>;
+		class cauchy_distribution : public std::cauchy_distribution<RealType>
+		{
+		public:
+			using std::cauchy_distribution<RealType>::cauchy_distribution;
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "";
+			static const int nparams = 2;
+			static constexpr const char * const param_a_desc = "Location";
+			static constexpr const char * const param_b_desc = "Scale";
+			static constexpr const char * const param_desc_list[nparams] = {param_a_desc, param_b_desc};
+		};
 		template <typename RealType = double>
-		using fisher_f_distribution = std::fisher_f_distribution<RealType>;
+		//using fisher_f_distribution = std::fisher_f_distribution<RealType>;
+		class fisher_f_distribution : public std::fisher_f_distribution<RealType>
+		{
+		public:
+			using std::fisher_f_distribution<RealType>::fisher_f_distribution;
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "";
+			static const int nparams = 2;
+			static constexpr const char * const param_m_desc = "First degree of freedom";
+			static constexpr const char * const param_n_desc = "Second degree of freedom";
+			static constexpr const char * const param_desc_list[nparams] = {param_m_desc, param_n_desc};
+		};
 		template <typename RealType = double>
-		using student_t_distribution = std::student_t_distribution<RealType>;
+		//using student_t_distribution = std::student_t_distribution<RealType>;
+		class student_t_distribution : public std::student_t_distribution<RealType>
+		{
+		public:
+			using std::student_t_distribution<RealType>::student_t_distribution;
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "";
+			static const int nparams = 1;
+			static constexpr const char * const param_n_desc = "Degrees of freedom";
+			static constexpr const char * const param_desc_list[nparams] = {param_n_desc};
+		};
 
 		template <typename IntType = int>
-		using discrete_distribution = std::discrete_distribution<IntType>;
+		//using discrete_distribution = std::discrete_distribution<IntType>;
+		class discrete_distribution : public std::discrete_distribution<IntType>
+		{
+		public:
+			using std::discrete_distribution<IntType>::discrete_distribution;
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "";
+			static const int nparams = 1;
+			static constexpr const char * const param_probabilities_desc = "Probabilities";
+			static constexpr const char * const param_desc_list[nparams] = {param_probabilities_desc};
+		};
 		template <typename RealType = double>
-		using piecewise_constant_distribution = std::piecewise_constant_distribution<RealType>;
+		//using piecewise_constant_distribution = std::piecewise_constant_distribution<RealType>;
+		class piecewise_constant_distribution : public std::piecewise_constant_distribution<RealType>
+		{
+		public:
+			using std::piecewise_constant_distribution<RealType>::piecewise_constant_distribution;
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "";
+			static const int nparams = 2;
+			static constexpr const char * const param_intervals_desc = "Intervals";
+			static constexpr const char * const param_densities_desc = "Densities";
+			static constexpr const char * const param_desc_list[nparams] = {param_intervals_desc, param_densities_desc};
+		};
 		template <typename RealType = double>
-		using piecewise_linear_distribution = std::piecewise_linear_distribution<RealType>;
+		//using piecewise_linear_distribution = std::piecewise_linear_distribution<RealType>;
+		class piecewise_linear_distribution : public std::piecewise_linear_distribution<RealType>
+		{
+		public:
+			using std::piecewise_linear_distribution<RealType>::piecewise_linear_distribution;
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "";
+			static const int nparams = 2;
+			static constexpr const char * const param_intervals_desc = "Intervals";
+			static constexpr const char * const param_densities_desc = "Densities";
+			static constexpr const char * const param_desc_list[nparams] = {param_intervals_desc, param_densities_desc};
+		};
 
 		// beta distribution		
 		template<class _RealType = double>
 		class beta_distribution
 		{
 		public:
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "";
+			static const int nparams = 2;
+			static constexpr const char * const param_alpha_desc = "First shape parameter";
+			static constexpr const char * const param_beta_desc = "Second shape parameter";
+			static constexpr const char * const param_desc_list[nparams] = {param_alpha_desc, param_beta_desc};
 			// types
 			typedef _RealType result_type;
 
@@ -174,6 +482,12 @@ namespace x
 		class kumaraswamy_distribution
 		{
 		public:
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "";
+			static const int nparams = 2;
+			static constexpr const char * const param_alpha_desc = "First shape parameter";
+			static constexpr const char * const param_beta_desc = "Second shape parameter";
+			static constexpr const char * const param_desc_list[nparams] = {param_alpha_desc, param_beta_desc};
 			// types
 			typedef _RealType result_type;
 
@@ -275,6 +589,11 @@ namespace x
 		class dirichlet_distribution
 		{
 		public:
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "";
+			static const int nparams = 1;
+			static constexpr const char * const param_alpha_desc = "Concentrations";
+			static constexpr const char * const param_desc_list[nparams] = {param_alpha_desc};
 			// types
 			typedef _RealType result_type;
 
@@ -498,6 +817,12 @@ namespace x
 		class multinomial_distribution
 		{
 		public:
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "";
+			static const int nparams = 2;
+			static constexpr const char * const param_n_desc = "Number of trials";
+			static constexpr const char * const param_p_desc = "Probabilities";
+			static constexpr const char * const param_desc_list[nparams] = {param_n_desc, param_p_desc};
 			// types
 			typedef _IntType result_type;
 
@@ -742,6 +1067,13 @@ namespace x
 		class hypergeometric_distribution
 		{
 		public:
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "";
+			static const int nparams = 3;
+			static constexpr const char * const param_n_desc = "Number of successes";
+			static constexpr const char * const param_M_desc = "Population size";
+			static constexpr const char * const param_N_desc = "Number of objects of interest";
+			static constexpr const char * const param_desc_list[nparams] = {param_n_desc, param_M_desc, param_N_desc};
 			// types
 			typedef _IntType result_type;
 
@@ -890,6 +1222,12 @@ namespace x
 		class multivariate_hypergeometric_distribution
 		{
 		public:
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "";
+			static const int nparams = 2;
+			static constexpr const char * const param_n_desc = "Number of trials";
+			static constexpr const char * const param_M_desc = "Population sizes";
+			static constexpr const char * const param_desc_list[nparams] = {param_n_desc, param_M_desc};
 			// types
 			typedef _IntType result_type;
 
@@ -1136,6 +1474,12 @@ namespace x
 		class laplace_distribution
 		{
 		public:
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "";
+			static const int nparams = 2;
+			static constexpr const char * const param_mu_desc = "Location";
+			static constexpr const char * const param_sigma_desc = "Scale";
+			static constexpr const char * const param_desc_list[nparams] = {param_mu_desc, param_sigma_desc};
 			// types
 			typedef _RealType result_type;
 
@@ -1241,6 +1585,11 @@ namespace x
 		class rayleigh_distribution
 		{
 		public:
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "";
+			static const int nparams = 1;
+			static constexpr const char * const param_sigma_desc = "Scale";
+			static constexpr const char * const param_desc_list[nparams] = {param_sigma_desc};
 			// types
 			typedef _RealType result_type;
 
@@ -1336,6 +1685,12 @@ namespace x
 		class erlang_distribution
 		{
 		public:
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "";
+			static const int nparams = 2;
+			static constexpr const char * const param_k_desc = "Shape";
+			static constexpr const char * const param_lambda_desc = "Rate";
+			static constexpr const char * const param_desc_list[nparams] = {param_k_desc, param_lambda_desc};
 			// types
 			typedef _RealType result_type;
 
@@ -1456,11 +1811,11 @@ namespace x
 			double param2(void){return b();}
 		};
 
-		class bernoulli_distribution_param_type : public bernoulli_distribution<int>::param_type
+		class bernoulli_distribution_param_type : public bernoulli_distribution<long>::param_type
 		{
 		public:
-			bernoulli_distribution_param_type(void) : bernoulli_distribution<int>::param_type() {}
-			bernoulli_distribution_param_type(double p1) : bernoulli_distribution<int>::param_type(p1) {}
+			bernoulli_distribution_param_type(void) : bernoulli_distribution<long>::param_type() {}
+			bernoulli_distribution_param_type(double p1) : bernoulli_distribution<long>::param_type(p1) {}
 			double param1(void){return p();}
 		};
 		

@@ -275,7 +275,7 @@ namespace x
 
 		class random_device_obj : public obj
 		{
-			std::random_device rd;
+			x::random::random_device rd;
 		public:
 			t_object *newobj(t_symbol *msg, short argc, t_atom *argv)
 			{
@@ -345,6 +345,30 @@ namespace x
 				}
 			}
 
+			static void doc(t_maxobj *_x)
+			{
+				random_device_obj *x = (random_device_obj *)(_x->myobj);
+				x::random::random_device d;
+				t_atom as[3];
+				t_symbol *doc = gensym("doc");
+				t_symbol *desc = gensym("desc");
+				// t_symbol *s = gensym("long");
+				// t_symbol *desc = gensym(d.desc_long);
+				// atom_setsym(as, s);
+				// atom_setsym(as + 1, desc);
+				// outlet_anything(x->outlet_main(), doc, 2, as);
+					
+				t_symbol *s = gensym("short");
+				t_symbol *text = gensym(d.desc_short);
+				atom_setsym(as, desc);
+				atom_setsym(as + 1, s);
+				atom_setsym(as + 2, text);
+				outlet_anything(x->outlet_main(), doc, 3, as);
+
+				atom_setsym(as, gensym("done"));
+				outlet_anything(x->outlet_main(), doc, 1, as);
+			}
+
 			int main(void)
 			{
 				int ret = obj::main();
@@ -352,6 +376,7 @@ namespace x
 				class_addmethod(max_class(), (method)msg_min, "min", 0);
 				class_addmethod(max_class(), (method)msg_max, "max", 0);
 				class_addmethod(max_class(), (method)notify, "notify", A_CANT, 0);
+				class_addmethod(max_class(), (method)doc, "doc", 0);
 				return ret;
 			}
 		};
@@ -451,7 +476,7 @@ namespace x
 		public:
 			bool init_rng(t_maxobj *x)
 			{
-				x::proxy::seed_seq_from_delegate<seed_seq_from_delegate_base, std::random_device> seed_source;
+				x::proxy::seed_seq_from_delegate<seed_seq_from_delegate_base, x::random::random_device> seed_source;
 				seed_source.context(outlet_delegation());
 			        critical_enter(x->lock);
 				x->buf = seed_source.buffer_address();
@@ -540,6 +565,30 @@ namespace x
 				}
 			}
 
+			static void doc(t_maxobj *_x)
+			{
+				rng_obj<rng_type> *x = (rng_obj<rng_type> *)(_x->myobj);
+				rng_type d;
+				t_atom as[3];
+				t_symbol *doc = gensym("doc");
+				t_symbol *desc = gensym("desc");
+				// t_symbol *s = gensym("long");
+				// t_symbol *desc = gensym(d.desc_long);
+				// atom_setsym(as, s);
+				// atom_setsym(as + 1, desc);
+				// outlet_anything(x->outlet_main(), doc, 2, as);
+
+				t_symbol *s = gensym("short");
+				t_symbol *text = gensym(d.desc_short);
+				atom_setsym(as, desc);
+				atom_setsym(as + 1, s);
+				atom_setsym(as + 2, text);
+				outlet_anything(x->outlet_main(), doc, 3, as);
+
+				atom_setsym(as, gensym("done"));
+				outlet_anything(x->outlet_main(), doc, 1, as);
+			}
+
 			static void notify(t_maxobj *_x, t_symbol *s, t_symbol *msg, t_xglobal_conduit *sender, void *data)
 			{
 				if(msg == gensym("sendmessage")){
@@ -558,66 +607,67 @@ namespace x
 				class_addmethod(max_class(), (method)msg_min, "min", 0);
 				class_addmethod(max_class(), (method)msg_max, "max", 0);
 				class_addmethod(max_class(), (method)notify, "notify", A_CANT, 0);
+				class_addmethod(max_class(), (method)doc, "doc", 0);
 				return 0;
 			}
 		};
-		using generator_pcg32_obj = rng_obj<pcg32>;
+		using generator_pcg32_obj = rng_obj<x::random::pcg32>;
 		generator_pcg32_obj _generator_pcg32_obj;
 		t_object *generator_pcg32_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _generator_pcg32_obj.newobj(msg, argc, argv);
 		}
 
-		using generator_pcg64_obj = rng_obj<pcg64>;
+		using generator_pcg64_obj = rng_obj<x::random::pcg64>;
 		generator_pcg64_obj _generator_pcg64_obj;
 		t_object *generator_pcg64_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _generator_pcg64_obj.newobj(msg, argc, argv);
 		}
 
-		using generator_minstd_rand0_obj = rng_obj<std::minstd_rand0>;
+		using generator_minstd_rand0_obj = rng_obj<x::random::minstd_rand0>;
 		generator_minstd_rand0_obj _generator_minstd_rand0_obj;
 		t_object *generator_minstd_rand0_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _generator_minstd_rand0_obj.newobj(msg, argc, argv);
 		}
 
-		using generator_minstd_rand_obj = rng_obj<std::minstd_rand>;
+		using generator_minstd_rand_obj = rng_obj<x::random::minstd_rand>;
 		generator_minstd_rand_obj _generator_minstd_rand_obj;
 		t_object *generator_minstd_rand_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _generator_minstd_rand_obj.newobj(msg, argc, argv);
 		}
 
-		using generator_mt19937_obj = rng_obj<std::mt19937>;
+		using generator_mt19937_obj = rng_obj<x::random::mt19937>;
 		generator_mt19937_obj _generator_mt19937_obj;
 		t_object *generator_mt19937_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _generator_mt19937_obj.newobj(msg, argc, argv);
 		}
 
-		using generator_mt19937_64_obj = rng_obj<std::mt19937_64>;
+		using generator_mt19937_64_obj = rng_obj<x::random::mt19937_64>;
 		generator_mt19937_64_obj _generator_mt19937_64_obj;
 		t_object *generator_mt19937_64_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _generator_mt19937_64_obj.newobj(msg, argc, argv);
 		}
 
-		using generator_ranlux24_obj = rng_obj<std::ranlux24>;
+		using generator_ranlux24_obj = rng_obj<x::random::ranlux24>;
 		generator_ranlux24_obj _generator_ranlux24_obj;
 		t_object *generator_ranlux24_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _generator_ranlux24_obj.newobj(msg, argc, argv);
 		}
 
-		using generator_ranlux48_obj = rng_obj<std::ranlux48>;
+		using generator_ranlux48_obj = rng_obj<x::random::ranlux48>;
 		generator_ranlux48_obj _generator_ranlux48_obj;
 		t_object *generator_ranlux48_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _generator_ranlux48_obj.newobj(msg, argc, argv);
 		}
 
-		using generator_knuth_b_obj = rng_obj<std::knuth_b>;
+		using generator_knuth_b_obj = rng_obj<x::random::knuth_b>;
 		generator_knuth_b_obj _generator_knuth_b_obj;
 		t_object *generator_knuth_b_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
@@ -994,6 +1044,40 @@ namespace x
 					return 0;
 				}
 
+				static void doc(t_maxobj *_x)
+				{
+					dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
+					dist_type d = dist_type(*((param_type *)x));
+				        t_atom as[3];
+					t_symbol *doc = gensym("doc");
+					t_symbol *desc = gensym("desc");
+					// t_symbol *s = gensym("long");
+					// t_symbol *desc = gensym(d.desc_long);
+					// atom_setsym(as, s);
+					// atom_setsym(as + 1, desc);
+					// outlet_anything(x->outlet_main(), doc, 2, as);
+					
+					t_symbol *s = gensym("short");
+					t_symbol *text = gensym(d.desc_short);
+					atom_setsym(as, desc);
+					atom_setsym(as + 1, s);
+					atom_setsym(as + 2, text);
+					outlet_anything(x->outlet_main(), doc, 3, as);
+
+					desc = gensym("param");
+					atom_setsym(as, desc);
+					for(int i = 0; i < d.nparams; i++){
+						s = ((param_type *)x)->names_sym[i];
+						text = gensym(d.param_desc_list[i]);
+						atom_setsym(as + 1, s);
+						atom_setsym(as + 2, text);
+						outlet_anything(x->outlet_main(), doc, 3, as);
+					}
+
+					atom_setsym(as, gensym("done"));
+					outlet_anything(x->outlet_main(), doc, 1, as);
+				}
+
 				int main(void)
 				{
 					obj::main();
@@ -1012,19 +1096,20 @@ namespace x
 						object_method(theattr, gensym("setmethod"), USESYM(get), attr_get);
 						object_method(theattr, gensym("setmethod"), USESYM(set), attr_set);
 					}
+					class_addmethod(c, (method)doc, "doc", 0);
 					return 0;
 				}
 			};
 
 		// Uniform
-		using dist_uniform_int_obj = dist_obj<std::uniform_int_distribution<long>, long, false, param_type_2<x::random::uniform_int_distribution_param_type, long, a_str, long, false, b_str, long, false>>;
+		using dist_uniform_int_obj = dist_obj<x::random::uniform_int_distribution<long>, long, false, param_type_2<x::random::uniform_int_distribution_param_type, long, a_str, long, false, b_str, long, false>>;
 		dist_uniform_int_obj _dist_uniform_int_obj;
 		t_object *dist_uniform_int_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_uniform_int_obj.newobj(msg, argc, argv);
 		}
 
-		using dist_uniform_real_obj = dist_obj<std::uniform_real_distribution<double>, double, false, param_type_2<x::random::uniform_real_distribution_param_type, double, a_str, double, false, b_str, double, false>>;
+		using dist_uniform_real_obj = dist_obj<x::random::uniform_real_distribution<double>, double, false, param_type_2<x::random::uniform_real_distribution_param_type, double, a_str, double, false, b_str, double, false>>;
 		dist_uniform_real_obj _dist_uniform_real_obj;
 		t_object *dist_uniform_real_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
@@ -1240,7 +1325,7 @@ template<> void x::proxy::random_device_delegate<x::max::random_device_delegate_
 	outlet_anything(o->context(), x::max::ps_generate, 1, &a);
 }
 
-template<> void x::proxy::seed_seq_from_delegate<x::max::random_device_delegate_base, std::random_device>::callback(x::max::random_device_delegate_base *o, size_t n)
+template<> void x::proxy::seed_seq_from_delegate<x::max::random_device_delegate_base, x::random::random_device>::callback(x::max::random_device_delegate_base *o, size_t n)
 {
 	t_atom a;
 	atom_setlong(&a, n);

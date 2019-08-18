@@ -302,7 +302,6 @@
 		52B210FF2150D01F002FC3CD /* x.generator.ranlux48.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = x.generator.ranlux48.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 		52B2110E2150D022002FC3CD /* x.generator.knuth_b.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = x.generator.knuth_b.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 		52B2111D2150D592002FC3CD /* x.generator.pcg64.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = x.generator.pcg64.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
-		52B2111E2150D593002FC3CD /* x.generator.pcg32 copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "x.generator.pcg32 copy-Info.plist"; path = "/Users/john/Development/maccallum/x/source/x.generator.pcg32 copy-Info.plist"; sourceTree = "<absolute>"; };
 		52D69DF020AC90CB00D7BDEF /* x.seed_seq_from.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = x.seed_seq_from.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -711,7 +710,6 @@
 				52C839E1167A5BB8000AA688 /* Other Sources */,
 				089C1671FE841209C02AAC07 /* External Frameworks and Libraries */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
-				52B2111E2150D593002FC3CD /* x.generator.pcg32 copy-Info.plist */,
 			);
 			name = cv_jit;
 			sourceTree = "<group>";
@@ -2743,7 +2741,7 @@
 				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_OWNER = "$(USER)";
-				INSTALL_PATH = ../../../externals;
+				INSTALL_PATH = ../../externals;
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/max-sdk/source/c74support/max-includes\"";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OBJROOT = build;
@@ -2841,7 +2839,7 @@
 				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_OWNER = "$(USER)";
-				INSTALL_PATH = ../../../externals;
+				INSTALL_PATH = ../../externals;
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/max-sdk/source/c74support/max-includes\"";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OBJROOT = build;
