@@ -43,7 +43,7 @@ namespace x
 		class pcg32 : public pcg::pcg32
 		{
 		public:
-			//using pcg::pcg32::pcg32;
+			using pcg::pcg32::pcg32;
 			//static constexpr const char * const desc_long = "some very long foo";
 			static constexpr const char * const desc_short = "Melissa O'Neill's 32-bit Permuted Congruential Generator";
 		};
@@ -51,7 +51,7 @@ namespace x
 		class pcg64 : public pcg::pcg64
 		{
 		public:
-			//using pcg::pcg64::pcg64;
+			using pcg::pcg64::pcg64;
 			//static constexpr const char * const desc_long = "some very long foo";
 			static constexpr const char * const desc_short = "Melissa O'Neill's 64-bit Permuted Congruential Generator";
 		};
