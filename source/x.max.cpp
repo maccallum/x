@@ -59,6 +59,9 @@ namespace x
 	}
 }
 
+#ifdef WIN_VERSION
+__declspec(dllexport) 
+#endif
 int main(void)
 {
 	return x::max::main();

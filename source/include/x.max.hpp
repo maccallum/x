@@ -301,11 +301,12 @@ namespace x
 				if(n == 1){
 					outlet_int(x->outlet_main(), x->rd());
 				}else{
-					t_atom out[n];
+					t_atom *out = (t_atom *)_malloca(n * sizeof(t_atom));
 					for(int i = 0; i < n; i++){
 						atom_setlong(out + i, x->rd());
 					}
 					outlet_list(x->outlet_main(), _sym_list, n, out);
+					_freea(out);
 				}
 			}
 
@@ -419,13 +420,21 @@ namespace x
 					n = atom_getlong(argv);
 				}
 				x::proxy::seed_seq_from<x::proxy::random_device_delegate<x::proxy::delegate<uint_least32_t, t_atom, atom_get<uint_least32_t>, atom_set/*<uint_least32_t>*/>>> seed_source;
+				typename seed_seq_from_obj_base::result_type* buf = (seed_seq_from_obj_base::result_type*)_malloca(n * sizeof(seed_seq_from_obj_base::result_type));
+				if (!buf) {
+					object_error((t_object*)x, "ran out of memory!");
+					return;
+				}
+				t_atom* out = (t_atom*)_malloca(n * sizeof(t_atom));
+				if (!out) {
+					object_error((t_object*)x, "ran out of memory!");
+					return;
+				}
 				critical_enter(_x->lock);
 				_x->n = seed_source.buffer_len_address();
 				_x->buf = seed_source.buffer_address();
 				seed_source.context(x->outlet_delegation());
-				typename seed_seq_from_obj_base::result_type buf[n];
 				seed_source.generate(buf, buf + n);
-				t_atom out[n];
 				for(int i = 0; i < n; i++){
 					atom_set(out + i, buf[i]);
 				}
@@ -437,6 +446,8 @@ namespace x
 					_x->n = 0;
 				}
 				critical_exit(_x->lock);
+				_freea(buf);
+				_freea(out);
 			}
 
 			static void freeobj(t_maxobj *x)
@@ -531,7 +542,7 @@ namespace x
 				if(argc && atom_gettype(argv) == A_LONG){
 					n = atom_getlong(argv);
 				}
-				t_atom out[n];
+				t_atom out[X_MAX_OUTPUT_LIST_LEN];
 				for(int i = 0; i < n; i++){
 					atom_set(out + i, x->_rng());
 				}
@@ -677,85 +688,85 @@ namespace x
 		using rng_delegate_uint32 = x::proxy::delegate<uint32_t, t_atom, x::max::atom_get<uint32_t>, x::max::atom_set>;
 		using rng_delegate_uint64 = x::proxy::delegate<uint64_t, t_atom, x::max::atom_get<uint64_t>, x::max::atom_set>;
 
-		template <typename param_type, typename result_type, const char param1_name[], typename param1_type, bool param1_vec>
-		class param_type_1 : public param_type
+		template <typename xparam_type, typename result_type, const char param1_name[], typename param1_type, bool param1_vec>
+		class param_type_1 : public xparam_type
 		{
 		public:
 			int nargs = 1;
 			const char *names_str[1] = {param1_name};
 			t_symbol *names_sym[1] = {gensym(param1_name)};
-			static void p1(param_type *p, long *argc, t_atom **argv)
+			static void p1(xparam_type *p, long *argc, t_atom **argv)
 			{
 				atom_setv(p->param1(), argc, argv);
 			}
-			static void p1(param_type *p, long argc, t_atom *argv)
+			static void p1(xparam_type *p, long argc, t_atom *argv)
 			{
-				*p = param_type(atom_getv<param1_type, param1_vec>(argc, argv));
+				*p = xparam_type(atom_getv<param1_type, param1_vec>(argc, argv));
 			}
-			void (*getters[1])(param_type*, long*, t_atom**) = {p1};
-			void (*setters[1])(param_type*, long, t_atom*) = {p1};
+			void (*getters[1])(xparam_type*, long*, t_atom**) = {p1};
+			void (*setters[1])(xparam_type*, long, t_atom*) = {p1};
 		};
 
-		template <typename param_type, typename result_type, const char param1_name[], typename param1_type, bool param1_vec, const char param2_name[], typename param2_type, bool param2_vec>
-		class param_type_2 : public param_type
+		template <typename xparam_type, typename result_type, const char param1_name[], typename param1_type, bool param1_vec, const char param2_name[], typename param2_type, bool param2_vec>
+		class param_type_2 : public xparam_type
 		{
 		public:
 			int nargs = 2;
 			const char *names_str[2] = {param1_name, param2_name};
 			t_symbol *names_sym[2] = {gensym(param1_name), gensym(param2_name)};
-			static void p1(param_type *p, long *argc, t_atom **argv)
+			static void p1(xparam_type *p, long *argc, t_atom **argv)
 			{
 				atom_setv(p->param1(), argc, argv);
 			}
-			static void p1(param_type *p, long argc, t_atom *argv)
+			static void p1(xparam_type *p, long argc, t_atom *argv)
 			{
-				*p = param_type(atom_getv<param1_type, param1_vec>(argc, argv), p->param2());
+				*p = xparam_type(atom_getv<param1_type, param1_vec>(argc, argv), p->param2());
 			}
-			static void p2(param_type *p, long *argc, t_atom **argv)
+			static void p2(xparam_type *p, long *argc, t_atom **argv)
 			{
 				atom_setv(p->param2(), argc, argv);
 			}
-			static void p2(param_type *p, long argc, t_atom *argv)
+			static void p2(xparam_type *p, long argc, t_atom *argv)
 			{
-				*p = param_type(p->param1(), atom_getv<param2_type, param2_vec>(argc, argv));
+				*p = xparam_type(p->param1(), atom_getv<param2_type, param2_vec>(argc, argv));
 			}
-			void (*getters[2])(param_type*, long*, t_atom**) = {p1, p2};
-			void (*setters[2])(param_type*, long, t_atom*) = {p1, p2};
+			void (*getters[2])(xparam_type*, long*, t_atom**) = {p1, p2};
+			void (*setters[2])(xparam_type*, long, t_atom*) = {p1, p2};
 		};
 
-		template <typename param_type, typename result_type, const char param1_name[], typename param1_type, bool param1_vec, const char param2_name[], typename param2_type, bool param2_vec, const char param3_name[], typename param3_type, bool param3_vec>
-		class param_type_3 : public param_type
+		template <typename xparam_type, typename result_type, const char param1_name[], typename param1_type, bool param1_vec, const char param2_name[], typename param2_type, bool param2_vec, const char param3_name[], typename param3_type, bool param3_vec>
+		class param_type_3 : public xparam_type
 		{
 		public:
 			int nargs = 3;
 			const char *names_str[3] = {param1_name, param2_name, param3_name};
 			t_symbol *names_sym[3] = {gensym(param1_name), gensym(param2_name), gensym(param3_name)};
-			static void p1(param_type *p, long *argc, t_atom **argv)
+			static void p1(xparam_type *p, long *argc, t_atom **argv)
 			{
 				atom_setv(p->param1(), argc, argv);
 			}
-			static void p1(param_type *p, long argc, t_atom *argv)
+			static void p1(xparam_type *p, long argc, t_atom *argv)
 			{
-				*p = param_type(atom_getv<param1_type, param1_vec>(argc, argv), p->param2(), p->param3());
+				*p = xparam_type(atom_getv<param1_type, param1_vec>(argc, argv), p->param2(), p->param3());
 			}
-			static void p2(param_type *p, long *argc, t_atom **argv)
+			static void p2(xparam_type *p, long *argc, t_atom **argv)
 			{
 				atom_setv(p->param2(), argc, argv);
 			}
-			static void p2(param_type *p, long argc, t_atom *argv)
+			static void p2(xparam_type *p, long argc, t_atom *argv)
 			{
-				*p = param_type(p->param1(), atom_getv<param2_type, param2_vec>(argc, argv), p->param3());
+				*p = xparam_type(p->param1(), atom_getv<param2_type, param2_vec>(argc, argv), p->param3());
 			}
-			static void p3(param_type *p, long *argc, t_atom **argv)
+			static void p3(xparam_type *p, long *argc, t_atom **argv)
 			{
 				atom_setv(p->param3(), argc, argv);
 			}
-			static void p3(param_type *p, long argc, t_atom *argv)
+			static void p3(xparam_type *p, long argc, t_atom *argv)
 			{
-				*p = param_type(p->param1(), p->param2(), atom_getv<param3_type, param3_vec>(argc, argv));
+				*p = xparam_type(p->param1(), p->param2(), atom_getv<param3_type, param3_vec>(argc, argv));
 			}
-			void (*getters[3])(param_type*, long*, t_atom**) = {p1, p2, p3};
-			void (*setters[3])(param_type*, long, t_atom*) = {p1, p2, p3};
+			void (*getters[3])(xparam_type*, long*, t_atom**) = {p1, p2, p3};
+			void (*setters[3])(xparam_type*, long, t_atom*) = {p1, p2, p3};
 		};
 
 		const char alpha_str[] = "alpha";
@@ -779,8 +790,8 @@ namespace x
 		const char s_str[] = "s";
 		const char t_str[] = "t";
 		
-		template <typename dist_type, typename result_type, bool multivariate=false, typename param_type=param_type_2<x::random::uniform_real_distribution_param_type, double, a_str, double, false, b_str, double, false>>
-			class dist_obj : public obj, public dist_type, public param_type
+		template <typename dist_type, typename result_type, bool multivariate=false, typename xparam_type=param_type_2<x::random::uniform_real_distribution_param_type, double, a_str, double, false, b_str, double, false>>
+			class dist_obj : public obj, public dist_type, public xparam_type
 			{
 			public:
 				t_object *newobj(t_symbol *msg, short argc, t_atom *argv)
@@ -788,7 +799,7 @@ namespace x
 					t_object *x = obj::newobj(msg, argc, argv);
 					if(x){
 						t_maxobj *xx = (t_maxobj *)x;
-						dist_obj<dist_type, result_type, multivariate, param_type> *o = new dist_obj<dist_type, result_type, multivariate, param_type>;
+						dist_obj<dist_type, result_type, multivariate, xparam_type> *o = new dist_obj<dist_type, result_type, multivariate, xparam_type>;
 						obj::obj_init(x, (obj *)o);
 						xx->myobj = (void *)o;
 						critical_new(&(xx->lock));
@@ -855,8 +866,8 @@ namespace x
 			
 				static void generate(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
 				{
-					dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
-					dist_type d = dist_type(*((param_type *)x));
+					dist_obj<dist_type, result_type, multivariate, xparam_type> *x = (dist_obj<dist_type, result_type, multivariate, xparam_type> *)(_x->myobj);
+					dist_type d = dist_type(*((xparam_type *)x));
 					size_t n = 1;
 					critical_enter(_x->lock);
 					_x->n = &n;
@@ -955,8 +966,8 @@ namespace x
 						msg_anything(_x, msg, argc, argv);
 						return;
 					}
-					dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
-					dist_type d = dist_type(*((param_type *)x));
+					dist_obj<dist_type, result_type, multivariate, xparam_type> *x = (dist_obj<dist_type, result_type, multivariate, xparam_type> *)(_x->myobj);
+					dist_type d = dist_type(*((xparam_type *)x));
 					t_atom a;
 					atom_set(&a, d.min());
 					outlet_anything(((dist_obj<dist_type, result_type> *)(_x->myobj))->outlet_main(), _sym_min, 1, &a);
@@ -968,8 +979,8 @@ namespace x
 						msg_anything(_x, msg, argc, argv);
 						return;
 					}
-					dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
-					dist_type d = dist_type(*((param_type *)x));
+					dist_obj<dist_type, result_type, multivariate, xparam_type> *x = (dist_obj<dist_type, result_type, multivariate, xparam_type> *)(_x->myobj);
+					dist_type d = dist_type(*((xparam_type *)x));
 					t_atom a;
 					atom_set(&a, d.max());
 					outlet_anything(((dist_obj<dist_type, result_type> *)(_x->myobj))->outlet_main(), _sym_max, 1, &a);
@@ -977,12 +988,17 @@ namespace x
 
 				static void paramnames(t_maxobj *_x)
 				{
-					dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
-					t_atom a[x->nargs];
+					dist_obj<dist_type, result_type, multivariate, xparam_type> *x = (dist_obj<dist_type, result_type, multivariate, xparam_type> *)(_x->myobj);
+					t_atom *a = (t_atom *)_malloca(x->nargs * sizeof(t_atom));
+					if (!a) {
+						object_error((t_object*)x, "out of memory!");
+						return;
+					}
 					for(int i = 0; i < x->nargs; i++){
 						atom_setsym(a + i, x->names_sym[i]);
 					}
 					outlet_anything(x->outlet_main(), ps_paramnames, x->nargs, a);
+					_freea(a);
 				}
 
 				static void freeobj(t_maxobj *x)
@@ -998,7 +1014,7 @@ namespace x
 
 				static void param(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
 				{
-					dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
+					dist_obj<dist_type, result_type, multivariate, xparam_type> *x = (dist_obj<dist_type, result_type, multivariate, xparam_type> *)(_x->myobj);
 					t_symbol *name = msg;
 					for(int i = 0; i < x->nargs; i++){
 						if(name == x->names_sym[i]){
@@ -1020,7 +1036,7 @@ namespace x
 
 				static t_max_err attr_get(t_maxobj *_x, t_object *attr, long *argc, t_atom **argv)
 				{
-					dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
+					dist_obj<dist_type, result_type, multivariate, xparam_type> *x = (dist_obj<dist_type, result_type, multivariate, xparam_type> *)(_x->myobj);
 					t_symbol *name = (t_symbol *)object_method(attr, gensym("getname"));
 					for(int i = 0; i < x->nargs; i++){
 						if(!strncmp(name->s_name, x->names_sym[i]->s_name, strlen(name->s_name) - 1)){
@@ -1033,9 +1049,9 @@ namespace x
 
 				static t_max_err attr_set(t_maxobj *_x, t_object *attr, long argc, t_atom *argv)
 				{
-					dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
+					dist_obj<dist_type, result_type, multivariate, xparam_type> *x = (dist_obj<dist_type, result_type, multivariate, xparam_type> *)(_x->myobj);
 					t_symbol *name = (t_symbol *)object_method(attr, gensym("getname"));
-					for(int i = 0; i < x->nargs; i++){
+					for(int i = 0; i < ((xparam_type *)x)->nargs; i++){
 						if(!strncmp(name->s_name, x->names_sym[i]->s_name, strlen(name->s_name) - 1)){
 							x->setters[i](x, argc, argv);
 							break;
@@ -1046,8 +1062,8 @@ namespace x
 
 				static void doc(t_maxobj *_x)
 				{
-					dist_obj<dist_type, result_type, multivariate, param_type> *x = (dist_obj<dist_type, result_type, multivariate, param_type> *)(_x->myobj);
-					dist_type d = dist_type(*((param_type *)x));
+					dist_obj<dist_type, result_type, multivariate, xparam_type> *x = (dist_obj<dist_type, result_type, multivariate, xparam_type> *)(_x->myobj);
+					dist_type d = dist_type(*((xparam_type *)x));
 				        t_atom as[3];
 					t_symbol *doc = gensym("doc");
 					t_symbol *desc = gensym("desc");
@@ -1067,7 +1083,7 @@ namespace x
 					desc = gensym("param");
 					atom_setsym(as, desc);
 					for(int i = 0; i < d.nparams; i++){
-						s = ((param_type *)x)->names_sym[i];
+						s = ((xparam_type *)x)->names_sym[i];
 						text = gensym(d.param_desc_list[i]);
 						atom_setsym(as + 1, s);
 						atom_setsym(as + 2, text);
@@ -1087,9 +1103,9 @@ namespace x
 					class_addmethod(c, (method)min, "min", A_GIMME, 0);
 					class_addmethod(c, (method)max, "max", A_GIMME, 0);
 					class_addmethod(c, (method)paramnames, "paramnames", 0);
-					for(int i = 0; i < param_type::nargs; i++){
-						class_addmethod(c, (method)param, param_type::names_str[i], A_GIMME, 0);
-						const char *name = (std::string(param_type::names_str[i]) + std::string(" ")).c_str();
+					for(int i = 0; i < xparam_type::nargs; i++){
+						class_addmethod(c, (method)param, xparam_type::names_str[i], A_GIMME, 0);
+						const char *name = (std::string(xparam_type::names_str[i]) + std::string(" ")).c_str();
 						class_addattr(c, attr_offset_new(name, gensym("atom"), 0, (method)0L,(method)0L,calcoffset(t_maxobj, ob)));
 					
 						t_object *theattr = (t_object *)class_attr_get(c, gensym(name));
