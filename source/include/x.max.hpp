@@ -301,12 +301,12 @@ namespace x
 				if(n == 1){
 					outlet_int(x->outlet_main(), x->rd());
 				}else{
-					t_atom *out = (t_atom *)_malloca(n * sizeof(t_atom));
+					t_atom *out = (t_atom *)sysmem_newptr(n * sizeof(t_atom));
 					for(int i = 0; i < n; i++){
 						atom_setlong(out + i, x->rd());
 					}
 					outlet_list(x->outlet_main(), _sym_list, n, out);
-					_freea(out);
+					sysmem_freeptr(out);
 				}
 			}
 
@@ -420,12 +420,12 @@ namespace x
 					n = atom_getlong(argv);
 				}
 				x::proxy::seed_seq_from<x::proxy::random_device_delegate<x::proxy::delegate<uint_least32_t, t_atom, atom_get<uint_least32_t>, atom_set/*<uint_least32_t>*/>>> seed_source;
-				typename seed_seq_from_obj_base::result_type* buf = (seed_seq_from_obj_base::result_type*)_malloca(n * sizeof(seed_seq_from_obj_base::result_type));
+				typename seed_seq_from_obj_base::result_type* buf = (seed_seq_from_obj_base::result_type*)sysmem_newptr(n * sizeof(seed_seq_from_obj_base::result_type));
 				if (!buf) {
 					object_error((t_object*)x, "ran out of memory!");
 					return;
 				}
-				t_atom* out = (t_atom*)_malloca(n * sizeof(t_atom));
+				t_atom* out = (t_atom*)sysmem_newptr(n * sizeof(t_atom));
 				if (!out) {
 					object_error((t_object*)x, "ran out of memory!");
 					return;
@@ -446,8 +446,8 @@ namespace x
 					_x->n = 0;
 				}
 				critical_exit(_x->lock);
-				_freea(buf);
-				_freea(out);
+				sysmem_freeptr(buf);
+				sysmem_freeptr(out);
 			}
 
 			static void freeobj(t_maxobj *x)
@@ -542,11 +542,12 @@ namespace x
 				if(argc && atom_gettype(argv) == A_LONG){
 					n = atom_getlong(argv);
 				}
-				t_atom out[X_MAX_OUTPUT_LIST_LEN];
+				t_atom *out = (t_atom *)sysmem_newptr(n * sizeof(t_atom));
 				for(int i = 0; i < n; i++){
 					atom_set(out + i, x->_rng());
 				}
 				outlet_list(x->outlet_main(), _sym_list, n, out);
+				sysmem_freeptr(out);
 			}
 
 			static void msg_min(t_maxobj *_x)
@@ -989,7 +990,7 @@ namespace x
 				static void paramnames(t_maxobj *_x)
 				{
 					dist_obj<dist_type, result_type, multivariate, xparam_type> *x = (dist_obj<dist_type, result_type, multivariate, xparam_type> *)(_x->myobj);
-					t_atom *a = (t_atom *)_malloca(x->nargs * sizeof(t_atom));
+					t_atom *a = (t_atom *)sysmem_newptr(x->nargs * sizeof(t_atom));
 					if (!a) {
 						object_error((t_object*)x, "out of memory!");
 						return;
@@ -998,7 +999,7 @@ namespace x
 						atom_setsym(a + i, x->names_sym[i]);
 					}
 					outlet_anything(x->outlet_main(), ps_paramnames, x->nargs, a);
-					_freea(a);
+					sysmem_freeptr(a);
 				}
 
 				static void freeobj(t_maxobj *x)
