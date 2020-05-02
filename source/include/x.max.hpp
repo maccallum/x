@@ -209,7 +209,7 @@ namespace x
 		template <typename T, typename std::enable_if<std::is_integral<T>::value, T>::type* = nullptr>
 		void atom_set(t_atom *a, T v)
 		{
-			atom_setlong(a, (long)v);
+			atom_setlong(a, (long long)v);
 		}
 
 		template <typename T, typename std::enable_if<std::is_floating_point<T>::value, T>::type* = nullptr>
@@ -544,6 +544,7 @@ namespace x
 				}
 				t_atom *out = (t_atom *)sysmem_newptr(n * sizeof(t_atom));
 				for(int i = 0; i < n; i++){
+					long v = x->_rng();
 					atom_set(out + i, x->_rng());
 				}
 				outlet_list(x->outlet_main(), _sym_list, n, out);
@@ -857,12 +858,13 @@ namespace x
 					((dist_obj<dist_type, result_type> *)(_x->myobj))->init_delegate(_x, (rng_delegate_uint64 *)rng);
 					std::vector<result_type> vec = d(*rng);
 					size_t n = vec.size();
-					t_atom a[n];
+					t_atom *a = (t_atom *)sysmem_newptr(sizeof(t_atom) * n);
 					for(int i = 0; i < n; i++){
 						atom_set(a + i, vec[i]);
 					}
 					outlet_atoms(((dist_obj<dist_type, result_type> *)(_x->myobj))->outlet_main(), n, a);
 					((dist_obj<dist_type, result_type> *)(_x->myobj))->finalize_delegate(_x, (rng_delegate_uint64 *)rng);
+					sysmem_freeptr(a);
 				}
 			
 				static void generate(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)

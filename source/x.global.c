@@ -104,14 +104,14 @@ void *xglobal_new(t_symbol *msg, short argc, t_atom *argv)
 	if((x = (t_xglobal *)object_alloc(xglobal_class))){
 		x->outlet_delegation = outlet_new((t_object *)x, NULL);
 		x->outlet_main = outlet_new((t_object *)x, NULL);
-		t_object *conduit = object_findregistered(ps_xglobal_conduit, atom_getsym(argv));
+		t_object *conduit = (t_object *)object_findregistered(ps_xglobal_conduit, atom_getsym(argv));
 		if(!conduit){
 			t_atom a[2];
 			atom_setsym(a, gensym(XGLOBAL_REGISTER_ATTR));
 			atom_setlong(a + 1, 1);
 			object_new_typed(CLASS_BOX, atom_getsym(argv), 2, a);
 			object_new(CLASS_NOBOX, ps_xglobal_conduit, atom_getsym(argv));
-			conduit = object_findregistered(ps_xglobal_conduit, atom_getsym(argv));
+			conduit = (t_object *)object_findregistered(ps_xglobal_conduit, atom_getsym(argv));
 		}
 		if(conduit){
 			x->conduit = (t_xglobal_conduit *)conduit;

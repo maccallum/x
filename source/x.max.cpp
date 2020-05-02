@@ -64,5 +64,12 @@ __declspec(dllexport)
 #endif
 int main(void)
 {
+#if defined(WIN_VERSION) && defined(X_DEBUG)
+	FILE* fp;
+	AllocConsole();
+	freopen_s(&fp, "CONIN$", "r", stdin);
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	freopen_s(&fp, "CONOUT$", "w", stderr);
+#endif
 	return x::max::main();
 }

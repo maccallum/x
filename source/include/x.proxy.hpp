@@ -172,7 +172,7 @@ namespace x
 			template <typename Iter>
 			void generate(Iter start, Iter finish)
 			{
-				size_t n = finish - start + 1;
+				size_t n = finish - start;
 				delegate_type::operator()(callback, n);
 				if(delegate_type::buffer()){
 					typename delegate_type::boxed_type *buffer = delegate_type::buffer();
@@ -205,8 +205,9 @@ namespace x
 				delegate_type::operator()(callback, 1);
 				if(delegate_type::buffer() && delegate_type::buffer_len() > 0){
 					return delegate_type::unbox(delegate_type::buffer());
+				} else {
+					return 0;
 				}
-				return 0;
 			}
 
 			static constexpr result_type min()
