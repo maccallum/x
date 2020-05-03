@@ -59,3 +59,5 @@ bld/
 [Ll]og/
 [Ll]ogs/
 sysbuild/
+*.ilk
+*.pdb
