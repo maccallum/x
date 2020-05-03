@@ -29,7 +29,7 @@ SOFTWARE.
 
 #ifndef __clang__
 #define MAX_NVARS 8
-#define ST(n) #n
+#define MAX_NVARS_STR "8"
 #endif
 
 typedef struct _xdelegate{
@@ -181,6 +181,9 @@ void *xdelegate_new(t_symbol *msg, short argc, t_atom *argv)
 	return x;
 }
 
+#ifdef WIN_VERSION
+__declspec(dllexport)
+#endif
 int main(void)
 {
 	t_class *c = (t_class *)class_new("x.delegate~", (method)xdelegate_new, (method)xdelegate_free, sizeof(t_xdelegate), 0L, A_GIMME, 0);
@@ -194,7 +197,7 @@ int main(void)
 	CLASS_ATTR_INVISIBLE(c, "nvars", 0);
 	CLASS_ATTR_MIN(c, "nvars", 0, "1");
 #ifndef __clang__
-	CLASS_ATTR_MAX(c, "nvars", 0, ST(MAX_NVARS));
+	CLASS_ATTR_MAX(c, "nvars", 0, MAX_NVARS_STR);
 #endif
 	CLASS_ATTR_DEFAULT(c, "nvars", 0, "1");
 
