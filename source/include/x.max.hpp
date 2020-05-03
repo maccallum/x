@@ -438,7 +438,7 @@ namespace x
 					return;
 				}
 #else
-				typename seed_seq_from_obj_base::result_type* buf[n];
+				typename seed_seq_from_obj_base::result_type buf[n];
 				t_atom out[n];
 #endif
 				critical_enter(_x->lock);
