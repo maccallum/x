@@ -27,6 +27,11 @@ SOFTWARE.
 #include "ext_sysmem.h"
 #include "z_dsp.h"
 
+#ifdef WIN_VERSION
+#define MAX_NVARS 8
+#define ST(n) #n
+#endif
+
 typedef struct _xdelegate{
 	t_pxobject ob;
 	void *outlet_delegation;
@@ -59,7 +64,11 @@ void xdelegate_dist_perform64(t_xdelegate *x, t_object *dsp64, double **ins, lon
 {
 	for(int i = 0; i < vectorsize; i++){
 		if(ins[0][i] != 0){
+#ifdef WIN_VERSION
+			double buf[MAX_NVARS];
+#else
 			double buf[x->nvars];
+#endif
 			xdelegate_getvalues(x, buf);
 			for(int j = 0; j < numouts; j++){
 				outs[j][i] = buf[j];
@@ -145,7 +154,7 @@ void xdelegate_free(t_xdelegate *x)
 void *xdelegate_new(t_symbol *msg, short argc, t_atom *argv)
 {
 	t_xdelegate *x = NULL;
-	if((x = (t_xdelegate *)object_alloc(xdelegate_class))){
+	if((x = (t_xdelegate *)object_alloc((t_class *)xdelegate_class))){
   		dsp_setup((t_pxobject *)x, 1);
 		x->outlet_delegation = outlet_new((t_object *)x, "generate");
 		//x->mode = gensym("dist");
@@ -174,7 +183,7 @@ void *xdelegate_new(t_symbol *msg, short argc, t_atom *argv)
 
 int main(void)
 {
-	t_class *c = class_new("x.delegate~", (method)xdelegate_new, (method)xdelegate_free, sizeof(t_xdelegate), 0L, A_GIMME, 0);
+	t_class *c = (t_class *)class_new("x.delegate~", (method)xdelegate_new, (method)xdelegate_free, sizeof(t_xdelegate), 0L, A_GIMME, 0);
 	class_addmethod(c, (method)xdelegate_assist, "assist", A_CANT, 0);
     	class_addmethod(c, (method)xdelegate_dsp64, "dsp64", A_CANT, 0);
 	class_addmethod(c, (method)xdelegate_list, "list", A_GIMME, 0);
@@ -184,6 +193,9 @@ int main(void)
 	CLASS_ATTR_LONG(c, "nvars", 0, t_xdelegate, nvars);
 	CLASS_ATTR_INVISIBLE(c, "nvars", 0);
 	CLASS_ATTR_MIN(c, "nvars", 0, "1");
+#ifdef WIN_VERSION
+	CLASS_ATTR_MAX(c, "nvars", 0, ST(MAX_NVARS));
+#endif
 	CLASS_ATTR_DEFAULT(c, "nvars", 0, "1");
 
 	CLASS_ATTR_SYM(c, "mode", 0, t_xdelegate, mode);
