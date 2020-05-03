@@ -1020,7 +1020,7 @@ namespace x
 #ifndef __clang__
 					t_atom *a = (t_atom *)sysmem_newptr(x->nargs * sizeof(t_atom));
 #else
-					t_atom a[x->args];
+					t_atom a[x->nargs];
 #endif
 					if (!a) {
 						object_error((t_object*)x, "out of memory!");
