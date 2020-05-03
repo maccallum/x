@@ -27,7 +27,7 @@ SOFTWARE.
 #include "ext_sysmem.h"
 #include "z_dsp.h"
 
-#ifdef WIN_VERSION
+#ifndef __clang__
 #define MAX_NVARS 8
 #define ST(n) #n
 #endif
@@ -64,7 +64,7 @@ void xdelegate_dist_perform64(t_xdelegate *x, t_object *dsp64, double **ins, lon
 {
 	for(int i = 0; i < vectorsize; i++){
 		if(ins[0][i] != 0){
-#ifdef WIN_VERSION
+#ifndef __clang__
 			double buf[MAX_NVARS];
 #else
 			double buf[x->nvars];
@@ -193,7 +193,7 @@ int main(void)
 	CLASS_ATTR_LONG(c, "nvars", 0, t_xdelegate, nvars);
 	CLASS_ATTR_INVISIBLE(c, "nvars", 0);
 	CLASS_ATTR_MIN(c, "nvars", 0, "1");
-#ifdef WIN_VERSION
+#ifndef __clang__
 	CLASS_ATTR_MAX(c, "nvars", 0, ST(MAX_NVARS));
 #endif
 	CLASS_ATTR_DEFAULT(c, "nvars", 0, "1");

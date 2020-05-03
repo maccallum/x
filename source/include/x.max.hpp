@@ -301,12 +301,18 @@ namespace x
 				if(n == 1){
 					outlet_int(x->outlet_main(), x->rd());
 				}else{
+#ifndef __clang__
 					t_atom *out = (t_atom *)sysmem_newptr(n * sizeof(t_atom));
+#else
+					t_atom out[n];
+#endif
 					for(int i = 0; i < n; i++){
 						atom_setlong(out + i, x->rd());
 					}
 					outlet_list(x->outlet_main(), _sym_list, n, out);
+#ifndef __clang__
 					sysmem_freeptr(out);
+#endif
 				}
 			}
 
@@ -420,6 +426,7 @@ namespace x
 					n = atom_getlong(argv);
 				}
 				x::proxy::seed_seq_from<x::proxy::random_device_delegate<x::proxy::delegate<uint_least32_t, t_atom, atom_get<uint_least32_t>, atom_set/*<uint_least32_t>*/>>> seed_source;
+#ifndef __clang__
 				typename seed_seq_from_obj_base::result_type* buf = (seed_seq_from_obj_base::result_type*)sysmem_newptr(n * sizeof(seed_seq_from_obj_base::result_type));
 				if (!buf) {
 					object_error((t_object*)x, "ran out of memory!");
@@ -430,6 +437,10 @@ namespace x
 					object_error((t_object*)x, "ran out of memory!");
 					return;
 				}
+#else
+				typename seed_seq_from_obj_base::result_type* buf[n];
+				t_atom out[n];
+#endif
 				critical_enter(_x->lock);
 				_x->n = seed_source.buffer_len_address();
 				_x->buf = seed_source.buffer_address();
@@ -446,8 +457,10 @@ namespace x
 					_x->n = 0;
 				}
 				critical_exit(_x->lock);
+#ifndef __clang__
 				sysmem_freeptr(buf);
 				sysmem_freeptr(out);
+#endif
 			}
 
 			static void freeobj(t_maxobj *x)
@@ -542,13 +555,19 @@ namespace x
 				if(argc && atom_gettype(argv) == A_LONG){
 					n = atom_getlong(argv);
 				}
+#ifndef __clang__
 				t_atom *out = (t_atom *)sysmem_newptr(n * sizeof(t_atom));
+#else
+				t_atom out[n];
+#endif
 				for(int i = 0; i < n; i++){
 					long v = x->_rng();
 					atom_set(out + i, x->_rng());
 				}
 				outlet_list(x->outlet_main(), _sym_list, n, out);
+#ifndef __clang__
 				sysmem_freeptr(out);
+#endif
 			}
 
 			static void msg_min(t_maxobj *_x)
@@ -858,13 +877,19 @@ namespace x
 					((dist_obj<dist_type, result_type> *)(_x->myobj))->init_delegate(_x, (rng_delegate_uint64 *)rng);
 					std::vector<result_type> vec = d(*rng);
 					size_t n = vec.size();
+#ifndef __clang__
 					t_atom *a = (t_atom *)sysmem_newptr(sizeof(t_atom) * n);
+#else
+					t_atom a[n];
+#endif
 					for(int i = 0; i < n; i++){
 						atom_set(a + i, vec[i]);
 					}
 					outlet_atoms(((dist_obj<dist_type, result_type> *)(_x->myobj))->outlet_main(), n, a);
 					((dist_obj<dist_type, result_type> *)(_x->myobj))->finalize_delegate(_x, (rng_delegate_uint64 *)rng);
+#ifndef __clang__
 					sysmem_freeptr(a);
+#endif
 				}
 			
 				static void generate(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
@@ -992,7 +1017,11 @@ namespace x
 				static void paramnames(t_maxobj *_x)
 				{
 					dist_obj<dist_type, result_type, multivariate, xparam_type> *x = (dist_obj<dist_type, result_type, multivariate, xparam_type> *)(_x->myobj);
+#ifndef __clang__
 					t_atom *a = (t_atom *)sysmem_newptr(x->nargs * sizeof(t_atom));
+#else
+					t_atom a[x->args];
+#endif
 					if (!a) {
 						object_error((t_object*)x, "out of memory!");
 						return;
@@ -1001,7 +1030,9 @@ namespace x
 						atom_setsym(a + i, x->names_sym[i]);
 					}
 					outlet_anything(x->outlet_main(), ps_paramnames, x->nargs, a);
+#ifndef __clang__
 					sysmem_freeptr(a);
+#endif
 				}
 
 				static void freeobj(t_maxobj *x)
