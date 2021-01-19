@@ -78,6 +78,11 @@
 		523BCE9325B77FE10078A614 /* commonsyms.c in Sources */ = {isa = PBXBuildFile; fileRef = 523B363920A32703003D1A6B /* commonsyms.c */; };
 		523BCE9525B77FE10078A614 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 523B362D20A32080003D1A6B /* MaxAPI.framework */; };
 		523BCE9625B77FE10078A614 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08EA7FFBFE8413EDC02AAC07 /* Carbon.framework */; };
+		523BCE9E25B79A180078A614 /* x.max.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 521EE6AE2115F30000F281AE /* x.max.hpp */; };
+		523BCEA125B79A180078A614 /* x.max.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52582D5521343AD4000C1585 /* x.max.cpp */; };
+		523BCEA225B79A180078A614 /* commonsyms.c in Sources */ = {isa = PBXBuildFile; fileRef = 523B363920A32703003D1A6B /* commonsyms.c */; };
+		523BCEA425B79A180078A614 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 523B362D20A32080003D1A6B /* MaxAPI.framework */; };
+		523BCEA525B79A180078A614 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08EA7FFBFE8413EDC02AAC07 /* Carbon.framework */; };
 		52582D5621343AD4000C1585 /* x.max.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52582D5521343AD4000C1585 /* x.max.cpp */; };
 		52582D5721345303000C1585 /* x.max.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52582D5521343AD4000C1585 /* x.max.cpp */; };
 		52582D5921349B77000C1585 /* x.max.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52582D5521343AD4000C1585 /* x.max.cpp */; };
@@ -282,6 +287,7 @@
 		523BCE7C25B7370C0078A614 /* x.dist.bivariate_normal.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = x.dist.bivariate_normal.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 		523BCE8B25B755600078A614 /* x.dist.exponential_power.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = x.dist.exponential_power.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 		523BCE9A25B77FE10078A614 /* x.dist.rayleigh_tail.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = x.dist.rayleigh_tail.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
+		523BCEA925B79A180078A614 /* x.dist.logistic.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = x.dist.logistic.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 		52582D5521343AD4000C1585 /* x.max.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = x.max.cpp; sourceTree = "<group>"; };
 		52582D5821349B6E000C1585 /* x.proxy.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = x.proxy.hpp; path = include/x.proxy.hpp; sourceTree = "<group>"; };
 		5266D4A320C95934007D4589 /* x.dist.exponential.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = x.dist.exponential.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -399,6 +405,15 @@
 			files = (
 				523BCE9525B77FE10078A614 /* MaxAPI.framework in Frameworks */,
 				523BCE9625B77FE10078A614 /* Carbon.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		523BCEA325B79A180078A614 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				523BCEA425B79A180078A614 /* MaxAPI.framework in Frameworks */,
+				523BCEA525B79A180078A614 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -834,6 +849,7 @@
 				523BCE7C25B7370C0078A614 /* x.dist.bivariate_normal.mxo */,
 				523BCE8B25B755600078A614 /* x.dist.exponential_power.mxo */,
 				523BCE9A25B77FE10078A614 /* x.dist.rayleigh_tail.mxo */,
+				523BCEA925B79A180078A614 /* x.dist.logistic.mxo */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -909,6 +925,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				523BCE8F25B77FE10078A614 /* x.max.hpp in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		523BCE9D25B79A180078A614 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				523BCE9E25B79A180078A614 /* x.max.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1369,6 +1393,24 @@
 			name = x.dist.rayleigh_tail;
 			productName = cv.jit.dilate;
 			productReference = 523BCE9A25B77FE10078A614 /* x.dist.rayleigh_tail.mxo */;
+			productType = "com.apple.product-type.bundle";
+		};
+		523BCE9C25B79A180078A614 /* x.dist.logistic */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 523BCEA625B79A180078A614 /* Build configuration list for PBXNativeTarget "x.dist.logistic" */;
+			buildPhases = (
+				523BCE9D25B79A180078A614 /* Headers */,
+				523BCE9F25B79A180078A614 /* Resources */,
+				523BCEA025B79A180078A614 /* Sources */,
+				523BCEA325B79A180078A614 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = x.dist.logistic;
+			productName = cv.jit.dilate;
+			productReference = 523BCEA925B79A180078A614 /* x.dist.logistic.mxo */;
 			productType = "com.apple.product-type.bundle";
 		};
 		5266D49620C95934007D4589 /* x.dist.exponential */ = {
@@ -2131,6 +2173,8 @@
 				523BCE6025B725400078A614 /* x.dist.gaussian_tail */,
 				523BCE6F25B7370C0078A614 /* x.dist.bivariate_normal */,
 				523BCE7E25B755600078A614 /* x.dist.exponential_power */,
+				523BCE8D25B77FE10078A614 /* x.dist.rayleigh_tail */,
+				523BCE9C25B79A180078A614 /* x.dist.logistic */,
 				5266D54120C974E4007D4589 /* x.dist.normal */,
 				5266D55020C974E6007D4589 /* x.dist.lognormal */,
 				5266D55F20C974E8007D4589 /* x.dist.chi_squared */,
@@ -2144,7 +2188,6 @@
 				52B21076214ABC25002FC3CD /* x.dist */,
 				52B210652145B083002FC3CD /* x.global */,
 				52B21017213EDC0F002FC3CD /* x.delegate~ */,
-				523BCE8D25B77FE10078A614 /* x.dist.rayleigh_tail */,
 			);
 		};
 /* End PBXProject section */
@@ -2200,6 +2243,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		523BCE9025B77FE10078A614 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		523BCE9F25B79A180078A614 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2551,6 +2601,15 @@
 			files = (
 				523BCE9225B77FE10078A614 /* x.max.cpp in Sources */,
 				523BCE9325B77FE10078A614 /* commonsyms.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		523BCEA025B79A180078A614 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				523BCEA125B79A180078A614 /* x.max.cpp in Sources */,
+				523BCEA225B79A180078A614 /* commonsyms.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3963,6 +4022,115 @@
 					"$(OTHER_CFLAGS)",
 					"-Wall",
 					"-DX_MAX_TYPE=rayleigh_tail",
+					"-DX_MAX_CLASS=dist",
+				);
+				OTHER_LDFLAGS = "$(inherited)";
+				PREBINDING = YES;
+				PRELINK_LIBS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = "$(inherited)";
+				SHARED_PRECOMPS_DIR = "$(inherited)";
+				SKIP_INSTALL = NO;
+				SYMROOT = "$(inherited)";
+				VERSION_INFO_BUILDER = "$(TARGET_NAME)";
+				WARNING_CFLAGS = "$(inherited)";
+				WRAPPER_EXTENSION = "$(inherited)";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		523BCEA725B79A180078A614 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(inherited)";
+				COPY_PHASE_STRIP = NO;
+				DEPLOYMENT_LOCATION = YES;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/max-sdk/source/c74support/max-includes",
+					"$(PROJECT_DIR)/max-sdk/source/c74support/jit-includes",
+					"$(PROJECT_DIR)/max-sdk/source/c74support/msp-includes",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
+				GCC_ALTIVEC_EXTENSIONS = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INPUT_FILETYPE = automatic;
+				GCC_MODEL_TUNING = G4;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(inherited)";
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "$(inherited)";
+				INSTALL_PATH = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../libo\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/../../libomax\"";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				OBJROOT = "$(inherited)";
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-Wall",
+					"-DX_MAX_TYPE=logistic",
+					"-DX_MAX_CLASS=dist",
+				);
+				OTHER_LDFLAGS = "$(inherited)";
+				PREBINDING = YES;
+				PRELINK_LIBS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = "$(inherited)";
+				SHARED_PRECOMPS_DIR = "$(inherited)";
+				SKIP_INSTALL = NO;
+				SYMROOT = "$(inherited)";
+				VERSION_INFO_BUILDER = "$(TARGET_NAME)";
+				WARNING_CFLAGS = "$(inherited)";
+				WRAPPER_EXTENSION = "$(inherited)";
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		523BCEA825B79A180078A614 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(inherited)";
+				COPY_PHASE_STRIP = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				DSTROOT = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/max-sdk/source/c74support/max-includes",
+					"$(PROJECT_DIR)/max-sdk/source/c74support/jit-includes",
+					"$(PROJECT_DIR)/max-sdk/source/c74support/msp-includes",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
+				GCC_ALTIVEC_EXTENSIONS = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INPUT_FILETYPE = automatic;
+				GCC_MODEL_TUNING = G4;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(inherited)";
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "$(inherited)";
+				INSTALL_PATH = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../libo\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/../../libomax\"";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				OBJROOT = "$(inherited)";
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-Wall",
+					"-DX_MAX_TYPE=logistic",
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
@@ -8370,6 +8538,15 @@
 			buildConfigurations = (
 				523BCE9825B77FE10078A614 /* Debug */,
 				523BCE9925B77FE10078A614 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		523BCEA625B79A180078A614 /* Build configuration list for PBXNativeTarget "x.dist.logistic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				523BCEA725B79A180078A614 /* Debug */,
+				523BCEA825B79A180078A614 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -2586,6 +2586,18 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
+									"id" : "obj-37",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "" ],
+									"patching_rect" : [ 80.0, 761.0, 77.0, 20.0 ],
+									"text" : "x.dist.logistic"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"id" : "obj-36",
 									"maxclass" : "newobj",
 									"numinlets" : 1,
@@ -4315,7 +4327,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 80.0, 799.0, 95.0, 20.0 ],
+									"patching_rect" : [ 80.0, 809.0, 95.0, 20.0 ],
 									"text" : "x.dist.lognormal"
 								}
 
@@ -4327,7 +4339,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 80.0, 768.0, 79.0, 20.0 ],
+									"patching_rect" : [ 80.0, 787.0, 79.0, 20.0 ],
 									"text" : "x.dist.normal"
 								}
 
@@ -4822,6 +4834,10 @@
 			}
 , 			{
 				"name" : "x.dist.rayleigh_tail.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.logistic.mxo",
 				"type" : "iLaX"
 			}
 , 			{

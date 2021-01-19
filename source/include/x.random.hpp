@@ -2086,8 +2086,8 @@ namespace x
 			result_type beta() const {return __p_.beta();}
 			param_type param() const {return __p_;}
 			void param(const param_type& __p) {__p_ = __p;}
-			result_type min() const {return 0;}
-			result_type max() const {return 1.;}
+			result_type min() const {return -std::numeric_limits<result_type>::infinity();}
+			result_type max() const {return std::numeric_limits<result_type>::infinity();}
 
 			friend bool operator==(const exponential_power_distribution& __x,
 					       const exponential_power_distribution& __y)
@@ -2286,6 +2286,114 @@ namespace x
 			__is >> __a >> __sigma;
 			if (!__is.fail())
 				__x.param(param_type(__a, __sigma));
+			return __is;
+		}
+
+		// logistic distribution
+		template<class _RealType = double>
+		class logistic_distribution
+		{
+		public:
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "";
+			static const int nparams = 2;
+			static constexpr const char * const param_mu_desc = "Position";
+			static constexpr const char * const param_s_desc = "Scale";
+			static constexpr const char * const param_desc_list[nparams] = {param_mu_desc, param_s_desc};
+			// types
+			typedef _RealType result_type;
+
+			class param_type
+			{
+				result_type __mu_;
+				result_type __s_;
+			public:
+				typedef logistic_distribution distribution_type;
+				explicit param_type(long __mu = 0, result_type __s = 1)
+					: __mu_(__mu), __s_(__s) {}
+				result_type mu() const {return __mu_;}
+				result_type s() const {return __s_;}
+				friend bool operator==(const param_type& __x, const param_type& __y)
+				{return __x.__mu_ == __y.__mu_ && __x.__s_ == __y.__s_;}
+				friend bool operator!=(const param_type& __x, const param_type& __y)
+				{return !(__x == __y);}
+			};
+
+		private:
+			param_type __p_;
+
+		public:
+			// constructors and reset functions
+			explicit logistic_distribution(long __mu = 0, result_type __s = 1)
+				: __p_(param_type(__mu, __s)) {}
+			explicit logistic_distribution(const param_type& __p)
+				: __p_(__p) {}
+			void reset() {}
+
+			// generating functions
+			template<class _URNG>
+			result_type operator()(_URNG& __g)
+			{return (*this)(__g, __p_);}
+			template<class _URNG> result_type operator()(_URNG& __g, const param_type& __p);
+
+			// property functions
+			result_type mu() const {return __p_.mu();}
+			result_type s() const {return __p_.s();}
+			param_type param() const {return __p_;}
+			void param(const param_type& __p) {__p_ = __p;}
+			result_type min() const {return -std::numeric_limits<result_type>::infinity();}
+			result_type max() const {return std::numeric_limits<result_type>::infinity();}
+
+			friend bool operator==(const logistic_distribution& __x,
+					       const logistic_distribution& __y)
+			{return __x.__p_ == __y.__p_;}
+			friend bool operator!=(const logistic_distribution& __x,
+					       const logistic_distribution& __y)
+			{return !(__x == __y);}
+		};
+
+		template <class _RealType>
+		template<class _URNG>
+		_RealType
+		logistic_distribution<_RealType>::operator()(_URNG& __g, const param_type& __p)
+		{
+			std::uniform_real_distribution<result_type> du(0, 1);
+			result_type u;
+			do{
+				u = du(__g);
+			}while(u == 0 || u == 1);
+			return __p.mu() + __p.s() * log(u / (1 - u));
+		}
+
+		template <class _CharT, class _Traits, class _RT>
+		std::basic_ostream<_CharT, _Traits>&
+		operator<<(std::basic_ostream<_CharT, _Traits>& __os,
+			   const logistic_distribution<_RT>& __x)
+		{
+			std::__save_flags<_CharT, _Traits> __lx(__os);
+			__os.flags(std::ios_base::dec | std::ios_base::left | std::ios_base::fixed |
+				   std::ios_base::scientific);
+			_CharT __sp = __os.widen(' ');
+			__os.fill(__sp);
+			__os << __x.mu() << __sp << __x.s();
+			return __os;
+		}
+
+		template <class _CharT, class _Traits, class _RT>
+		std::basic_istream<_CharT, _Traits>&
+		operator>>(std::basic_istream<_CharT, _Traits>& __is,
+			   logistic_distribution<_RT>& __x)
+		{
+			typedef logistic_distribution<_RT> _Eng;
+			typedef typename _Eng::result_type result_type;
+			typedef typename _Eng::param_type param_type;
+			std::__save_flags<_CharT, _Traits> __lx(__is);
+			__is.flags(std::ios_base::dec | std::ios_base::skipws);
+			result_type __mu;
+			result_type __s;
+			__is >> __mu >> __s;
+			if (!__is.fail())
+				__x.param(param_type(__mu, __s));
 			return __is;
 		}
 
@@ -2494,6 +2602,15 @@ namespace x
 			rayleigh_tail_distribution_param_type(double p1, double p2) : x::random::rayleigh_tail_distribution<double>::param_type(p1, p2) {}
 			double param1(void){return a();}
 			double param2(void){return sigma();}
+		};
+
+		class logistic_distribution_param_type : public x::random::logistic_distribution<double>::param_type
+		{
+		public:
+			logistic_distribution_param_type(void) : x::random::logistic_distribution<double>::param_type() {}
+			logistic_distribution_param_type(double p1, double p2) : x::random::logistic_distribution<double>::param_type(p1, p2) {}
+			double param1(void){return mu();}
+			double param2(void){return s();}
 		};
 
 		class normal_distribution_param_type : public normal_distribution<double>::param_type

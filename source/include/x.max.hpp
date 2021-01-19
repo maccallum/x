@@ -1326,6 +1326,13 @@ namespace x
 			return _dist_rayleigh_tail_obj.newobj(msg, argc, argv);
 		}
 
+		using dist_logistic_obj = dist_obj<x::random::logistic_distribution<double>, double, false, param_type_2<x::random::logistic_distribution_param_type, double, mu_str, double, false, s_str, double, false>>;
+		dist_logistic_obj _dist_logistic_obj;
+		t_object *dist_logistic_newobj(t_symbol *msg, short argc, t_atom *argv)
+		{
+			return _dist_logistic_obj.newobj(msg, argc, argv);
+		}
+
 		using dist_lognormal_obj = dist_obj<x::random::lognormal_distribution<double>, double, false, param_type_2<x::random::lognormal_distribution_param_type, double, m_str, double, false, s_str, double, false>>;
 		dist_lognormal_obj _dist_lognormal_obj;
 		t_object *dist_lognormal_newobj(t_symbol *msg, short argc, t_atom *argv)
