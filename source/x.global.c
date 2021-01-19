@@ -74,7 +74,10 @@ void xglobal_float(t_xglobal *x, double f)
 	xglobal_anything(x, gensym("float"), 1, &a);
 }
 
-
+void xglobal_doc(t_xglobal *x)
+{
+	xglobal_anything(x, gensym("doc"), 0, NULL);
+}
 
 void xglobal_notify(t_xglobal *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
@@ -131,6 +134,7 @@ void ext_main(void *r)
 	class_addmethod(c, (method)xglobal_anything, "anything", A_GIMME, 0);
 	class_addmethod(c, (method)xglobal_assist, "assist", A_CANT, 0);
 	class_addmethod(c, (method)xglobal_notify, "notify", A_CANT, 0);
+	class_addmethod(c, (method)xglobal_doc, "doc", 0);
 
 	class_register(CLASS_BOX, c);
 	xglobal_class = c;

@@ -61,3 +61,8 @@ bld/
 sysbuild/
 *.ilk
 *.pdb
+
+.DS_Store
+.dsp_cache
+build
+xcuserdata
