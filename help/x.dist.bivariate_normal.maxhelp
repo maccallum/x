@@ -183,12 +183,12 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-10",
-					"linecount" : 2,
+					"linecount" : 3,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 201.0, 26.0, 404.0, 30.0 ],
-					"text" : "Produce a random variable from the tail (i.e. greater than <a>) of a gaussian distribution with standard deviation <sigma>."
+					"patching_rect" : [ 201.0, 26.0, 404.0, 42.0 ],
+					"text" : "Produce a random variable from the bivariate gaussian distribution with standard deviations <sigmax> and <sigmay> in the x and y directions respectively, and correlation parameter <rho>."
 				}
 
 			}

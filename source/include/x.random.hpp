@@ -1936,7 +1936,7 @@ namespace x
 				result_type __rho_;
 			public:
 				typedef bivariate_normal_distribution distribution_type;
-				explicit param_type(result_type __sigmax = 1, result_type __sigmay = 1, result_type __rho = 1)
+				explicit param_type(result_type __sigmax = 1, result_type __sigmay = 1, result_type __rho = 0)
 					: __sigmax_(__sigmax), __sigmay_(__sigmay), __rho_(__rho) {}
 				result_type sigmax() const {return __sigmax_;}
 				result_type sigmay() const {return __sigmay_;}
@@ -1952,7 +1952,7 @@ namespace x
 
 		public:
 			// constructors and reset functions
-			explicit bivariate_normal_distribution(long __sigmax = 1, result_type __sigmay = 1, result_type __rho = 1)
+			explicit bivariate_normal_distribution(long __sigmax = 1, result_type __sigmay = 1, result_type __rho = 0)
 				: __p_(param_type(__sigmax, __sigmay, __rho)) {}
 			explicit bivariate_normal_distribution(const param_type& __p)
 				: __p_(__p) {}
@@ -2031,6 +2031,261 @@ namespace x
 			__is >> __sigmax >> __sigmay >> __rho;
 			if (!__is.fail())
 				__x.param(param_type(__sigmax, __sigmay, __rho));
+			return __is;
+		}
+
+		// exponential power distribution		
+		template<class _RealType = double>
+		class exponential_power_distribution
+		{
+		public:
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "";
+			static const int nparams = 2;
+			static constexpr const char * const param_alpha_desc = "Scale";
+			static constexpr const char * const param_beta_desc = "Shape";
+			static constexpr const char * const param_desc_list[nparams] = {param_alpha_desc, param_beta_desc};
+			// types
+			typedef _RealType result_type;
+
+			class param_type
+			{
+				result_type __alpha_;
+				result_type __beta_;
+			public:
+				typedef exponential_power_distribution distribution_type;
+				explicit param_type(result_type __alpha = 1, result_type __beta = 1)
+					: __alpha_(__alpha), __beta_(__beta) {}
+				result_type alpha() const {return __alpha_;}
+				result_type beta() const {return __beta_;}
+				friend bool operator==(const param_type& __x, const param_type& __y)
+				{return __x.__alpha_ == __y.__alpha_ && __x.__beta_ == __y.__beta_;}
+				friend bool operator!=(const param_type& __x, const param_type& __y)
+				{return !(__x == __y);}
+			};
+
+		private:
+			param_type __p_;
+
+		public:
+			// constructors and reset functions
+			explicit exponential_power_distribution(result_type __alpha = 1, result_type __beta = 1)
+				: __p_(param_type(__alpha, __beta)) {}
+			explicit exponential_power_distribution(const param_type& __p)
+				: __p_(__p) {}
+			void reset() {}
+
+			// generating functions
+			template<class _URNG>
+			result_type operator()(_URNG& __g)
+			{return (*this)(__g, __p_);}
+			template<class _URNG> result_type operator()(_URNG& __g, const param_type& __p);
+
+			// property functions
+			result_type alpha() const {return __p_.alpha();}
+			result_type beta() const {return __p_.beta();}
+			param_type param() const {return __p_;}
+			void param(const param_type& __p) {__p_ = __p;}
+			result_type min() const {return 0;}
+			result_type max() const {return 1.;}
+
+			friend bool operator==(const exponential_power_distribution& __x,
+					       const exponential_power_distribution& __y)
+			{return __x.__p_ == __y.__p_;}
+			friend bool operator!=(const exponential_power_distribution& __x,
+					       const exponential_power_distribution& __y)
+			{return !(__x == __y);}
+		};
+
+		template <class _RealType>
+		template<class _URNG>
+		_RealType
+		exponential_power_distribution<_RealType>::operator()(_URNG& __g, const param_type& __p)
+		{
+			result_type a = __p.alpha();
+			result_type b = __p.beta();
+
+			if(b < 1 || b > 4){
+				std::uniform_real_distribution<result_type> du(0, 1);
+				gamma_distribution<result_type> g(1. / b, 1.);
+				result_type u = du(__g);
+				result_type v = g(__g);
+				result_type z = a * pow(v, 1 / b);
+				if(u > 0.5){
+					return z;
+				}else{
+					return -z;
+				}
+			}else if(b == 1){
+				laplace_distribution<result_type> l(0, a);
+				return l(__g);
+			}else if(b < 2){
+				double x, h, u, B = pow(1 / b, 1 / b);
+				laplace_distribution<result_type> l(0, B);
+				std::uniform_real_distribution<result_type> du(0, 1);
+				do{
+					x = l(__g);
+					do{
+						u = du(__g);
+					}while(u == 0);
+					h = -pow(fabs(x), b) + fabs(x) / B - 1 + (1 / b);
+				}while(log(u) > h);
+				return a * x;
+			}else if(b == 2){
+				normal_distribution<result_type> g(0., a / sqrt(2.));
+				return g(__g);
+			}else{
+				double x, h, u, B = pow(1 / b, 1 / b);
+				normal_distribution<result_type> g(0., B);
+				std::uniform_real_distribution<result_type> du(0, 1);
+				do{
+					x = g(__g);
+					do{
+						u = du(__g);
+					}while(u == 0);
+					h = -pow(fabs(x), b) + (x * x) / (2 * B * B) * (1 / b) - 0.5;
+				}while(log(u) > h);
+				return a * x;
+			}
+		}
+
+		template <class _CharT, class _Traits, class _RT>
+		std::basic_ostream<_CharT, _Traits>&
+		operator<<(std::basic_ostream<_CharT, _Traits>& __os,
+			   const exponential_power_distribution<_RT>& __x)
+		{
+			std::__save_flags<_CharT, _Traits> __lx(__os);
+			__os.flags(std::ios_base::dec | std::ios_base::left | std::ios_base::fixed |
+				   std::ios_base::scientific);
+			_CharT __sp = __os.widen(' ');
+			__os.fill(__sp);
+			__os << __x.alpha() << __sp << __x.beta();
+			return __os;
+		}
+
+		template <class _CharT, class _Traits, class _RT>
+		std::basic_istream<_CharT, _Traits>&
+		operator>>(std::basic_istream<_CharT, _Traits>& __is,
+			   exponential_power_distribution<_RT>& __x)
+		{
+			typedef exponential_power_distribution<_RT> _Eng;
+			typedef typename _Eng::result_type result_type;
+			typedef typename _Eng::param_type param_type;
+			std::__save_flags<_CharT, _Traits> __lx(__is);
+			__is.flags(std::ios_base::dec | std::ios_base::skipws);
+			result_type __alpha;
+			result_type __beta;
+			__is >> __alpha >> __beta;
+			if (!__is.fail())
+				__x.param(param_type(__alpha, __beta));
+			return __is;
+		}
+
+		// rayleigh_tail distribution
+		template<class _RealType = double>
+		class rayleigh_tail_distribution
+		{
+		public:
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "";
+			static const int nparams = 2;
+			static constexpr const char * const param_a_desc = "Lower bound";
+			static constexpr const char * const param_sigma_desc = "Scale";
+			static constexpr const char * const param_desc_list[nparams] = {param_a_desc, param_sigma_desc};
+			// types
+			typedef _RealType result_type;
+
+			class param_type
+			{
+				result_type __a_;
+				result_type __sigma_;
+			public:
+				typedef rayleigh_tail_distribution distribution_type;
+				explicit param_type(long __a = 1, result_type __sigma = 1)
+					: __a_(__a), __sigma_(__sigma) {}
+				result_type a() const {return __a_;}
+				result_type sigma() const {return __sigma_;}
+				friend bool operator==(const param_type& __x, const param_type& __y)
+				{return __x.__a_ == __y.__a_ && __x.__sigma_ == __y.__sigma_;}
+				friend bool operator!=(const param_type& __x, const param_type& __y)
+				{return !(__x == __y);}
+			};
+
+		private:
+			param_type __p_;
+
+		public:
+			// constructors and reset functions
+			explicit rayleigh_tail_distribution(long __a = 1, result_type __sigma = 1)
+				: __p_(param_type(__a, __sigma)) {}
+			explicit rayleigh_tail_distribution(const param_type& __p)
+				: __p_(__p) {}
+			void reset() {}
+
+			// generating functions
+			template<class _URNG>
+			result_type operator()(_URNG& __g)
+			{return (*this)(__g, __p_);}
+			template<class _URNG> result_type operator()(_URNG& __g, const param_type& __p);
+
+			// property functions
+			result_type a() const {return __p_.a();}
+			result_type sigma() const {return __p_.sigma();}
+			param_type param() const {return __p_;}
+			void param(const param_type& __p) {__p_ = __p;}
+			result_type min() const {return nextafter(a(), a() + 1);}
+			result_type max() const {return std::numeric_limits<result_type>::infinity();}
+
+			friend bool operator==(const rayleigh_tail_distribution& __x,
+					       const rayleigh_tail_distribution& __y)
+			{return __x.__p_ == __y.__p_;}
+			friend bool operator!=(const rayleigh_tail_distribution& __x,
+					       const rayleigh_tail_distribution& __y)
+			{return !(__x == __y);}
+		};
+
+		template <class _RealType>
+		template<class _URNG>
+		_RealType
+		rayleigh_tail_distribution<_RealType>::operator()(_URNG& __g, const param_type& __p)
+		{
+			std::uniform_real_distribution<result_type> du(0, 1);
+			result_type u, a = __p.a(), sigma = __p.sigma();
+			do{
+				u = du(__g);
+			}while(u == 0);
+			return sqrt(a * a - 2. * sigma * sigma * log(u));
+		}
+
+		template <class _CharT, class _Traits, class _RT>
+		std::basic_ostream<_CharT, _Traits>&
+		operator<<(std::basic_ostream<_CharT, _Traits>& __os,
+			   const rayleigh_tail_distribution<_RT>& __x)
+		{
+			std::__save_flags<_CharT, _Traits> __lx(__os);
+			__os.flags(std::ios_base::dec | std::ios_base::left | std::ios_base::fixed |
+				   std::ios_base::scientific);
+			_CharT __sp = __os.widen(' ');
+			__os.fill(__sp);
+			__os << __x.a() << __sp << __x.sigma();
+			return __os;
+		}
+
+		template <class _CharT, class _Traits, class _RT>
+		std::basic_istream<_CharT, _Traits>&
+		operator>>(std::basic_istream<_CharT, _Traits>& __is,
+			   rayleigh_tail_distribution<_RT>& __x)
+		{
+			typedef rayleigh_tail_distribution<_RT> _Eng;
+			typedef typename _Eng::result_type result_type;
+			typedef typename _Eng::param_type param_type;
+			std::__save_flags<_CharT, _Traits> __lx(__is);
+			__is.flags(std::ios_base::dec | std::ios_base::skipws);
+			result_type __a;
+			result_type __sigma;
+			__is >> __a >> __sigma;
+			if (!__is.fail())
+				__x.param(param_type(__a, __sigma));
 			return __is;
 		}
 
@@ -2221,6 +2476,24 @@ namespace x
 			double param1(void){return sigmax();}
 			double param2(void){return sigmay();}
 			double param3(void){return rho();}
+		};
+
+		class exponential_power_distribution_param_type : public x::random::exponential_power_distribution<double>::param_type
+		{
+		public:
+			exponential_power_distribution_param_type(void) : x::random::exponential_power_distribution<double>::param_type() {}
+			exponential_power_distribution_param_type(double p1, double p2) : x::random::exponential_power_distribution<double>::param_type(p1, p2) {}
+			double param1(void){return alpha();}
+			double param2(void){return beta();}
+		};
+
+		class rayleigh_tail_distribution_param_type : public x::random::rayleigh_tail_distribution<double>::param_type
+		{
+		public:
+			rayleigh_tail_distribution_param_type(void) : x::random::rayleigh_tail_distribution<double>::param_type() {}
+			rayleigh_tail_distribution_param_type(double p1, double p2) : x::random::rayleigh_tail_distribution<double>::param_type(p1, p2) {}
+			double param1(void){return a();}
+			double param2(void){return sigma();}
 		};
 
 		class normal_distribution_param_type : public normal_distribution<double>::param_type

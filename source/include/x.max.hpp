@@ -1312,6 +1312,20 @@ namespace x
 			return _dist_bivariate_normal_obj.newobj(msg, argc, argv);
 		}
 
+		using dist_exponential_power_obj = dist_obj<x::random::exponential_power_distribution<double>, double, false, param_type_2<x::random::exponential_power_distribution_param_type, double, alpha_str, double, false, beta_str, double, false>>;
+		dist_exponential_power_obj _dist_exponential_power_obj;
+		t_object *dist_exponential_power_newobj(t_symbol *msg, short argc, t_atom *argv)
+		{
+			return _dist_exponential_power_obj.newobj(msg, argc, argv);
+		}
+
+		using dist_rayleigh_tail_obj = dist_obj<x::random::rayleigh_tail_distribution<double>, double, false, param_type_2<x::random::rayleigh_tail_distribution_param_type, double, a_str, double, false, sigma_str, double, false>>;
+		dist_rayleigh_tail_obj _dist_rayleigh_tail_obj;
+		t_object *dist_rayleigh_tail_newobj(t_symbol *msg, short argc, t_atom *argv)
+		{
+			return _dist_rayleigh_tail_obj.newobj(msg, argc, argv);
+		}
+
 		using dist_lognormal_obj = dist_obj<x::random::lognormal_distribution<double>, double, false, param_type_2<x::random::lognormal_distribution_param_type, double, m_str, double, false, s_str, double, false>>;
 		dist_lognormal_obj _dist_lognormal_obj;
 		t_object *dist_lognormal_newobj(t_symbol *msg, short argc, t_atom *argv)
