@@ -2588,12 +2588,24 @@
 						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
+									"id" : "obj-33",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "" ],
+									"patching_rect" : [ 80.0, 693.0, 129.0, 20.0 ],
+									"text" : "x.dist.bivariate_normal"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"id" : "obj-25",
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 80.0, 671.0, 110.0, 20.0 ],
+									"patching_rect" : [ 80.0, 663.0, 110.0, 20.0 ],
 									"text" : "x.dist.gaussian_tail"
 								}
 
@@ -4776,6 +4788,10 @@
 			}
 , 			{
 				"name" : "x.dist.gaussian_tail.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.bivariate_normal.mxo",
 				"type" : "iLaX"
 			}
 , 			{

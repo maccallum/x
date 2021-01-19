@@ -799,7 +799,10 @@ namespace x
 		const char intervals_str[] = "intervals";
 		const char densities_str[] = "densities";
 		const char mu_str[] = "mu";
+		const char rho_str[] = "rho";
 		const char sigma_str[] = "sigma";
+		const char sigmax_str[] = "sigmax";
+		const char sigmay_str[] = "sigmay";
 		const char a_str[] = "a";
 		const char b_str[] = "b";
 		const char k_str[] = "k";
@@ -1300,6 +1303,13 @@ namespace x
 		t_object *dist_gaussian_tail_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_gaussian_tail_obj.newobj(msg, argc, argv);
+		}
+
+		using dist_bivariate_normal_obj = dist_obj<x::random::bivariate_normal_distribution<double>, double, true, param_type_3<x::random::bivariate_normal_distribution_param_type, double, sigmax_str, double, false, sigmay_str, double, false, rho_str, double, false>>;
+		dist_bivariate_normal_obj _dist_bivariate_normal_obj;
+		t_object *dist_bivariate_normal_newobj(t_symbol *msg, short argc, t_atom *argv)
+		{
+			return _dist_bivariate_normal_obj.newobj(msg, argc, argv);
 		}
 
 		using dist_lognormal_obj = dist_obj<x::random::lognormal_distribution<double>, double, false, param_type_2<x::random::lognormal_distribution_param_type, double, m_str, double, false, s_str, double, false>>;

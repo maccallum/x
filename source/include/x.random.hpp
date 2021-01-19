@@ -1816,7 +1816,7 @@ namespace x
 				result_type a() const {return __a_;}
 				result_type sigma() const {return __sigma_;}
 				friend bool operator==(const param_type& __x, const param_type& __y)
-				{return __x.__k_ == __y.__k_ && __x.__lambda_ == __y.__lambda_;}
+				{return __x.__a_ == __y.__a_ && __x.__sigma_ == __y.__sigma_;}
 				friend bool operator!=(const param_type& __x, const param_type& __y)
 				{return !(__x == __y);}
 			};
@@ -1911,6 +1911,126 @@ namespace x
 			__is >> __a >> __sigma;
 			if (!__is.fail())
 				__x.param(param_type(__a, __sigma));
+			return __is;
+		}
+
+		// bivariate_normal distribution
+		template<class _RealType = double>
+		class bivariate_normal_distribution
+		{
+		public:
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "";
+			static const int nparams = 3;
+			static constexpr const char * const param_sigmax_desc = "Standard deviation in the X direction";
+			static constexpr const char * const param_sigmay_desc = "Standard deviation in the Y direction";
+			static constexpr const char * const param_rho_desc = "Correlation coefficient";
+			static constexpr const char * const param_desc_list[nparams] = {param_sigmax_desc, param_sigmay_desc, param_rho_desc};
+			// types
+			typedef _RealType result_type;
+
+			class param_type
+			{
+				result_type __sigmax_;
+				result_type __sigmay_;
+				result_type __rho_;
+			public:
+				typedef bivariate_normal_distribution distribution_type;
+				explicit param_type(result_type __sigmax = 1, result_type __sigmay = 1, result_type __rho = 1)
+					: __sigmax_(__sigmax), __sigmay_(__sigmay), __rho_(__rho) {}
+				result_type sigmax() const {return __sigmax_;}
+				result_type sigmay() const {return __sigmay_;}
+				result_type rho() const {return __rho_;}
+				friend bool operator==(const param_type& __x, const param_type& __y)
+				{return __x.__sigmax_ == __y.__sigmax_ && __x.__sigmay_ == __y.__sigmay_ && __x.rho_ == __y.rho_;}
+				friend bool operator!=(const param_type& __x, const param_type& __y)
+				{return !(__x == __y);}
+			};
+
+		private:
+			param_type __p_;
+
+		public:
+			// constructors and reset functions
+			explicit bivariate_normal_distribution(long __sigmax = 1, result_type __sigmay = 1, result_type __rho = 1)
+				: __p_(param_type(__sigmax, __sigmay, __rho)) {}
+			explicit bivariate_normal_distribution(const param_type& __p)
+				: __p_(__p) {}
+			void reset() {}
+
+			// generating functions
+			template<class _URNG>
+			std::vector<result_type> operator()(_URNG& __g)
+			{return (*this)(__g, __p_);}
+			template<class _URNG> std::vector<result_type> operator()(_URNG& __g, const param_type& __p);
+
+			// property functions
+			result_type sigmax() const {return __p_.sigmax();}
+			result_type sigmay() const {return __p_.sigmay();}
+			result_type rho() const {return __p_.rho();}
+			param_type param() const {return __p_;}
+			void param(const param_type& __p) {__p_ = __p;}
+			result_type min() const {return -std::numeric_limits<result_type>::infinity();}
+			result_type max() const {return std::numeric_limits<result_type>::infinity();}
+
+			friend bool operator==(const bivariate_normal_distribution& __x,
+					       const bivariate_normal_distribution& __y)
+			{return __x.__p_ == __y.__p_;}
+			friend bool operator!=(const bivariate_normal_distribution& __x,
+					       const bivariate_normal_distribution& __y)
+			{return !(__x == __y);}
+		};
+
+		template <class _RealType>
+		template<class _URNG>
+		std::vector<_RealType>
+		bivariate_normal_distribution<_RealType>::operator()(_URNG& __g, const param_type& __p)
+		{
+			std::uniform_real_distribution<result_type> du(0, 1);
+			result_type u1, u2, r;
+			do{
+				u1 = -1 + 2 * du(__g);
+				u2 = -1 + 2 * du(__g);
+				r = u1 * u1 + u2 * u2;
+			}while(r > 1.0 || r == 0);
+			result_type s = sqrt(-2. * log(r) / r);
+			result_type rho = __p.rho();
+			result_type x = __p.sigmax() * u1 * s;
+			result_type y = __p.sigmay() * (rho * u1 + sqrt(1 - rho * rho) * u2) * s;
+			std::vector<_RealType> out{x, y};
+			return out;
+		}
+
+		template <class _CharT, class _Traits, class _RT>
+		std::basic_ostream<_CharT, _Traits>&
+		operator<<(std::basic_ostream<_CharT, _Traits>& __os,
+			   const bivariate_normal_distribution<_RT>& __x)
+		{
+			std::__save_flags<_CharT, _Traits> __lx(__os);
+			__os.flags(std::ios_base::dec | std::ios_base::left | std::ios_base::fixed |
+				   std::ios_base::scientific);
+			_CharT __sp = __os.widen(' ');
+			__os.fill(__sp);
+			__os << __x.sigmax() << __sp << __x.sigmay() << __sp << __x.rho();
+			return __os;
+		}
+
+		template <class _CharT, class _Traits, class _RT>
+		std::basic_istream<_CharT, _Traits>&
+		operator>>(std::basic_istream<_CharT, _Traits>& __is,
+			   bivariate_normal_distribution<_RT>& __x)
+		{
+			typedef bivariate_normal_distribution<_RT> _Eng;
+			typedef typename _Eng::result_type result_type;
+			typedef typename _Eng::param_type param_type;
+			std::__save_flags<_CharT, _Traits> __lx(__is);
+			__is.flags(std::ios_base::dec | std::ios_base::skipws);
+			result_type __sigmax;
+			result_type __sigmay;
+			result_type __rho;
+			__is >> __sigmax >> __sigmay >> __rho;
+			if (!__is.fail())
+				__x.param(param_type(__sigmax, __sigmay, __rho));
 			return __is;
 		}
 
@@ -2091,6 +2211,16 @@ namespace x
 			gaussian_tail_distribution_param_type(double p1, double p2) : x::random::gaussian_tail_distribution<double>::param_type(p1, p2) {}
 			double param1(void){return a();}
 			double param2(void){return sigma();}
+		};
+
+		class bivariate_normal_distribution_param_type : public x::random::bivariate_normal_distribution<double>::param_type
+		{
+		public:
+			bivariate_normal_distribution_param_type(void) : x::random::bivariate_normal_distribution<double>::param_type() {}
+			bivariate_normal_distribution_param_type(double p1, double p2, double p3) : x::random::bivariate_normal_distribution<double>::param_type(p1, p2, p3) {}
+			double param1(void){return sigmax();}
+			double param2(void){return sigmay();}
+			double param3(void){return rho();}
 		};
 
 		class normal_distribution_param_type : public normal_distribution<double>::param_type
