@@ -1749,7 +1749,6 @@ namespace x
 		erlang_distribution<_RealType>::operator()(_URNG& __g, const param_type& __p)
 		{
 			std::uniform_real_distribution<result_type> d(0, 1);
-			std::cout << "k = " << __p.k() << "\n";
 			long k = __p.k();
 			result_type product = 1.;
 			for(long i = 0; i < k; i++){
@@ -1789,6 +1788,129 @@ namespace x
 			__is >> __k >> __lambda;
 			if (!__is.fail())
 				__x.param(param_type(__k, __lambda));
+			return __is;
+		}
+
+		// gaussian_tail distribution
+		template<class _RealType = double>
+		class gaussian_tail_distribution
+		{
+		public:
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "";
+			static const int nparams = 2;
+			static constexpr const char * const param_a_desc = "Lower bound";
+			static constexpr const char * const param_sigma_desc = "Standard deviation";
+			static constexpr const char * const param_desc_list[nparams] = {param_a_desc, param_sigma_desc};
+			// types
+			typedef _RealType result_type;
+
+			class param_type
+			{
+				result_type __a_;
+				result_type __sigma_;
+			public:
+				typedef gaussian_tail_distribution distribution_type;
+				explicit param_type(long __a = 1, result_type __sigma = 1)
+					: __a_(__a), __sigma_(__sigma) {}
+				result_type a() const {return __a_;}
+				result_type sigma() const {return __sigma_;}
+				friend bool operator==(const param_type& __x, const param_type& __y)
+				{return __x.__k_ == __y.__k_ && __x.__lambda_ == __y.__lambda_;}
+				friend bool operator!=(const param_type& __x, const param_type& __y)
+				{return !(__x == __y);}
+			};
+
+		private:
+			param_type __p_;
+
+		public:
+			// constructors and reset functions
+			explicit gaussian_tail_distribution(long __a = 1, result_type __sigma = 1)
+				: __p_(param_type(__a, __sigma)) {}
+			explicit gaussian_tail_distribution(const param_type& __p)
+				: __p_(__p) {}
+			void reset() {}
+
+			// generating functions
+			template<class _URNG>
+			result_type operator()(_URNG& __g)
+			{return (*this)(__g, __p_);}
+			template<class _URNG> result_type operator()(_URNG& __g, const param_type& __p);
+
+			// property functions
+			result_type a() const {return __p_.a();}
+			result_type sigma() const {return __p_.sigma();}
+			param_type param() const {return __p_;}
+			void param(const param_type& __p) {__p_ = __p;}
+			result_type min() const {return nextafter(a(), a() + 1);}
+			result_type max() const {return std::numeric_limits<result_type>::infinity();}
+
+			friend bool operator==(const gaussian_tail_distribution& __x,
+					       const gaussian_tail_distribution& __y)
+			{return __x.__p_ == __y.__p_;}
+			friend bool operator!=(const gaussian_tail_distribution& __x,
+					       const gaussian_tail_distribution& __y)
+			{return !(__x == __y);}
+		};
+
+		template <class _RealType>
+		template<class _URNG>
+		_RealType
+		gaussian_tail_distribution<_RealType>::operator()(_URNG& __g, const param_type& __p)
+		{
+			std::uniform_real_distribution<result_type> du(0, 1);
+			std::normal_distribution<result_type> dn(1.0);
+			result_type sigma = __p.sigma();
+			result_type adivsigma = __p.a() / __p.sigma();
+			if(adivsigma < 1){
+				double x = dn(__g);
+				while(x < adivsigma){
+					x = dn(__g);
+				}
+				return x * sigma;
+			}else{
+				double u, v, x;
+				do{
+					u = du(__g);
+					do{
+						v = du(__g);
+					}while(v == 0.);
+					x = sqrt(adivsigma * adivsigma - 2 * log(v));
+				}while(x * u > adivsigma);
+				return x * sigma;
+			}
+		}
+
+		template <class _CharT, class _Traits, class _RT>
+		std::basic_ostream<_CharT, _Traits>&
+		operator<<(std::basic_ostream<_CharT, _Traits>& __os,
+			   const gaussian_tail_distribution<_RT>& __x)
+		{
+			std::__save_flags<_CharT, _Traits> __lx(__os);
+			__os.flags(std::ios_base::dec | std::ios_base::left | std::ios_base::fixed |
+				   std::ios_base::scientific);
+			_CharT __sp = __os.widen(' ');
+			__os.fill(__sp);
+			__os << __x.a() << __sp << __x.sigma();
+			return __os;
+		}
+
+		template <class _CharT, class _Traits, class _RT>
+		std::basic_istream<_CharT, _Traits>&
+		operator>>(std::basic_istream<_CharT, _Traits>& __is,
+			   gaussian_tail_distribution<_RT>& __x)
+		{
+			typedef gaussian_tail_distribution<_RT> _Eng;
+			typedef typename _Eng::result_type result_type;
+			typedef typename _Eng::param_type param_type;
+			std::__save_flags<_CharT, _Traits> __lx(__is);
+			__is.flags(std::ios_base::dec | std::ios_base::skipws);
+			result_type __a;
+			result_type __sigma;
+			__is >> __a >> __sigma;
+			if (!__is.fail())
+				__x.param(param_type(__a, __sigma));
 			return __is;
 		}
 
@@ -1960,6 +2082,15 @@ namespace x
 			erlang_distribution_param_type(double p1, double p2) : x::random::erlang_distribution<double>::param_type(p1, p2) {}
 			long param1(void){return k();}
 			double param2(void){return lambda();}
+		};
+
+		class gaussian_tail_distribution_param_type : public x::random::gaussian_tail_distribution<double>::param_type
+		{
+		public:
+			gaussian_tail_distribution_param_type(void) : x::random::gaussian_tail_distribution<double>::param_type() {}
+			gaussian_tail_distribution_param_type(double p1, double p2) : x::random::gaussian_tail_distribution<double>::param_type(p1, p2) {}
+			double param1(void){return a();}
+			double param2(void){return sigma();}
 		};
 
 		class normal_distribution_param_type : public normal_distribution<double>::param_type

@@ -1295,6 +1295,13 @@ namespace x
 			return _dist_normal_obj.newobj(msg, argc, argv);
 		}
 
+		using dist_gaussian_tail_obj = dist_obj<x::random::gaussian_tail_distribution<double>, double, false, param_type_2<x::random::gaussian_tail_distribution_param_type, double, a_str, double, false, sigma_str, double, false>>;
+		dist_gaussian_tail_obj _dist_gaussian_tail_obj;
+		t_object *dist_gaussian_tail_newobj(t_symbol *msg, short argc, t_atom *argv)
+		{
+			return _dist_gaussian_tail_obj.newobj(msg, argc, argv);
+		}
+
 		using dist_lognormal_obj = dist_obj<x::random::lognormal_distribution<double>, double, false, param_type_2<x::random::lognormal_distribution_param_type, double, m_str, double, false, s_str, double, false>>;
 		dist_lognormal_obj _dist_lognormal_obj;
 		t_object *dist_lognormal_newobj(t_symbol *msg, short argc, t_atom *argv)
