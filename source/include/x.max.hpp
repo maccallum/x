@@ -1333,6 +1333,13 @@ namespace x
 			return _dist_logistic_obj.newobj(msg, argc, argv);
 		}
 
+		using dist_pareto_obj = dist_obj<x::random::pareto_distribution<double>, double, false, param_type_2<x::random::pareto_distribution_param_type, double, a_str, double, false, b_str, double, false>>;
+		dist_pareto_obj _dist_pareto_obj;
+		t_object *dist_pareto_newobj(t_symbol *msg, short argc, t_atom *argv)
+		{
+			return _dist_pareto_obj.newobj(msg, argc, argv);
+		}
+
 		using dist_lognormal_obj = dist_obj<x::random::lognormal_distribution<double>, double, false, param_type_2<x::random::lognormal_distribution_param_type, double, m_str, double, false, s_str, double, false>>;
 		dist_lognormal_obj _dist_lognormal_obj;
 		t_object *dist_lognormal_newobj(t_symbol *msg, short argc, t_atom *argv)

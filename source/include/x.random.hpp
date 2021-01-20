@@ -2397,6 +2397,117 @@ namespace x
 			return __is;
 		}
 
+		// pareto distribution
+		template<class _RealType = double>
+		class pareto_distribution
+		{
+		public:
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "";
+			static const int nparams = 2;
+			static constexpr const char * const param_a_desc = "Scale";
+			static constexpr const char * const param_b_desc = "Shape";
+			static constexpr const char * const param_desc_list[nparams] = {param_a_desc, param_b_desc};
+			// types
+			typedef _RealType result_type;
+
+			class param_type
+			{
+				result_type __a_;
+				result_type __b_;
+			public:
+				typedef pareto_distribution distribution_type;
+				explicit param_type(result_type __a = 1, result_type __b = 1)
+					: __a_(__a), __b_(__b) {}
+				result_type a() const {return __a_;}
+				result_type b() const {return __b_;}
+				friend bool operator==(const param_type& __x, const param_type& __y)
+				{return __x.__a_ == __y.__a_ && __x.__b_ == __y.__b_;}
+				friend bool operator!=(const param_type& __x, const param_type& __y)
+				{return !(__x == __y);}
+			};
+
+		private:
+			param_type __p_;
+
+		public:
+			// constructors and reset functions
+			explicit pareto_distribution(result_type __a = 1, result_type __b = 1)
+				: __p_(param_type(__a, __b)) {}
+			explicit pareto_distribution(const param_type& __p)
+				: __p_(__p) {}
+			void reset() {}
+
+			// generating functions
+			template<class _URNG>
+			result_type operator()(_URNG& __g)
+			{return (*this)(__g, __p_);}
+			template<class _URNG> result_type operator()(_URNG& __g, const param_type& __p);
+
+			// property functions
+			result_type a() const {return __p_.a();}
+			result_type b() const {return __p_.b();}
+			param_type param() const {return __p_;}
+			void param(const param_type& __p) {__p_ = __p;}
+			result_type min() const {return -std::numeric_limits<result_type>::infinity();}
+			result_type max() const {return std::numeric_limits<result_type>::infinity();}
+
+			friend bool operator==(const pareto_distribution& __x,
+					       const pareto_distribution& __y)
+			{return __x.__p_ == __y.__p_;}
+			friend bool operator!=(const pareto_distribution& __x,
+					       const pareto_distribution& __y)
+			{return !(__x == __y);}
+		};
+
+		template <class _RealType>
+		template<class _URNG>
+		_RealType
+		pareto_distribution<_RealType>::operator()(_URNG& __g, const param_type& __p)
+		{
+			result_type a = __p.a();
+			result_type b = __p.b();
+
+			std::uniform_real_distribution<result_type> du(0, 1);
+			result_type u;
+			do{
+				u = du(__g);
+			}while(u == 0);
+			return b * pow(u, -1 / a);
+		}
+
+		template <class _CharT, class _Traits, class _RT>
+		std::basic_ostream<_CharT, _Traits>&
+		operator<<(std::basic_ostream<_CharT, _Traits>& __os,
+			   const pareto_distribution<_RT>& __x)
+		{
+			std::__save_flags<_CharT, _Traits> __lx(__os);
+			__os.flags(std::ios_base::dec | std::ios_base::left | std::ios_base::fixed |
+				   std::ios_base::scientific);
+			_CharT __sp = __os.widen(' ');
+			__os.fill(__sp);
+			__os << __x.a() << __sp << __x.b();
+			return __os;
+		}
+
+		template <class _CharT, class _Traits, class _RT>
+		std::basic_istream<_CharT, _Traits>&
+		operator>>(std::basic_istream<_CharT, _Traits>& __is,
+			   pareto_distribution<_RT>& __x)
+		{
+			typedef pareto_distribution<_RT> _Eng;
+			typedef typename _Eng::result_type result_type;
+			typedef typename _Eng::param_type param_type;
+			std::__save_flags<_CharT, _Traits> __lx(__is);
+			__is.flags(std::ios_base::dec | std::ios_base::skipws);
+			result_type __a;
+			result_type __b;
+			__is >> __a >> __b;
+			if (!__is.fail())
+				__x.param(param_type(__a, __b));
+			return __is;
+		}
+
 		// params
 		class uniform_int_distribution_param_type : public std::uniform_int_distribution<long>::param_type
 		{
@@ -2593,6 +2704,15 @@ namespace x
 			exponential_power_distribution_param_type(double p1, double p2) : x::random::exponential_power_distribution<double>::param_type(p1, p2) {}
 			double param1(void){return alpha();}
 			double param2(void){return beta();}
+		};
+
+		class pareto_distribution_param_type : public x::random::pareto_distribution<double>::param_type
+		{
+		public:
+			pareto_distribution_param_type(void) : x::random::pareto_distribution<double>::param_type() {}
+			pareto_distribution_param_type(double p1, double p2) : x::random::pareto_distribution<double>::param_type(p1, p2) {}
+			double param1(void){return a();}
+			double param2(void){return b();}
 		};
 
 		class rayleigh_tail_distribution_param_type : public x::random::rayleigh_tail_distribution<double>::param_type

@@ -2556,7 +2556,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 396.0, 105.0, 916.0, 745.0 ],
+						"rect" : [ 0.0, 26.0, 916.0, 745.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -2586,12 +2586,24 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
+									"id" : "obj-38",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "" ],
+									"patching_rect" : [ 80.0, 743.0, 74.0, 20.0 ],
+									"text" : "x.dist.pareto"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"id" : "obj-37",
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 80.0, 761.0, 77.0, 20.0 ],
+									"patching_rect" : [ 80.0, 806.0, 77.0, 20.0 ],
 									"text" : "x.dist.logistic"
 								}
 
@@ -2603,7 +2615,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 80.0, 739.0, 104.0, 20.0 ],
+									"patching_rect" : [ 80.0, 784.0, 104.0, 20.0 ],
 									"text" : "x.dist.rayleigh_tail"
 								}
 
@@ -4122,7 +4134,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 80.0, 943.0, 84.0, 20.0 ],
+									"patching_rect" : [ 80.0, 988.0, 84.0, 20.0 ],
 									"text" : "x.dist.rayleigh"
 								}
 
@@ -4170,7 +4182,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 80.0, 1093.0, 83.0, 20.0 ],
+									"patching_rect" : [ 80.0, 1138.0, 83.0, 20.0 ],
 									"text" : "x.dist.benford"
 								}
 
@@ -4243,7 +4255,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 80.0, 1057.0, 131.0, 20.0 ],
+									"patching_rect" : [ 80.0, 1102.0, 131.0, 20.0 ],
 									"text" : "x.dist.piecewise_linear"
 								}
 
@@ -4255,7 +4267,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 80.0, 1020.0, 147.0, 20.0 ],
+									"patching_rect" : [ 80.0, 1065.0, 147.0, 20.0 ],
 									"text" : "x.dist.piecewise_constant"
 								}
 
@@ -4267,7 +4279,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 80.0, 981.0, 84.0, 20.0 ],
+									"patching_rect" : [ 80.0, 1026.0, 84.0, 20.0 ],
 									"text" : "x.dist.discrete"
 								}
 
@@ -4279,7 +4291,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 80.0, 914.0, 91.0, 20.0 ],
+									"patching_rect" : [ 80.0, 959.0, 91.0, 20.0 ],
 									"text" : "x.dist.student_t"
 								}
 
@@ -4291,7 +4303,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 80.0, 888.0, 81.0, 20.0 ],
+									"patching_rect" : [ 80.0, 933.0, 81.0, 20.0 ],
 									"text" : "x.dist.fisher_f"
 								}
 
@@ -4303,7 +4315,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 80.0, 859.0, 80.0, 20.0 ],
+									"patching_rect" : [ 80.0, 904.0, 80.0, 20.0 ],
 									"text" : "x.dist.cauchy"
 								}
 
@@ -4315,7 +4327,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 80.0, 837.0, 107.0, 20.0 ],
+									"patching_rect" : [ 80.0, 882.0, 107.0, 20.0 ],
 									"text" : "x.dist.chi_squared"
 								}
 
@@ -4327,7 +4339,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 80.0, 809.0, 95.0, 20.0 ],
+									"patching_rect" : [ 80.0, 854.0, 95.0, 20.0 ],
 									"text" : "x.dist.lognormal"
 								}
 
@@ -4339,7 +4351,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 80.0, 787.0, 79.0, 20.0 ],
+									"patching_rect" : [ 80.0, 832.0, 79.0, 20.0 ],
 									"text" : "x.dist.normal"
 								}
 
@@ -4838,6 +4850,10 @@
 			}
 , 			{
 				"name" : "x.dist.logistic.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.pareto.mxo",
 				"type" : "iLaX"
 			}
 , 			{

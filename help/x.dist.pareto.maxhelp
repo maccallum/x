@@ -39,7 +39,7 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
-					"attr" : "beta ",
+					"attr" : "b ",
 					"id" : "obj-7",
 					"maxclass" : "attrui",
 					"numinlets" : 1,
@@ -51,7 +51,7 @@
 			}
 , 			{
 				"box" : 				{
-					"attr" : "alpha ",
+					"attr" : "a ",
 					"id" : "obj-3",
 					"maxclass" : "attrui",
 					"numinlets" : 1,
@@ -80,7 +80,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 201.0, 26.0, 404.0, 18.0 ],
-					"text" : "Produce a variate from the exponential power distribution"
+					"text" : "Produce a variate from the pareto distribution"
 				}
 
 			}
@@ -93,6 +93,7 @@
 					"outlettype" : [ "", "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 227.0, 272.0, 146.0, 108.0 ],
+					"setminmax" : [ 0.0, 100.0 ],
 					"setstyle" : 4
 				}
 
@@ -179,7 +180,7 @@
 					"outlettype" : [ "", "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 65.0, 272.0, 146.0, 108.0 ],
-					"setminmax" : [ -10.0, 10.0 ],
+					"setminmax" : [ 0.0, 100.0 ],
 					"setstyle" : 4
 				}
 
@@ -215,8 +216,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 65.0, 159.0, 141.0, 20.0 ],
-					"text" : "x.dist.exponential_power"
+					"patching_rect" : [ 65.0, 159.0, 74.0, 20.0 ],
+					"text" : "x.dist.pareto"
 				}
 
 			}
@@ -331,7 +332,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "x.dist.exponential_power.mxo",
+				"name" : "x.dist.pareto.mxo",
 				"type" : "iLaX"
 			}
 , 			{
