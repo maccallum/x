@@ -1340,6 +1340,20 @@ namespace x
 			return _dist_pareto_obj.newobj(msg, argc, argv);
 		}
 
+		using dist_gumbel_obj = dist_obj<x::random::gumbel_distribution<double>, double, false, param_type_2<x::random::gumbel_distribution_param_type, double, mu_str, double, false, beta_str, double, false>>;
+		dist_gumbel_obj _dist_gumbel_obj;
+		t_object *dist_gumbel_newobj(t_symbol *msg, short argc, t_atom *argv)
+		{
+			return _dist_gumbel_obj.newobj(msg, argc, argv);
+		}
+
+		using dist_logarithmic_series_obj = dist_obj<x::random::logarithmic_series_distribution<long>, long, false, param_type_1<x::random::logarithmic_series_distribution_param_type, long, p_str, double, false>>;
+		dist_logarithmic_series_obj _dist_logarithmic_series_obj;
+		t_object *dist_logarithmic_series_newobj(t_symbol *msg, short argc, t_atom *argv)
+		{
+			return _dist_logarithmic_series_obj.newobj(msg, argc, argv);
+		}		
+
 		using dist_lognormal_obj = dist_obj<x::random::lognormal_distribution<double>, double, false, param_type_2<x::random::lognormal_distribution_param_type, double, m_str, double, false, s_str, double, false>>;
 		dist_lognormal_obj _dist_lognormal_obj;
 		t_object *dist_lognormal_newobj(t_symbol *msg, short argc, t_atom *argv)

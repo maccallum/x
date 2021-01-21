@@ -2508,6 +2508,224 @@ namespace x
 			return __is;
 		}
 
+		// gumbel distribution		
+		template<class _RealType = double>
+		class gumbel_distribution
+		{
+		public:
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "";
+			static const int nparams = 2;
+			static constexpr const char * const param_mu_desc = "Location";
+			static constexpr const char * const param_beta_desc = "Scale";
+			static constexpr const char * const param_desc_list[nparams] = {param_mu_desc, param_beta_desc};
+			// types
+			typedef _RealType result_type;
+
+			class param_type
+			{
+				result_type __mu_;
+				result_type __beta_;
+			public:
+				typedef gumbel_distribution distribution_type;
+				explicit param_type(result_type __mu = 1, result_type __beta = 1)
+					: __mu_(__mu), __beta_(__beta) {}
+				result_type mu() const {return __mu_;}
+				result_type beta() const {return __beta_;}
+				friend bool operator==(const param_type& __x, const param_type& __y)
+				{return __x.__mu_ == __y.__mu_ && __x.__beta_ == __y.__beta_;}
+				friend bool operator!=(const param_type& __x, const param_type& __y)
+				{return !(__x == __y);}
+			};
+
+		private:
+			param_type __p_;
+
+		public:
+			// constructors and reset functions
+			explicit gumbel_distribution(result_type __mu = 1, result_type __beta = 1)
+				: __p_(param_type(__mu, __beta)) {}
+			explicit gumbel_distribution(const param_type& __p)
+				: __p_(__p) {}
+			void reset() {}
+
+			// generating functions
+			template<class _URNG>
+			result_type operator()(_URNG& __g)
+			{return (*this)(__g, __p_);}
+			template<class _URNG> result_type operator()(_URNG& __g, const param_type& __p);
+
+			// property functions
+			result_type mu() const {return __p_.mu();}
+			result_type beta() const {return __p_.beta();}
+			param_type param() const {return __p_;}
+			void param(const param_type& __p) {__p_ = __p;}
+			result_type min() const {return -std::numeric_limits<result_type>::infinity();}
+			result_type max() const {return std::numeric_limits<result_type>::infinity();}
+
+			friend bool operator==(const gumbel_distribution& __x,
+					       const gumbel_distribution& __y)
+			{return __x.__p_ == __y.__p_;}
+			friend bool operator!=(const gumbel_distribution& __x,
+					       const gumbel_distribution& __y)
+			{return !(__x == __y);}
+		};
+
+		template <class _RealType>
+		template<class _URNG>
+		_RealType
+		gumbel_distribution<_RealType>::operator()(_URNG& __g, const param_type& __p)
+		{
+			std::uniform_real_distribution<result_type> du(0, 1);
+			result_type m = __p.mu();
+			result_type b = __p.beta();
+			result_type u;
+			do{
+				u = du(__g);
+			}while(u == 0);
+			
+			return m - b * log(-log(u));
+		}
+
+		template <class _CharT, class _Traits, class _RT>
+		std::basic_ostream<_CharT, _Traits>&
+		operator<<(std::basic_ostream<_CharT, _Traits>& __os,
+			   const gumbel_distribution<_RT>& __x)
+		{
+			std::__save_flags<_CharT, _Traits> __lx(__os);
+			__os.flags(std::ios_base::dec | std::ios_base::left | std::ios_base::fixed |
+				   std::ios_base::scientific);
+			_CharT __sp = __os.widen(' ');
+			__os.fill(__sp);
+			__os << __x.mu() << __sp << __x.beta();
+			return __os;
+		}
+
+		template <class _CharT, class _Traits, class _RT>
+		std::basic_istream<_CharT, _Traits>&
+		operator>>(std::basic_istream<_CharT, _Traits>& __is,
+			   gumbel_distribution<_RT>& __x)
+		{
+			typedef gumbel_distribution<_RT> _Eng;
+			typedef typename _Eng::result_type result_type;
+			typedef typename _Eng::param_type param_type;
+			std::__save_flags<_CharT, _Traits> __lx(__is);
+			__is.flags(std::ios_base::dec | std::ios_base::skipws);
+			result_type __mu;
+			result_type __beta;
+			__is >> __mu >> __beta;
+			if (!__is.fail())
+				__x.param(param_type(__mu, __beta));
+			return __is;
+		}
+
+		// logarithmic_series_distribution
+
+		template<class _IntType = int>
+		class logarithmic_series_distribution
+		{
+		public:
+			//static constexpr const char * const desc_long = "";
+			static constexpr const char * const desc_short = "";
+			static const int nparams = 1;
+			static constexpr const char * const param_p_desc = "Shape";
+			static constexpr const char * const param_desc_list[nparams] = {param_p_desc};
+			// types
+			typedef _IntType result_type;
+
+			class param_type
+			{
+				double __P_;
+			public:
+				typedef logarithmic_series_distribution distribution_type;
+
+				explicit param_type(double __P = 0.5) : __P_(__P) {}
+
+				double P() const {return __P_;}
+
+				friend bool operator==(const param_type& __x, const param_type& __y)
+				{return __x.__P_ == __y.__P_;}
+				friend bool operator!=(const param_type& __x, const param_type& __y)
+				{return !(__x == __y);}
+			};
+
+		private:
+			param_type __p_;
+
+		public:
+			// constructors and reset functions
+			explicit logarithmic_series_distribution(double __P = 0.5)
+				: __p_(param_type(__P)) {}
+			explicit logarithmic_series_distribution(const param_type& __p) : __p_(__p) {}
+			void reset() {}
+
+			// generating functions
+			template<class _URNG>
+			result_type operator()(_URNG& __g)
+			{return (*this)(__g, __p_);}
+			template<class _URNG> result_type operator()(_URNG& __g, const param_type& __p);
+
+			// property functions
+			double P() const {return __p_.P();}
+
+			param_type param() const {return __p_;}
+			void param(const param_type& __p) {__p_ = __p;}
+
+			result_type min() const {return 0;}
+			result_type max() const {return std::numeric_limits<result_type>::infinity();}
+
+			friend bool operator==(const logarithmic_series_distribution& __x,
+					       const logarithmic_series_distribution& __y)
+			{return __x.__p_ == __y.__p_;}
+			friend bool operator!=(const logarithmic_series_distribution& __x,
+					       const logarithmic_series_distribution& __y)
+			{return !(__x == __y);}
+		};
+
+		template <class _IntType>
+		template<class _URNG>
+		_IntType
+		logarithmic_series_distribution<_IntType>::operator()(_URNG& __g, const param_type& __p)
+		{
+			std::uniform_real_distribution<double> du(0, 1);
+			double u, v;
+			do{
+				u = du(__g);
+			}while(u == 0);
+			do{
+				v = du(__g);
+			}while(v == 0);
+			return 1 + (log(v) / log(1 - pow(1. - __p.P(), u)));
+		}
+
+		template <class _CharT, class _Traits, class _IntType>
+		std::basic_ostream<_CharT, _Traits>&
+		operator<<(std::basic_ostream<_CharT, _Traits>& __os,
+			   const logarithmic_series_distribution<_IntType>& __x)
+		{
+			std::__save_flags<_CharT, _Traits> __lx(__os);
+			__os.flags(std::ios_base::dec | std::ios_base::left | std::ios_base::fixed |
+				   std::ios_base::scientific);
+			return __os << __x.P();
+		}
+
+		template <class _CharT, class _Traits, class _IntType>
+		std::basic_istream<_CharT, _Traits>&
+		operator>>(std::basic_istream<_CharT, _Traits>& __is,
+			   logarithmic_series_distribution<_IntType>& __x)
+		{
+			typedef logarithmic_series_distribution<_IntType> _Eng;
+			typedef typename _Eng::result_type result_type;
+			typedef typename _Eng::param_type param_type;
+			std::__save_flags<_CharT, _Traits> __lx(__is);
+			__is.flags(std::ios_base::dec | std::ios_base::skipws);
+			double __P;
+			__is >> __P;
+			if (!__is.fail())
+				__x.param(param_type(__P));
+			return __is;
+		}
+
 		// params
 		class uniform_int_distribution_param_type : public std::uniform_int_distribution<long>::param_type
 		{
@@ -2731,6 +2949,23 @@ namespace x
 			logistic_distribution_param_type(double p1, double p2) : x::random::logistic_distribution<double>::param_type(p1, p2) {}
 			double param1(void){return mu();}
 			double param2(void){return s();}
+		};
+
+		class gumbel_distribution_param_type : public x::random::gumbel_distribution<double>::param_type
+		{
+		public:
+			gumbel_distribution_param_type(void) : x::random::gumbel_distribution<double>::param_type() {}
+			gumbel_distribution_param_type(double p1, double p2) : x::random::gumbel_distribution<double>::param_type(p1, p2) {}
+			double param1(void){return mu();}
+			double param2(void){return beta();}
+		};
+
+		class logarithmic_series_distribution_param_type : public logarithmic_series_distribution<long>::param_type
+		{
+		public:
+			logarithmic_series_distribution_param_type(void) : logarithmic_series_distribution<long>::param_type() {}
+			logarithmic_series_distribution_param_type(double p1) : logarithmic_series_distribution<long>::param_type(p1) {}
+			double param1(void){return P();}
 		};
 
 		class normal_distribution_param_type : public normal_distribution<double>::param_type

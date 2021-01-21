@@ -2556,7 +2556,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 916.0, 745.0 ],
+						"rect" : [ 396.0, 105.0, 916.0, 745.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -2585,6 +2585,19 @@
 						"subpatcher_template" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"hidden" : 1,
+									"id" : "obj-39",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "" ],
+									"patching_rect" : [ 80.0, 317.0, 137.0, 20.0 ],
+									"text" : "x.dist.logarithmic_series"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"id" : "obj-38",
 									"maxclass" : "newobj",
@@ -4854,6 +4867,10 @@
 			}
 , 			{
 				"name" : "x.dist.pareto.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.logarithmic_series.mxo",
 				"type" : "iLaX"
 			}
 , 			{
