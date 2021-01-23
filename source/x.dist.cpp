@@ -28,7 +28,11 @@ void *xdist_new(t_symbol *msg, short argc, t_atom *argv)
 {
 	char buf[128];
 	sprintf(buf, "x.dist.%s", atom_getsym(argv)->s_name);
-	return object_new_typed(CLASS_BOX, gensym(buf), argc - 1, argv + 1);
+	void *o = object_new_typed(CLASS_BOX, gensym(buf), argc - 1, argv + 1);
+	if(!o){
+		error("%s: No such object", buf);
+	}
+	return o;
 }
 
 void ext_main(void *r)

@@ -6,20 +6,6 @@
 	objectVersion = 50;
 	objects = {
 
-/* Begin PBXAggregateTarget section */
-		B4E73DAC0E1888E9001E52BE /* Build all.bak */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = B4E73DB00E1888EA001E52BE /* Build configuration list for PBXAggregateTarget "Build all.bak" */;
-			buildPhases = (
-			);
-			dependencies = (
-				52AA37081950DE4E009A1920 /* PBXTargetDependency */,
-			);
-			name = "Build all.bak";
-			productName = "Build all";
-		};
-/* End PBXAggregateTarget section */
-
 /* Begin PBXBuildFile section */
 		521EE6AF2115F30100F281AE /* x.max.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 521EE6AE2115F30000F281AE /* x.max.hpp */; };
 		521EE6B02115F30100F281AE /* x.max.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 521EE6AE2115F30000F281AE /* x.max.hpp */; };
@@ -278,16 +264,6 @@
 		52D69DEB20AC90CB00D7BDEF /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 523B362D20A32080003D1A6B /* MaxAPI.framework */; };
 		52D69DEC20AC90CB00D7BDEF /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08EA7FFBFE8413EDC02AAC07 /* Carbon.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		52AA37071950DE4E009A1920 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9B5FD7D0194EB74A00E0369C;
-			remoteInfo = o.listiter;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		08EA7FFBFE8413EDC02AAC07 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
@@ -2265,7 +2241,6 @@
 			projectDirPath = "";
 			projectRoot = "<Project File Directory>/../../../";
 			targets = (
-				B4E73DAC0E1888E9001E52BE /* Build all.bak */,
 				52A8393B16E978D7002E273C /* x.random_device */,
 				52D69DE420AC90CB00D7BDEF /* x.seed_seq_from */,
 				523B363B20A3396A003D1A6B /* x.generator.pcg32 */,
@@ -3142,13 +3117,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		52AA37081950DE4E009A1920 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			targetProxy = 52AA37071950DE4E009A1920 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		4FADC23808B4156C00ABE55E /* Debug */ = {
@@ -8896,72 +8864,6 @@
 			};
 			name = Release;
 		};
-		B4E73DAE0E1888E9001E52BE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
-				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_VERSION = "";
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "../../max-sdk/source/c74support/max-includes/macho-prefix.pch";
-				GENERATE_PKGINFO_FILE = yes;
-				GENERATE_PROFILING_CODE = NO;
-				INFOPLIST_FILE = "";
-				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "";
-				INFOPLIST_PREFIX_HEADER = "";
-				INFOPLIST_PREPROCESSOR_DEFINITIONS = "";
-				INSTALL_PATH = "$(PROJECT_DIR)/../externals";
-				OBJROOT = build;
-				OTHER_LDFLAGS = "@../../max6-sdk/c74support/max-includes/c74_linker_flags.txt";
-				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
-				PRELINK_LIBS = "\"$(SRCROOT)/../../libo/libo.a\" \"$(SRCROOT)/../../libomax/libomax.a\"";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(inherited)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				RUN_CLANG_STATIC_ANALYZER = NO;
-				SDKROOT = macosx;
-				SYMROOT = "$(SYMROOT)";
-				WRAPPER_EXTENSION = "";
-			};
-			name = Debug;
-		};
-		B4E73DAF0E1888E9001E52BE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_VERSION = "";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "../../max-sdk/source/c74support/max-includes/macho-prefix.pch";
-				GENERATE_PKGINFO_FILE = yes;
-				GENERATE_PROFILING_CODE = NO;
-				INFOPLIST_FILE = "";
-				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "";
-				INFOPLIST_PREFIX_HEADER = "";
-				INFOPLIST_PREPROCESSOR_DEFINITIONS = "";
-				INSTALL_PATH = "$(PROJECT_DIR)/../externals";
-				OBJROOT = build;
-				OTHER_LDFLAGS = "@../../max6-sdk/c74support/max-includes/c74_linker_flags.txt";
-				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
-				PRELINK_LIBS = "\"$(SRCROOT)/../../libo/libo.a\" \"$(SRCROOT)/../../libomax/libomax.a\"";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(inherited)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				RUN_CLANG_STATIC_ANALYZER = NO;
-				SDKROOT = macosx;
-				SYMROOT = "$(SYMROOT)";
-				WRAPPER_EXTENSION = "";
-				ZERO_LINK = NO;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -9429,15 +9331,6 @@
 			buildConfigurations = (
 				52D69DEE20AC90CB00D7BDEF /* Debug */,
 				52D69DEF20AC90CB00D7BDEF /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B4E73DB00E1888EA001E52BE /* Build configuration list for PBXAggregateTarget "Build all.bak" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B4E73DAE0E1888E9001E52BE /* Debug */,
-				B4E73DAF0E1888E9001E52BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
