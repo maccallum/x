@@ -124,6 +124,22 @@ namespace x
 			static constexpr const char * const param_a_desc = "Lower bound (inclusive)";
 			static constexpr const char * const param_b_desc = "Upper bound (inclusive)";
 			static constexpr const char * const param_desc_list[nparams] = {param_a_desc, param_b_desc};
+
+			double pdf(double x) {return 1. / ((this->b() - this->a()) + 1);}
+			double cdf(double x) {return (floor(x) - this->a() + 1) / ((this->b() - this->a()) + 1);}
+			static constexpr bool meandef = 1;
+			double mean() {return (this->a() + this->b()) / 2.;}
+			static constexpr bool mediandef = 1;
+			double median() {return this->mean();}
+			static constexpr  bool modedef = false;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return (pow((this->b() - this->a()) + 1, 2.) - 1) / 12;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return -((6 * (pow((this->b() - this->a()) + 1, 2.) + 1)) / (5 * (pow((this->b() - this->a()) + 1, 2.) - 1)));}
+			
 		};
 		template <typename RealType = double>
 		//using uniform_real_distribution = std::uniform_real_distribution<RealType>;
@@ -137,6 +153,21 @@ namespace x
 			static constexpr const char * const param_a_desc = "Lower bound (inclusive)";
 			static constexpr const char * const param_b_desc = "Upper bound (inclusive)";
 			static constexpr const char * const param_desc_list[nparams] = {param_a_desc, param_b_desc};
+
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 
 		
@@ -151,6 +182,21 @@ namespace x
 			static const int nparams = 1;
 			static constexpr const char * const param_p_desc = "Probability of success";
 			static constexpr const char * const param_desc_list[nparams] = {param_p_desc};
+
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 		template <typename IntType = int>
 		//using binomial_distribution = std::binomial_distribution<IntType>;
@@ -164,6 +210,21 @@ namespace x
 			static constexpr const char * const param_t_desc = "Number of trials";
 			static constexpr const char * const param_p_desc = "Probability of success";
 			static constexpr const char * const param_desc_list[nparams] = {param_t_desc, param_p_desc};
+			
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 		template <typename IntType = int>
 		//using geometric_distribution = std::geometric_distribution<IntType>;
@@ -176,6 +237,21 @@ namespace x
 			static const int nparams = 1;
 			static constexpr const char * const param_p_desc = "Probability of success";
 			static constexpr const char * const param_desc_list[nparams] = {param_p_desc};
+			
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 		template <typename IntType = int>
 		//using negative_binomial_distribution = std::negative_binomial_distribution<IntType>;
@@ -189,6 +265,21 @@ namespace x
 			static constexpr const char * const param_k_desc = "Number of failures";
 			static constexpr const char * const param_p_desc = "Probability of success";
 			static constexpr const char * const param_desc_list[nparams] = {param_k_desc, param_p_desc};
+
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 		
 		template <typename IntType = int>
@@ -202,6 +293,21 @@ namespace x
 			static const int nparams = 1;
 			static constexpr const char * const param_mean_desc = "Mean number of events";
 			static constexpr const char * const param_desc_list[nparams] = {param_mean_desc};
+			
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 		template <typename RealType = double>
 		//using exponential_distribution = std::exponential_distribution<RealType>;
@@ -214,6 +320,21 @@ namespace x
 			static const int nparams = 1;
 			static constexpr const char * const param_lambda_desc = "Rate of events";
 			static constexpr const char * const param_desc_list[nparams] = {param_lambda_desc};
+			
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 		template <typename RealType = double>
 		//using gamma_distribution = std::gamma_distribution<RealType>;
@@ -227,6 +348,21 @@ namespace x
 			static constexpr const char * const param_alpha_desc = "Shape";
 			static constexpr const char * const param_beta_desc = "Scale";
 			static constexpr const char * const param_desc_list[nparams] = {param_alpha_desc, param_beta_desc};
+			
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 		template <typename RealType = double>
 		//using weibull_distribution = std::weibull_distribution<RealType>;
@@ -240,6 +376,21 @@ namespace x
 			static constexpr const char * const param_a_desc = "Shape";
 			static constexpr const char * const param_b_desc = "Scale";
 			static constexpr const char * const param_desc_list[nparams] = {param_a_desc, param_b_desc};
+			
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 		template <typename RealType = double>
 		//using extreme_value_distribution = std::extreme_value_distribution<RealType>;
@@ -253,6 +404,21 @@ namespace x
 			static constexpr const char * const param_a_desc = "Location";
 			static constexpr const char * const param_b_desc = "Scale";
 			static constexpr const char * const param_desc_list[nparams] = {param_a_desc, param_b_desc};
+			
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 
 		template <typename RealType = double>
@@ -267,6 +433,21 @@ namespace x
 			static constexpr const char * const param_mean_desc = "Mean";
 			static constexpr const char * const param_stddev_desc = "Standard deviation";
 			static constexpr const char * const param_desc_list[nparams] = {param_mean_desc, param_stddev_desc};
+			
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 		template <typename RealType = double>
 		//using lognormal_distribution = std::lognormal_distribution<RealType>;
@@ -280,6 +461,21 @@ namespace x
 			static constexpr const char * const param_m_desc = "Mean";
 			static constexpr const char * const param_s_desc = "Standard deviation";
 			static constexpr const char * const param_desc_list[nparams] = {param_m_desc, param_s_desc};
+			
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 		template <typename RealType = double>
 		//using chi_squared_distribution = std::chi_squared_distribution<RealType>;
@@ -292,6 +488,21 @@ namespace x
 			static const int nparams = 1;
 			static constexpr const char * const param_n_desc = "Degrees of freedom";
 			static constexpr const char * const param_desc_list[nparams] = {param_n_desc};
+			
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 		template <typename RealType = double>
 		//using cauchy_distribution = std::cauchy_distribution<RealType>;
@@ -305,6 +516,21 @@ namespace x
 			static constexpr const char * const param_a_desc = "Location";
 			static constexpr const char * const param_b_desc = "Scale";
 			static constexpr const char * const param_desc_list[nparams] = {param_a_desc, param_b_desc};
+			
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 		template <typename RealType = double>
 		//using fisher_f_distribution = std::fisher_f_distribution<RealType>;
@@ -318,6 +544,21 @@ namespace x
 			static constexpr const char * const param_m_desc = "First degree of freedom";
 			static constexpr const char * const param_n_desc = "Second degree of freedom";
 			static constexpr const char * const param_desc_list[nparams] = {param_m_desc, param_n_desc};
+			
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 		template <typename RealType = double>
 		//using student_t_distribution = std::student_t_distribution<RealType>;
@@ -330,6 +571,21 @@ namespace x
 			static const int nparams = 1;
 			static constexpr const char * const param_n_desc = "Degrees of freedom";
 			static constexpr const char * const param_desc_list[nparams] = {param_n_desc};
+			
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 
 		template <typename IntType = int>
@@ -343,6 +599,21 @@ namespace x
 			static const int nparams = 1;
 			static constexpr const char * const param_probabilities_desc = "Probabilities";
 			static constexpr const char * const param_desc_list[nparams] = {param_probabilities_desc};
+			
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 		template <typename RealType = double>
 		//using piecewise_constant_distribution = std::piecewise_constant_distribution<RealType>;
@@ -356,6 +627,21 @@ namespace x
 			static constexpr const char * const param_intervals_desc = "Intervals";
 			static constexpr const char * const param_densities_desc = "Densities";
 			static constexpr const char * const param_desc_list[nparams] = {param_intervals_desc, param_densities_desc};
+			
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 		template <typename RealType = double>
 		//using piecewise_linear_distribution = std::piecewise_linear_distribution<RealType>;
@@ -369,6 +655,21 @@ namespace x
 			static constexpr const char * const param_intervals_desc = "Intervals";
 			static constexpr const char * const param_densities_desc = "Densities";
 			static constexpr const char * const param_desc_list[nparams] = {param_intervals_desc, param_densities_desc};
+			
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 
 		// beta distribution		
@@ -432,18 +733,23 @@ namespace x
 			friend bool operator!=(const beta_distribution& __x,
 					       const beta_distribution& __y)
 			{return !(__x == __y);}
-		};
 
-		template <class _RealType>
-		template<class _URNG>
-		_RealType
-		beta_distribution<_RealType>::operator()(_URNG& __g, const param_type& __p)
-		{
-			gamma_distribution<result_type> g1(__p.alpha(), 1.);
-			gamma_distribution<result_type> g2(__p.beta(), 1.);
-			result_type a = g1(__g);
-			return a / (a + g2(__g));
-		}
+			// characterization functions
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
+		};
 
 		template <class _CharT, class _Traits, class _RT>
 		std::basic_ostream<_CharT, _Traits>&
@@ -475,6 +781,17 @@ namespace x
 			if (!__is.fail())
 				__x.param(param_type(__alpha, __beta));
 			return __is;
+		}
+
+		template <class _RealType>
+		template<class _URNG>
+		_RealType
+		beta_distribution<_RealType>::operator()(_URNG& __g, const param_type& __p)
+		{
+			gamma_distribution<result_type> g1(__p.alpha(), 1.);
+			gamma_distribution<result_type> g2(__p.beta(), 1.);
+			result_type a = g1(__g);
+			return a / (a + g2(__g));
 		}
 
 		// kumaraswamy distribution
@@ -538,6 +855,22 @@ namespace x
 			friend bool operator!=(const kumaraswamy_distribution& __x,
 					       const kumaraswamy_distribution& __y)
 			{return !(__x == __y);}
+
+			// characterization functions
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 
 		template <class _RealType>
@@ -693,6 +1026,22 @@ namespace x
 			std::basic_istream<_CharT, _Traits>&
 			operator>>(std::basic_istream<_CharT, _Traits>& __is,
 				   dirichlet_distribution<_IT>& __x);
+
+			// characterization functions
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 
 		template<class _RealType>
@@ -926,6 +1275,22 @@ namespace x
 			std::basic_istream<_CharT, _Traits>&
 			operator>>(std::basic_istream<_CharT, _Traits>& __is,
 				   multinomial_distribution<_IT>& __x);
+
+			// characterization functions
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 
 		template<class _IntType>
@@ -1130,6 +1495,22 @@ namespace x
 			friend bool operator!=(const hypergeometric_distribution& __x,
 					       const hypergeometric_distribution& __y)
 			{return !(__x == __y);}
+
+			// characterization functions
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 
 		template<class _IntType>
@@ -1331,6 +1712,22 @@ namespace x
 			std::basic_istream<_CharT, _Traits>&
 			operator>>(std::basic_istream<_CharT, _Traits>& __is,
 				   multivariate_hypergeometric_distribution<_IT>& __x);
+
+			// characterization functions
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 
 		template<class _IntType>
@@ -1530,6 +1927,22 @@ namespace x
 			friend bool operator!=(const laplace_distribution& __x,
 					       const laplace_distribution& __y)
 			{return !(__x == __y);}
+
+			// characterization functions
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 
 		template <class _RealType>
@@ -1640,6 +2053,22 @@ namespace x
 			friend bool operator!=(const rayleigh_distribution& __x,
 					       const rayleigh_distribution& __y)
 			{return !(__x == __y);}
+
+			// characterization functions
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 
 		template <class _RealType>
@@ -1741,6 +2170,22 @@ namespace x
 			friend bool operator!=(const erlang_distribution& __x,
 					       const erlang_distribution& __y)
 			{return !(__x == __y);}
+
+			// characterization functions
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 
 		template <class _RealType>
@@ -1852,6 +2297,22 @@ namespace x
 			friend bool operator!=(const gaussian_tail_distribution& __x,
 					       const gaussian_tail_distribution& __y)
 			{return !(__x == __y);}
+
+			// characterization functions
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 
 		template <class _RealType>
@@ -1979,6 +2440,22 @@ namespace x
 			friend bool operator!=(const bivariate_normal_distribution& __x,
 					       const bivariate_normal_distribution& __y)
 			{return !(__x == __y);}
+
+			// characterization functions
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 
 		template <class _RealType>
@@ -2095,6 +2572,22 @@ namespace x
 			friend bool operator!=(const exponential_power_distribution& __x,
 					       const exponential_power_distribution& __y)
 			{return !(__x == __y);}
+
+			// characterization functions
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 
 		template <class _RealType>
@@ -2242,6 +2735,22 @@ namespace x
 			friend bool operator!=(const rayleigh_tail_distribution& __x,
 					       const rayleigh_tail_distribution& __y)
 			{return !(__x == __y);}
+
+			// characterization functions
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 
 		template <class _RealType>
@@ -2350,6 +2859,22 @@ namespace x
 			friend bool operator!=(const logistic_distribution& __x,
 					       const logistic_distribution& __y)
 			{return !(__x == __y);}
+
+			// characterization functions
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 
 		template <class _RealType>
@@ -2458,6 +2983,22 @@ namespace x
 			friend bool operator!=(const pareto_distribution& __x,
 					       const pareto_distribution& __y)
 			{return !(__x == __y);}
+
+			// characterization functions
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 
 		template <class _RealType>
@@ -2569,6 +3110,22 @@ namespace x
 			friend bool operator!=(const gumbel_distribution& __x,
 					       const gumbel_distribution& __y)
 			{return !(__x == __y);}
+
+			// characterization functions
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 
 		template <class _RealType>
@@ -2680,6 +3237,22 @@ namespace x
 			friend bool operator!=(const logarithmic_series_distribution& __x,
 					       const logarithmic_series_distribution& __y)
 			{return !(__x == __y);}
+
+			// characterization functions
+			double pdf(double x) {return 0;}
+			double cdf(double x) {return 0;}
+			static constexpr bool meandef = 1;
+			double mean() {return 0;}
+			static constexpr bool mediandef = 1;
+			double median() {return 0;}
+			static constexpr  bool modedef = 1;
+			double mode() {return 0;}
+			static constexpr bool variancedef = 1;
+			double variance() {return 0;}
+			static constexpr bool skewnessdef = 1;
+			double skewness() {return 0;}
+			static constexpr bool kurtosisdef = 1;
+			double kurtosis() {return 0;}
 		};
 
 		template <class _IntType>
@@ -2687,6 +3260,8 @@ namespace x
 		_IntType
 		logarithmic_series_distribution<_IntType>::operator()(_URNG& __g, const param_type& __p)
 		{
+			// http://www.nrbook.com/devroye/Devroye_files/chapter_ten.pdf
+			// could implement the speed up
 			std::uniform_real_distribution<double> du(0, 1);
 			double u, v;
 			do{

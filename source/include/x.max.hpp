@@ -45,6 +45,9 @@ typedef struct _maxobj
 	t_critical lock;
 } t_maxobj;
 
+t_symbol *_sym_pdf, *_sym_cdf, *_sym_mean, *_sym_median, *_sym_variance,
+	*_sym_skewness, *_sym_kurtosis, *_sym_undefined;
+
 namespace x
 {
 	namespace max
@@ -817,7 +820,10 @@ namespace x
 		template <typename dist_type, typename result_type, bool multivariate=false, typename xparam_type=param_type_2<x::random::uniform_real_distribution_param_type, double, a_str, double, false, b_str, double, false>>
 			class dist_obj : public obj, public dist_type, public xparam_type
 			{
+				bool _hascharacterizationfns = 0;
 			public:
+				dist_obj(bool hascharacterizationfns = false) : _hascharacterizationfns(hascharacterizationfns) {}
+				
 				t_object *newobj(t_symbol *msg, short argc, t_atom *argv)
 				{
 					t_object *x = obj::newobj(msg, argc, argv);
@@ -991,6 +997,72 @@ namespace x
 					critical_exit(_x->lock);
 				}
 
+				static void distributionfn(t_maxobj *_x, t_symbol *fn, int argc, t_atom *argv)
+				{
+					
+					dist_obj<dist_type, result_type, multivariate, xparam_type> *x = (dist_obj<dist_type, result_type, multivariate, xparam_type> *)(_x->myobj);
+					dist_type d = dist_type(*((xparam_type *)x));
+					if(argc != 1){
+						object_error((t_object *)((dist_obj<dist_type, result_type> *)(_x->myobj)), "%s requixes a single argument (x)", fn->s_name);
+						return;
+					}
+					double y = 0;
+					if(fn == _sym_pdf){
+						y = d.pdf(atom_getfloat(argv));
+					}else if(fn == _sym_cdf){
+						y = d.cdf(atom_getfloat(argv));
+					}
+					t_atom a;
+					atom_set(&a, y);
+					outlet_anything(((dist_obj<dist_type, result_type> *)(_x->myobj))->outlet_main(), fn, 1, &a);
+				}
+
+				static void characteristic(t_maxobj *_x, t_symbol *ch, int argc, t_atom *argv)
+				{
+					dist_obj<dist_type, result_type, multivariate, xparam_type> *x = (dist_obj<dist_type, result_type, multivariate, xparam_type> *)(_x->myobj);
+					dist_type d = dist_type(*((xparam_type *)x));
+					double val = 0;
+					bool valdef = false;
+					if(ch == _sym_mean){
+						if(d.meandef == true){
+							valdef = true;
+							val = d.mean();
+						}
+					}else if(ch == _sym_median){
+						if(d.mediandef == true){
+							valdef = true;
+							val = d.median();
+						}
+					}else if(ch == _sym_mode){
+						if(d.modedef == true){
+							valdef = true;
+							val = d.mode();
+						}
+					}else if(ch == _sym_variance){
+						if(d.variancedef == true){
+							valdef = true;
+							val = d.variance();
+						}
+					}else if(ch == _sym_skewness){
+						if(d.skewnessdef == true){
+							valdef = true;
+							val = d.skewness();
+						}
+					}else if(ch == _sym_kurtosis){
+						if(d.kurtosisdef == true){
+							valdef = true;
+							val = d.kurtosis();
+						}
+					}
+					t_atom a;
+					if(valdef == true){
+						atom_set(&a, val);
+					}else{
+						atom_setsym(&a, _sym_undefined);
+					}
+					outlet_anything(((dist_obj<dist_type, result_type> *)(_x->myobj))->outlet_main(), ch, 1, &a);
+				}
+
 				static void min(t_maxobj *_x, t_symbol *msg, short argc, t_atom *argv)
 				{
 					if(argc){
@@ -1150,13 +1222,31 @@ namespace x
 						object_method(theattr, gensym("setmethod"), USESYM(set), attr_set);
 					}
 					class_addmethod(c, (method)doc, "doc", 0);
+					if(_hascharacterizationfns){
+						class_addmethod(c, (method)distributionfn, "pdf", A_GIMME, 0);
+						class_addmethod(c, (method)distributionfn, "cdf", A_GIMME, 0);
+						class_addmethod(c, (method)characteristic, "mean", A_GIMME, 0);
+						class_addmethod(c, (method)characteristic, "median", A_GIMME, 0);
+						class_addmethod(c, (method)characteristic, "mode", A_GIMME, 0);
+						class_addmethod(c, (method)characteristic, "variance", A_GIMME, 0);
+						class_addmethod(c, (method)characteristic, "skewness", A_GIMME, 0);
+						class_addmethod(c, (method)characteristic, "kurtosis", A_GIMME, 0);
+					}
+					_sym_pdf = gensym("pdf");
+					_sym_cdf = gensym("cdf");
+					_sym_mean = gensym("mean");
+					_sym_median = gensym("median");
+					_sym_variance = gensym("variance");
+					_sym_skewness = gensym("skewness");
+					_sym_kurtosis = gensym("kurtosis");
+					_sym_undefined = gensym("undefined");
 					return 0;
 				}
 			};
 
 		// Uniform
 		using dist_uniform_int_obj = dist_obj<x::random::uniform_int_distribution<long>, long, false, param_type_2<x::random::uniform_int_distribution_param_type, long, a_str, long, false, b_str, long, false>>;
-		dist_uniform_int_obj _dist_uniform_int_obj;
+		dist_uniform_int_obj _dist_uniform_int_obj(true);
 		t_object *dist_uniform_int_newobj(t_symbol *msg, short argc, t_atom *argv)
 		{
 			return _dist_uniform_int_obj.newobj(msg, argc, argv);
