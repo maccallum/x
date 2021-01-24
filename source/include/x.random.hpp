@@ -28,6 +28,12 @@ namespace pcg
 #include "pcg_random.hpp"
 }
 
+struct x_param_validation
+{
+	bool valid;
+	char const *desc;
+};
+
 namespace x
 {
 	namespace random
@@ -124,6 +130,14 @@ namespace x
 			static constexpr const char * const param_a_desc = "Lower bound (inclusive)";
 			static constexpr const char * const param_b_desc = "Upper bound (inclusive)";
 			static constexpr const char * const param_desc_list[nparams] = {param_a_desc, param_b_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->a() < this->b()){
+					return {true, ""};
+				}else{
+					return {false, "a < b"};
+				}
+			}
 
 			double pdf(double x) {return 1. / ((this->b() - this->a()) + 1);}
 			double cdf(double x) {return (floor(x) - this->a() + 1) / ((this->b() - this->a()) + 1);}
@@ -153,6 +167,14 @@ namespace x
 			static constexpr const char * const param_a_desc = "Lower bound (inclusive)";
 			static constexpr const char * const param_b_desc = "Upper bound (inclusive)";
 			static constexpr const char * const param_desc_list[nparams] = {param_a_desc, param_b_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->a() < this->b()){
+					return {true, ""};
+				}else{
+					return {false, "a < b"};
+				}
+			}
 
 			double pdf(double x) {return 0;}
 			double cdf(double x) {return 0;}
@@ -182,6 +204,14 @@ namespace x
 			static const int nparams = 1;
 			static constexpr const char * const param_p_desc = "Probability of success";
 			static constexpr const char * const param_desc_list[nparams] = {param_p_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->p() >= 0 && this->p() <= 1){
+					return {true, ""};
+				}else{
+					return {false, "0 <= p <= 1"};
+				}
+			}
 
 			double pdf(double x) {return 0;}
 			double cdf(double x) {return 0;}
@@ -210,6 +240,16 @@ namespace x
 			static constexpr const char * const param_t_desc = "Number of trials";
 			static constexpr const char * const param_p_desc = "Probability of success";
 			static constexpr const char * const param_desc_list[nparams] = {param_t_desc, param_p_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->t() < 0){
+					return {false, "t >= 0"};
+				}else if(this->p() < 0 || this->p() > 1){
+					return {false, "0 <= p <= 1"};
+				}else{
+					return {true, ""};
+				}
+			}
 			
 			double pdf(double x) {return 0;}
 			double cdf(double x) {return 0;}
@@ -237,6 +277,14 @@ namespace x
 			static const int nparams = 1;
 			static constexpr const char * const param_p_desc = "Probability of success";
 			static constexpr const char * const param_desc_list[nparams] = {param_p_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->p() <= 0 || this->p() > 1){
+					return {false, "0 < p <= 1"};
+				}else{
+					return {true, ""};
+				}
+			}
 			
 			double pdf(double x) {return 0;}
 			double cdf(double x) {return 0;}
@@ -265,6 +313,16 @@ namespace x
 			static constexpr const char * const param_k_desc = "Number of failures";
 			static constexpr const char * const param_p_desc = "Probability of success";
 			static constexpr const char * const param_desc_list[nparams] = {param_k_desc, param_p_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->k() <= 0){
+					return {false, "k > 0"};
+				}else if(this->p() < 0 || this->p() > 1){
+					return {false, "0 <= p <= 1"};
+				}else{
+					return {true, ""};
+				}
+			}
 
 			double pdf(double x) {return 0;}
 			double cdf(double x) {return 0;}
@@ -293,6 +351,14 @@ namespace x
 			static const int nparams = 1;
 			static constexpr const char * const param_mean_desc = "Mean number of events";
 			static constexpr const char * const param_desc_list[nparams] = {param_mean_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->mean() <= 0){
+					return {false, "mean > 0"};
+				}else{
+					return {true, ""};
+				}
+			}
 			
 			double pdf(double x) {return 0;}
 			double cdf(double x) {return 0;}
@@ -320,6 +386,14 @@ namespace x
 			static const int nparams = 1;
 			static constexpr const char * const param_lambda_desc = "Rate of events";
 			static constexpr const char * const param_desc_list[nparams] = {param_lambda_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->lambda() <= 0){
+					return {false, "lambda > 0"};
+				}else{
+					return {true, ""};
+				}
+			}
 			
 			double pdf(double x) {return 0;}
 			double cdf(double x) {return 0;}
@@ -348,6 +422,16 @@ namespace x
 			static constexpr const char * const param_alpha_desc = "Shape";
 			static constexpr const char * const param_beta_desc = "Scale";
 			static constexpr const char * const param_desc_list[nparams] = {param_alpha_desc, param_beta_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->alpha() <= 0){
+					return {false, "alpha > 0"};
+				}else if(this->beta() <= 0){
+					return {false, "beta > 0"};
+				}else{
+					return {true, ""};
+				}
+			}
 			
 			double pdf(double x) {return 0;}
 			double cdf(double x) {return 0;}
@@ -376,6 +460,16 @@ namespace x
 			static constexpr const char * const param_a_desc = "Shape";
 			static constexpr const char * const param_b_desc = "Scale";
 			static constexpr const char * const param_desc_list[nparams] = {param_a_desc, param_b_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->a() <= 0){
+					return {false, "a > 0"};
+				}else if(this->b() <= 0){
+					return {false, "b > 0"};
+				}else{
+					return {true, ""};
+				}
+			}
 			
 			double pdf(double x) {return 0;}
 			double cdf(double x) {return 0;}
@@ -404,6 +498,14 @@ namespace x
 			static constexpr const char * const param_a_desc = "Location";
 			static constexpr const char * const param_b_desc = "Scale";
 			static constexpr const char * const param_desc_list[nparams] = {param_a_desc, param_b_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->b() <= 0){
+					return {false, "b > 0"};
+				}else{
+					return {true, ""};
+				}
+			}
 			
 			double pdf(double x) {return 0;}
 			double cdf(double x) {return 0;}
@@ -433,6 +535,14 @@ namespace x
 			static constexpr const char * const param_mean_desc = "Mean";
 			static constexpr const char * const param_stddev_desc = "Standard deviation";
 			static constexpr const char * const param_desc_list[nparams] = {param_mean_desc, param_stddev_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->stddev() <= 0){
+					return {false, "stddev > 0"};
+				}else{
+					return {true, ""};
+				}
+			}
 			
 			double pdf(double x) {return 0;}
 			double cdf(double x) {return 0;}
@@ -461,6 +571,14 @@ namespace x
 			static constexpr const char * const param_m_desc = "Mean";
 			static constexpr const char * const param_s_desc = "Standard deviation";
 			static constexpr const char * const param_desc_list[nparams] = {param_m_desc, param_s_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->s() <= 0){
+					return {false, "s > 0"};
+				}else{
+					return {true, ""};
+				}
+			}
 			
 			double pdf(double x) {return 0;}
 			double cdf(double x) {return 0;}
@@ -488,6 +606,14 @@ namespace x
 			static const int nparams = 1;
 			static constexpr const char * const param_n_desc = "Degrees of freedom";
 			static constexpr const char * const param_desc_list[nparams] = {param_n_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->n() <= 0){
+					return {false, "n > 0"};
+				}else{
+					return {true, ""};
+				}
+			}
 			
 			double pdf(double x) {return 0;}
 			double cdf(double x) {return 0;}
@@ -516,6 +642,14 @@ namespace x
 			static constexpr const char * const param_a_desc = "Location";
 			static constexpr const char * const param_b_desc = "Scale";
 			static constexpr const char * const param_desc_list[nparams] = {param_a_desc, param_b_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->b() <= 0){
+					return {false, "b > 0"};
+				}else{
+					return {true, ""};
+				}
+			}
 			
 			double pdf(double x) {return 0;}
 			double cdf(double x) {return 0;}
@@ -544,6 +678,16 @@ namespace x
 			static constexpr const char * const param_m_desc = "First degree of freedom";
 			static constexpr const char * const param_n_desc = "Second degree of freedom";
 			static constexpr const char * const param_desc_list[nparams] = {param_m_desc, param_n_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->m() <= 0){
+					return {false, "m > 0"};
+				}else if(this->n() <= 0){
+					return {false, "n > 0"};
+				}else{
+					return {true, ""};
+				}
+			}
 			
 			double pdf(double x) {return 0;}
 			double cdf(double x) {return 0;}
@@ -571,6 +715,14 @@ namespace x
 			static const int nparams = 1;
 			static constexpr const char * const param_n_desc = "Degrees of freedom";
 			static constexpr const char * const param_desc_list[nparams] = {param_n_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->n() <= 0){
+					return {false, "n > 0"};
+				}else{
+					return {true, ""};
+				}
+			}
 			
 			double pdf(double x) {return 0;}
 			double cdf(double x) {return 0;}
@@ -599,6 +751,19 @@ namespace x
 			static const int nparams = 1;
 			static constexpr const char * const param_probabilities_desc = "Probabilities";
 			static constexpr const char * const param_desc_list[nparams] = {param_probabilities_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->probabilities().size() == 0){
+					return {false, "probabilities must contain at least one value"};
+				}else{
+					for(int i = 0; i < this->probabilities().size(); i++){
+						if(this->probabilities()[i] <= 0){
+							return {false, "p_i > 0"};
+						}
+					}
+					return {true, ""};
+				}
+			}
 			
 			double pdf(double x) {return 0;}
 			double cdf(double x) {return 0;}
@@ -627,6 +792,14 @@ namespace x
 			static constexpr const char * const param_intervals_desc = "Intervals";
 			static constexpr const char * const param_densities_desc = "Densities";
 			static constexpr const char * const param_desc_list[nparams] = {param_intervals_desc, param_densities_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->intervals().size() != (this->densities().size() + 1)){
+					return {false, "intervals should contain one more element than densities"};
+				}else{
+					return {true, ""};
+				}
+			}
 			
 			double pdf(double x) {return 0;}
 			double cdf(double x) {return 0;}
@@ -655,6 +828,14 @@ namespace x
 			static constexpr const char * const param_intervals_desc = "Intervals";
 			static constexpr const char * const param_densities_desc = "Densities";
 			static constexpr const char * const param_desc_list[nparams] = {param_intervals_desc, param_densities_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->intervals().size() != (this->densities().size() + 1)){
+					return {false, "intervals should contain one more element than densities"};
+				}else{
+					return {true, ""};
+				}
+			}
 			
 			double pdf(double x) {return 0;}
 			double cdf(double x) {return 0;}
@@ -683,6 +864,17 @@ namespace x
 			static constexpr const char * const param_alpha_desc = "First shape parameter";
 			static constexpr const char * const param_beta_desc = "Second shape parameter";
 			static constexpr const char * const param_desc_list[nparams] = {param_alpha_desc, param_beta_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->alpha() <= 0){
+					return {false, "alpha > 0"};
+				}else if(this->beta() <= 0){
+					return {false, "beta > 0"};
+				}else{
+					return {true, ""};
+				}
+			}
+			
 			// types
 			typedef _RealType result_type;
 
@@ -805,6 +997,17 @@ namespace x
 			static constexpr const char * const param_alpha_desc = "First shape parameter";
 			static constexpr const char * const param_beta_desc = "Second shape parameter";
 			static constexpr const char * const param_desc_list[nparams] = {param_alpha_desc, param_beta_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->alpha() <= 0){
+					return {false, "alpha > 0"};
+				}else if(this->alpha() <= 0){
+					return {false, "beta > 0"};
+				}else{
+					return {true, ""};
+				}
+			}
+			
 			// types
 			typedef _RealType result_type;
 
@@ -882,7 +1085,7 @@ namespace x
 			gamma_distribution<result_type> g2(__p.beta(), 1.0);
 			result_type a = g1(__g);
 			result_type beta = a / (a + g2(__g));
-			return powf(beta, 1. / __p.alpha());
+			return pow(beta, 1. / __p.alpha());
 		}
 
 		template <class _CharT, class _Traits, class _RT>
@@ -927,6 +1130,20 @@ namespace x
 			static const int nparams = 1;
 			static constexpr const char * const param_alpha_desc = "Concentrations";
 			static constexpr const char * const param_desc_list[nparams] = {param_alpha_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->alpha().size() < 2){
+					return {false, "alpha must contain 2 or more values"};
+				}else{
+					for(int i = 0; i < this->alpha().size(); i++){
+						if(this->alpha()[i] <= 0){
+							return {false, "alpha_i > 0"};
+						}
+					}
+					return {true, ""};
+				}
+			}
+			
 			// types
 			typedef _RealType result_type;
 
@@ -1172,6 +1389,17 @@ namespace x
 			static constexpr const char * const param_n_desc = "Number of trials";
 			static constexpr const char * const param_p_desc = "Probabilities";
 			static constexpr const char * const param_desc_list[nparams] = {param_n_desc, param_p_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->n() <= 0){
+					return {false, "n > 0"};
+				}else if(this->p().size() < 1){
+					return {false, "p must contain at least one probability"};
+				}else{
+					return {true, ""};
+				}
+			}
+			
 			// types
 			typedef _IntType result_type;
 
@@ -1439,6 +1667,19 @@ namespace x
 			static constexpr const char * const param_M_desc = "Population size";
 			static constexpr const char * const param_N_desc = "Number of objects of interest";
 			static constexpr const char * const param_desc_list[nparams] = {param_n_desc, param_M_desc, param_N_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->M() < 0){
+					return {false, "M >= 0"};
+				}else if(this->n() <= 0 || this->n() > this->M()){
+					return {false, "0 < n <= M"};
+				}else if(this->N() <= 0 || this->N() > this->M()){
+					return {false, "0 < N <= M"};
+				}else{
+					return {true, ""};
+				}
+			}
+			
 			// types
 			typedef _IntType result_type;
 
@@ -1609,6 +1850,28 @@ namespace x
 			static constexpr const char * const param_n_desc = "Number of trials";
 			static constexpr const char * const param_M_desc = "Population sizes";
 			static constexpr const char * const param_desc_list[nparams] = {param_n_desc, param_M_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->n() <= 0){
+					return {false, "n > 0"};
+				}else if(this->M().size() <= 0){
+					return {false, "M must contain at least one element"};
+				}else{
+					_IntType sum = 0;
+					for(int i = 0; i < this->M().size(); i++){
+						if(this->M()[i] < 0){
+							return {false, "M_i >= 0"};
+						}
+						sum += this->M()[i];
+					}
+					if(this->n() > sum){
+						return {false, "n <= sum(M)"};
+					}else{
+						return {true, ""};
+					}
+				}
+			}
+			
 			// types
 			typedef _IntType result_type;
 
@@ -1686,7 +1949,7 @@ namespace x
 
 			// property functions
 			result_type n() const {return __p_.n();}
-			std::vector<double> M() const {return __p_.p();}
+			std::vector<result_type> M() const {return __p_.M();}
 
 			param_type param() const {return __p_;}
 			void param(const param_type& __p) {__p_ = __p;}
@@ -1877,6 +2140,15 @@ namespace x
 			static constexpr const char * const param_mu_desc = "Location";
 			static constexpr const char * const param_sigma_desc = "Scale";
 			static constexpr const char * const param_desc_list[nparams] = {param_mu_desc, param_sigma_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->sigma() <= 0){
+					return {false, "sigma > 0"};
+				}else{
+					return {true, ""};
+				}
+			}
+			
 			// types
 			typedef _RealType result_type;
 
@@ -2003,6 +2275,15 @@ namespace x
 			static const int nparams = 1;
 			static constexpr const char * const param_sigma_desc = "Scale";
 			static constexpr const char * const param_desc_list[nparams] = {param_sigma_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->sigma() <= 0){
+					return {false, "sigma > 0"};
+				}else{
+					return {true, ""};
+				}
+			}
+			
 			// types
 			typedef _RealType result_type;
 
@@ -2076,8 +2357,11 @@ namespace x
 		_RealType
 		rayleigh_distribution<_RealType>::operator()(_URNG& __g, const param_type& __p)
 		{
-			std::uniform_real_distribution d(0., 1.);
-			result_type u = d(__g);
+			std::uniform_real_distribution<result_type> d(0., 1.);
+			result_type u;
+			do{
+				u = d(__g);
+			}while(u == 0);
 			return __p.sigma() * sqrt(-2. * log(u));
 		}
 
@@ -2120,6 +2404,17 @@ namespace x
 			static constexpr const char * const param_k_desc = "Shape";
 			static constexpr const char * const param_lambda_desc = "Rate";
 			static constexpr const char * const param_desc_list[nparams] = {param_k_desc, param_lambda_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->k() < 1){
+					return {false, "k > 0"};
+				}else if(this->lambda() <= 0){
+					return {false, "lambda > 0"};
+				}else{
+					return {true, ""};
+				}
+			}
+			
 			// types
 			typedef _RealType result_type;
 
@@ -2247,6 +2542,15 @@ namespace x
 			static constexpr const char * const param_a_desc = "Lower bound";
 			static constexpr const char * const param_sigma_desc = "Standard deviation";
 			static constexpr const char * const param_desc_list[nparams] = {param_a_desc, param_sigma_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->sigma() <= 0){
+					return {false, "sigma > 0"};
+				}else{
+					return {true, ""};
+				}
+			}
+			
 			// types
 			typedef _RealType result_type;
 
@@ -2387,6 +2691,19 @@ namespace x
 			static constexpr const char * const param_sigmay_desc = "Standard deviation in the Y direction";
 			static constexpr const char * const param_rho_desc = "Correlation coefficient";
 			static constexpr const char * const param_desc_list[nparams] = {param_sigmax_desc, param_sigmay_desc, param_rho_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->sigmax() <= 0){
+					return {false, "sigmax > 0"};
+				}else if(this->sigmay() <= 0){
+					return {false, "sigmay > 0"};
+				}else if(this->rho() < -1 || this->rho() > 1){
+					return {false, "-1 <= rho <= 1"};
+				}else{
+					return {true, ""};
+				}
+			}
+			
 			// types
 			typedef _RealType result_type;
 
@@ -2522,6 +2839,17 @@ namespace x
 			static constexpr const char * const param_alpha_desc = "Scale";
 			static constexpr const char * const param_beta_desc = "Shape";
 			static constexpr const char * const param_desc_list[nparams] = {param_alpha_desc, param_beta_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->alpha() <= 0){
+					return {false, "alpha > 0"};
+				}else if(this->beta() <= 0){
+					return {false, "beta > 0"};
+				}else{
+					return {true, ""};
+				}
+			}
+			
 			// types
 			typedef _RealType result_type;
 
@@ -2685,6 +3013,15 @@ namespace x
 			static constexpr const char * const param_a_desc = "Lower bound";
 			static constexpr const char * const param_sigma_desc = "Scale";
 			static constexpr const char * const param_desc_list[nparams] = {param_a_desc, param_sigma_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->sigma() <= 0){
+					return {false, "sigma > 0"};
+				}else{
+					return {true, ""};
+				}
+			}
+			
 			// types
 			typedef _RealType result_type;
 
@@ -2809,6 +3146,15 @@ namespace x
 			static constexpr const char * const param_mu_desc = "Position";
 			static constexpr const char * const param_s_desc = "Scale";
 			static constexpr const char * const param_desc_list[nparams] = {param_mu_desc, param_s_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->s() <= 0){
+					return {false, "s > 0"};
+				}else{
+					return {true, ""};
+				}
+			}
+			
 			// types
 			typedef _RealType result_type;
 
@@ -2933,6 +3279,17 @@ namespace x
 			static constexpr const char * const param_a_desc = "Scale";
 			static constexpr const char * const param_b_desc = "Shape";
 			static constexpr const char * const param_desc_list[nparams] = {param_a_desc, param_b_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->a() <= 0){
+					return {false, "a > 0"};
+				}else if(this->b() <= 0){
+					return {false, "b > 0"};
+				}else{
+					return {true, ""};
+				}
+			}
+			
 			// types
 			typedef _RealType result_type;
 
@@ -2974,7 +3331,7 @@ namespace x
 			result_type b() const {return __p_.b();}
 			param_type param() const {return __p_;}
 			void param(const param_type& __p) {__p_ = __p;}
-			result_type min() const {return -std::numeric_limits<result_type>::infinity();}
+			result_type min() const {return __p_.a();}
 			result_type max() const {return std::numeric_limits<result_type>::infinity();}
 
 			friend bool operator==(const pareto_distribution& __x,
@@ -3014,7 +3371,7 @@ namespace x
 			do{
 				u = du(__g);
 			}while(u == 0);
-			return b * pow(u, -1 / a);
+			return a / pow(u, 1. / b);
 		}
 
 		template <class _CharT, class _Traits, class _RT>
@@ -3060,6 +3417,11 @@ namespace x
 			static constexpr const char * const param_mu_desc = "Location";
 			static constexpr const char * const param_beta_desc = "Scale";
 			static constexpr const char * const param_desc_list[nparams] = {param_mu_desc, param_beta_desc};
+			struct x_param_validation validparams()
+			{
+				return {true, ""};
+			}
+			
 			// types
 			typedef _RealType result_type;
 
@@ -3187,21 +3549,30 @@ namespace x
 			static const int nparams = 1;
 			static constexpr const char * const param_p_desc = "Shape";
 			static constexpr const char * const param_desc_list[nparams] = {param_p_desc};
+			struct x_param_validation validparams()
+			{
+				if(this->p() <= 0 || this->p() >= 1){
+					return {false, "0 < p < 1"};
+				}else{
+					return {true, ""};
+				}
+			}
+			
 			// types
 			typedef _IntType result_type;
 
 			class param_type
 			{
-				double __P_;
+				double __p_;
 			public:
 				typedef logarithmic_series_distribution distribution_type;
 
-				explicit param_type(double __P = 0.5) : __P_(__P) {}
+				explicit param_type(double __p = 0.5) : __p_(__p) {}
 
-				double P() const {return __P_;}
+				double p() const {return __p_;}
 
 				friend bool operator==(const param_type& __x, const param_type& __y)
-				{return __x.__P_ == __y.__P_;}
+				{return __x.__p_ == __y.__p_;}
 				friend bool operator!=(const param_type& __x, const param_type& __y)
 				{return !(__x == __y);}
 			};
@@ -3211,8 +3582,8 @@ namespace x
 
 		public:
 			// constructors and reset functions
-			explicit logarithmic_series_distribution(double __P = 0.5)
-				: __p_(param_type(__P)) {}
+			explicit logarithmic_series_distribution(double __p = 0.5)
+				: __p_(param_type(__p)) {}
 			explicit logarithmic_series_distribution(const param_type& __p) : __p_(__p) {}
 			void reset() {}
 
@@ -3223,12 +3594,12 @@ namespace x
 			template<class _URNG> result_type operator()(_URNG& __g, const param_type& __p);
 
 			// property functions
-			double P() const {return __p_.P();}
+			double p() const {return __p_.p();}
 
 			param_type param() const {return __p_;}
 			void param(const param_type& __p) {__p_ = __p;}
 
-			result_type min() const {return 0;}
+			result_type min() const {return 1;}
 			result_type max() const {return std::numeric_limits<result_type>::infinity();}
 
 			friend bool operator==(const logarithmic_series_distribution& __x,
@@ -3270,7 +3641,7 @@ namespace x
 			do{
 				v = du(__g);
 			}while(v == 0);
-			return 1 + (log(v) / log(1 - pow(1. - __p.P(), u)));
+			return 1 + (log(v) / log(1 - pow(1. - __p.p(), u)));
 		}
 
 		template <class _CharT, class _Traits, class _IntType>
@@ -3281,7 +3652,7 @@ namespace x
 			std::__save_flags<_CharT, _Traits> __lx(__os);
 			__os.flags(std::ios_base::dec | std::ios_base::left | std::ios_base::fixed |
 				   std::ios_base::scientific);
-			return __os << __x.P();
+			return __os << __x.p();
 		}
 
 		template <class _CharT, class _Traits, class _IntType>
@@ -3290,14 +3661,14 @@ namespace x
 			   logarithmic_series_distribution<_IntType>& __x)
 		{
 			typedef logarithmic_series_distribution<_IntType> _Eng;
-			typedef typename _Eng::result_type result_type;
+			//typedef typename _Eng::result_type result_type;
 			typedef typename _Eng::param_type param_type;
 			std::__save_flags<_CharT, _Traits> __lx(__is);
 			__is.flags(std::ios_base::dec | std::ios_base::skipws);
-			double __P;
-			__is >> __P;
+			double __p;
+			__is >> __p;
 			if (!__is.fail())
-				__x.param(param_type(__P));
+				__x.param(param_type(__p));
 			return __is;
 		}
 
@@ -3540,7 +3911,7 @@ namespace x
 		public:
 			logarithmic_series_distribution_param_type(void) : logarithmic_series_distribution<long>::param_type() {}
 			logarithmic_series_distribution_param_type(double p1) : logarithmic_series_distribution<long>::param_type(p1) {}
-			double param1(void){return P();}
+			double param1(void){return p();}
 		};
 
 		class normal_distribution_param_type : public normal_distribution<double>::param_type

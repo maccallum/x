@@ -265,6 +265,366 @@
 		52D69DEC20AC90CB00D7BDEF /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08EA7FFBFE8413EDC02AAC07 /* Carbon.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		52D0B7E425BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52B21017213EDC0F002FC3CD;
+			remoteInfo = "x.delegate~";
+		};
+		52D0B7E625BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52B21076214ABC25002FC3CD;
+			remoteInfo = x.dist;
+		};
+		52D0B7E825BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5266D4FD20C969EB007D4589;
+			remoteInfo = x.dist.bernoulli;
+		};
+		52D0B7EA25BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52B20FE7213C43ED002FC3CD;
+			remoteInfo = x.dist.beta;
+		};
+		52D0B7EC25BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5266D50C20C969EF007D4589;
+			remoteInfo = x.dist.binomial;
+		};
+		52D0B7EE25BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 523BCE6F25B7370C0078A614;
+			remoteInfo = x.dist.bivariate_normal;
+		};
+		52D0B7F025BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5266D56E20C974EA007D4589;
+			remoteInfo = x.dist.cauchy;
+		};
+		52D0B7F225BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5266D55F20C974E8007D4589;
+			remoteInfo = x.dist.chi_squared;
+		};
+		52D0B7F425BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52B20FF7213C6B68002FC3CD;
+			remoteInfo = x.dist.dirichlet;
+		};
+		52D0B7F625BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 521EE6C42118992700F281AE;
+			remoteInfo = x.dist.discrete;
+		};
+		52D0B7F825BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52B210A7214BEBB3002FC3CD;
+			remoteInfo = x.dist.erlang;
+		};
+		52D0B7FA25BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5266D49620C95934007D4589;
+			remoteInfo = x.dist.exponential;
+		};
+		52D0B7FC25BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 523BCE7E25B755600078A614;
+			remoteInfo = x.dist.exponential_power;
+		};
+		52D0B7FE25BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5266D4CA20C96115007D4589;
+			remoteInfo = x.dist.extreme_value;
+		};
+		52D0B80025BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5266D57D20C974EC007D4589;
+			remoteInfo = x.dist.fisher_f;
+		};
+		52D0B80225BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 529EACB520B0121C006D56A4;
+			remoteInfo = x.dist.gamma;
+		};
+		52D0B80425BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 523BCE6025B725400078A614;
+			remoteInfo = x.dist.gaussian_tail;
+		};
+		52D0B80625BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5266D51B20C969F1007D4589;
+			remoteInfo = x.dist.geometric;
+		};
+		52D0B80825BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 523BCEBA25B835050078A614;
+			remoteInfo = x.dist.gumbel;
+		};
+		52D0B80A25BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52B2104721454CB9002FC3CD;
+			remoteInfo = x.dist.hypergeometric;
+		};
+		52D0B80C25BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52B21007213D221D002FC3CD;
+			remoteInfo = x.dist.kumaraswamy;
+		};
+		52D0B80E25BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52B21089214BB588002FC3CD;
+			remoteInfo = x.dist.laplace;
+		};
+		52D0B81025BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 523BCEC925B874130078A614;
+			remoteInfo = x.dist.logarithmic_series;
+		};
+		52D0B81225BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 523BCE9C25B79A180078A614;
+			remoteInfo = x.dist.logistic;
+		};
+		52D0B81425BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5266D55020C974E6007D4589;
+			remoteInfo = x.dist.lognormal;
+		};
+		52D0B81625BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52B2103821448A55002FC3CD;
+			remoteInfo = x.dist.multinomial;
+		};
+		52D0B81825BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52B210562145796D002FC3CD;
+			remoteInfo = x.dist.multivariate_hypergeometric;
+		};
+		52D0B81A25BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5266D52A20C969F3007D4589;
+			remoteInfo = x.dist.negative_binomial;
+		};
+		52D0B81C25BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5266D54120C974E4007D4589;
+			remoteInfo = x.dist.normal;
+		};
+		52D0B81E25BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 523BCEAB25B80F3B0078A614;
+			remoteInfo = x.dist.pareto;
+		};
+		52D0B82025BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 521EE6D52118E74700F281AE;
+			remoteInfo = x.dist.piecewise_constant;
+		};
+		52D0B82225BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 521EE6E72118EE7600F281AE;
+			remoteInfo = x.dist.piecewise_linear;
+		};
+		52D0B82425BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5266D4A720C95B70007D4589;
+			remoteInfo = x.dist.poisson;
+		};
+		52D0B82625BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52B21098214BBB0D002FC3CD;
+			remoteInfo = x.dist.rayleigh;
+		};
+		52D0B82825BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 523BCE8D25B77FE10078A614;
+			remoteInfo = x.dist.rayleigh_tail;
+		};
+		52D0B82A25BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5266D58C20C974ED007D4589;
+			remoteInfo = x.dist.student_t;
+		};
+		52D0B82C25BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5266D4DB20C963FF007D4589;
+			remoteInfo = x.dist.uniform_int;
+		};
+		52D0B82E25BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5266D4EA20C96405007D4589;
+			remoteInfo = x.dist.uniform_real;
+		};
+		52D0B83025BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5266D4B920C95CC9007D4589;
+			remoteInfo = x.dist.weibull;
+		};
+		52D0B83225BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 523B363B20A3396A003D1A6B;
+			remoteInfo = x.generator.pcg32;
+		};
+		52D0B83425BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52B211102150D592002FC3CD;
+			remoteInfo = x.generator.pcg64;
+		};
+		52D0B83625BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52B210B62150CE27002FC3CD;
+			remoteInfo = x.generator.minstd_rand0;
+		};
+		52D0B83825BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52B210C52150D016002FC3CD;
+			remoteInfo = x.generator.minstd_rand;
+		};
+		52D0B83A25BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52B210D42150D01A002FC3CD;
+			remoteInfo = x.generator.mt19937;
+		};
+		52D0B83C25BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 528D3197211C765C00DD478F;
+			remoteInfo = x.generator.mt19937_64;
+		};
+		52D0B83E25BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52B210E32150D01C002FC3CD;
+			remoteInfo = x.generator.ranlux24;
+		};
+		52D0B84025BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52B210F22150D01F002FC3CD;
+			remoteInfo = x.generator.ranlux48;
+		};
+		52D0B84225BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52B211012150D022002FC3CD;
+			remoteInfo = x.generator.knuth_b;
+		};
+		52D0B84425BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52B210652145B083002FC3CD;
+			remoteInfo = x.global;
+		};
+		52D0B84625BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52A8393B16E978D7002E273C;
+			remoteInfo = x.random_device;
+		};
+		52D0B84825BD76B2007A8962 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52D69DE420AC90CB00D7BDEF;
+			remoteInfo = x.seed_seq_from;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		08EA7FFBFE8413EDC02AAC07 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		521EE6AE2115F30000F281AE /* x.max.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = x.max.hpp; path = include/x.max.hpp; sourceTree = "<group>"; };
@@ -326,6 +686,7 @@
 		52B210FF2150D01F002FC3CD /* x.generator.ranlux48.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = x.generator.ranlux48.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 		52B2110E2150D022002FC3CD /* x.generator.knuth_b.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = x.generator.knuth_b.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 		52B2111D2150D592002FC3CD /* x.generator.pcg64.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = x.generator.pcg64.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
+		52D0B7DE25BD7682007A8962 /* Build All (Phony).mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Build All (Phony).mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		52D69DF020AC90CB00D7BDEF /* x.seed_seq_from.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = x.seed_seq_from.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -781,6 +1142,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		52D0B7DB25BD7682007A8962 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		52D69DEA20AC90CB00D7BDEF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -874,6 +1242,7 @@
 				523BCEB825B80F3B0078A614 /* x.dist.pareto.mxo */,
 				523BCEC725B835050078A614 /* x.dist.gumbel.mxo */,
 				523BCED625B874130078A614 /* x.dist.logarithmic_series.mxo */,
+				52D0B7DE25BD7682007A8962 /* Build All (Phony).mxo */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2199,6 +2568,74 @@
 			productReference = 52B2111D2150D592002FC3CD /* x.generator.pcg64.mxo */;
 			productType = "com.apple.product-type.bundle";
 		};
+		52D0B7DD25BD7682007A8962 /* Build All (Phony) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 52D0B7E125BD7682007A8962 /* Build configuration list for PBXNativeTarget "Build All (Phony)" */;
+			buildPhases = (
+				52D0B7DA25BD7682007A8962 /* Sources */,
+				52D0B7DB25BD7682007A8962 /* Frameworks */,
+				52D0B7DC25BD7682007A8962 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				52D0B7E525BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B7E725BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B7E925BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B7EB25BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B7ED25BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B7EF25BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B7F125BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B7F325BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B7F525BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B7F725BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B7F925BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B7FB25BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B7FD25BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B7FF25BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B80125BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B80325BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B80525BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B80725BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B80925BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B80B25BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B80D25BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B80F25BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B81125BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B81325BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B81525BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B81725BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B81925BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B81B25BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B81D25BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B81F25BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B82125BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B82325BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B82525BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B82725BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B82925BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B82B25BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B82D25BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B82F25BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B83125BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B83325BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B83525BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B83725BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B83925BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B83B25BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B83D25BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B83F25BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B84125BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B84325BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B84525BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B84725BD76B2007A8962 /* PBXTargetDependency */,
+				52D0B84925BD76B2007A8962 /* PBXTargetDependency */,
+			);
+			name = "Build All (Phony)";
+			productName = "Build All (Phony)";
+			productReference = 52D0B7DE25BD7682007A8962 /* Build All (Phony).mxo */;
+			productType = "com.apple.product-type.bundle";
+		};
 		52D69DE420AC90CB00D7BDEF /* x.seed_seq_from */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 52D69DED20AC90CB00D7BDEF /* Build configuration list for PBXNativeTarget "x.seed_seq_from" */;
@@ -2226,6 +2663,11 @@
 				BuildIndependentTargetsInParallel = NO;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "com.john-maccallum";
+				TargetAttributes = {
+					52D0B7DD25BD7682007A8962 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
 			};
 			buildConfigurationList = 4FADC23708B4156C00ABE55E /* Build configuration list for PBXProject "x" */;
 			compatibilityVersion = "Xcode 9.3";
@@ -2241,8 +2683,46 @@
 			projectDirPath = "";
 			projectRoot = "<Project File Directory>/../../../";
 			targets = (
-				52A8393B16E978D7002E273C /* x.random_device */,
-				52D69DE420AC90CB00D7BDEF /* x.seed_seq_from */,
+				52D0B7DD25BD7682007A8962 /* Build All (Phony) */,
+				52B21017213EDC0F002FC3CD /* x.delegate~ */,
+				52B21076214ABC25002FC3CD /* x.dist */,
+				5266D4FD20C969EB007D4589 /* x.dist.bernoulli */,
+				52B20FE7213C43ED002FC3CD /* x.dist.beta */,
+				5266D50C20C969EF007D4589 /* x.dist.binomial */,
+				523BCE6F25B7370C0078A614 /* x.dist.bivariate_normal */,
+				5266D56E20C974EA007D4589 /* x.dist.cauchy */,
+				5266D55F20C974E8007D4589 /* x.dist.chi_squared */,
+				52B20FF7213C6B68002FC3CD /* x.dist.dirichlet */,
+				521EE6C42118992700F281AE /* x.dist.discrete */,
+				52B210A7214BEBB3002FC3CD /* x.dist.erlang */,
+				5266D49620C95934007D4589 /* x.dist.exponential */,
+				523BCE7E25B755600078A614 /* x.dist.exponential_power */,
+				5266D4CA20C96115007D4589 /* x.dist.extreme_value */,
+				5266D57D20C974EC007D4589 /* x.dist.fisher_f */,
+				529EACB520B0121C006D56A4 /* x.dist.gamma */,
+				523BCE6025B725400078A614 /* x.dist.gaussian_tail */,
+				5266D51B20C969F1007D4589 /* x.dist.geometric */,
+				523BCEBA25B835050078A614 /* x.dist.gumbel */,
+				52B2104721454CB9002FC3CD /* x.dist.hypergeometric */,
+				52B21007213D221D002FC3CD /* x.dist.kumaraswamy */,
+				52B21089214BB588002FC3CD /* x.dist.laplace */,
+				523BCEC925B874130078A614 /* x.dist.logarithmic_series */,
+				523BCE9C25B79A180078A614 /* x.dist.logistic */,
+				5266D55020C974E6007D4589 /* x.dist.lognormal */,
+				52B2103821448A55002FC3CD /* x.dist.multinomial */,
+				52B210562145796D002FC3CD /* x.dist.multivariate_hypergeometric */,
+				5266D52A20C969F3007D4589 /* x.dist.negative_binomial */,
+				5266D54120C974E4007D4589 /* x.dist.normal */,
+				523BCEAB25B80F3B0078A614 /* x.dist.pareto */,
+				521EE6D52118E74700F281AE /* x.dist.piecewise_constant */,
+				521EE6E72118EE7600F281AE /* x.dist.piecewise_linear */,
+				5266D4A720C95B70007D4589 /* x.dist.poisson */,
+				52B21098214BBB0D002FC3CD /* x.dist.rayleigh */,
+				523BCE8D25B77FE10078A614 /* x.dist.rayleigh_tail */,
+				5266D58C20C974ED007D4589 /* x.dist.student_t */,
+				5266D4DB20C963FF007D4589 /* x.dist.uniform_int */,
+				5266D4EA20C96405007D4589 /* x.dist.uniform_real */,
+				5266D4B920C95CC9007D4589 /* x.dist.weibull */,
 				523B363B20A3396A003D1A6B /* x.generator.pcg32 */,
 				52B211102150D592002FC3CD /* x.generator.pcg64 */,
 				52B210B62150CE27002FC3CD /* x.generator.minstd_rand0 */,
@@ -2252,46 +2732,9 @@
 				52B210E32150D01C002FC3CD /* x.generator.ranlux24 */,
 				52B210F22150D01F002FC3CD /* x.generator.ranlux48 */,
 				52B211012150D022002FC3CD /* x.generator.knuth_b */,
-				5266D4DB20C963FF007D4589 /* x.dist.uniform_int */,
-				5266D4EA20C96405007D4589 /* x.dist.uniform_real */,
-				5266D4FD20C969EB007D4589 /* x.dist.bernoulli */,
-				5266D50C20C969EF007D4589 /* x.dist.binomial */,
-				5266D51B20C969F1007D4589 /* x.dist.geometric */,
-				5266D52A20C969F3007D4589 /* x.dist.negative_binomial */,
-				52B2103821448A55002FC3CD /* x.dist.multinomial */,
-				52B2104721454CB9002FC3CD /* x.dist.hypergeometric */,
-				52B210562145796D002FC3CD /* x.dist.multivariate_hypergeometric */,
-				5266D4A720C95B70007D4589 /* x.dist.poisson */,
-				5266D49620C95934007D4589 /* x.dist.exponential */,
-				529EACB520B0121C006D56A4 /* x.dist.gamma */,
-				5266D4B920C95CC9007D4589 /* x.dist.weibull */,
-				5266D4CA20C96115007D4589 /* x.dist.extreme_value */,
-				52B20FF7213C6B68002FC3CD /* x.dist.dirichlet */,
-				52B20FE7213C43ED002FC3CD /* x.dist.beta */,
-				52B21007213D221D002FC3CD /* x.dist.kumaraswamy */,
-				52B21089214BB588002FC3CD /* x.dist.laplace */,
-				52B210A7214BEBB3002FC3CD /* x.dist.erlang */,
-				523BCE6025B725400078A614 /* x.dist.gaussian_tail */,
-				523BCE6F25B7370C0078A614 /* x.dist.bivariate_normal */,
-				523BCE7E25B755600078A614 /* x.dist.exponential_power */,
-				523BCE8D25B77FE10078A614 /* x.dist.rayleigh_tail */,
-				523BCE9C25B79A180078A614 /* x.dist.logistic */,
-				523BCEAB25B80F3B0078A614 /* x.dist.pareto */,
-				523BCEBA25B835050078A614 /* x.dist.gumbel */,
-				523BCEC925B874130078A614 /* x.dist.logarithmic_series */,
-				5266D54120C974E4007D4589 /* x.dist.normal */,
-				5266D55020C974E6007D4589 /* x.dist.lognormal */,
-				5266D55F20C974E8007D4589 /* x.dist.chi_squared */,
-				5266D56E20C974EA007D4589 /* x.dist.cauchy */,
-				5266D57D20C974EC007D4589 /* x.dist.fisher_f */,
-				5266D58C20C974ED007D4589 /* x.dist.student_t */,
-				52B21098214BBB0D002FC3CD /* x.dist.rayleigh */,
-				521EE6C42118992700F281AE /* x.dist.discrete */,
-				521EE6D52118E74700F281AE /* x.dist.piecewise_constant */,
-				521EE6E72118EE7600F281AE /* x.dist.piecewise_linear */,
-				52B21076214ABC25002FC3CD /* x.dist */,
 				52B210652145B083002FC3CD /* x.global */,
-				52B21017213EDC0F002FC3CD /* x.delegate~ */,
+				52A8393B16E978D7002E273C /* x.random_device */,
+				52D69DE420AC90CB00D7BDEF /* x.seed_seq_from */,
 			);
 		};
 /* End PBXProject section */
@@ -2641,6 +3084,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		52B211132150D592002FC3CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52D0B7DC25BD7682007A8962 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3107,6 +3557,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		52D0B7DA25BD7682007A8962 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		52D69DE720AC90CB00D7BDEF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3117,6 +3574,264 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		52D0B7E525BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52B21017213EDC0F002FC3CD /* x.delegate~ */;
+			targetProxy = 52D0B7E425BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B7E725BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52B21076214ABC25002FC3CD /* x.dist */;
+			targetProxy = 52D0B7E625BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B7E925BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5266D4FD20C969EB007D4589 /* x.dist.bernoulli */;
+			targetProxy = 52D0B7E825BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B7EB25BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52B20FE7213C43ED002FC3CD /* x.dist.beta */;
+			targetProxy = 52D0B7EA25BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B7ED25BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5266D50C20C969EF007D4589 /* x.dist.binomial */;
+			targetProxy = 52D0B7EC25BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B7EF25BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 523BCE6F25B7370C0078A614 /* x.dist.bivariate_normal */;
+			targetProxy = 52D0B7EE25BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B7F125BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5266D56E20C974EA007D4589 /* x.dist.cauchy */;
+			targetProxy = 52D0B7F025BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B7F325BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5266D55F20C974E8007D4589 /* x.dist.chi_squared */;
+			targetProxy = 52D0B7F225BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B7F525BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52B20FF7213C6B68002FC3CD /* x.dist.dirichlet */;
+			targetProxy = 52D0B7F425BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B7F725BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 521EE6C42118992700F281AE /* x.dist.discrete */;
+			targetProxy = 52D0B7F625BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B7F925BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52B210A7214BEBB3002FC3CD /* x.dist.erlang */;
+			targetProxy = 52D0B7F825BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B7FB25BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5266D49620C95934007D4589 /* x.dist.exponential */;
+			targetProxy = 52D0B7FA25BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B7FD25BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 523BCE7E25B755600078A614 /* x.dist.exponential_power */;
+			targetProxy = 52D0B7FC25BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B7FF25BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5266D4CA20C96115007D4589 /* x.dist.extreme_value */;
+			targetProxy = 52D0B7FE25BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B80125BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5266D57D20C974EC007D4589 /* x.dist.fisher_f */;
+			targetProxy = 52D0B80025BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B80325BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 529EACB520B0121C006D56A4 /* x.dist.gamma */;
+			targetProxy = 52D0B80225BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B80525BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 523BCE6025B725400078A614 /* x.dist.gaussian_tail */;
+			targetProxy = 52D0B80425BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B80725BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5266D51B20C969F1007D4589 /* x.dist.geometric */;
+			targetProxy = 52D0B80625BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B80925BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 523BCEBA25B835050078A614 /* x.dist.gumbel */;
+			targetProxy = 52D0B80825BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B80B25BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52B2104721454CB9002FC3CD /* x.dist.hypergeometric */;
+			targetProxy = 52D0B80A25BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B80D25BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52B21007213D221D002FC3CD /* x.dist.kumaraswamy */;
+			targetProxy = 52D0B80C25BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B80F25BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52B21089214BB588002FC3CD /* x.dist.laplace */;
+			targetProxy = 52D0B80E25BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B81125BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 523BCEC925B874130078A614 /* x.dist.logarithmic_series */;
+			targetProxy = 52D0B81025BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B81325BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 523BCE9C25B79A180078A614 /* x.dist.logistic */;
+			targetProxy = 52D0B81225BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B81525BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5266D55020C974E6007D4589 /* x.dist.lognormal */;
+			targetProxy = 52D0B81425BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B81725BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52B2103821448A55002FC3CD /* x.dist.multinomial */;
+			targetProxy = 52D0B81625BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B81925BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52B210562145796D002FC3CD /* x.dist.multivariate_hypergeometric */;
+			targetProxy = 52D0B81825BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B81B25BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5266D52A20C969F3007D4589 /* x.dist.negative_binomial */;
+			targetProxy = 52D0B81A25BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B81D25BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5266D54120C974E4007D4589 /* x.dist.normal */;
+			targetProxy = 52D0B81C25BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B81F25BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 523BCEAB25B80F3B0078A614 /* x.dist.pareto */;
+			targetProxy = 52D0B81E25BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B82125BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 521EE6D52118E74700F281AE /* x.dist.piecewise_constant */;
+			targetProxy = 52D0B82025BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B82325BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 521EE6E72118EE7600F281AE /* x.dist.piecewise_linear */;
+			targetProxy = 52D0B82225BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B82525BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5266D4A720C95B70007D4589 /* x.dist.poisson */;
+			targetProxy = 52D0B82425BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B82725BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52B21098214BBB0D002FC3CD /* x.dist.rayleigh */;
+			targetProxy = 52D0B82625BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B82925BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 523BCE8D25B77FE10078A614 /* x.dist.rayleigh_tail */;
+			targetProxy = 52D0B82825BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B82B25BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5266D58C20C974ED007D4589 /* x.dist.student_t */;
+			targetProxy = 52D0B82A25BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B82D25BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5266D4DB20C963FF007D4589 /* x.dist.uniform_int */;
+			targetProxy = 52D0B82C25BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B82F25BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5266D4EA20C96405007D4589 /* x.dist.uniform_real */;
+			targetProxy = 52D0B82E25BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B83125BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5266D4B920C95CC9007D4589 /* x.dist.weibull */;
+			targetProxy = 52D0B83025BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B83325BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 523B363B20A3396A003D1A6B /* x.generator.pcg32 */;
+			targetProxy = 52D0B83225BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B83525BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52B211102150D592002FC3CD /* x.generator.pcg64 */;
+			targetProxy = 52D0B83425BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B83725BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52B210B62150CE27002FC3CD /* x.generator.minstd_rand0 */;
+			targetProxy = 52D0B83625BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B83925BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52B210C52150D016002FC3CD /* x.generator.minstd_rand */;
+			targetProxy = 52D0B83825BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B83B25BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52B210D42150D01A002FC3CD /* x.generator.mt19937 */;
+			targetProxy = 52D0B83A25BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B83D25BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 528D3197211C765C00DD478F /* x.generator.mt19937_64 */;
+			targetProxy = 52D0B83C25BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B83F25BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52B210E32150D01C002FC3CD /* x.generator.ranlux24 */;
+			targetProxy = 52D0B83E25BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B84125BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52B210F22150D01F002FC3CD /* x.generator.ranlux48 */;
+			targetProxy = 52D0B84025BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B84325BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52B211012150D022002FC3CD /* x.generator.knuth_b */;
+			targetProxy = 52D0B84225BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B84525BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52B210652145B083002FC3CD /* x.global */;
+			targetProxy = 52D0B84425BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B84725BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52A8393B16E978D7002E273C /* x.random_device */;
+			targetProxy = 52D0B84625BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+		52D0B84925BD76B2007A8962 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52D69DE420AC90CB00D7BDEF /* x.seed_seq_from */;
+			targetProxy = 52D0B84825BD76B2007A8962 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		4FADC23808B4156C00ABE55E /* Debug */ = {
@@ -8757,6 +9472,90 @@
 			};
 			name = Release;
 		};
+		52D0B7E225BD7682007A8962 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_MASTER_OBJECT_FILE = NO;
+				INFOPLIST_FILE = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.john-maccallum.Build-All--Phony-";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = mxo;
+			};
+			name = Debug;
+		};
+		52D0B7E325BD7682007A8962 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_MASTER_OBJECT_FILE = NO;
+				INFOPLIST_FILE = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.john-maccallum.Build-All--Phony-";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = mxo;
+			};
+			name = Release;
+		};
 		52D69DEE20AC90CB00D7BDEF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -9322,6 +10121,15 @@
 			buildConfigurations = (
 				52B2111B2150D592002FC3CD /* Debug */,
 				52B2111C2150D592002FC3CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		52D0B7E125BD7682007A8962 /* Build configuration list for PBXNativeTarget "Build All (Phony)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52D0B7E225BD7682007A8962 /* Debug */,
+				52D0B7E325BD7682007A8962 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

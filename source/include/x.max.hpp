@@ -565,7 +565,7 @@ namespace x
 #endif
 				for(int i = 0; i < n; i++){
 					long v = x->_rng();
-					atom_set(out + i, x->_rng());
+					atom_set(out + i, v);
 				}
 				outlet_list(x->outlet_main(), _sym_list, n, out);
 #ifndef __clang__
@@ -1094,13 +1094,13 @@ namespace x
 					dist_obj<dist_type, result_type, multivariate, xparam_type> *x = (dist_obj<dist_type, result_type, multivariate, xparam_type> *)(_x->myobj);
 #ifndef __clang__
 					t_atom *a = (t_atom *)sysmem_newptr(x->nargs * sizeof(t_atom));
-#else
-					t_atom a[x->nargs];
-#endif
 					if (!a) {
 						object_error((t_object*)x, "out of memory!");
 						return;
 					}
+#else
+					t_atom a[x->nargs];
+#endif
 					for(int i = 0; i < x->nargs; i++){
 						atom_setsym(a + i, x->names_sym[i]);
 					}
@@ -1108,6 +1108,23 @@ namespace x
 #ifndef __clang__
 					sysmem_freeptr(a);
 #endif
+				}
+
+				static void validparams(t_maxobj *_x)
+				{
+					dist_obj<dist_type, result_type, multivariate, xparam_type> *x = (dist_obj<dist_type, result_type, multivariate, xparam_type> *)(_x->myobj);
+					dist_type d = dist_type(*((xparam_type *)x));
+					struct x_param_validation pv = d.validparams();
+					if(pv.valid == true){
+						t_atom a;
+						atom_set(&a, 1);
+						outlet_anything(((dist_obj<dist_type, result_type> *)(_x->myobj))->outlet_main(), gensym("validparams"), 1, &a);
+					}else{
+						t_atom a[2];
+						atom_setlong(a, 0);
+						atom_setsym(a + 1, gensym(pv.desc));
+						outlet_anything(((dist_obj<dist_type, result_type> *)(_x->myobj))->outlet_main(), gensym("validparams"), 2, a);
+					}
 				}
 
 				static void freeobj(t_maxobj *x)
@@ -1212,6 +1229,7 @@ namespace x
 					class_addmethod(c, (method)min, "min", A_GIMME, 0);
 					class_addmethod(c, (method)max, "max", A_GIMME, 0);
 					class_addmethod(c, (method)paramnames, "paramnames", 0);
+					class_addmethod(c, (method)validparams, "validparams", 0);
 					for(int i = 0; i < xparam_type::nargs; i++){
 						class_addmethod(c, (method)param, xparam_type::names_str[i], A_GIMME, 0);
 						const char *name = (std::string(xparam_type::names_str[i]) + std::string(" ")).c_str();
