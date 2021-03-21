@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2018 John MacCallum
+Copyright (c) 2018-2021 John MacCallum
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -36,6 +36,8 @@ struct x_param_validation
 
 namespace x
 {
+	constexpr char const *copyright = "X Copyright 2018-2021, John MacCallum\n"
+		"PCG By Melissa O'Neill and PCG contributers";
 	namespace random
 	{
 		class random_device : public std::random_device
@@ -308,7 +310,7 @@ namespace x
 		public:
 			using std::negative_binomial_distribution<IntType>::negative_binomial_distribution;
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "Produces random integers which represent the number of successful trials, each with probability k, before k unsuccessful trials.";
+			static constexpr const char * const desc_short = "Produces random integers which represent the number of successful trials, each with probability p, before k unsuccessful trials.";
 			static const int nparams = 2;
 			static constexpr const char * const param_k_desc = "Number of failures";
 			static constexpr const char * const param_p_desc = "Probability of success";
@@ -417,7 +419,7 @@ namespace x
 		public:
 			using std::gamma_distribution<RealType>::gamma_distribution;
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "Produces random numbers which are the aggregation of alpha exponential distributions, each with beta as its parameter.";
+			static constexpr const char * const desc_short = "Produces random numbers which are the sum of alpha exponential distributions, each with beta as its parameter.";
 			static const int nparams = 2;
 			static constexpr const char * const param_alpha_desc = "Shape";
 			static constexpr const char * const param_beta_desc = "Scale";
@@ -455,7 +457,8 @@ namespace x
 		public:
 			using std::weibull_distribution<RealType>::weibull_distribution;
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "Produces random numbers which represent the lifetime for which the death probability is proportional to the a-th power of time. b is a scale parameter.";
+			//static constexpr const char * const desc_short = "Produces random numbers which represent the lifetime for which the death probability is proportional to the a-th power of time. b is a scale parameter.";
+			static constexpr const char * const desc_short = "Produces random numbers which represent the lifetime of an object. a is a shape parameter which characterizes objects as having a high degree of early failure when a < 1 (\"infant mortality rate\"), random failure when a = 1, or that the object wears out over time when a > 1. b is a scale parameter.";
 			static const int nparams = 2;
 			static constexpr const char * const param_a_desc = "Shape";
 			static constexpr const char * const param_b_desc = "Scale";

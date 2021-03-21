@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2018 John MacCallum
+Copyright (c) 2018-2021 John MacCallum
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -41,6 +41,8 @@ SOFTWARE.
 #define x_max_obj_call_max_class EVAL(_, EVAL(C_T, _obj.max_class(c)))
 #define x_max_obj_call_main EVAL(_, EVAL(C_T, _obj.main()))
 
+t_symbol *_x_copyright_posted;
+
 namespace x
 {
 	namespace max
@@ -53,6 +55,10 @@ namespace x
 				x_max_obj_call_max_class;
 				x_max_obj_call_main;
 				class_register(CLASS_BOX, c);
+			}
+			if(!_x_copyright_posted){
+				_x_copyright_posted = gensym("_x_copyright_posted");
+				post("%s", x::copyright);
 			}
 			return 0;
 		}
