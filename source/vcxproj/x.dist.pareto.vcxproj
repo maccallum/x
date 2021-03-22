@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{D7D2B050-0FAC-4326-89AD-C82254541416}</ProjectGuid>
+    <ProjectGuid>{49D5DAF6-4AC4-4914-BB26-2ACB061BB9A2}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>x.dist.gamma</ProjectName>
+    <ProjectName>x.dist.pareto</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -105,7 +105,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>..\pcg-cpp\include;..\include;..\max-sdk\source\c74support\max-includes;..\max-sdk\source\c74support\msp-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>X_MAX_TYPE=gamma;X_MAX_CLASS=dist;NOMINMAX;NO_TRANSLATION_SUPPORT;MAXAPI_USE_MSCRT;EXT_WIN_VERSION;WIN_EXT_VERSION;X_DEBUG;X_MAX_TYPE=gamma;X_MAX_CLASS=dist;WIN_VERSION;WIN32;_DEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>X_MAX_TYPE=pareto;X_MAX_CLASS=dist;NOMINMAX;NO_TRANSLATION_SUPPORT;MAXAPI_USE_MSCRT;EXT_WIN_VERSION;WIN_EXT_VERSION;X_DEBUG;X_MAX_TYPE=normal;X_MAX_CLASS=dist;WIN_VERSION;WIN32;_DEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <ExceptionHandling />
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -147,7 +147,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>..\pcg-cpp\include;..\include;..\max-sdk\source\c74support\max-includes;..\max-sdk\source\c74support\msp-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>X_MAX_TYPE=gamma;X_MAX_CLASS=dist;NOMINMAX;NO_TRANSLATION_SUPPORT;MAXAPI_USE_MSCRT;EXT_WIN_VERSION;WIN_EXT_VERSION;X_DEBUG;WIN64;X_MAX_TYPE=gamma;X_MAX_CLASS=dist;WIN_VERSION;_DEBUG;_WINDOWS;_USRDLL;WIN_EXT_VERSION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>X_MAX_TYPE=pareto;X_MAX_CLASS=dist;NOMINMAX;NO_TRANSLATION_SUPPORT;MAXAPI_USE_MSCRT;EXT_WIN_VERSION;WIN_EXT_VERSION;X_DEBUG;WIN64;X_MAX_TYPE=normal;X_MAX_CLASS=dist;WIN_VERSION;_DEBUG;_WINDOWS;_USRDLL;WIN_EXT_VERSION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <ExceptionHandling />
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -194,7 +194,7 @@
       <OmitFramePointers>true</OmitFramePointers>
       <WholeProgramOptimization>true</WholeProgramOptimization>
       <AdditionalIncludeDirectories>..\pcg-cpp\include;..\include;..\max-sdk\source\c74support\max-includes;..\max-sdk\source\c74support\msp-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>X_MAX_TYPE=gamma;X_MAX_CLASS=dist;NOMINMAX;NO_TRANSLATION_SUPPORT;MAXAPI_USE_MSCRT;EXT_WIN_VERSION;WIN_EXT_VERSION;X_MAX_TYPE=gamma;X_MAX_CLASS=dist;WIN_VERSION;WIN32;NDEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>X_MAX_TYPE=pareto;X_MAX_CLASS=dist;NOMINMAX;NO_TRANSLATION_SUPPORT;MAXAPI_USE_MSCRT;EXT_WIN_VERSION;WIN_EXT_VERSION;X_MAX_TYPE=normal;X_MAX_CLASS=dist;WIN_VERSION;WIN32;NDEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling />
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -242,7 +242,7 @@
       <OmitFramePointers>true</OmitFramePointers>
       <WholeProgramOptimization>true</WholeProgramOptimization>
       <AdditionalIncludeDirectories>..\pcg-cpp\include;..\include;..\max-sdk\source\c74support\max-includes;..\max-sdk\source\c74support\msp-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>X_MAX_TYPE=gamma;X_MAX_CLASS=dist;NOMINMAX;NO_TRANSLATION_SUPPORT;MAXAPI_USE_MSCRT;EXT_WIN_VERSION;WIN_EXT_VERSION;WIN64;X_MAX_TYPE=gamma;X_MAX_CLASS=dist;WIN_VERSION;NDEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>X_MAX_TYPE=pareto;X_MAX_CLASS=dist;NOMINMAX;NO_TRANSLATION_SUPPORT;MAXAPI_USE_MSCRT;EXT_WIN_VERSION;WIN_EXT_VERSION;WIN64;WIN_VERSION;NDEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling />
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
