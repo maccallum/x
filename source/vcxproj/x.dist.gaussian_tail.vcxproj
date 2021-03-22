@@ -145,7 +145,7 @@
     <PreBuildEvent>
       <Command>set cmd="git describe --long "
 FOR /F "tokens=*" %%i IN (' %cmd% ') DO SET X=%%i
-echo #define X_VERSION ^"%X%^" &gt; "..\version.h"</Command>
+echo #define X_VERSION ^"%X%^" &gt; "..\include\version.h"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -192,7 +192,7 @@ echo #define X_VERSION ^"%X%^" &gt; "..\version.h"</Command>
     <PreBuildEvent>
       <Command>set cmd="git describe --long "
 FOR /F "tokens=*" %%i IN (' %cmd% ') DO SET X=%%i
-echo #define X_VERSION ^"%X%^" &gt; "..\version.h"</Command>
+echo #define X_VERSION ^"%X%^" &gt; "..\include\version.h"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -245,7 +245,7 @@ echo #define X_VERSION ^"%X%^" &gt; "..\version.h"</Command>
     <PreBuildEvent>
       <Command>set cmd="git describe --long "
 FOR /F "tokens=*" %%i IN (' %cmd% ') DO SET X=%%i
-echo #define X_VERSION ^"%X%^" &gt; "..\version.h"</Command>
+echo #define X_VERSION ^"%X%^" &gt; "..\include\version.h"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -299,7 +299,7 @@ echo #define X_VERSION ^"%X%^" &gt; "..\version.h"</Command>
     <PreBuildEvent>
       <Command>set cmd="git describe --long "
 FOR /F "tokens=*" %%i IN (' %cmd% ') DO SET X=%%i
-echo #define X_VERSION ^"%X%^" &gt; "..\version.h"</Command>
+echo #define X_VERSION ^"%X%^" &gt; "..\include\version.h"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
