@@ -58,7 +58,7 @@ namespace x
 			if(!_x_copyright_posted->s_thing){
 				_x_copyright_posted->s_thing = (t_object*)1;
 				post("%s", x::copyright); 
-				post("%s", x::version);
+				post("version %s", x::version);
 			}
 			return 0;
 		}

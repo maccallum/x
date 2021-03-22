@@ -2660,7 +2660,6 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = NO;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "com.john-maccallum";
 				TargetAttributes = {
