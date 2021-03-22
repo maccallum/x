@@ -97,7 +97,9 @@ void xglobal_assist(t_xglobal *x, void *b, long m, long a, char *s)
 
 void xglobal_free(t_xglobal *x)
 {
-	object_method(x->conduit, gensym("release"));
+	if(x->conduit){
+		object_method(x->conduit, gensym("release"));
+	}
 }
 
 void *xglobal_new(t_symbol *msg, short argc, t_atom *argv)

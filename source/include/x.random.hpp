@@ -20,6 +20,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "version.h"
+
 namespace pcg
 {
 #ifdef PCG_RAND_HPP_INCLUDED
@@ -36,8 +38,8 @@ struct x_param_validation
 
 namespace x
 {
-	constexpr char const *copyright = "X Copyright 2018-2021, John MacCallum\n"
-		"PCG By Melissa O'Neill and PCG contributers";
+	constexpr char const* copyright = "X Copyright 2018-2021, John MacCallum";
+	constexpr char const* version = X_VERSION;
 	namespace random
 	{
 		class random_device : public std::random_device

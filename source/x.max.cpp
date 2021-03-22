@@ -41,8 +41,6 @@ SOFTWARE.
 #define x_max_obj_call_max_class EVAL(_, EVAL(C_T, _obj.max_class(c)))
 #define x_max_obj_call_main EVAL(_, EVAL(C_T, _obj.main()))
 
-t_symbol *_x_copyright_posted;
-
 namespace x
 {
 	namespace max
@@ -56,9 +54,11 @@ namespace x
 				x_max_obj_call_main;
 				class_register(CLASS_BOX, c);
 			}
-			if(!_x_copyright_posted){
-				_x_copyright_posted = gensym("_x_copyright_posted");
-				post("%s", x::copyright);
+			t_symbol* _x_copyright_posted = gensym("_x_copyright_posted");
+			if(!_x_copyright_posted->s_thing){
+				_x_copyright_posted->s_thing = (t_object*)1;
+				post("%s", x::copyright); 
+				post("%s", x::version);
 			}
 			return 0;
 		}

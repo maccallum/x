@@ -66,3 +66,4 @@ sysbuild/
 .dsp_cache
 build
 xcuserdata
+version.h
