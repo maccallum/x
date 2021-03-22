@@ -37,5 +37,5 @@ filename=x.`git describe --tags`
 git clone . ../$filename
 cp -r externals ../$filename/
 cp -r source/lib ../$filename/source/
-zip -r -X ../$filename.zip ../$filename
-rm -rf ../$filename
+# tar zcvf ../$filename.tgz ../$filename
+# rm -rf ../$filename
