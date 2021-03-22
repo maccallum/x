@@ -564,7 +564,7 @@ namespace x
 				t_atom out[n];
 #endif
 				for(int i = 0; i < n; i++){
-					long v = x->_rng();
+					long long v = x->_rng();
 					atom_set(out + i, v);
 				}
 				outlet_list(x->outlet_main(), _sym_list, n, out);
@@ -1232,10 +1232,10 @@ namespace x
 					class_addmethod(c, (method)validparams, "validparams", 0);
 					for(int i = 0; i < xparam_type::nargs; i++){
 						class_addmethod(c, (method)param, xparam_type::names_str[i], A_GIMME, 0);
-						const char *name = (std::string(xparam_type::names_str[i]) + std::string(" ")).c_str();
-						class_addattr(c, attr_offset_new(name, gensym("atom"), 0, (method)0L,(method)0L,calcoffset(t_maxobj, ob)));
+						const std::string name = (std::string(xparam_type::names_str[i]) + std::string(" "));
+						class_addattr(c, attr_offset_new(name.c_str(), gensym("atom"), 0, (method)0L,(method)0L,calcoffset(t_maxobj, ob)));
 					
-						t_object *theattr = (t_object *)class_attr_get(c, gensym(name));
+						t_object *theattr = (t_object *)class_attr_get(c, gensym(name.c_str()));
 						object_method(theattr, gensym("setmethod"), USESYM(get), attr_get);
 						object_method(theattr, gensym("setmethod"), USESYM(set), attr_set);
 					}
