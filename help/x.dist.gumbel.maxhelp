@@ -181,7 +181,6 @@
 					"outlettype" : [ "", "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 65.0, 272.0, 146.0, 108.0 ],
-					"setminmax" : [ 0.0, 1.0 ],
 					"setstyle" : 4
 				}
 
@@ -331,8 +330,8 @@
 			}
 , 			{
 				"name" : "x.generator.default.maxpat",
-				"bootpath" : "~/Development/maccallum/x.0.7.0/patchers",
-				"patcherrelativepath" : "../../x.0.7.0/patchers",
+				"bootpath" : "~/Development/maccallum/x/patchers",
+				"patcherrelativepath" : "../patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}

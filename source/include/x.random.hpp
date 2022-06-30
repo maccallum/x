@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2018-2021 John MacCallum
+Copyright (c) 2018-2022 John MacCallum
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -38,7 +38,7 @@ struct x_param_validation
 
 namespace x
 {
-	constexpr char const* copyright = "X Copyright 2018-2021, John MacCallum";
+	constexpr char const* copyright = "X Copyright 2018-2022, John MacCallum";
 	constexpr char const* version = X_VERSION;
 	namespace random
 	{
@@ -46,7 +46,7 @@ namespace x
 		{
 		public:
 			using std::random_device::random_device;
-			//static constexpr const char * const desc_long = "some very long foo";
+			//static constexpr const char * const desc_long = "";
 			static constexpr const char * const desc_short = "Non-deterministic random number generator using hardware entropy source.";
 		};
 		
@@ -54,7 +54,7 @@ namespace x
 		{
 		public:
 			using pcg::pcg32::pcg32;
-			//static constexpr const char * const desc_long = "some very long foo";
+			//static constexpr const char * const desc_long = "";
 			static constexpr const char * const desc_short = "Melissa O'Neill's 32-bit Permuted Congruential Generator";
 		};
 
@@ -62,7 +62,7 @@ namespace x
 		{
 		public:
 			using pcg::pcg64::pcg64;
-			//static constexpr const char * const desc_long = "some very long foo";
+			//static constexpr const char * const desc_long = "";
 			static constexpr const char * const desc_short = "Melissa O'Neill's 64-bit Permuted Congruential Generator";
 		};
 
@@ -70,7 +70,7 @@ namespace x
 		{
 		public:
 			using std::minstd_rand0::minstd_rand0;
-			//static constexpr const char * const desc_long = "some very long foo";
+			//static constexpr const char * const desc_long = "";
 			static constexpr const char * const desc_short = "Discovered in 1969 by Lewis, Goodman and Miller, adopted as \"Minimal standard\" in 1988 by Park and Miller";
 		};
 
@@ -78,7 +78,7 @@ namespace x
 		{
 		public:
 			using std::minstd_rand::minstd_rand;
-			//static constexpr const char * const desc_long = "some very long foo";
+			//static constexpr const char * const desc_long = "";
 			static constexpr const char * const desc_short = "Newer \"Minimum standard\", recommended by Park, Miller, and Stockmeyer in 1993";
 		};
 
@@ -86,7 +86,7 @@ namespace x
 		{
 		public:
 			using std::mt19937::mt19937;
-			//static constexpr const char * const desc_long = "some very long foo";
+			//static constexpr const char * const desc_long = "";
 			static constexpr const char * const desc_short = "32-bit Mersenne Twister by Matsumoto and Nishimura, 1998";
 		};
 
@@ -94,7 +94,7 @@ namespace x
 		{
 		public:
 			using std::mt19937_64::mt19937_64;
-			//static constexpr const char * const desc_long = "some very long foo";
+			//static constexpr const char * const desc_long = "";
 			static constexpr const char * const desc_short = "64-bit Mersenne Twister by Matsumoto and Nishimura, 2000";
 		};
 
@@ -102,7 +102,7 @@ namespace x
 		{
 		public:
 			using std::ranlux24::ranlux24;
-			//static constexpr const char * const desc_long = "some very long foo";
+			//static constexpr const char * const desc_long = "";
 			static constexpr const char * const desc_short = "24-bit RANLUX generator by Martin Lüscher and Fred James, 1994";
 		};
 
@@ -110,7 +110,7 @@ namespace x
 		{
 		public:
 			using std::ranlux48::ranlux48;
-			//static constexpr const char * const desc_long = "some very long foo";
+			//static constexpr const char * const desc_long = "";
 			static constexpr const char * const desc_short = "48-bit RANLUX generator by Martin Lüscher and Fred James, 1994";
 		};
 
@@ -118,7 +118,7 @@ namespace x
 		{
 		public:
 			using std::knuth_b::knuth_b;
-			//static constexpr const char * const desc_long = "some very long foo";
+			//static constexpr const char * const desc_long = "";
 			static constexpr const char * const desc_short = "Knuth's generator shuffles sequences generated with minstd_rand0";
 		};
 		
@@ -128,7 +128,7 @@ namespace x
 		{
 		public:
 			using std::uniform_int_distribution<IntType>::uniform_int_distribution;
-			//static constexpr const char * const desc_long = "some very long foo";
+			//static constexpr const char * const desc_long = "";
 			static constexpr const char * const desc_short = "Produces random integers with equal probability in the range [a,b] (inclusive).";
 			static const int nparams = 2;
 			static constexpr const char * const param_a_desc = "Lower bound (inclusive)";

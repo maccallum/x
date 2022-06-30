@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2018-2021 John MacCallum
+Copyright (c) 2018-2022 John MacCallum
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -43,6 +43,7 @@ typedef struct _maxobj
 	size_t *n;
 	int delegation_status;
 	t_critical lock;
+    t_symbol *name;
 } t_maxobj;
 
 t_symbol *_sym_pdf, *_sym_cdf, *_sym_mean, *_sym_median, *_sym_variance,
@@ -74,6 +75,7 @@ namespace x
 			t_object *newobj(t_symbol *msg, short argc, t_atom *argv)
 			{
 				t_maxobj *x = (t_maxobj *)object_alloc(_c);
+                x->name = msg;
 				x->myobj = NULL;
 				x->buf = NULL;
 				x->n = NULL;
@@ -287,6 +289,7 @@ namespace x
 				random_device_obj *o = new random_device_obj;
 				obj::obj_init_without_delegation(xx, (obj *)o);
 				x->myobj = (void *)o;
+                x->name = msg;
 				t_dictionary *d = object_dictionaryarg(argc, argv);
 				if(dictionary_hasentry(d, gensym(XGLOBAL_REGISTER))){
 					object_subscribe(gensym("xglobal_conduit"), max_class()->c_sym, gensym("xglobal_conduit"), x);
@@ -362,6 +365,12 @@ namespace x
 				t_atom as[3];
 				t_symbol *doc = gensym("doc");
 				t_symbol *desc = gensym("desc");
+                t_symbol *name = gensym("name");
+
+                atom_setsym(as, name);
+                atom_setsym(as + 1, _x->name);
+                outlet_anything(x->outlet_main(), doc, 2, as);
+                
 				// t_symbol *s = gensym("long");
 				// t_symbol *desc = gensym(d.desc_long);
 				// atom_setsym(as, s);
@@ -416,6 +425,7 @@ namespace x
 					seed_seq_from_obj *o = new seed_seq_from_obj;
 					obj::obj_init(x, (obj *)o);
 					xx->myobj = (void *)o;
+                    xx->name = msg;
 					return x;
 				}
 				return NULL;
@@ -535,7 +545,7 @@ namespace x
 					rng_obj<rng_type> *o = new rng_obj<rng_type>;
 					obj::obj_init(x, (obj *)o);
 					xx->myobj = (void *)o;
-
+                    xx->name = msg;
 					t_dictionary *d = object_dictionaryarg(argc, argv);
 					if(dictionary_hasentry(d, gensym(XGLOBAL_REGISTER))){
 						object_subscribe(gensym("xglobal_conduit"), max_class()->c_sym, gensym("xglobal_conduit"), x);
@@ -607,6 +617,12 @@ namespace x
 				t_atom as[3];
 				t_symbol *doc = gensym("doc");
 				t_symbol *desc = gensym("desc");
+                t_symbol *name = gensym("name");
+                
+                atom_setsym(as, name);
+                atom_setsym(as + 1, _x->name);
+                outlet_anything(x->outlet_main(), doc, 2, as);
+                
 				// t_symbol *s = gensym("long");
 				// t_symbol *desc = gensym(d.desc_long);
 				// atom_setsym(as, s);
@@ -832,6 +848,7 @@ namespace x
 						dist_obj<dist_type, result_type, multivariate, xparam_type> *o = new dist_obj<dist_type, result_type, multivariate, xparam_type>;
 						obj::obj_init(x, (obj *)o);
 						xx->myobj = (void *)o;
+                        xx->name = msg;
 						critical_new(&(xx->lock));
 						t_dictionary *d = object_dictionaryarg(argc, argv);
 						for(int i = 0; i < o->nargs; i++){
@@ -1193,6 +1210,11 @@ namespace x
 				        t_atom as[3];
 					t_symbol *doc = gensym("doc");
 					t_symbol *desc = gensym("desc");
+                    t_symbol *name = gensym("name");
+                
+                    atom_setsym(as, name);
+                    atom_setsym(as + 1, _x->name);
+                    outlet_anything(x->outlet_main(), doc, 2, as);
 					// t_symbol *s = gensym("long");
 					// t_symbol *desc = gensym(d.desc_long);
 					// atom_setsym(as, s);

@@ -2663,7 +2663,7 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1320;
 				ORGANIZATIONNAME = "com.john-maccallum";
 				TargetAttributes = {
 					52D0B7DD25BD7682007A8962 = {
@@ -2673,13 +2673,14 @@
 			};
 			buildConfigurationList = 4FADC23708B4156C00ABE55E /* Build configuration list for PBXProject "x" */;
 			compatibilityVersion = "Xcode 9.3";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 1;
 			knownRegions = (
-				English,
-				Japanese,
-				French,
-				German,
+				Base,
+				de,
+				fr,
+				en,
+				ja,
 			);
 			mainGroup = 089C166AFE841209C02AAC07 /* cv_jit */;
 			projectDirPath = "";
@@ -3840,6 +3841,7 @@
 		4FADC23808B4156C00ABE55E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -3856,6 +3858,7 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -3871,7 +3874,6 @@
 				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/max-sdk-base/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DEBUGGING_SYMBOLS = full;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_INPUT_FILETYPE = automatic;
@@ -3903,7 +3905,7 @@
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/max-sdk-base/c74support/max-includes\"";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OBJROOT = build;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-g",
 					"-DNO_TRANSLATION_SUPPORT",
@@ -3913,7 +3915,6 @@
 					"-Wall",
 				);
 				OTHER_LDFLAGS = "@$(SRCROOT)/max-sdk-base/c74support/max-includes/c74_linker_flags.txt";
-				PREBINDING = YES;
 				PRELINK_LIBS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.john-maccallum.$(PRODUCT_NAME)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3936,6 +3937,7 @@
 		4FADC23908B4156C00ABE55E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -3952,6 +3954,7 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -4011,7 +4014,6 @@
 					"-Wall",
 				);
 				OTHER_LDFLAGS = "@$(SRCROOT)/max-sdk-base/c74support/max-includes/c74_linker_flags.txt";
-				PREBINDING = YES;
 				PRELINK_LIBS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.john-maccallum.$(PRODUCT_NAME)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4049,7 +4051,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -4071,7 +4072,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4106,7 +4106,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -4127,7 +4126,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4162,7 +4160,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -4184,7 +4181,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4219,7 +4215,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -4240,7 +4235,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4275,7 +4269,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -4297,7 +4290,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4332,7 +4324,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -4353,7 +4344,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4388,7 +4378,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -4410,7 +4399,6 @@
 					"-DX_MAX_CLASS=generator",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4445,7 +4433,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -4467,7 +4454,6 @@
 					"-DX_MAX_CLASS=generator",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4502,7 +4488,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -4524,7 +4509,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4559,7 +4543,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -4580,7 +4563,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4615,7 +4597,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -4637,7 +4618,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4672,7 +4652,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -4693,7 +4672,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4728,7 +4706,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -4750,7 +4727,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4785,7 +4761,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -4806,7 +4781,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4841,7 +4815,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -4863,7 +4836,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4898,7 +4870,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -4919,7 +4890,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4954,7 +4924,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -4976,7 +4945,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5011,7 +4979,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -5032,7 +4999,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5067,7 +5033,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -5089,7 +5054,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5124,7 +5088,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -5145,7 +5108,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5180,7 +5142,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -5202,7 +5163,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5237,7 +5197,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -5258,7 +5217,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5293,7 +5251,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -5315,7 +5272,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5350,7 +5306,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -5371,7 +5326,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5406,7 +5360,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -5428,7 +5381,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5463,7 +5415,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -5484,7 +5435,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5519,7 +5469,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -5541,7 +5490,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5576,7 +5524,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -5597,7 +5544,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5632,7 +5578,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -5654,7 +5599,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5689,7 +5633,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -5710,7 +5653,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5745,7 +5687,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -5767,7 +5708,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5802,7 +5742,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -5823,7 +5762,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5858,7 +5796,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -5880,7 +5817,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5915,7 +5851,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -5936,7 +5871,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5971,7 +5905,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -5993,7 +5926,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6028,7 +5960,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -6049,7 +5980,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6084,7 +6014,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -6106,7 +6035,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6141,7 +6069,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -6162,7 +6089,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6197,7 +6123,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -6219,7 +6144,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6254,7 +6178,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -6275,7 +6198,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6310,7 +6232,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -6332,7 +6253,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6367,7 +6287,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -6388,7 +6307,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6423,7 +6341,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -6445,7 +6362,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6480,7 +6396,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -6501,7 +6416,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6536,7 +6450,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -6558,7 +6471,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6593,7 +6505,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -6614,7 +6525,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6649,7 +6559,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -6671,7 +6580,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6706,7 +6614,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -6727,7 +6634,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6762,7 +6668,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -6784,7 +6689,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6819,7 +6723,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -6840,7 +6743,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6875,7 +6777,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -6897,7 +6798,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6932,7 +6832,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -6953,7 +6852,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6988,7 +6886,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -7010,7 +6907,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -7045,7 +6941,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -7066,7 +6961,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -7101,7 +6995,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -7123,7 +7016,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -7158,7 +7050,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -7179,7 +7070,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -7214,7 +7104,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -7236,7 +7125,6 @@
 					"-DX_MAX_CLASS=generator",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -7271,7 +7159,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -7293,7 +7180,6 @@
 					"-DX_MAX_CLASS=generator",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -7328,7 +7214,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -7350,7 +7235,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -7385,7 +7269,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -7406,7 +7289,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -7441,7 +7323,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -7462,7 +7343,6 @@
 					"-DX_MAX_CLASS=random_device",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(inherited)";
@@ -7497,7 +7377,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -7517,7 +7396,6 @@
 					"-DX_MAX_CLASS=random_device",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(inherited)";
@@ -7552,7 +7430,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -7574,7 +7451,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -7609,7 +7485,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -7630,7 +7505,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -7665,7 +7539,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -7687,7 +7560,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -7722,7 +7594,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -7743,7 +7614,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -7778,7 +7648,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -7800,7 +7669,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -7835,7 +7703,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -7856,7 +7723,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -7892,7 +7758,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -7912,7 +7777,6 @@
 					"-Wall",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -7948,7 +7812,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -7967,7 +7830,6 @@
 					"-Wall",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -8002,7 +7864,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -8024,7 +7885,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -8059,7 +7919,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -8080,7 +7939,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -8115,7 +7973,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -8137,7 +7994,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -8172,7 +8028,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -8193,7 +8048,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -8228,7 +8082,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -8250,7 +8103,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -8285,7 +8137,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -8306,7 +8157,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -8341,7 +8191,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -8361,7 +8210,6 @@
 					"-Wall",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -8396,7 +8244,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -8415,7 +8262,6 @@
 					"-Wall",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -8450,7 +8296,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -8470,7 +8315,6 @@
 					"-Wall",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -8505,7 +8349,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -8524,7 +8367,6 @@
 					"-Wall",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -8559,7 +8401,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -8581,7 +8422,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -8616,7 +8456,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -8637,7 +8476,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -8672,7 +8510,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -8694,7 +8531,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -8729,7 +8565,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -8750,7 +8585,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -8785,7 +8619,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -8807,7 +8640,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -8842,7 +8674,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -8863,7 +8694,6 @@
 					"-DX_MAX_CLASS=dist",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -8898,7 +8728,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -8920,7 +8749,6 @@
 					"-DX_MAX_CLASS=generator",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -8955,7 +8783,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -8977,7 +8804,6 @@
 					"-DX_MAX_CLASS=generator",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9012,7 +8838,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -9034,7 +8859,6 @@
 					"-DX_MAX_CLASS=generator",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9069,7 +8893,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -9091,7 +8914,6 @@
 					"-DX_MAX_CLASS=generator",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9126,7 +8948,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -9148,7 +8969,6 @@
 					"-DX_MAX_CLASS=generator",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9183,7 +9003,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -9205,7 +9024,6 @@
 					"-DX_MAX_CLASS=generator",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9240,7 +9058,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -9262,7 +9079,6 @@
 					"-DX_MAX_CLASS=generator",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9297,7 +9113,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -9319,7 +9134,6 @@
 					"-DX_MAX_CLASS=generator",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9354,7 +9168,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -9376,7 +9189,6 @@
 					"-DX_MAX_CLASS=generator",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9411,7 +9223,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -9433,7 +9244,6 @@
 					"-DX_MAX_CLASS=generator",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9468,7 +9278,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -9490,7 +9299,6 @@
 					"-DX_MAX_CLASS=generator",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9525,7 +9333,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -9547,7 +9354,6 @@
 					"-DX_MAX_CLASS=generator",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9582,7 +9388,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -9604,7 +9409,6 @@
 					"-DX_MAX_CLASS=generator",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9639,7 +9443,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -9661,7 +9464,6 @@
 					"-DX_MAX_CLASS=generator",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9790,7 +9592,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -9811,7 +9612,6 @@
 					"-DX_MAX_CLASS=seed_seq_from",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9846,7 +9646,6 @@
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../max6-sdk/c74support/max-includes\"";
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_MODEL_TUNING = G4;
@@ -9866,7 +9665,6 @@
 					"-DX_MAX_CLASS=seed_seq_from",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PREBINDING = YES;
 				PRELINK_LIBS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
