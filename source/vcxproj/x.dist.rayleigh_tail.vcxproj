@@ -56,26 +56,26 @@
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
-    <Import Project="..\max-sdk\source\c74support\max-includes\max_extern_common.props" />
-    <Import Project="..\max-sdk\source\c74support\max-includes\max_extern_x86.props" />
+    <Import Project="..\max-sdk-base\c74support\max-includes\max_extern_common.props" />
+    <Import Project="..\max-sdk-base\c74support\max-includes\max_extern_x86.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
-    <Import Project="..\max-sdk\source\c74support\max-includes\max_extern_common.props" />
-    <Import Project="..\max-sdk\source\c74support\max-includes\max_extern_x86.props" />
+    <Import Project="..\max-sdk-base\c74support\max-includes\max_extern_common.props" />
+    <Import Project="..\max-sdk-base\c74support\max-includes\max_extern_x86.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
-    <Import Project="..\max-sdk\source\c74support\max-includes\max_extern_common.props" />
-    <Import Project="..\max-sdk\source\c74support\max-includes\max_extern_x64.props" />
+    <Import Project="..\max-sdk-base\c74support\max-includes\max_extern_common.props" />
+    <Import Project="..\max-sdk-base\c74support\max-includes\max_extern_x64.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
-    <Import Project="..\max-sdk\source\c74support\max-includes\max_extern_common.props" />
-    <Import Project="..\max-sdk\source\c74support\max-includes\max_extern_x64.props" />
+    <Import Project="..\max-sdk-base\c74support\max-includes\max_extern_common.props" />
+    <Import Project="..\max-sdk-base\c74support\max-includes\max_extern_x64.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
@@ -104,7 +104,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\pcg-cpp\include;..\include;..\max-sdk\source\c74support\max-includes;..\max-sdk\source\c74support\msp-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\pcg-cpp\include;..\include;..\max-sdk-base\c74support\max-includes;..\max-sdk-base\c74support\msp-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>X_MAX_TYPE=rayleigh_tail;X_MAX_CLASS=dist;NOMINMAX;NO_TRANSLATION_SUPPORT;MAXAPI_USE_MSCRT;EXT_WIN_VERSION;WIN_EXT_VERSION;X_DEBUG;WIN_VERSION;WIN32;_DEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <ExceptionHandling />
@@ -139,7 +139,7 @@
       <DataExecutionPrevention />
       <ImportLibrary>$(IntDir)$(ProjectName).lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalLibraryDirectories>..\max-sdk\source\c74support\max-includes;..\max-sdk\source\c74support\msp-includes;..\max-sdk\source\c74support\jit-includes</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\max-sdk-base\c74support\max-includes;..\max-sdk-base\c74support\msp-includes;..\max-sdk\source\c74support\jit-includes</AdditionalLibraryDirectories>
       <AdditionalDependencies>MaxAPI.lib;MaxAudio.lib;jitlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
@@ -151,7 +151,7 @@ echo #define X_VERSION ^"%X%^" &gt; "..\include\version.h"</Command>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\pcg-cpp\include;..\include;..\max-sdk\source\c74support\max-includes;..\max-sdk\source\c74support\msp-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\pcg-cpp\include;..\include;..\max-sdk-base\c74support\max-includes;..\max-sdk-base\c74support\msp-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>X_MAX_TYPE=rayleigh_tail;X_MAX_CLASS=dist;NOMINMAX;NO_TRANSLATION_SUPPORT;MAXAPI_USE_MSCRT;EXT_WIN_VERSION;WIN_EXT_VERSION;X_DEBUG;WIN64;WIN_VERSION;WIN32;_DEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <ExceptionHandling />
@@ -186,7 +186,7 @@ echo #define X_VERSION ^"%X%^" &gt; "..\include\version.h"</Command>
       <DataExecutionPrevention />
       <ImportLibrary>$(IntDir)$(ProjectName).lib</ImportLibrary>
       <TargetMachine>MachineX64</TargetMachine>
-      <AdditionalLibraryDirectories>..\max-sdk\source\c74support\msp-includes\x64;..\max-sdk\source\c74support\max-includes\x64;..\max-sdk\source\c74support\jit-includes\x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\max-sdk-base\c74support\msp-includes\x64;..\max-sdk-base\c74support\max-includes\x64;..\max-sdk\source\c74support\jit-includes\x64</AdditionalLibraryDirectories>
       <AdditionalDependencies>MaxAPI.lib;MaxAudio.lib;jitlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
@@ -203,7 +203,7 @@ echo #define X_VERSION ^"%X%^" &gt; "..\include\version.h"</Command>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <OmitFramePointers>true</OmitFramePointers>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>..\pcg-cpp\include;..\include;..\max-sdk\source\c74support\max-includes;..\max-sdk\source\c74support\msp-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\pcg-cpp\include;..\include;..\max-sdk-base\c74support\max-includes;..\max-sdk-base\c74support\msp-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>X_MAX_TYPE=rayleigh_tail;X_MAX_CLASS=dist;NOMINMAX;NO_TRANSLATION_SUPPORT;MAXAPI_USE_MSCRT;EXT_WIN_VERSION;WIN_EXT_VERSION;WIN_VERSION;WIN32;NDEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling />
@@ -239,7 +239,7 @@ echo #define X_VERSION ^"%X%^" &gt; "..\include\version.h"</Command>
       <DataExecutionPrevention />
       <ImportLibrary>$(IntDir)$(ProjectName).lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalLibraryDirectories>..\max-sdk\source\c74support\max-includes;..\max-sdk\source\c74support\msp-includes;..\max-sdk\source\c74support\jit-includes</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\max-sdk-base\c74support\max-includes;..\max-sdk-base\c74support\msp-includes;..\max-sdk\source\c74support\jit-includes</AdditionalLibraryDirectories>
       <AdditionalDependencies>MaxAPI.lib;MaxAudio.lib;jitlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
@@ -256,7 +256,7 @@ echo #define X_VERSION ^"%X%^" &gt; "..\include\version.h"</Command>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <OmitFramePointers>true</OmitFramePointers>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>..\pcg-cpp\include;..\include;..\max-sdk\source\c74support\max-includes;..\max-sdk\source\c74support\msp-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\pcg-cpp\include;..\include;..\max-sdk-base\c74support\max-includes;..\max-sdk-base\c74support\msp-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>X_MAX_TYPE=rayleigh_tail;X_MAX_CLASS=dist;NOMINMAX;NO_TRANSLATION_SUPPORT;MAXAPI_USE_MSCRT;EXT_WIN_VERSION;WIN_EXT_VERSION;WIN64;WIN_VERSION;WIN32;NDEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling />
@@ -293,7 +293,7 @@ echo #define X_VERSION ^"%X%^" &gt; "..\include\version.h"</Command>
       <DataExecutionPrevention />
       <ImportLibrary>$(IntDir)$(ProjectName).lib</ImportLibrary>
       <TargetMachine>MachineX64</TargetMachine>
-      <AdditionalLibraryDirectories>..\max-sdk\source\c74support\msp-includes\x64;..\max-sdk\source\c74support\max-includes\x64;..\max-sdk\source\c74support\jit-includes\x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\max-sdk-base\c74support\msp-includes\x64;..\max-sdk-base\c74support\max-includes\x64;..\max-sdk\source\c74support\jit-includes\x64</AdditionalLibraryDirectories>
       <AdditionalDependencies>MaxAPI.lib;MaxAudio.lib;jitlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
@@ -303,8 +303,8 @@ echo #define X_VERSION ^"%X%^" &gt; "..\include\version.h"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\max-sdk\source\c74support\max-includes\common\commonsyms.c" />
-    <ClCompile Include="..\max-sdk\source\c74support\max-includes\common\dllmain_win.c" />
+    <ClCompile Include="..\max-sdk-base\c74support\max-includes\common\commonsyms.c" />
+    <ClCompile Include="..\max-sdk-base\c74support\max-includes\common\dllmain_win.c" />
     <!--<ClCompile Include="$(ProjectName).c" />-->
     <ClCompile Include="..\x.max.cpp" />
   </ItemGroup>
