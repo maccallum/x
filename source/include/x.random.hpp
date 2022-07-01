@@ -535,7 +535,7 @@ namespace x
 		public:
 			using std::normal_distribution<RealType>::normal_distribution;
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "";
+			static constexpr const char * const desc_short = "Produces normally distributed random values around a mean.";
 			static const int nparams = 2;
 			static constexpr const char * const param_mean_desc = "Mean";
 			static constexpr const char * const param_stddev_desc = "Standard deviation";
@@ -571,7 +571,7 @@ namespace x
 		public:
 			using std::lognormal_distribution<RealType>::lognormal_distribution;
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "";
+			static constexpr const char * const desc_short = "Produces numbers from a random variable, the logarathim of which is normally distributed.";
 			static const int nparams = 2;
 			static constexpr const char * const param_m_desc = "Mean";
 			static constexpr const char * const param_s_desc = "Standard deviation";
@@ -607,7 +607,7 @@ namespace x
 		public:
 			using std::chi_squared_distribution<RealType>::chi_squared_distribution;
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "";
+			static constexpr const char * const desc_short = "Produces random numbers from the sum of the squares of k independent normal random variables.";
 			static const int nparams = 1;
 			static constexpr const char * const param_n_desc = "Degrees of freedom";
 			static constexpr const char * const param_desc_list[nparams] = {param_n_desc};
@@ -642,7 +642,7 @@ namespace x
 		public:
 			using std::cauchy_distribution<RealType>::cauchy_distribution;
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "";
+			static constexpr const char * const desc_short = "Produces random numbers which are the ratio of two independent normally distributed random variables zero mean.";
 			static const int nparams = 2;
 			static constexpr const char * const param_a_desc = "Location";
 			static constexpr const char * const param_b_desc = "Scale";
@@ -678,7 +678,7 @@ namespace x
 		public:
 			using std::fisher_f_distribution<RealType>::fisher_f_distribution;
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "";
+			static constexpr const char * const desc_short = "Produces random values which are the result of dividing two independent chi-squared distributions of m and n degrees of freedom.";
 			static const int nparams = 2;
 			static constexpr const char * const param_m_desc = "First degree of freedom";
 			static constexpr const char * const param_n_desc = "Second degree of freedom";
@@ -716,7 +716,7 @@ namespace x
 		public:
 			using std::student_t_distribution<RealType>::student_t_distribution;
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "";
+			static constexpr const char * const desc_short = "Produces random values which approach a standard normal distribution as n (the sample size) increases.";
 			static const int nparams = 1;
 			static constexpr const char * const param_n_desc = "Degrees of freedom";
 			static constexpr const char * const param_desc_list[nparams] = {param_n_desc};
@@ -752,7 +752,7 @@ namespace x
 		public:
 			using std::discrete_distribution<IntType>::discrete_distribution;
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "";
+			static constexpr const char * const desc_short = "Produces random values according to a list of n non-negative weights.";
 			static const int nparams = 1;
 			static constexpr const char * const param_probabilities_desc = "Probabilities";
 			static constexpr const char * const param_desc_list[nparams] = {param_probabilities_desc};
@@ -792,7 +792,7 @@ namespace x
 		public:
 			using std::piecewise_constant_distribution<RealType>::piecewise_constant_distribution;
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "";
+			static constexpr const char * const desc_short = "Produces random values that are uniformly distributed over a sequence of subintervals.";
 			static const int nparams = 2;
 			static constexpr const char * const param_intervals_desc = "Intervals";
 			static constexpr const char * const param_densities_desc = "Densities";
@@ -828,7 +828,7 @@ namespace x
 		public:
 			using std::piecewise_linear_distribution<RealType>::piecewise_linear_distribution;
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "";
+			static constexpr const char * const desc_short = "Produces random values that are distributed over a sequence of subintervals.";
 			static const int nparams = 2;
 			static constexpr const char * const param_intervals_desc = "Intervals";
 			static constexpr const char * const param_densities_desc = "Densities";
@@ -864,7 +864,7 @@ namespace x
 		{
 		public:
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "";
+			static constexpr const char * const desc_short = "Produces random values over the interval [0,1], which represent a distribution of probabilities.";
 			static const int nparams = 2;
 			static constexpr const char * const param_alpha_desc = "First shape parameter";
 			static constexpr const char * const param_beta_desc = "Second shape parameter";
@@ -997,7 +997,7 @@ namespace x
 		{
 		public:
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "";
+			static constexpr const char * const desc_short = "Produces random values on the interval (0,1), similar to the beta distribution.";
 			static const int nparams = 2;
 			static constexpr const char * const param_alpha_desc = "First shape parameter";
 			static constexpr const char * const param_beta_desc = "Second shape parameter";
@@ -1131,7 +1131,7 @@ namespace x
 		{
 		public:
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "";
+			static constexpr const char * const desc_short = "Produces random values on the interval (0,1) derived from the multivariate beta distribution.";
 			static const int nparams = 1;
 			static constexpr const char * const param_alpha_desc = "Concentrations";
 			static constexpr const char * const param_desc_list[nparams] = {param_alpha_desc};
@@ -1389,7 +1389,7 @@ namespace x
 		{
 		public:
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "";
+			static constexpr const char * const desc_short = "Produces random values that represent the number occurences of some number of outcomes described by the list probabilities p, after n trials.";
 			static const int nparams = 2;
 			static constexpr const char * const param_n_desc = "Number of trials";
 			static constexpr const char * const param_p_desc = "Probabilities";
@@ -1666,7 +1666,7 @@ namespace x
 		{
 		public:
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "";
+			static constexpr const char * const desc_short = "Produces random values that represent the probability of n successes in M trials given N objects of interest.";
 			static const int nparams = 3;
 			static constexpr const char * const param_n_desc = "Number of successes";
 			static constexpr const char * const param_M_desc = "Population size";
@@ -1850,7 +1850,7 @@ namespace x
 		{
 		public:
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "";
+			static constexpr const char * const desc_short = "Produces random values from the generalized hypergeometric distribution.";
 			static const int nparams = 2;
 			static constexpr const char * const param_n_desc = "Number of trials";
 			static constexpr const char * const param_M_desc = "Population sizes";
@@ -2140,7 +2140,7 @@ namespace x
 		{
 		public:
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "";
+			static constexpr const char * const desc_short = "Produces random values from two symmetric exponential distributions centered around mu.";
 			static const int nparams = 2;
 			static constexpr const char * const param_mu_desc = "Location";
 			static constexpr const char * const param_sigma_desc = "Scale";
@@ -2276,7 +2276,7 @@ namespace x
 		{
 		public:
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "";
+			static constexpr const char * const desc_short = "Produces a random value from the Rayleigh distribution, which is a special case of both the Chi and Weibull distributions.";
 			static const int nparams = 1;
 			static constexpr const char * const param_sigma_desc = "Scale";
 			static constexpr const char * const param_desc_list[nparams] = {param_sigma_desc};
@@ -2404,7 +2404,7 @@ namespace x
 		{
 		public:
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "";
+			static constexpr const char * const desc_short = "Produces a random value from the sum of k independent exponential variables with mean 1/lambda.";
 			static const int nparams = 2;
 			static constexpr const char * const param_k_desc = "Shape";
 			static constexpr const char * const param_lambda_desc = "Rate";
@@ -2542,7 +2542,7 @@ namespace x
 		{
 		public:
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "";
+			static constexpr const char * const desc_short = "Produces a random value drawn from the upper tail of the normal distribution.";
 			static const int nparams = 2;
 			static constexpr const char * const param_a_desc = "Lower bound";
 			static constexpr const char * const param_sigma_desc = "Standard deviation";
@@ -2690,7 +2690,7 @@ namespace x
 		{
 		public:
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "";
+			static constexpr const char * const desc_short = "Produces a random value from a two-dimensional normal distribution.";
 			static const int nparams = 3;
 			static constexpr const char * const param_sigmax_desc = "Standard deviation in the X direction";
 			static constexpr const char * const param_sigmay_desc = "Standard deviation in the Y direction";
@@ -2839,7 +2839,7 @@ namespace x
 		{
 		public:
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "";
+			static constexpr const char * const desc_short = "Produces a random value from a normal distribution with an added shape parameter beta.";
 			static const int nparams = 2;
 			static constexpr const char * const param_alpha_desc = "Scale";
 			static constexpr const char * const param_beta_desc = "Shape";
@@ -3013,7 +3013,7 @@ namespace x
 		{
 		public:
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "";
+			static constexpr const char * const desc_short = "Produces a random value from the tail of the Rayleigh distribution.";
 			static const int nparams = 2;
 			static constexpr const char * const param_a_desc = "Lower bound";
 			static constexpr const char * const param_sigma_desc = "Scale";
@@ -3146,7 +3146,7 @@ namespace x
 		{
 		public:
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "";
+			static constexpr const char * const desc_short = "Produces a random value from the logistic distribution whose CDF is the logistic function.";
 			static const int nparams = 2;
 			static constexpr const char * const param_mu_desc = "Position";
 			static constexpr const char * const param_s_desc = "Scale";
@@ -3279,7 +3279,7 @@ namespace x
 		{
 		public:
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "";
+			static constexpr const char * const desc_short = "Produces a random value that corresponds to the \"80-20\" rule, which states that 80% of outcomes are due to 20% of causes.";
 			static const int nparams = 2;
 			static constexpr const char * const param_a_desc = "Scale";
 			static constexpr const char * const param_b_desc = "Shape";
@@ -3417,7 +3417,7 @@ namespace x
 		{
 		public:
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "";
+			static constexpr const char * const desc_short = "Produces a random value which models the maximum of a number of samples of distributions.";
 			static const int nparams = 2;
 			static constexpr const char * const param_mu_desc = "Location";
 			static constexpr const char * const param_beta_desc = "Scale";
@@ -3550,7 +3550,7 @@ namespace x
 		{
 		public:
 			//static constexpr const char * const desc_long = "";
-			static constexpr const char * const desc_short = "";
+			static constexpr const char * const desc_short = "Produces a random value from a distribution with a maximum peak of 1 and a long tail controled by a shape parameter.";
 			static const int nparams = 1;
 			static constexpr const char * const param_p_desc = "Shape";
 			static constexpr const char * const param_desc_list[nparams] = {param_p_desc};

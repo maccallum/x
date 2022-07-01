@@ -2,14 +2,15 @@
 	"patcher" : 	{
 		"fileversion" : 1,
 		"appversion" : 		{
-			"major" : 7,
-			"minor" : 3,
-			"revision" : 5,
+			"major" : 8,
+			"minor" : 2,
+			"revision" : 2,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
-		"rect" : [ -1879.0, 183.0, 722.0, 530.0 ],
+		"classnamespace" : "box",
+		"rect" : [ 35.0, 87.0, 722.0, 530.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -36,14 +37,14 @@
 		"tags" : "",
 		"style" : "",
 		"subpatcher_template" : "",
+		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
 					"id" : "obj-28",
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 74.0, 75.0, 567.0, 18.0 ],
-					"style" : "",
+					"patching_rect" : [ 73.0, 75.0, 567.0, 20.0 ],
 					"text" : "This example, which uses the exponential distribution to generate wait times is a Poisson process"
 				}
 
@@ -55,8 +56,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 74.0, 23.0, 567.0, 42.0 ],
-					"style" : "",
+					"patching_rect" : [ 73.0, 23.0, 567.0, 47.0 ],
 					"text" : "x.process.delegate~ produces a ramp that goes from [0, 1) in n samples, where n is determined by a (presumably random) process. When the ramp has completed, x.process.delegate sends a generate message out its right outlet and expects to get a value in samples in return."
 				}
 
@@ -67,8 +67,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 363.0, 291.0, 119.0, 18.0 ],
-					"style" : "",
+					"patching_rect" : [ 363.0, 291.0, 119.0, 20.0 ],
 					"text" : "wait time in seconds"
 				}
 
@@ -79,8 +78,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 453.0, 419.0, 119.0, 18.0 ],
-					"style" : "",
+					"patching_rect" : [ 453.0, 419.0, 119.0, 20.0 ],
 					"text" : "wait time in samples"
 				}
 
@@ -92,8 +90,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
-					"patching_rect" : [ 340.0, 325.0, 147.0, 20.0 ],
-					"style" : "",
+					"patching_rect" : [ 340.0, 325.0, 147.0, 22.0 ],
 					"text" : "x.round.alternate-tiebreak"
 				}
 
@@ -107,8 +104,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 453.0, 393.0, 123.0, 20.0 ],
-					"style" : ""
+					"patching_rect" : [ 453.0, 393.0, 123.0, 22.0 ]
 				}
 
 			}
@@ -121,8 +117,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 322.0, 393.0, 123.0, 20.0 ],
-					"style" : ""
+					"patching_rect" : [ 322.0, 393.0, 123.0, 22.0 ]
 				}
 
 			}
@@ -135,8 +130,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 297.0, 158.0, 50.0, 20.0 ],
-					"style" : ""
+					"patching_rect" : [ 297.0, 158.0, 50.0, 22.0 ]
 				}
 
 			}
@@ -147,8 +141,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 297.0, 187.0, 67.0, 20.0 ],
-					"style" : "",
+					"patching_rect" : [ 297.0, 187.0, 67.0, 22.0 ],
 					"text" : "lambda $1"
 				}
 
@@ -160,8 +153,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 74.0, 259.0, 29.5, 20.0 ],
-					"style" : "",
+					"patching_rect" : [ 74.0, 259.0, 29.5, 22.0 ],
 					"text" : "<~"
 				}
 
@@ -173,8 +165,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 84.5, 227.0, 66.0, 20.0 ],
-					"style" : "",
+					"patching_rect" : [ 84.5, 227.0, 66.0, 22.0 ],
 					"text" : "delay~ 1 1"
 				}
 
@@ -183,12 +174,12 @@
 				"box" : 				{
 					"id" : "obj-8",
 					"maxclass" : "gain~",
+					"multichannelvariant" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 2,
-					"outlettype" : [ "signal", "int" ],
+					"outlettype" : [ "signal", "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 74.0, 291.0, 22.0, 140.0 ],
-					"style" : ""
+					"patching_rect" : [ 74.0, 291.0, 22.0, 140.0 ]
 				}
 
 			}
@@ -201,8 +192,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 363.0, 260.0, 93.0, 20.0 ],
-					"style" : ""
+					"patching_rect" : [ 363.0, 260.0, 93.0, 22.0 ]
 				}
 
 			}
@@ -217,9 +207,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "float" ],
-					"patching_rect" : [ 163.0, 227.0, 77.0, 20.0 ],
-					"sig" : 0.0,
-					"style" : ""
+					"patching_rect" : [ 163.0, 227.0, 77.0, 22.0 ],
+					"sig" : 0.0
 				}
 
 			}
@@ -230,8 +219,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "float" ],
-					"patching_rect" : [ 262.0, 288.0, 79.0, 20.0 ],
-					"style" : "",
+					"patching_rect" : [ 262.0, 288.0, 79.0, 22.0 ],
 					"text" : "mstosamps~"
 				}
 
@@ -243,8 +231,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "float" ],
-					"patching_rect" : [ 262.0, 260.0, 49.0, 20.0 ],
-					"style" : "",
+					"patching_rect" : [ 262.0, 260.0, 49.0, 22.0 ],
 					"text" : "* 1000."
 				}
 
@@ -255,8 +242,7 @@
 					"maxclass" : "ezdac~",
 					"numinlets" : 2,
 					"numoutlets" : 0,
-					"patching_rect" : [ 74.0, 440.0, 45.0, 45.0 ],
-					"style" : ""
+					"patching_rect" : [ 74.0, 440.0, 45.0, 45.0 ]
 				}
 
 			}
@@ -266,8 +252,7 @@
 					"maxclass" : "scope~",
 					"numinlets" : 2,
 					"numoutlets" : 0,
-					"patching_rect" : [ 163.0, 325.0, 130.0, 130.0 ],
-					"style" : ""
+					"patching_rect" : [ 163.0, 325.0, 130.0, 130.0 ]
 				}
 
 			}
@@ -278,8 +263,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 262.0, 227.0, 202.0, 20.0 ],
-					"style" : "",
+					"patching_rect" : [ 262.0, 227.0, 202.0, 22.0 ],
 					"text" : "x.variable exponential @lambda 0.1"
 				}
 
@@ -291,8 +275,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "generate" ],
-					"patching_rect" : [ 74.0, 159.0, 167.0, 20.0 ],
-					"style" : "",
+					"patching_rect" : [ 74.0, 159.0, 167.0, 22.0 ],
 					"text" : "x.process.counting.delegate~"
 				}
 
@@ -439,11 +422,12 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "x.variable.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
+				"name" : "x.delegate~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.exponential.mxo",
+				"type" : "iLaX"
 			}
 , 			{
 				"name" : "x.generator.default.maxpat",
@@ -453,6 +437,10 @@
 				"implicit" : 1
 			}
 , 			{
+				"name" : "x.global.mxo",
+				"type" : "iLaX"
+			}
+, 			{
 				"name" : "x.round.alternate-tiebreak.maxpat",
 				"bootpath" : "~/Development/maccallum/x/patchers",
 				"patcherrelativepath" : "../patchers",
@@ -460,20 +448,15 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "x.delegate~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "x.dist.exponential.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "x.global.mxo",
-				"type" : "iLaX"
-			}
-, 			{
 				"name" : "x.seed_seq_from.mxo",
 				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.variable.maxpat",
+				"bootpath" : "~/Development/maccallum/x/patchers",
+				"patcherrelativepath" : "../patchers",
+				"type" : "JSON",
+				"implicit" : 1
 			}
  ],
 		"autosave" : 0

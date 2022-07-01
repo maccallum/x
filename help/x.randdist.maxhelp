@@ -2,13 +2,14 @@
 	"patcher" : 	{
 		"fileversion" : 1,
 		"appversion" : 		{
-			"major" : 7,
-			"minor" : 3,
-			"revision" : 5,
+			"major" : 8,
+			"minor" : 2,
+			"revision" : 2,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
+		"classnamespace" : "box",
 		"rect" : [ 59.0, 104.0, 640.0, 480.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -36,6 +37,7 @@
 		"tags" : "",
 		"style" : "",
 		"subpatcher_template" : "",
+		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
 					"id" : "obj-7",
@@ -43,9 +45,8 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 145.0, 30.0, 345.0, 30.0 ],
-					"style" : "",
-					"text" : "x.randdist is a (currently incomplete) replacement for CNMAT's randdist object"
+					"patching_rect" : [ 145.0, 30.0, 345.0, 33.0 ],
+					"text" : "x.randdist is a (mostly complete) drop-in replacement for CNMAT's randdist object"
 				}
 
 			}
@@ -58,8 +59,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 165.0, 271.0, 50.0, 20.0 ],
-					"style" : ""
+					"patching_rect" : [ 165.0, 271.0, 50.0, 22.0 ]
 				}
 
 			}
@@ -70,8 +70,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 165.0, 172.0, 111.0, 20.0 ],
-					"style" : "",
+					"patching_rect" : [ 165.0, 172.0, 111.0, 22.0 ],
 					"text" : "gamma 4. 3., bang"
 				}
 
@@ -83,8 +82,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 165.0, 222.0, 63.0, 20.0 ],
-					"style" : "",
+					"patching_rect" : [ 165.0, 222.0, 63.0, 22.0 ],
 					"text" : "x.randdist"
 				}
 
@@ -106,6 +104,141 @@
 			}
  ],
 		"dependency_cache" : [ 			{
+				"name" : "randdist.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.bernoulli.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.beta.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.binomial.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.bivariate_normal.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.cauchy.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.chi_squared.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.dirichlet.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.discrete.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.erlang.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.exponential.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.exponential_power.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.fisher_f.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.gamma.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.gaussian_tail.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.geometric.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.laplace.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.logarithmic_series.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.logistic.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.lognormal.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.multinomial.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.multivariate_hypergeometric.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.negative_binomial.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.normal.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.pareto.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.poisson.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.rayleigh.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.rayleigh_tail.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.student_t.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.uniform_real.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.dist.weibull.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.generator.default.maxpat",
+				"bootpath" : "~/Development/maccallum/x/patchers",
+				"patcherrelativepath" : "../patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "x.global.mxo",
+				"type" : "iLaX"
+			}
+, 			{
 				"name" : "x.randdist.maxpat",
 				"bootpath" : "~/Development/maccallum/x/patchers",
 				"patcherrelativepath" : "../patchers",
@@ -113,55 +246,15 @@
 				"implicit" : 1
 			}
 , 			{
+				"name" : "x.seed_seq_from.mxo",
+				"type" : "iLaX"
+			}
+, 			{
 				"name" : "x.variable.maxpat",
 				"bootpath" : "~/Development/maccallum/x/patchers",
 				"patcherrelativepath" : "../patchers",
 				"type" : "JSON",
 				"implicit" : 1
-			}
-, 			{
-				"name" : "x.dist.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "x.generator.pcg32.global.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "x.global.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "x.random_device.global.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "x.dist.gamma.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "x.generator.pcg32.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "x.seed_seq_from.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "x.random_device.mxo",
-				"type" : "iLaX"
 			}
  ],
 		"autosave" : 0

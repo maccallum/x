@@ -2,14 +2,15 @@
 	"patcher" : 	{
 		"fileversion" : 1,
 		"appversion" : 		{
-			"major" : 7,
-			"minor" : 3,
-			"revision" : 5,
+			"major" : 8,
+			"minor" : 2,
+			"revision" : 2,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
-		"rect" : [ -2005.0, 285.0, 640.0, 480.0 ],
+		"classnamespace" : "box",
+		"rect" : [ 201.0, 153.0, 640.0, 480.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -36,14 +37,14 @@
 		"tags" : "",
 		"style" : "",
 		"subpatcher_template" : "",
+		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
 					"id" : "obj-8",
 					"maxclass" : "ezdac~",
 					"numinlets" : 2,
 					"numoutlets" : 0,
-					"patching_rect" : [ 240.0, 229.0, 45.0, 45.0 ],
-					"style" : ""
+					"patching_rect" : [ 240.0, 229.0, 45.0, 45.0 ]
 				}
 
 			}
@@ -54,8 +55,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 262.0, 43.0, 330.0, 42.0 ],
-					"style" : "",
+					"patching_rect" : [ 262.0, 43.0, 330.0, 47.0 ],
 					"text" : "Audio rate Wiener process. Each sample is a normally distributed step (mean = 0, stddev = 1) away from the value of the previous sample. "
 				}
 
@@ -71,9 +71,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "float" ],
-					"patching_rect" : [ 107.0, 101.0, 99.0, 20.0 ],
-					"sig" : 0.0,
-					"style" : ""
+					"patching_rect" : [ 107.0, 101.0, 99.0, 22.0 ],
+					"sig" : 0.0
 				}
 
 			}
@@ -85,8 +84,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 107.0, 133.0, 189.0, 20.0 ],
-					"style" : ""
+					"patching_rect" : [ 107.0, 133.0, 189.0, 22.0 ]
 				}
 
 			}
@@ -97,8 +95,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 0,
 					"patching_rect" : [ 71.0, 169.0, 130.0, 130.0 ],
-					"range" : [ -1000.0, 1000.0 ],
-					"style" : ""
+					"range" : [ -1000.0, 1000.0 ]
 				}
 
 			}
@@ -109,8 +106,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 71.0, 70.0, 108.0, 20.0 ],
-					"style" : "",
+					"patching_rect" : [ 71.0, 70.0, 108.0, 22.0 ],
 					"text" : "x.process.wiener~"
 				}
 
@@ -141,18 +137,12 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "x.process.wiener~.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
+				"name" : "x.delegate~.mxo",
+				"type" : "iLaX"
 			}
 , 			{
-				"name" : "x.variable.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
+				"name" : "x.dist.normal.mxo",
+				"type" : "iLaX"
 			}
 , 			{
 				"name" : "x.generator.default.maxpat",
@@ -162,20 +152,26 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "x.delegate~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "x.dist.normal.mxo",
-				"type" : "iLaX"
-			}
-, 			{
 				"name" : "x.global.mxo",
 				"type" : "iLaX"
 			}
 , 			{
+				"name" : "x.process.wiener~.maxpat",
+				"bootpath" : "~/Development/maccallum/x/patchers",
+				"patcherrelativepath" : "../patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "x.seed_seq_from.mxo",
 				"type" : "iLaX"
+			}
+, 			{
+				"name" : "x.variable.maxpat",
+				"bootpath" : "~/Development/maccallum/x/patchers",
+				"patcherrelativepath" : "../patchers",
+				"type" : "JSON",
+				"implicit" : 1
 			}
  ],
 		"autosave" : 0

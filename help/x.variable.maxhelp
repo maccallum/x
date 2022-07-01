@@ -2,13 +2,14 @@
 	"patcher" : 	{
 		"fileversion" : 1,
 		"appversion" : 		{
-			"major" : 7,
-			"minor" : 3,
-			"revision" : 5,
+			"major" : 8,
+			"minor" : 2,
+			"revision" : 2,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
+		"classnamespace" : "box",
 		"rect" : [ 84.0, 129.0, 640.0, 480.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -36,6 +37,7 @@
 		"tags" : "",
 		"style" : "",
 		"subpatcher_template" : "",
+		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
 					"id" : "obj-14",
@@ -43,8 +45,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 251.0, 24.0, 295.0, 30.0 ],
-					"style" : "",
+					"patching_rect" : [ 213.0, 70.0, 295.0, 33.0 ],
 					"text" : "x.variable instantiates a distribution as well as all of the necessary random number generation objects"
 				}
 
@@ -57,10 +58,9 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 118.0, 233.0, 295.0, 138.0 ],
+					"patching_rect" : [ 80.0, 279.0, 295.0, 138.0 ],
 					"setminmax" : [ 0.0, 100.0 ],
-					"setstyle" : 4,
-					"style" : ""
+					"setstyle" : 4
 				}
 
 			}
@@ -71,8 +71,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 118.0, 13.0, 72.0, 20.0 ],
-					"style" : "",
+					"patching_rect" : [ 80.0, 59.0, 72.0, 22.0 ],
 					"text" : "loadmess 1"
 				}
 
@@ -85,8 +84,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 118.0, 45.0, 24.0, 24.0 ],
-					"style" : ""
+					"patching_rect" : [ 80.0, 91.0, 24.0, 24.0 ]
 				}
 
 			}
@@ -97,8 +95,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 118.0, 81.0, 58.0, 20.0 ],
-					"style" : "",
+					"patching_rect" : [ 80.0, 127.0, 58.0, 22.0 ],
 					"text" : "metro 20"
 				}
 
@@ -110,8 +107,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 118.0, 109.0, 58.0, 20.0 ],
-					"style" : "",
+					"patching_rect" : [ 80.0, 155.0, 58.0, 22.0 ],
 					"text" : "generate"
 				}
 
@@ -123,8 +119,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 118.0, 151.0, 222.0, 20.0 ],
-					"style" : "",
+					"patching_rect" : [ 80.0, 197.0, 222.0, 22.0 ],
 					"text" : "x.variable gamma @alpha 10. @beta 2."
 				}
 
@@ -167,46 +162,18 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "x.variable.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "x.dist.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "x.generator.pcg32.global.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "x.global.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "x.random_device.global.maxpat",
-				"bootpath" : "~/Development/maccallum/x/patchers",
-				"patcherrelativepath" : "../patchers",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "x.dist.gamma.mxo",
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "x.generator.pcg32.mxo",
+				"name" : "x.generator.default.maxpat",
+				"bootpath" : "~/Development/maccallum/x/patchers",
+				"patcherrelativepath" : "../patchers",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "x.global.mxo",
 				"type" : "iLaX"
 			}
 , 			{
@@ -214,8 +181,11 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "x.random_device.mxo",
-				"type" : "iLaX"
+				"name" : "x.variable.maxpat",
+				"bootpath" : "~/Development/maccallum/x/patchers",
+				"patcherrelativepath" : "../patchers",
+				"type" : "JSON",
+				"implicit" : 1
 			}
  ],
 		"autosave" : 0

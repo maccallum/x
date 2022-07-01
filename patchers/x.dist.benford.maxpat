@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 291.0, 79.0, 967.0, 783.0 ],
+		"rect" : [ 290.0, 87.0, 967.0, 783.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -123,13 +123,13 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-1",
-									"linecount" : 3,
+									"linecount" : 2,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 60.5, 166.0, 165.0, 49.0 ],
-									"text" : "doc desc short Distribute a random number according to Benford's Law"
+									"patching_rect" : [ 60.5, 166.0, 579.5, 35.0 ],
+									"text" : "doc desc short \"Produces a random number according to Benford's Law, which describes the distribution of first digits in numerical data.\""
 								}
 
 							}

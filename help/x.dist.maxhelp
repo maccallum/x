@@ -2,13 +2,14 @@
 	"patcher" : 	{
 		"fileversion" : 1,
 		"appversion" : 		{
-			"major" : 7,
-			"minor" : 3,
-			"revision" : 5,
+			"major" : 8,
+			"minor" : 2,
+			"revision" : 2,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
+		"classnamespace" : "box",
 		"rect" : [ 84.0, 129.0, 640.0, 480.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -36,6 +37,7 @@
 		"tags" : "",
 		"style" : "",
 		"subpatcher_template" : "",
+		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
 					"id" : "obj-14",
@@ -43,8 +45,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 251.0, 24.0, 295.0, 30.0 ],
-					"style" : "",
+					"patching_rect" : [ 223.0, 53.0, 295.0, 33.0 ],
 					"text" : "x.dist is a utility  that simply instantiates an object of the given distribution. It's used by x.variable"
 				}
 
@@ -57,10 +58,9 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 118.0, 233.0, 295.0, 138.0 ],
+					"patching_rect" : [ 90.0, 262.0, 295.0, 138.0 ],
 					"setminmax" : [ 0.0, 100.0 ],
-					"setstyle" : 4,
-					"style" : ""
+					"setstyle" : 4
 				}
 
 			}
@@ -71,8 +71,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 118.0, 13.0, 72.0, 20.0 ],
-					"style" : "",
+					"patching_rect" : [ 90.0, 42.0, 72.0, 22.0 ],
 					"text" : "loadmess 1"
 				}
 
@@ -85,8 +84,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 118.0, 45.0, 24.0, 24.0 ],
-					"style" : ""
+					"patching_rect" : [ 90.0, 74.0, 24.0, 24.0 ]
 				}
 
 			}
@@ -97,8 +95,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 118.0, 81.0, 58.0, 20.0 ],
-					"style" : "",
+					"patching_rect" : [ 90.0, 110.0, 58.0, 22.0 ],
 					"text" : "metro 20"
 				}
 
@@ -110,8 +107,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 118.0, 109.0, 58.0, 20.0 ],
-					"style" : "",
+					"patching_rect" : [ 90.0, 138.0, 58.0, 22.0 ],
 					"text" : "generate"
 				}
 
@@ -123,8 +119,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 298.0, 184.0, 110.0, 20.0 ],
-					"style" : "",
+					"patching_rect" : [ 270.0, 213.0, 110.0, 22.0 ],
 					"text" : "x.generator.default"
 				}
 
@@ -136,8 +131,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 118.0, 151.0, 199.0, 20.0 ],
-					"style" : "",
+					"patching_rect" : [ 90.0, 180.0, 199.0, 22.0 ],
 					"text" : "x.dist gamma @alpha 10. @beta 2."
 				}
 
@@ -160,7 +154,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-6", 0 ],
-					"midpoints" : [ 307.5, 216.0, 429.0, 216.0, 429.0, 139.0, 127.5, 139.0 ],
+					"midpoints" : [ 279.5, 245.0, 401.0, 245.0, 401.0, 168.0, 99.5, 168.0 ],
 					"source" : [ "obj-5", 0 ]
 				}
 
@@ -195,15 +189,15 @@
 			}
  ],
 		"dependency_cache" : [ 			{
+				"name" : "x.dist.gamma.mxo",
+				"type" : "iLaX"
+			}
+, 			{
 				"name" : "x.generator.default.maxpat",
 				"bootpath" : "~/Development/maccallum/x/patchers",
 				"patcherrelativepath" : "../patchers",
 				"type" : "JSON",
 				"implicit" : 1
-			}
-, 			{
-				"name" : "x.dist.gamma.mxo",
-				"type" : "iLaX"
 			}
 , 			{
 				"name" : "x.global.mxo",

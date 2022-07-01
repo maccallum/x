@@ -1182,7 +1182,7 @@ namespace x
 					dist_obj<dist_type, result_type, multivariate, xparam_type> *x = (dist_obj<dist_type, result_type, multivariate, xparam_type> *)(_x->myobj);
 					t_symbol *name = (t_symbol *)object_method(attr, gensym("getname"));
 					for(int i = 0; i < x->nargs; i++){
-						if(!strncmp(name->s_name, x->names_sym[i]->s_name, strlen(name->s_name) - 1)){
+						if(!strcmp(name->s_name, x->names_sym[i]->s_name)){
 							x->getters[i](x, argc, argv);
 							break;
 						}
@@ -1195,7 +1195,7 @@ namespace x
 					dist_obj<dist_type, result_type, multivariate, xparam_type> *x = (dist_obj<dist_type, result_type, multivariate, xparam_type> *)(_x->myobj);
 					t_symbol *name = (t_symbol *)object_method(attr, gensym("getname"));
 					for(int i = 0; i < ((xparam_type *)x)->nargs; i++){
-						if(!strncmp(name->s_name, x->names_sym[i]->s_name, strlen(name->s_name) - 1)){
+						if(!strcmp(name->s_name, x->names_sym[i]->s_name)){
 							x->setters[i](x, argc, argv);
 							break;
 						}
@@ -1253,8 +1253,8 @@ namespace x
 					class_addmethod(c, (method)paramnames, "paramnames", 0);
 					class_addmethod(c, (method)validparams, "validparams", 0);
 					for(int i = 0; i < xparam_type::nargs; i++){
-						class_addmethod(c, (method)param, xparam_type::names_str[i], A_GIMME, 0);
-						const std::string name = (std::string(xparam_type::names_str[i]) + std::string(" "));
+						// class_addmethod(c, (method)param, xparam_type::names_str[i], A_GIMME, 0);
+						const std::string name = (std::string(xparam_type::names_str[i]));
 						class_addattr(c, attr_offset_new(name.c_str(), gensym("atom"), 0, (method)0L,(method)0L,calcoffset(t_maxobj, ob)));
 					
 						t_object *theattr = (t_object *)class_attr_get(c, gensym(name.c_str()));
