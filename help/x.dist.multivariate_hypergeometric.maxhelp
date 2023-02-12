@@ -60,7 +60,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 311.5, 300.0, 70.0, 22.0 ],
-					"text" : "loadmess 1"
+					"text" : "loadmess 5"
 				}
 
 			}
@@ -226,8 +226,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 13.0, 152.0, 58.0, 22.0 ],
-					"text" : "metro 20"
+					"patching_rect" : [ 13.0, 152.0, 63.0, 22.0 ],
+					"text" : "metro 250"
 				}
 
 			}
@@ -240,7 +240,7 @@
 					"outlettype" : [ "", "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 13.0, 448.0, 238.0, 114.0 ],
-					"setminmax" : [ 0.0, 1.0 ],
+					"setminmax" : [ 0.0, 10.0 ],
 					"setstyle" : 1,
 					"size" : 4
 				}

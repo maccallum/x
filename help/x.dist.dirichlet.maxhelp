@@ -200,7 +200,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 13.0, 52.0, 475.0, 33.0 ],
-					"text" : "Produces random values on the interval (0 , 1) derived from the multivariate beta distribution."
+					"text" : "Produces random values on the interval (0,1) derived from the multivariate beta distribution."
 				}
 
 			}
@@ -236,8 +236,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 13.0, 152.0, 58.0, 22.0 ],
-					"text" : "metro 20"
+					"patching_rect" : [ 13.0, 152.0, 63.0, 22.0 ],
+					"text" : "metro 250"
 				}
 
 			}

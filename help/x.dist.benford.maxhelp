@@ -40,6 +40,42 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-21",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "float" ],
+					"patching_rect" : [ 30.0, 368.0, 29.5, 22.0 ],
+					"text" : "/ 1."
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-19",
+					"maxclass" : "newobj",
+					"numinlets" : 5,
+					"numoutlets" : 4,
+					"outlettype" : [ "int", "", "", "int" ],
+					"patching_rect" : [ 54.0, 340.0, 61.0, 22.0 ],
+					"text" : "counter"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-18",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "int", "bang" ],
+					"patching_rect" : [ 13.0, 286.0, 29.5, 22.0 ],
+					"text" : "t i b"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-3",
 					"linecount" : 3,
 					"maxclass" : "newobj",
@@ -70,8 +106,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 13.0, 395.0, 56.0, 22.0 ],
-					"text" : "pack 0 0"
+					"patching_rect" : [ 13.0, 395.0, 57.0, 22.0 ],
+					"text" : "pack 0 0."
 				}
 
 			}
@@ -82,7 +118,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 50.0, 366.0, 37.0, 22.0 ],
+					"patching_rect" : [ 60.5, 286.0, 37.0, 22.0 ],
 					"text" : "clear"
 				}
 
@@ -94,7 +130,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "int" ],
-					"patching_rect" : [ 13.0, 366.0, 36.0, 22.0 ],
+					"patching_rect" : [ 13.0, 340.0, 36.0, 22.0 ],
 					"text" : "histo"
 				}
 
@@ -146,7 +182,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 13.0, 52.0, 475.0, 33.0 ],
-					"text" : "Produces a random number according to Benford's Law , which describes the distribution of first digits in numerical data."
+					"text" : "Produces a random number according to Benford's Law, which describes the distribution of first digits in numerical data."
 				}
 
 			}
@@ -197,8 +233,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 13.0, 152.0, 58.0, 22.0 ],
-					"text" : "metro 20"
+					"patching_rect" : [ 13.0, 152.0, 49.0, 22.0 ],
+					"text" : "metro 2"
 				}
 
 			}
@@ -210,7 +246,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 13.0, 331.0, 50.0, 22.0 ]
+					"patching_rect" : [ 13.0, 258.0, 50.0, 22.0 ]
 				}
 
 			}
@@ -223,7 +259,7 @@
 					"outlettype" : [ "", "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 13.0, 448.0, 238.0, 114.0 ],
-					"setminmax" : [ 0.0, 5000.0 ],
+					"setminmax" : [ 0.0, 1.0 ],
 					"setstyle" : 1,
 					"size" : 9
 				}
@@ -248,7 +284,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 290.0, 331.0, 110.0, 22.0 ],
+					"patching_rect" : [ 290.0, 258.0, 110.0, 22.0 ],
 					"text" : "x.generator.default"
 				}
 
@@ -260,7 +296,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 13.0, 298.0, 296.0, 22.0 ],
+					"patching_rect" : [ 13.0, 225.0, 296.0, 22.0 ],
 					"text" : "x.dist.benford"
 				}
 
@@ -302,7 +338,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-8", 1 ],
+					"destination" : [ "obj-21", 0 ],
 					"source" : [ "obj-13", 1 ]
 				}
 
@@ -316,8 +352,29 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-13", 0 ],
+					"source" : [ "obj-18", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-19", 0 ],
+					"source" : [ "obj-18", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-21", 1 ],
+					"source" : [ "obj-19", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-1", 0 ],
-					"midpoints" : [ 299.5, 361.0, 413.0, 361.0, 413.0, 285.0, 22.5, 285.0 ],
+					"midpoints" : [ 299.5, 288.0, 413.0, 288.0, 413.0, 212.0, 22.5, 212.0 ],
 					"source" : [ "obj-2", 0 ]
 				}
 
@@ -332,7 +389,14 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-13", 0 ],
+					"destination" : [ "obj-8", 1 ],
+					"source" : [ "obj-21", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-18", 0 ],
 					"source" : [ "obj-24", 0 ]
 				}
 

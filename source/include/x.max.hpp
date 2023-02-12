@@ -583,6 +583,12 @@ namespace x
 #endif
 			}
 
+            static void msg_reset(t_maxobj *_x)
+            {
+                rng_obj<rng_type> *x = (rng_obj<rng_type> *)(_x->myobj);
+                x->_rng_is_valid = false;
+            }
+
 			static void msg_min(t_maxobj *_x)
 			{
 				rng_obj<rng_type> *x = (rng_obj<rng_type> *)(_x->myobj);
@@ -657,6 +663,7 @@ namespace x
 				class_addmethod(max_class(), (method)msg_generate, "generate", A_GIMME, 0);
 				class_addmethod(max_class(), (method)msg_min, "min", 0);
 				class_addmethod(max_class(), (method)msg_max, "max", 0);
+                class_addmethod(max_class(), (method)msg_reset, "reset", 0);
 				class_addmethod(max_class(), (method)notify, "notify", A_CANT, 0);
 				class_addmethod(max_class(), (method)doc, "doc", 0);
 				return 0;
@@ -732,9 +739,9 @@ namespace x
 		class param_type_1 : public xparam_type
 		{
 		public:
-			int nargs = 1;
-			const char *names_str[1] = {param1_name};
-			t_symbol *names_sym[1] = {gensym(param1_name)};
+			const int nargs = 1;
+			const char * const names_str[1] = {param1_name};
+			t_symbol * const names_sym[1] = {gensym(param1_name)};
 			static void p1(xparam_type *p, long *argc, t_atom **argv)
 			{
 				atom_setv(p->param1(), argc, argv);
@@ -751,9 +758,9 @@ namespace x
 		class param_type_2 : public xparam_type
 		{
 		public:
-			int nargs = 2;
-			const char *names_str[2] = {param1_name, param2_name};
-			t_symbol *names_sym[2] = {gensym(param1_name), gensym(param2_name)};
+			const int nargs = 2;
+			const char * const names_str[2] = {param1_name, param2_name};
+			t_symbol * const names_sym[2] = {gensym(param1_name), gensym(param2_name)};
 			static void p1(xparam_type *p, long *argc, t_atom **argv)
 			{
 				atom_setv(p->param1(), argc, argv);
@@ -778,9 +785,9 @@ namespace x
 		class param_type_3 : public xparam_type
 		{
 		public:
-			int nargs = 3;
-			const char *names_str[3] = {param1_name, param2_name, param3_name};
-			t_symbol *names_sym[3] = {gensym(param1_name), gensym(param2_name), gensym(param3_name)};
+			const int nargs = 3;
+			const char * const names_str[3] = {param1_name, param2_name, param3_name};
+			t_symbol * const names_sym[3] = {gensym(param1_name), gensym(param2_name), gensym(param3_name)};
 			static void p1(xparam_type *p, long *argc, t_atom **argv)
 			{
 				atom_setv(p->param1(), argc, argv);
@@ -1149,9 +1156,9 @@ namespace x
 					if(x->buf){
 						sysmem_freeptr(x->buf);
 					}
-					critical_free(x->lock);				
+					critical_free(x->lock);
 					if(x->myobj){
-						delete ((dist_obj<dist_type, result_type> *)(x->myobj));
+						delete ((dist_obj<dist_type, result_type, multivariate, xparam_type> *)(x->myobj));
 					}
 				}
 
@@ -1255,12 +1262,71 @@ namespace x
 					for(int i = 0; i < xparam_type::nargs; i++){
 						// class_addmethod(c, (method)param, xparam_type::names_str[i], A_GIMME, 0);
 						const std::string name = (std::string(xparam_type::names_str[i]));
-						class_addattr(c, attr_offset_new(name.c_str(), gensym("atom"), 0, (method)0L,(method)0L,calcoffset(t_maxobj, ob)));
+                        if(*(xparam_type::paramtypes[i]) == typeid(long))
+                        {
+							class_addattr(c, attr_offset_new(name.c_str(), _sym_long, 0, (method)0L,(method)0L,calcoffset(t_maxobj, ob)));
+                        }
+                        else if(*(xparam_type::paramtypes[i]) == typeid(double))
+                        {
+                            class_addattr(c, attr_offset_new(name.c_str(), _sym_float64, 0, (method)0L,(method)0L,calcoffset(t_maxobj, ob)));
+                        }
+                        else
+                        {
+                            class_addattr(c, attr_offset_new(name.c_str(), _sym_atom, 0, (method)0L,(method)0L,calcoffset(t_maxobj, ob)));
+                        }
 					
 						t_object *theattr = (t_object *)class_attr_get(c, gensym(name.c_str()));
 						object_method(theattr, gensym("setmethod"), USESYM(get), attr_get);
 						object_method(theattr, gensym("setmethod"), USESYM(set), attr_set);
 					}
+                    // if(xparam_type::nargs > 0)
+                    // {
+                    //     const std::string name = (std::string(xparam_type::names_str[0]));
+                    //     if(typeid(xparam_type::param1()) == typeid(long))
+                    //     {
+                    //         class_addattr(c, attr_offset_new(name.c_str(), gensym("long"), 0, (method)0L,(method)0L,calcoffset(t_maxobj, ob)));
+                    //     }
+                    //     else if(typeid(xparam_type::param1()) == typeid(double))
+                    //     {
+                    //         class_addattr(c, attr_offset_new(name.c_str(), gensym("double"), 0, (method)0L,(method)0L,calcoffset(t_maxobj, ob)));
+                    //     }
+					
+                    //     t_object *theattr = (t_object *)class_attr_get(c, gensym(name.c_str()));
+                    //     object_method(theattr, gensym("setmethod"), USESYM(get), attr_get);
+                    //     object_method(theattr, gensym("setmethod"), USESYM(set), attr_set);
+                    // }
+                    // if(xparam_type::nargs > 1)
+                    // {
+                    //     const std::string name = (std::string(xparam_type::names_str[1]));
+                    //     if(typeid(xparam_type::param2()) == typeid(long))
+                    //     {
+                    //         class_addattr(c, attr_offset_new(name.c_str(), gensym("long"), 0, (method)0L,(method)0L,calcoffset(t_maxobj, ob)));
+                    //     }
+                    //     else if(typeid(xparam_type::param2()) == typeid(double))
+                    //     {
+                    //         class_addattr(c, attr_offset_new(name.c_str(), gensym("double"), 0, (method)0L,(method)0L,calcoffset(t_maxobj, ob)));
+                    //     }
+					
+                    //     t_object *theattr = (t_object *)class_attr_get(c, gensym(name.c_str()));
+                    //     object_method(theattr, gensym("setmethod"), USESYM(get), attr_get);
+                    //     object_method(theattr, gensym("setmethod"), USESYM(set), attr_set);
+                    // }
+                    // if(xparam_type::nargs > 2)
+                    // {
+                    //     const std::string name = (std::string(xparam_type::names_str[2]));
+                    //     if(typeid(xparam_type::param3()) == typeid(long))
+                    //     {
+                    //         class_addattr(c, attr_offset_new(name.c_str(), gensym("long"), 0, (method)0L,(method)0L,calcoffset(t_maxobj, ob)));
+                    //     }
+                    //     else if(typeid(xparam_type::param3()) == typeid(double))
+                    //     {
+                    //         class_addattr(c, attr_offset_new(name.c_str(), gensym("double"), 0, (method)0L,(method)0L,calcoffset(t_maxobj, ob)));
+                    //     }
+					
+                    //     t_object *theattr = (t_object *)class_attr_get(c, gensym(name.c_str()));
+                    //     object_method(theattr, gensym("setmethod"), USESYM(get), attr_get);
+                    //     object_method(theattr, gensym("setmethod"), USESYM(set), attr_set);
+                    // }
 					class_addmethod(c, (method)doc, "doc", 0);
 					if(_hascharacterizationfns){
 						class_addmethod(c, (method)distributionfn, "pdf", A_GIMME, 0);

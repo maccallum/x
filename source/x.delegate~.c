@@ -37,6 +37,7 @@ typedef struct _xdelegate{
 	void *outlet_delegation;
 	double *value;
 	int delegate_did_return;
+    int outlet_called;
 	long nvars;
 	long nsamples_to_wait;
 	long nsamples_waited;
@@ -54,9 +55,11 @@ void xdelegate_getvalues(t_xdelegate *x, double *buf)
 
 double xdelegate_getvalue(t_xdelegate *x)
 {
+    x->outlet_called = 1;
 	outlet_anything(x->outlet_delegation, gensym("generate"), 0, NULL);
 	double v = x->value[0];
 	memset(x->value, 0, x->nvars * sizeof(double));
+    x->outlet_called = 0;
 	return v;
 }
 
@@ -80,7 +83,7 @@ void xdelegate_dist_perform64(t_xdelegate *x, t_object *dsp64, double **ins, lon
 void xdelegate_process_perform64(t_xdelegate *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vectorsize, long flags, void *userparam)
 {
 	long rem = x->nsamples_to_wait - (x->nsamples_waited + vectorsize);
-	if(rem <= 0){	
+	if(rem <= 0){
 		for(long i = 0; i < vectorsize; i++){
 			if(x->nsamples_to_wait - x->nsamples_waited <= 0){
 				while((x->nsamples_to_wait = xdelegate_getvalue(x)) == 0.){
@@ -109,6 +112,7 @@ void xdelegate_dsp64(t_xdelegate *x, t_object *dsp64, short *count, double sampl
 	x->nsamples_to_wait = 0;
 	x->nsamples_waited = 0;
 	x->delegate_did_return = 0;
+    x->outlet_called = 0;
 	if(x->mode == gensym("dist")){
 		object_method(dsp64, gensym("dsp_add64"), x, xdelegate_dist_perform64, 0, NULL);
 	}else if(x->mode == gensym("process.counting")){
@@ -118,7 +122,10 @@ void xdelegate_dsp64(t_xdelegate *x, t_object *dsp64, short *count, double sampl
 
 void xdelegate_list(t_xdelegate *x, t_symbol *msg, short argc, t_atom *argv)
 {
-	x->delegate_did_return = 1;
+    if(x->outlet_called)
+    {
+		x->delegate_did_return = 1;
+    }
 	long n = x->nvars;
 	if(argc < n){
 		n = argc;
@@ -130,7 +137,10 @@ void xdelegate_list(t_xdelegate *x, t_symbol *msg, short argc, t_atom *argv)
 
 void xdelegate_float(t_xdelegate *x, double f)
 {
-	x->delegate_did_return = 1;
+    if(x->outlet_called)
+    {
+		x->delegate_did_return = 1;
+    }
 	x->value[0] = f;
 }
 
@@ -149,6 +159,22 @@ void xdelegate_free(t_xdelegate *x)
 	if(x->value){
 		free(x->value);
 	}
+}
+
+void xdelegate_helpname(t_xdelegate *x, char *helpname)
+{
+    if(x->mode == gensym("dist"))
+    {
+        sprintf(helpname, "x.dist.delegate~");
+    }
+    else if(x->mode == gensym("process.counting"))
+    {
+        sprintf(helpname, "x.process.counting.delegate~");
+    }
+    else
+    {
+        sprintf(helpname, "x.delegate~");
+    }
 }
 
 void *xdelegate_new(t_symbol *msg, short argc, t_atom *argv)
@@ -188,7 +214,8 @@ int main(void)
 {
 	t_class *c = (t_class *)class_new("x.delegate~", (method)xdelegate_new, (method)xdelegate_free, sizeof(t_xdelegate), 0L, A_GIMME, 0);
 	class_addmethod(c, (method)xdelegate_assist, "assist", A_CANT, 0);
-    	class_addmethod(c, (method)xdelegate_dsp64, "dsp64", A_CANT, 0);
+    class_addmethod(c, (method)xdelegate_helpname, "helpname", A_CANT, 0);
+    class_addmethod(c, (method)xdelegate_dsp64, "dsp64", A_CANT, 0);
 	class_addmethod(c, (method)xdelegate_list, "list", A_GIMME, 0);
 	class_addmethod(c, (method)xdelegate_float, "float", A_FLOAT, 0);
 	class_addmethod(c, (method)xdelegate_int, "int", A_LONG, 0);

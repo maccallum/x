@@ -3685,6 +3685,7 @@ namespace x
 			uniform_int_distribution_param_type(long p1, long p2) : std::uniform_int_distribution<long>::param_type(p1, p2) {}
 			long param1(void){return a();}
 			long param2(void){return b();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1()), &typeid(param2())};
 		};
 		
 		class uniform_real_distribution_param_type : public std::uniform_real_distribution<double>::param_type
@@ -3694,6 +3695,7 @@ namespace x
 			uniform_real_distribution_param_type(double p1, double p2) : std::uniform_real_distribution<double>::param_type(p1, p2) {}
 			double param1(void){return a();}
 			double param2(void){return b();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1()), &typeid(param2())};
 		};
 
 		class bernoulli_distribution_param_type : public bernoulli_distribution<long>::param_type
@@ -3702,6 +3704,7 @@ namespace x
 			bernoulli_distribution_param_type(void) : bernoulli_distribution<long>::param_type() {}
 			bernoulli_distribution_param_type(double p1) : bernoulli_distribution<long>::param_type(p1) {}
 			double param1(void){return p();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1())};
 		};
 		
 		class binomial_distribution_param_type : public binomial_distribution<long>::param_type
@@ -3711,6 +3714,7 @@ namespace x
 			binomial_distribution_param_type(long p1, double p2) : binomial_distribution<long>::param_type(p1, p2) {}
 			long param1(void){return t();}
 			double param2(void){return p();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1()), &typeid(param2())};
 		};
 
 		class geometric_distribution_param_type : public geometric_distribution<long>::param_type
@@ -3719,6 +3723,7 @@ namespace x
 			geometric_distribution_param_type(void) : geometric_distribution<long>::param_type() {}
 			geometric_distribution_param_type(double p1) : geometric_distribution<long>::param_type(p1) {}
 			double param1(void){return p();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1())};
 		};
 		
 		class negative_binomial_distribution_param_type : public negative_binomial_distribution<long>::param_type
@@ -3728,6 +3733,7 @@ namespace x
 			negative_binomial_distribution_param_type(long p1, double p2) : negative_binomial_distribution<long>::param_type(p1, p2) {}
 			long param1(void){return k();}
 			double param2(void){return p();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1()), &typeid(param2())};
 		};
 
 		class multinomial_distribution_param_type : public x::random::multinomial_distribution<long>::param_type
@@ -3737,6 +3743,7 @@ namespace x
 			multinomial_distribution_param_type(long p1, std::vector<double> p2) : x::random::multinomial_distribution<long>::param_type(p1, p2.begin(), p2.end()) {}
 			long param1(void){return n();}
 			std::vector<double> param2(void){return p();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1()), &typeid(param2())};
 		};
 
 		class hypergeometric_distribution_param_type : public x::random::hypergeometric_distribution<long>::param_type
@@ -3747,6 +3754,7 @@ namespace x
 			long param1(void){return n();}
 			long param2(void){return M();}
 			long param3(void){return N();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1()), &typeid(param2()), &typeid(param3())};
 		};
 
 		class multivariate_hypergeometric_distribution_param_type : public x::random::multivariate_hypergeometric_distribution<long>::param_type
@@ -3756,6 +3764,7 @@ namespace x
 			multivariate_hypergeometric_distribution_param_type(long p1, std::vector<long> p2) : x::random::multivariate_hypergeometric_distribution<long>::param_type(p1, p2.begin(), p2.end()) {}
 			long param1(void){return n();}
 			std::vector<long> param2(void){return M();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1()), &typeid(param2())};
 		};
 		
 		class poisson_distribution_param_type : public poisson_distribution<long>::param_type
@@ -3764,6 +3773,7 @@ namespace x
 			poisson_distribution_param_type(void) : poisson_distribution<long>::param_type() {}
 			poisson_distribution_param_type(double p1) : poisson_distribution<long>::param_type(p1) {}
 			double param1(void){return mean();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1())};
 		};
 
 		class exponential_distribution_param_type : public exponential_distribution<double>::param_type
@@ -3772,6 +3782,7 @@ namespace x
 			exponential_distribution_param_type(void) : exponential_distribution<double>::param_type() {}
 			exponential_distribution_param_type(double p1) : exponential_distribution<double>::param_type(p1) {}
 			double param1(void){return lambda();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1())};
 		};
 
 		class gamma_distribution_param_type : public gamma_distribution<double>::param_type
@@ -3781,6 +3792,7 @@ namespace x
 			gamma_distribution_param_type(double p1, double p2) : gamma_distribution<double>::param_type(p1, p2) {}
 			double param1(void){return alpha();}
 			double param2(void){return beta();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1()), &typeid(param2())};
 		};
 
 		class weibull_distribution_param_type : public weibull_distribution<double>::param_type
@@ -3790,6 +3802,7 @@ namespace x
 			weibull_distribution_param_type(double p1, double p2) : weibull_distribution<double>::param_type(p1, p2) {}
 			double param1(void){return a();}
 			double param2(void){return b();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1()), &typeid(param2())};
 		};
 
 		class extreme_value_distribution_param_type : public extreme_value_distribution<double>::param_type
@@ -3799,6 +3812,7 @@ namespace x
 			extreme_value_distribution_param_type(double p1, double p2) : extreme_value_distribution<double>::param_type(p1, p2) {}
 			double param1(void){return a();}
 			double param2(void){return b();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1()), &typeid(param2())};
 		};
 
 		class dirichlet_distribution_param_type : public x::random::dirichlet_distribution<double>::param_type
@@ -3809,6 +3823,7 @@ namespace x
 			dirichlet_distribution_param_type(_InputIterator __f, _InputIterator __l) : x::random::dirichlet_distribution<double>::param_type(__f, __l) {}
 			dirichlet_distribution_param_type(std::vector<double> v) : dirichlet_distribution_param_type(v.begin(), v.end()) {}
 			std::vector<double> param1(void){return alpha();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1())};
 		};
 
 		class beta_distribution_param_type : public x::random::beta_distribution<double>::param_type
@@ -3818,6 +3833,7 @@ namespace x
 			beta_distribution_param_type(double p1, double p2) : x::random::beta_distribution<double>::param_type(p1, p2) {}
 			double param1(void){return alpha();}
 			double param2(void){return beta();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1()), &typeid(param2())};
 		};
 
 		class kumaraswamy_distribution_param_type : public x::random::kumaraswamy_distribution<double>::param_type
@@ -3827,6 +3843,7 @@ namespace x
 			kumaraswamy_distribution_param_type(double p1, double p2) : x::random::kumaraswamy_distribution<double>::param_type(p1, p2) {}
 			double param1(void){return alpha();}
 			double param2(void){return beta();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1()), &typeid(param2())};
 		};
 
 		class laplace_distribution_param_type : public x::random::laplace_distribution<double>::param_type
@@ -3836,6 +3853,7 @@ namespace x
 			laplace_distribution_param_type(double p1, double p2) : x::random::laplace_distribution<double>::param_type(p1, p2) {}
 			double param1(void){return mu();}
 			double param2(void){return sigma();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1()), &typeid(param2())};
 		};
 
 		class erlang_distribution_param_type : public x::random::erlang_distribution<double>::param_type
@@ -3845,6 +3863,7 @@ namespace x
 			erlang_distribution_param_type(double p1, double p2) : x::random::erlang_distribution<double>::param_type(p1, p2) {}
 			long param1(void){return k();}
 			double param2(void){return lambda();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1()), &typeid(param2())};
 		};
 
 		class gaussian_tail_distribution_param_type : public x::random::gaussian_tail_distribution<double>::param_type
@@ -3854,6 +3873,7 @@ namespace x
 			gaussian_tail_distribution_param_type(double p1, double p2) : x::random::gaussian_tail_distribution<double>::param_type(p1, p2) {}
 			double param1(void){return a();}
 			double param2(void){return sigma();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1()), &typeid(param2())};
 		};
 
 		class bivariate_normal_distribution_param_type : public x::random::bivariate_normal_distribution<double>::param_type
@@ -3864,6 +3884,7 @@ namespace x
 			double param1(void){return sigmax();}
 			double param2(void){return sigmay();}
 			double param3(void){return rho();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1()), &typeid(param2()), &typeid(param3())};
 		};
 
 		class exponential_power_distribution_param_type : public x::random::exponential_power_distribution<double>::param_type
@@ -3873,6 +3894,7 @@ namespace x
 			exponential_power_distribution_param_type(double p1, double p2) : x::random::exponential_power_distribution<double>::param_type(p1, p2) {}
 			double param1(void){return alpha();}
 			double param2(void){return beta();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1()), &typeid(param2())};
 		};
 
 		class pareto_distribution_param_type : public x::random::pareto_distribution<double>::param_type
@@ -3882,6 +3904,7 @@ namespace x
 			pareto_distribution_param_type(double p1, double p2) : x::random::pareto_distribution<double>::param_type(p1, p2) {}
 			double param1(void){return a();}
 			double param2(void){return b();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1()), &typeid(param2())};
 		};
 
 		class rayleigh_tail_distribution_param_type : public x::random::rayleigh_tail_distribution<double>::param_type
@@ -3891,6 +3914,7 @@ namespace x
 			rayleigh_tail_distribution_param_type(double p1, double p2) : x::random::rayleigh_tail_distribution<double>::param_type(p1, p2) {}
 			double param1(void){return a();}
 			double param2(void){return sigma();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1()), &typeid(param2())};
 		};
 
 		class logistic_distribution_param_type : public x::random::logistic_distribution<double>::param_type
@@ -3900,6 +3924,7 @@ namespace x
 			logistic_distribution_param_type(double p1, double p2) : x::random::logistic_distribution<double>::param_type(p1, p2) {}
 			double param1(void){return mu();}
 			double param2(void){return s();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1()), &typeid(param2())};
 		};
 
 		class gumbel_distribution_param_type : public x::random::gumbel_distribution<double>::param_type
@@ -3909,6 +3934,7 @@ namespace x
 			gumbel_distribution_param_type(double p1, double p2) : x::random::gumbel_distribution<double>::param_type(p1, p2) {}
 			double param1(void){return mu();}
 			double param2(void){return beta();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1()), &typeid(param2())};
 		};
 
 		class logarithmic_series_distribution_param_type : public logarithmic_series_distribution<long>::param_type
@@ -3917,6 +3943,7 @@ namespace x
 			logarithmic_series_distribution_param_type(void) : logarithmic_series_distribution<long>::param_type() {}
 			logarithmic_series_distribution_param_type(double p1) : logarithmic_series_distribution<long>::param_type(p1) {}
 			double param1(void){return p();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1())};
 		};
 
 		class normal_distribution_param_type : public normal_distribution<double>::param_type
@@ -3926,6 +3953,7 @@ namespace x
 			normal_distribution_param_type(double p1, double p2) : normal_distribution<double>::param_type(p1, p2) {}
 			double param1(void){return mean();}
 			double param2(void){return stddev();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1()), &typeid(param2())};
 		};
 
 		class lognormal_distribution_param_type : public lognormal_distribution<double>::param_type
@@ -3935,6 +3963,7 @@ namespace x
 			lognormal_distribution_param_type(double p1, double p2) : lognormal_distribution<double>::param_type(p1, p2) {}
 			double param1(void){return m();}
 			double param2(void){return s();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1()), &typeid(param2())};
 		};
 
 		class chi_squared_distribution_param_type : public chi_squared_distribution<double>::param_type
@@ -3943,6 +3972,7 @@ namespace x
 			chi_squared_distribution_param_type(void) : chi_squared_distribution<double>::param_type() {}
 			chi_squared_distribution_param_type(double p1) : chi_squared_distribution<double>::param_type(p1) {}
 			double param1(void){return n();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1())};
 		};
 
 		class cauchy_distribution_param_type : public cauchy_distribution<double>::param_type
@@ -3952,6 +3982,7 @@ namespace x
 			cauchy_distribution_param_type(double p1, double p2) : cauchy_distribution<double>::param_type(p1, p2) {}
 			double param1(void){return a();}
 			double param2(void){return b();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1()), &typeid(param2())};
 		};
 
 		class fisher_f_distribution_param_type : public fisher_f_distribution<double>::param_type
@@ -3961,6 +3992,7 @@ namespace x
 			fisher_f_distribution_param_type(double p1, double p2) : fisher_f_distribution<double>::param_type(p1, p2) {}
 			double param1(void){return m();}
 			double param2(void){return n();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1()), &typeid(param2())};
 		};
 
 		class student_t_distribution_param_type : public student_t_distribution<double>::param_type
@@ -3969,6 +4001,7 @@ namespace x
 			student_t_distribution_param_type(void) : student_t_distribution<double>::param_type() {}
 			student_t_distribution_param_type(double p1) : student_t_distribution<double>::param_type(p1) {}
 			double param1(void){return n();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1())};
 		};
 
 		class rayleigh_distribution_param_type : public rayleigh_distribution<double>::param_type
@@ -3977,6 +4010,7 @@ namespace x
 			rayleigh_distribution_param_type(void) : rayleigh_distribution<double>::param_type() {}
 			rayleigh_distribution_param_type(double p1) : rayleigh_distribution<double>::param_type(p1) {}
 			double param1(void){return sigma();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1())};
 		};
 		
 		class discrete_distribution_param_type : public discrete_distribution<long>::param_type
@@ -3987,6 +4021,7 @@ namespace x
 			discrete_distribution_param_type(_InputIterator __f, _InputIterator __l) : discrete_distribution<long>::param_type(__f, __l) {}
 			discrete_distribution_param_type(std::vector<double> v) : discrete_distribution_param_type(v.begin(), v.end()) {}
 			std::vector<double> param1(void){return probabilities();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1())};
 		};
 
 		class piecewise_constant_distribution_param_type : public piecewise_constant_distribution<double>::param_type
@@ -3998,6 +4033,7 @@ namespace x
 			piecewise_constant_distribution_param_type(std::vector<double> v1, std::vector<double> v2) : piecewise_constant_distribution_param_type(v1.begin(), v1.end(), v2.begin()) {}
 			std::vector<double> param1(void){return intervals();}
 			std::vector<double> param2(void){return densities();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1()), &typeid(param2())};
 		};
 
 		class piecewise_linear_distribution_param_type : public piecewise_linear_distribution<double>::param_type
@@ -4009,6 +4045,7 @@ namespace x
 			piecewise_linear_distribution_param_type(std::vector<double> v1, std::vector<double> v2) : piecewise_linear_distribution_param_type(v1.begin(), v1.end(), v2.begin()) {}
 			std::vector<double> param1(void){return intervals();}
 			std::vector<double> param2(void){return densities();}
+            std::vector<const std::type_info*> paramtypes = {&typeid(param1()), &typeid(param2())};
 		};
 	}
 }

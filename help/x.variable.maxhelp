@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 84.0, 129.0, 640.0, 480.0 ],
+		"rect" : [ 34.0, 87.0, 640.0, 480.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -40,12 +40,50 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-4",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 256.0, 275.0, 108.0, 22.0 ],
+					"text" : "x.generator.default"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontsize" : 14.0,
+					"id" : "obj-3",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 89.0, 275.0, 495.0, 22.0 ],
+					"presentation_linecount" : 2,
+					"text" : "x.variable uses the global                               as its random number generator"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bubble" : 1,
+					"id" : "obj-2",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 279.0, 235.0, 348.0, 24.0 ],
+					"text" : "Double-click to see and set the parameters of the distribution"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontsize" : 14.0,
 					"id" : "obj-14",
 					"linecount" : 2,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 213.0, 70.0, 295.0, 33.0 ],
+					"patching_rect" : [ 50.0, 27.0, 343.0, 38.0 ],
 					"text" : "x.variable instantiates a distribution as well as all of the necessary random number generation objects"
 				}
 
@@ -58,7 +96,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 80.0, 279.0, 295.0, 138.0 ],
+					"patching_rect" : [ 50.0, 318.0, 295.0, 138.0 ],
 					"setminmax" : [ 0.0, 100.0 ],
 					"setstyle" : 4
 				}
@@ -71,7 +109,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 80.0, 59.0, 72.0, 22.0 ],
+					"patching_rect" : [ 50.0, 98.0, 72.0, 22.0 ],
 					"text" : "loadmess 1"
 				}
 
@@ -84,7 +122,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 80.0, 91.0, 24.0, 24.0 ]
+					"patching_rect" : [ 50.0, 130.0, 24.0, 24.0 ]
 				}
 
 			}
@@ -95,7 +133,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 80.0, 127.0, 58.0, 22.0 ],
+					"patching_rect" : [ 50.0, 166.0, 58.0, 22.0 ],
 					"text" : "metro 20"
 				}
 
@@ -107,7 +145,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 80.0, 155.0, 58.0, 22.0 ],
+					"patching_rect" : [ 50.0, 200.0, 58.0, 22.0 ],
 					"text" : "generate"
 				}
 
@@ -119,7 +157,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 80.0, 197.0, 222.0, 22.0 ],
+					"patching_rect" : [ 50.0, 236.0, 222.0, 22.0 ],
 					"text" : "x.variable gamma @alpha 10. @beta 2."
 				}
 
