@@ -86,13 +86,27 @@ void xglobal_notify(t_xglobal *x, t_symbol *s, t_symbol *msg, void *sender, void
 	}
 }
 
-void xglobal_assist(t_xglobal *x, void *b, long m, long a, char *s)
+void xglobal_assist(t_xglobal *x, void *b, long io, long index, char *s)
 {
-	if (m == ASSIST_INLET) {
-		sprintf(s, "Messages for my sweet servant");
-	}else{
-		sprintf(s, "I am outlet %ld", a);
-	}
+    switch (io) {
+    case ASSIST_INLET:
+        switch (index) {
+        case 0:
+            strncpy_zero(s, "generate", 512);
+            break;
+        }
+        break;
+    case ASSIST_OUTLET:
+        switch(index){
+        case 0:
+            strncpy_zero(s, "Main outlet", 512);
+            break;
+        case 1:
+            strncpy_zero(s, "Delegation outlet", 512);
+            break;
+        }
+        break;
+    }
 }
 
 void xglobal_free(t_xglobal *x)
