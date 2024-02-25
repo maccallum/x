@@ -35,6 +35,13 @@ SOFTWARE.
 #ifndef __X_MAX_HPP__
 #define __X_MAX_HPP__
 
+#define xcritical_enter(lock) {                             \
+        critical_enter(0);                               \
+    }
+#define xcritical_exit(lock) { \
+        critical_exit(0); \
+    }
+
 typedef struct _maxobj
 {
 	t_object ob;
@@ -90,7 +97,7 @@ namespace x
 					object_error((t_object *)_x, "doesn't understand message %s", msg->s_name);
 					return;
 				}
-				critical_enter(_x->lock);
+				xcritical_enter(_x->lock);
 				if(_x->buf){
 					if(*(_x->buf)){
 						if(*(_x->n) != argc){
@@ -108,7 +115,7 @@ namespace x
 				}
 				memcpy(*(_x->buf), argv, argc * sizeof(t_atom));
 				_x->delegation_status = 1;
-				critical_exit(_x->lock);
+				xcritical_exit(_x->lock);
 			}
 
 			static void msg_list(t_maxobj *x, t_symbol *msg, short argc, t_atom *argv)
@@ -454,22 +461,24 @@ namespace x
 				typename seed_seq_from_obj_base::result_type buf[n];
 				t_atom out[n];
 #endif
-				critical_enter(_x->lock);
+				xcritical_enter(_x->lock);
 				_x->n = seed_source.buffer_len_address();
 				_x->buf = seed_source.buffer_address();
 				seed_source.context(x->outlet_delegation());
+                xcritical_exit(_x->lock);
 				seed_source.generate(buf, buf + n);
 				for(int i = 0; i < n; i++){
 					atom_set(out + i, buf[i]);
 				}
 				outlet_list(x->outlet_main(), _sym_list, n, out);
+                xcritical_enter(_x->lock);
 				t_atom *ssbuf = seed_source.clear();
 				if(ssbuf){
 					sysmem_freeptr(ssbuf);
 					_x->buf = NULL;
 					_x->n = 0;
 				}
-				critical_exit(_x->lock);
+				xcritical_exit(_x->lock);
 #ifndef __clang__
 				sysmem_freeptr(buf);
 				sysmem_freeptr(out);
@@ -515,7 +524,7 @@ namespace x
 			{
 				x::proxy::seed_seq_from_delegate<seed_seq_from_delegate_base, x::random::random_device> seed_source;
 				seed_source.context(outlet_delegation());
-			        critical_enter(x->lock);
+                xcritical_enter(x->lock);
 				x->buf = seed_source.buffer_address();
 				x->n = seed_source.buffer_len_address();
 				x->delegation_status = 0;
@@ -532,7 +541,7 @@ namespace x
 					x->buf = NULL;
 					x->n = 0;
 				}
-				critical_exit(x->lock);
+				xcritical_exit(x->lock);
 				return _rng_is_valid;
 			}
 			
@@ -895,13 +904,15 @@ namespace x
 				template <typename rng_type, bool U=multivariate>
 				static typename std::enable_if<!U>::type _generate(t_maxobj *_x, dist_type d, rng_type *rng)
 				{
-					critical_enter(_x->lock);
+					xcritical_enter(_x->lock);
 					((dist_obj<dist_type, result_type> *)(_x->myobj))->init_delegate(_x, (rng_delegate_uint64 *)rng);
 					t_atom a;
 					atom_set(&a, d(*rng));
+                    xcritical_exit(_x->lock);
 					outlet_atoms(((dist_obj<dist_type, result_type> *)(_x->myobj))->outlet_main(), 1, &a);
+                    xcritical_enter(_x->lock);
 					((dist_obj<dist_type, result_type> *)(_x->myobj))->finalize_delegate(_x, (rng_delegate_uint64 *)rng);
-					critical_exit(_x->lock);
+					xcritical_exit(_x->lock);
 				}
 
 				template <typename rng_type, bool U=multivariate>
@@ -930,17 +941,26 @@ namespace x
 					dist_obj<dist_type, result_type, multivariate, xparam_type> *x = (dist_obj<dist_type, result_type, multivariate, xparam_type> *)(_x->myobj);
 					dist_type d = dist_type(*((xparam_type *)x));
 					size_t n = 1;
-					critical_enter(_x->lock);
-					_x->n = &n;
-					t_atom mina, maxa;
+                    t_atom mina, maxa;
+                    uint64_t min, max;
 					t_atom *p = &mina;
+                    xcritical_enter(_x->lock);
 					_x->buf = &p;
+					_x->n = &n;
+                    xcritical_exit(_x->lock);					
 					outlet_anything(x->outlet_delegation(), _sym_min, 0, NULL);
+                    xcritical_enter(_x->lock);
+                    // mina = **(_x->buf);
+                    min = atom_getlong(&mina);
 					p = &maxa;
 					_x->buf = &p;
+                    xcritical_exit(_x->lock);
 					outlet_anything(x->outlet_delegation(), _sym_max, 0, NULL);
-					uint64_t min = atom_getlong(&mina);
-					uint64_t max = atom_getlong(&maxa);
+                    xcritical_enter(_x->lock);
+                    max = atom_getlong(&maxa);
+                    xcritical_exit(_x->lock);
+					// uint64_t min = atom_getlong(&mina);
+					// uint64_t max = atom_getlong(&maxa);
 					if(max == 0xFFFFFF){
 						switch(min){
 						case 0:
@@ -1018,7 +1038,7 @@ namespace x
 						}
 					}else{
 					}
-					critical_exit(_x->lock);
+					// xcritical_exit(_x->lock);
 				}
 
 				static void distributionfn(t_maxobj *_x, t_symbol *fn, int argc, t_atom *argv)
