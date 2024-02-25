@@ -211,58 +211,6 @@
 		52D6598328631F2200298DF0 /* commonsyms.c in Sources */ = {isa = PBXBuildFile; fileRef = 52D6595128631F2100298DF0 /* commonsyms.c */; };
 		52D6598428631F2200298DF0 /* commonsyms.c in Sources */ = {isa = PBXBuildFile; fileRef = 52D6595128631F2100298DF0 /* commonsyms.c */; };
 		52D6598528631F2200298DF0 /* commonsyms.c in Sources */ = {isa = PBXBuildFile; fileRef = 52D6595128631F2100298DF0 /* commonsyms.c */; };
-		52D6598728631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D6598828631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D6598928631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D6598A28631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D6598B28631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D6598C28631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D6598D28631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D6598E28631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D6598F28631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D6599028631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D6599128631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D6599228631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D6599328631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D6599428631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D6599528631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D6599628631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D6599728631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D6599828631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D6599928631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D6599A28631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D6599B28631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D6599C28631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D6599D28631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D6599E28631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D6599F28631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D659A028631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D659A128631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D659A228631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D659A328631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D659A428631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D659A528631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D659A628631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D659A728631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D659A828631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D659A928631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D659AA28631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D659AB28631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D659AC28631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D659AD28631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D659AE28631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D659AF28631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D659B028631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D659B128631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D659B228631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D659B328631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D659B428631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D659B528631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D659B628631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D659B728631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D659B828631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D659B928631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
-		52D659BA28631F3200298DF0 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6598628631F3200298DF0 /* MaxAPI.framework */; };
 		52D659BC28631F6800298DF0 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D659BB28631F6800298DF0 /* MaxAudioAPI.framework */; };
 		52D69DEC20AC90CB00D7BDEF /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08EA7FFBFE8413EDC02AAC07 /* Carbon.framework */; };
 /* End PBXBuildFile section */
@@ -687,7 +635,6 @@
 		52B2111D2150D592002FC3CD /* x.generator.pcg64.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = x.generator.pcg64.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 		52D0B7DE25BD7682007A8962 /* Build All (Phony).mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Build All (Phony).mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		52D6595128631F2100298DF0 /* commonsyms.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = commonsyms.c; path = "max-sdk-base/c74support/max-includes/common/commonsyms.c"; sourceTree = "<group>"; };
-		52D6598628631F3200298DF0 /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = "max-sdk-base/c74support/max-includes/MaxAPI.framework"; sourceTree = "<group>"; };
 		52D659BB28631F6800298DF0 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "max-sdk-base/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 		52D69DF020AC90CB00D7BDEF /* x.seed_seq_from.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = x.seed_seq_from.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -697,7 +644,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D6599128631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				521EE6CE2118992700F281AE /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -706,7 +652,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D659A628631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				521EE6DF2118E74700F281AE /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -715,7 +660,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D659A728631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				521EE6F12118EE7600F281AE /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -724,7 +668,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D659AF28631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				523B364320A3396A003D1A6B /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -733,7 +676,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D6599828631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				523BCE6925B725400078A614 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -742,7 +684,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D6598D28631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				523BCE7825B7370C0078A614 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -751,7 +692,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D6599428631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				523BCE8725B755600078A614 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -760,7 +700,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D659AA28631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				523BCE9625B77FE10078A614 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -769,7 +708,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D6599F28631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				523BCEA525B79A180078A614 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -778,7 +716,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D659A528631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				523BCEB425B80F3B0078A614 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -787,7 +724,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D6599A28631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				523BCEC325B835050078A614 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -796,7 +732,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D6599E28631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				523BCED225B874130078A614 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -805,7 +740,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D6599328631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				5266D49F20C95934007D4589 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -814,7 +748,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D659A828631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				5266D4B020C95B70007D4589 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -823,7 +756,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D659AE28631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				5266D4C220C95CC9007D4589 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -832,7 +764,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D6599528631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				5266D4D320C96115007D4589 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -841,7 +772,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D659AC28631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				5266D4E420C963FF007D4589 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -850,7 +780,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D659AD28631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				5266D4F320C96405007D4589 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -859,7 +788,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D6598A28631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				5266D50620C969EB007D4589 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -868,7 +796,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D6598C28631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				5266D51520C969EF007D4589 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -877,7 +804,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D6599928631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				5266D52420C969F1007D4589 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -886,7 +812,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D659A328631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				5266D53320C969F3007D4589 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -895,7 +820,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D659A428631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				5266D54A20C974E4007D4589 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -904,7 +828,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D659A028631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				5266D55920C974E6007D4589 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -913,7 +836,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D6598F28631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				5266D56820C974E8007D4589 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -922,7 +844,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D6598E28631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				5266D57720C974EA007D4589 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -931,7 +852,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D6599628631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				5266D58620C974EC007D4589 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -940,7 +860,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D659AB28631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				5266D59520C974ED007D4589 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -949,7 +868,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D659B428631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				528D31A1211C765C00DD478F /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -958,7 +876,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D6599728631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				529EACBD20B0121C006D56A4 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -967,7 +884,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D659B928631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				52A8394216E978D7002E273C /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -976,7 +892,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D6598B28631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				52B20FF1213C43ED002FC3CD /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -985,7 +900,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D6599028631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				52B21001213C6B68002FC3CD /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -994,7 +908,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D6599C28631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				52B21011213D221D002FC3CD /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1004,7 +917,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				52D659BC28631F6800298DF0 /* MaxAudioAPI.framework in Frameworks */,
-				52D6598828631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				52B21021213EDC0F002FC3CD /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1013,7 +925,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D659A128631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				52B2104121448A55002FC3CD /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1022,7 +933,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D6599B28631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				52B2105021454CB9002FC3CD /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1031,7 +941,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D659A228631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				52B2105F2145796D002FC3CD /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1040,7 +949,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D659B828631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				52B2106E2145B083002FC3CD /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1049,7 +957,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D6598928631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				52B2107F214ABC25002FC3CD /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1058,7 +965,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D6599D28631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				52B21092214BB588002FC3CD /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1067,7 +973,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D659A928631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				52B210A1214BBB0D002FC3CD /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1076,7 +981,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D6599228631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				52B210B0214BEBB3002FC3CD /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1085,7 +989,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D659B128631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				52B210BF2150CE27002FC3CD /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1094,7 +997,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D659B228631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				52B210CE2150D016002FC3CD /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1103,7 +1005,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D659B328631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				52B210DD2150D01A002FC3CD /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1112,7 +1013,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D659B528631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				52B210EC2150D01C002FC3CD /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1121,7 +1021,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D659B628631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				52B210FB2150D01F002FC3CD /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1130,7 +1029,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D659B728631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				52B2110A2150D022002FC3CD /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1139,7 +1037,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D659B028631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				52B211192150D592002FC3CD /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1148,7 +1045,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D6598728631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1156,7 +1052,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D659BA28631F3200298DF0 /* MaxAPI.framework in Frameworks */,
 				52D69DEC20AC90CB00D7BDEF /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1185,7 +1080,6 @@
 			isa = PBXGroup;
 			children = (
 				08EA7FFBFE8413EDC02AAC07 /* Carbon.framework */,
-				52D6598628631F3200298DF0 /* MaxAPI.framework */,
 				52D659BB28631F6800298DF0 /* MaxAudioAPI.framework */,
 			);
 			name = "External Frameworks and Libraries";
